@@ -11,4 +11,4 @@ As a player, I want to control a laser cannon, shooting projectiles at advancing
 5. As the game, I want to display my current state.
 
 ## Sprints Chart:
-![Alt Text](https://github.com/ecs160ss12019/Wethebest/blob/master/Screen%20Shot%202019-07-08%20at%2010.08.11%20PM.png)
+![Sprints](https://github.com/ecs160ss12019/Wethebest/blob/master/sprints.png)
