@@ -29,12 +29,14 @@
 	
 ## Alien
 
-### As an alien, I want to move with my fellow aliens in a synchronized manner.
+### As an alien, I want to attack the player.
 	
 	AC1. Screen features several rows of aliens. 
 	AC2. Starting with the bottom row, every row moves in sync a small amount to one side following the row below it.
 	AC3. When a row reaches the end of the screen, repeat the process in the other direction.
-
+	AC4. Move downwards towards the cannon at a set interval.
+	AC5. Move increasingly faster as more aliens are killed.
+	AC6. Aliens shoot projectiles downwards toward cannon.
 
 ## Gamestate
 
@@ -45,9 +47,9 @@
 
 ### As a projectile, I want to move in a straight line until I hit something.
 
-        -Projectile travels in a straight line at a constant velocity
-        -Upon contact with an object, projectile is consumed
-        -A projectile shot from an alien cannot come in contact with another alien. 
+        AC1. Projectile travels in a straight line at a constant velocity
+        AC2. Upon contact with an object, projectile is consumed
+        AC3. A projectile shot from an alien cannot come in contact with another alien. 
 
  ## Barrier
 
