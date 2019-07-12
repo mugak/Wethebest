@@ -2,7 +2,7 @@
 
 ## GUI
 
-1. GUI should have 
+### GUI should have 
   
    -At the top of screen, a score board calculating the ampunt of points
    
