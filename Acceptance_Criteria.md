@@ -50,6 +50,12 @@
         AC1. Projectile travels in a straight line at a constant velocity
         AC2. Upon contact with an object, projectile is consumed
         AC3. A projectile shot from an alien cannot come in contact with another alien. 
+	
+### As a projectile, I want to cause damage to whatever I hit.
+
+	AC1. If a projectile hits an alien, the alien dies.
+	AC2. If a projectile hits a barrier, the barrier deteriorates by a set amount.
+	AC3. If a projectile hits the cannon, the cannon loses a life.
 
  ## Barrier
 
