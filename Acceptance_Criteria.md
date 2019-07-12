@@ -2,17 +2,13 @@
 
 ## GUI
 
-### GUI should have 
+### As a GUI, I want to display the visual features of the game in the playing state.
   
-   	1) At the top of screen, a score board calculating the amount of points
-   
-   	2) In the middle of screen should contain total 5 rows of 3 different aliens. The first type is in the first row. The row 2 & 3 	have a different alien species and the next 2 rows (4 & 5) are different aliens. The aliens are able to move left, right and down.
-    
-   	3) Have 4 green shields toward the bottom of the screen, but not all the way to the bottom. These shields protect the spaceship.
-   
-   	4) Have a space ship below the shields that is able to move left and right and able to fire shots straight towards the moving aliens.
-   
-   	5) Below the shapship, towards the bottom of the screen shows the number of lives (total 3) left and resembled by a picture of 3 space ships.
+	AC1. At the top of screen, there is a score board displaying the amount of points.
+	AC2. The middle of screen contains a total of 5 rows of 3 different types of aliens. The first type is in the first 		 row. Rows 2 & 3 have a different alien species and the next 2 rows (4 & 5) are different aliens.
+	AC3. There are 4 green barriers toward the bottom of the screen, but above the cannon. These barriers protect the 	       cannon.
+	AC4. Below the barriers, a cannon is able to move left and right and fire shots straight towards the moving aliens.
+	AC5. Below the cannon, towards the bottom of the screen the number of lives left are shown by a picture of 3 space 		ships.
 
 ## PlayerCannon
 
@@ -35,10 +31,12 @@
 	AC5. Move increasingly faster as more aliens are killed.
 	AC6. Aliens shoot projectiles downwards toward cannon.
 
-## Gamestate
+## GameState
 
-	-Points should be accumulated with enemy deaths
-	-When points reach a certain threshold playerCannon receives upgrade
+### As a GameState, I want to represent a state of gameplay.
+
+	AC1. GameState is an interface to represent a state of the game.
+	AC2. Home, gameplay, game over, and help, all implement GameState. 
 	
 ## Projectile
 
@@ -56,8 +54,8 @@
 
  ## Barrier
 
- ### As a barrier, I block projectiles until I break.
+ ### As a barrier, I want to block projectiles until I break.
 
-        -Barrier loses durability with each projectile consumed
-        -Barrier breaks when durability reaches 0.	
+	AC1. Barrier loses durability with each projectile consumed
+	AC2. Barrier breaks when durability reaches 0.	
 
