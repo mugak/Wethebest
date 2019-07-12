@@ -14,3 +14,7 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 ## Link to CRC for Week 1
 
 https://github.com/ecs160ss12019/Wethebest/blob/master/CRC_Sprint_1.md
+
+## Link to Acceptance Criteria 
+
+https://github.com/ecs160ss12019/Wethebest/blob/master/Acceptance_Criteria.md
