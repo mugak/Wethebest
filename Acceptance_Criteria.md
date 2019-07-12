@@ -47,9 +47,9 @@
 
 ### As a projectile, I want to move in a straight line until I hit something.
 
-        AC1. Projectile travels in a straight line at a constant velocity
-        AC2. Upon contact with an object, projectile is consumed
-        AC3. A projectile shot from an alien cannot come in contact with another alien. 
+	AC1. Projectile travels in a straight line at a constant velocity
+	AC2. Upon contact with an object, projectile is consumed
+	AC3. A projectile shot from an alien cannot come in contact with another alien. 
 	
 ### As a projectile, I want to cause damage to whatever I hit.
 
