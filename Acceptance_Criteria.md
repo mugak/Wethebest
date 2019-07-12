@@ -40,4 +40,19 @@
 
 	-Points should be accumulated with enemy deaths
 	-When points reach a certain threshold playerCannon receives upgrade
+	
+## Projectile
+
+### As a projectile, I want to move in a straight line until I hit something.
+
+        -Projectile travels in a straight line at a constant velocity
+        -Upon contact with an object, projectile is consumed
+        -A projectile shot from an alien cannot come in contact with another alien. 
+
+ ## Barrier
+
+ ### As a barrier, I block projectiles until I break.
+
+        -Barrier loses durability with each projectile consumed
+        -Barrier breaks when durability reaches 0.	
 
