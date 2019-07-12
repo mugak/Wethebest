@@ -19,16 +19,30 @@
 
 ## PlayerCannon
 
-### As a player, I want to control a laser cannon.
+### PlayerCannon should be able to
 	
-	AC1. Player can move laser cannon to the right or left (within the boundaries of the screen) by touching the screen 		 (either by touching and holding to the left or right of the cannon or by dragging the cannon).
-	AC2. Projectiles shoot upwards when player touches the screen.
-	AC3. Projectiles move fast enough to be easy to track with eyes and position accurately but not too sluggish to feel 		  unresponsive.	
-	AC4. Cannon loses a life when hit.
-	AC5. Cannon can be upgraded to be faster or have faster fire rate.
+	-Shoot projectiles at enemies
+	-Move left and right within the boundaries of the screen
+	-Move fast enough to be easy to track with eyes and position accurately but not too sluggish to feel unresponsive
+	-Lose a life when hit
+	-Upgraded to be faster or have faster fire rate
 
 ## Gamestate
 
 	-Points should be accumulated with enemy deaths
 	-When points reach a certain threshold playerCannon receives upgrade
 
+## Projectile
+
+### As a projectile, I want to move in a straight line until I hit something.
+
+        -Projectile travels in a straight line at a constant velocity
+        -Upon contact with an object, projectile is consumed
+        -A projectile shot from an alien cannot come in contact with another alien. 
+
+## Barrier
+
+### As a barrier, I block projectiles until I break.
+
+        -Barrier loses durability with each projectile consumed
+        -Barrier breaks when durability reaches 0.
