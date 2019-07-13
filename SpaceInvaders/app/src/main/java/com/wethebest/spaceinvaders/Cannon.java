@@ -8,7 +8,7 @@ public class Cannon {
     // save starting point for each object in UI class or SpaceInvadersApplication class
     public final Point START = UI.cannonStart;
     // store location of cannon for movement
-    public Point location;
+    public Point2D location;
     public int lives;
 
     // initialize Cannon with starting location stored in UI or SpaceInvadersApplication class
@@ -18,7 +18,7 @@ public class Cannon {
     }
 
     // initialize Cannon with any point & number of lives
-    public Cannon(Point loc, int lives) {
+    public Cannon(Point2D loc, int lives) {
         location = loc;
         this.lives = lives;
     }
@@ -46,10 +46,12 @@ public class Cannon {
      */
 
     // direction represented by global ints LEFT and RIGHT
-    public void move(int direction, int speed) {
+    public void move(int direction, float speed) {
         switch (direction) {
-            case LEFT: location.x -= speed;
-            case RIGHT: location.y += speed;
+
+            // BASE_SPEED global int in UI or SpaceInvadersApplication
+            case LEFT: location.x -= (speed * BASE_SPEED);
+            case RIGHT: location.y += (speed * BASE_SPEED);
         }
     }
 
