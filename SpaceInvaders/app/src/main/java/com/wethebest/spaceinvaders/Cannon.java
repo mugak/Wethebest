@@ -10,17 +10,23 @@ public class Cannon {
     // store location of cannon for movement
     public Point2D location;
     public int lives;
+    public float shootSpeed;
+    public float moveSpeed;
 
     // initialize Cannon with starting location stored in UI or SpaceInvadersApplication class
     public Cannon() {
         location = START;
         lives = 3;
+        moveSpeed = 1.0;
+        shootSpeed = 1.0;
     }
 
     // initialize Cannon with any point & number of lives
-    public Cannon(Point2D loc, int lives) {
+    public Cannon(Point2D loc, int lives, float shootSpeed, float moveSpeed) {
         location = loc;
         this.lives = lives;
+        this.shootSpeed = shootSpeed;
+        this.moveSpeed = moveSpeed;
     }
 
     /* For classes requiring speed: speed should be a multiplier of the default speed
@@ -67,6 +73,14 @@ public class Cannon {
         if (lives == 0) SpaceInvadersApp.setGameState(SpaceInvadersApp.GAME_OVER);
         // restarts the cannon if the current game is still in play
         else UI.cannonReappear();
+    }
+
+    public void shootUpgrade(float upgrade) {
+        shootSpeed *= upgrade;
+    }
+
+    public void moveUpgrade(float) {
+        moveSpeed *= upgrade;
     }
 
 }
