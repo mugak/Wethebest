@@ -55,7 +55,9 @@ public class Cannon{
 
     public void beenHit() {
         lives--;
-        UI.disintegrate();
+        UI.disintegrate(); //holds the animation
     }
+
+
 
 }
