@@ -3,7 +3,7 @@ package com.wethebest.spaceinvaders;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class Cannon{
+public class Cannon {
 
     // save starting point for each object in UI class or SpaceInvadersApplication class
     public final Point START = UI.cannonStart;
@@ -55,7 +55,16 @@ public class Cannon{
 
     public void beenHit() {
         lives--;
-        UI.disintegrate(); //holds the animation
+        // holds the animation for the cannon to disintegrate
+        UI.cannonDisintegrate();
+        // stops the alien army for the amount of time necessary for the cannon to
+        // disintegrate and restart
+        AlienArmy.stop(AlienArmy.CANNON_TIME);
+
+        // once cannon loses lives, set the gamestate to game over
+        if (lives == 0) SpaceInvadersApp.setGameState(GAME_OVER);
+        // restarts the cannon if the current game is still in play
+        else UI.cannonReappear();
     }
 
 
