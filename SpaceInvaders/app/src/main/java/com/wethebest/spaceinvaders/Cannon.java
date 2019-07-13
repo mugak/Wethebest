@@ -38,7 +38,7 @@ public class Cannon {
         // initialize new projectile with starting location of cannon
         Projectile p = new Projectile(START);
         // call move in projectile with int UP, initialized in SpaceInvadersApplication?
-        p.move(UP, speed); // in move, projectile stops when hits an obstacle
+        p.move(SpaceInvadersApp.UP, speed); // in move, projectile stops when hits an obstacle
     }
 
     /* moves 1 space unit (depending on speed) to either direction, called in a loop
@@ -50,8 +50,8 @@ public class Cannon {
         switch (direction) {
 
             // BASE_SPEED int in UI or SpaceInvadersApplication
-            case LEFT: location.x -= (speed * BASE_SPEED);
-            case RIGHT: location.y += (speed * BASE_SPEED);
+            case SpaceInvadersApp.LEFT: location.x -= (speed * SpaceInvadersApp.BASE_SPEED);
+            case SpaceInvadersApp.RIGHT: location.y += (speed * SpaceInvadersApp.BASE_SPEED);
         }
     }
 
@@ -64,7 +64,7 @@ public class Cannon {
         AlienArmy.stop(AlienArmy.CANNON_TIME);
 
         // once cannon loses lives, set the gamestate to game over
-        if (lives == 0) SpaceInvadersApp.setGameState(GAME_OVER);
+        if (lives == 0) SpaceInvadersApp.setGameState(SpaceInvadersApp.GAME_OVER);
         // restarts the cannon if the current game is still in play
         else UI.cannonReappear();
     }
