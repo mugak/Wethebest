@@ -16,6 +16,7 @@ public class SpaceInvaders extends Activity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
+
         mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
         setContentView(mSpaceInvadersApp);
     }
@@ -23,10 +24,12 @@ public class SpaceInvaders extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        mSpaceInvadersApp.resume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        mSpaceInvadersApp.pause();
     }
 }
