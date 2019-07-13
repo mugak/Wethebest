@@ -37,7 +37,7 @@ public class Cannon {
     public void shoot(float speed) {
         // initialize new projectile with starting location of cannon
         Projectile p = new Projectile(START);
-        // call move in projectile with global int UP, initialized in SpaceInvadersApplication?
+        // call move in projectile with int UP, initialized in SpaceInvadersApplication?
         p.move(UP, speed); // in move, projectile stops when hits an obstacle
     }
 
@@ -45,11 +45,11 @@ public class Cannon {
        in SpaceInvadersApplication as long as the user presses on the screen
      */
 
-    // direction represented by global ints LEFT and RIGHT
+    // direction represented by ints LEFT and RIGHT
     public void move(int direction, float speed) {
         switch (direction) {
 
-            // BASE_SPEED global int in UI or SpaceInvadersApplication
+            // BASE_SPEED int in UI or SpaceInvadersApplication
             case LEFT: location.x -= (speed * BASE_SPEED);
             case RIGHT: location.y += (speed * BASE_SPEED);
         }
