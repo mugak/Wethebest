@@ -24,8 +24,11 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private long mFPS;
     private final int MILLIS_IN_SECOND = 1000;
 
-    private Cannon mCannon;
+    //private Cannon mCannon;
     private Alien mAlien;
+
+
+    private Projectile mProjectile;
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -41,12 +44,17 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenY = y;
 
         mAlien = new Alien(mScreenX);
+        mProjectile = new Projectile(mScreenX);
+
 
         startGame();
     }
 
     private void startGame() {
         mAlien.reset(mScreenX, mScreenY);
+        mProjectile.setPos(mScreenX / 2, mScreenY / 2);
+
+
     }
 
     @Override
@@ -90,12 +98,14 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             mPaint.setColor(Color.argb(255, 255, 255, 255));
 
             mCanvas.drawRect(mAlien.getRect(), mPaint);
+            mCanvas.drawRect(mProjectile.getRect(), mPaint);
 
             mOurHolder.unlockCanvasAndPost(mCanvas);
         }
     }
     private void update() {
         mAlien.update(mFPS);
+        mProjectile.update(mFPS);
     }
 
     public void resume() {

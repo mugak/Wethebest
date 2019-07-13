@@ -11,12 +11,12 @@ public class Projectile{
     private float projWidth;
     private float projHeight;
 
-    Projectile(int screenX, float speed){
+    Projectile(int screenX){
         projWidth = screenX/100;
         projHeight = screenX/100;
 
         xVel = 0;
-        yVel = -speed/100;
+        yVel = -(screenX / 3);
         rect = new RectF();
     }
 
@@ -30,7 +30,7 @@ public class Projectile{
     //Updates the position of the projectile
     void update(long fps){
         rect.left = rect.left + (xVel/fps);
-        rect.right = rect.right + (yVel/fps);
+        rect.top = rect.top + (yVel/fps);
 
         rect.right = rect.left + projWidth;
         rect.bottom = rect.top + projHeight;
@@ -38,20 +38,20 @@ public class Projectile{
 
 
     void setPos(int x, int y){
-        rect.left = x/2;
+        rect.left = x + projWidth/2;
         rect.right = rect.left + projWidth;
-        rect.top = y/2;
+        rect.top = y + projHeight/2;
         rect.bottom = rect.top + projHeight;
     }
 }
 
 public class AlienProj extends Projectile{
 
-    Projectile(int screenX, float speed){
+    Projectile(int screenX){
         projWidth = screenX/100;
         projHeight = screenX/100;
         xVel = 0;
-        yVel = speed/100;
+        yVel = screenX / 3;
         rect = new RectF();
     }
 }
