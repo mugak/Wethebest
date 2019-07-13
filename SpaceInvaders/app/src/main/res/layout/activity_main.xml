@@ -5,18 +5,20 @@
     android:id="@+id/activity_setup"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".SpaceInvaders">
+    tools:context=".UI">
 
     <ImageView
         android:id="@+id/Spaceship"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:contentDescription="@string/app_name"
+
+        android:visibility="invisible"
         app:srcCompat="@drawable/player"
         tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="227dp"
-        android:visibility="invisible"
-        />
+        tools:layout_editor_absoluteY="227dp" />
 
     <ImageView
         android:id="@+id/Brick1"
@@ -158,13 +160,15 @@
         app:srcCompat="@drawable/game_over"
         tools:layout_editor_absoluteX="127dp"
         tools:layout_editor_absoluteY="227dp" />
+
     <ImageView
         android:id="@+id/start"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/start_button"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        app:srcCompat="@drawable/start_button" />
+
+
 
 
 </RelativeLayout>
