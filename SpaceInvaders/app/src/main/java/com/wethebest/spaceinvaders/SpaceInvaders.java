@@ -2,12 +2,31 @@ package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.graphics.Point;
+import android.view.Display;
 
 public class SpaceInvaders extends Activity {
+
+    private SpaceInvadersApp mSpaceInvadersApp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
+        setContentView(mSpaceInvadersApp);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }
