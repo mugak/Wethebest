@@ -43,6 +43,12 @@ public class Projectile{
         rect.top = y + projHeight/2;
         rect.bottom = rect.top + projHeight;
     }
+
+    // Added by Idan: created so that you can update the shooting speed
+    // of the Spaceship
+    void setyVel(float yVel) {
+        this.yVel = yVel;
+    }
 }
 
 public class AlienProj extends Projectile{
