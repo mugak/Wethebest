@@ -47,13 +47,18 @@ public abstract class Projectile{
         rect.bottom = rect.top + projHeight;
     }
 
-    // Added by Idan: created so that you can update the shooting speed
+    // Added by Idan - created so that you can update the shooting speed
     // of the Spaceship
     void setyVel(float yVel) {
         this.yVel = yVel;
     }
+
+    // Added by Idan - A concept: aliens and
+    /*boolean hasHit(GameObject g) {
+        return g.beenHit();
+    }*/
 }
-public class PlayerProj extends  Projectile{
+public class PlayerProj extends Projectile{
     PlayerProj(){
         //Vertical velocity is negative for
         //the proj to travel down the screen

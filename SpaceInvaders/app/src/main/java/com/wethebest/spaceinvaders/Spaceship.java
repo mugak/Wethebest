@@ -49,22 +49,17 @@ public class Spaceship {
         mXVelocity = (screenX / INITIAL_VELOCITY_DIVIDER);
     }
 
-    // shoot projectiles upwards
+    // shoot projectiles upwards,
     public void shoot(int screenX) {
         // initialize new projectile with width of screen
         Projectile p = new Projectile(screenX);
         p.setPos(mRect.centerX(), mRect.top);
-
-
+        while()
     }
 
     public void setShootVelocity(float shootVelocity) {
         mShootVelocity = shootVelocity;
     }
-
-    /* moves 1 space unit (depending on speed) to either direction, called in a loop
-       in SpaceInvadersApplication as long as the user presses on the screen
-     */
 
     // direction represented by ints LEFT and RIGHT
     public void move(int direction, float speed) {
@@ -90,8 +85,7 @@ public class Spaceship {
         else UI.cannonReappear();
     }
 
-    // since you can upgrade the velocity at which the spaceship shoots,
-    //
+    // upgrade is a multiplier of the current velocity
     public void shootUpgrade(float upgrade) {
         mShootVelocity *= upgrade;
     }
