@@ -12,6 +12,9 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private SurfaceHolder mOurHolder;
@@ -28,7 +31,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private SimpleCannon mCannon;
     private Alien mAlien;
 
-    private Projectile mProjectile;
+    List<Projectile> mProjectiles = new ArrayList<Projectile>();
 
 
     private Thread mGameThread = null;
@@ -45,7 +48,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenY = y;
 
         mAlien = new Alien(mScreenX);
-        mProjectile = new AlienProj(mScreenX);
         mCannon = new SimpleCannon(mScreenX);
 
 
@@ -54,7 +56,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private void startGame() {
         mAlien.reset(mScreenX, mScreenY);
-        mProjectile.setPos(mScreenX / 2, mScreenY / 2);
         mCannon.reset(mScreenX, mScreenY);
 
 
@@ -93,7 +94,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     mCannon.setMovement(mCannon.MOVINGLEFT);
                 }
 
-                mProjectile = mCannon.shoot();
+                mProjectiles.add(mCannon.shoot());
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -110,7 +111,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             mPaint.setColor(Color.argb(255, 255, 255, 255));
 
             mCanvas.drawRect(mAlien.getRect(), mPaint);
-            mCanvas.drawRect(mProjectile.getRect(), mPaint);
+
+            for(Projectile mProj : mProjectiles) {
+                mCanvas.drawRect(mProj.getRect(), mPaint);
+            }
             mCanvas.drawRect(mCannon.getRect(), mPaint);
 
             mOurHolder.unlockCanvasAndPost(mCanvas);
@@ -118,7 +122,11 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     }
     private void update() {
         mAlien.update(mFPS);
-        mProjectile.update(mFPS);
+
+        for(Projectile mProj : mProjectiles) {
+            mProj.update(mFPS);
+        }
+
         mCannon.update(mFPS);
     }
 
