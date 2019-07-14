@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,14 +38,18 @@ public class UI extends AppCompatActivity {
         ImageView Laserbeam = findViewById(R.id.laserbeam);
         ImageView InvaderLaserBeam = findViewById(R.id.Invader_laser_beam);
 
-        ImageView Invader1 = findViewById(R.id.Invader1);
-        ImageView Invader1a = findViewById(R.id.Invader1a);
-        ImageView Invader2 = findViewById(R.id.Invader2);
-        ImageView Invader2a = findViewById(R.id.Invader2a);
-        ImageView Invader3 = findViewById(R.id.Invader3);
-        ImageView Invader3a = findViewById(R.id.Invader3a);
+        final ImageView Invader1 = findViewById(R.id.Invader1);
+        final ImageView Invader1a = findViewById(R.id.Invader1a);
+        final ImageView Invader1b = findViewById(R.id.Invader1b);
+        final ImageView Invader2 = findViewById(R.id.Invader2);
+        final ImageView Invader2a = findViewById(R.id.Invader2a);
+        final ImageView Invader2b = findViewById(R.id.Invader2b);
+        final ImageView Invader3 = findViewById(R.id.Invader3);
+        final ImageView Invader3a = findViewById(R.id.Invader3a);
+        final ImageView Invader3b = findViewById(R.id.Invader3b);
 
-        ImageView Scoreboard = findViewById(R.id.Scoreboard);
+        final ImageView Scoreboard = findViewById(R.id.Scoreboard);
+        final TextView Score = findViewById(R.id.Score);
         ImageView Gameover = findViewById(R.id.gameover);
         final ImageView Start = findViewById(R.id.start);
 
@@ -56,6 +61,17 @@ public class UI extends AppCompatActivity {
                 Brick1.setVisibility(ImageView.VISIBLE);
                 Brick2.setVisibility(ImageView.VISIBLE);
                 Brick3.setVisibility(ImageView.VISIBLE);
+                Invader1.setVisibility(ImageView.VISIBLE);
+                Invader1a.setVisibility(ImageView.VISIBLE);
+                Invader1b.setVisibility(ImageView.VISIBLE);
+                Invader2.setVisibility(ImageView.VISIBLE);
+                Invader2a.setVisibility(ImageView.VISIBLE);
+                Invader2b.setVisibility(ImageView.VISIBLE);
+                Invader3.setVisibility(ImageView.VISIBLE);
+                Invader3a.setVisibility(ImageView.VISIBLE);
+                Invader3b.setVisibility(ImageView.VISIBLE);
+                Score.setVisibility(ImageView.VISIBLE);
+                Scoreboard.setVisibility(ImageView.VISIBLE);
 
 
 
