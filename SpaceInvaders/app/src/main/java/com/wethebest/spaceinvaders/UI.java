@@ -15,9 +15,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 
-public class UI extends Activity {
+public class UI extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,34 +27,36 @@ public class UI extends Activity {
 
         // define variables in the game
 
-        final ImageView Spaceship = (ImageView)findViewById(R.id.Spaceship);
+        final ImageView Spaceship = findViewById(R.id.Spaceship);
 
-        ImageView Brick1 = (ImageView)findViewById(R.id.Brick1);
-        ImageView Brick2 = (ImageView)findViewById(R.id.Brick2);
-        ImageView Brick3 = (ImageView)findViewById(R.id.Brick3);
-        ImageView Brick4 = (ImageView)findViewById(R.id.Brick4);
+        final ImageView Brick1 = findViewById(R.id.Brick1);
+        final ImageView Brick2 = findViewById(R.id.Brick2);
+        final ImageView Brick3 = findViewById(R.id.Brick3);
+        ImageView Brick4 = findViewById(R.id.Brick4);
 
-        ImageView Laserbeam = (ImageView)findViewById(R.id.laserbeam);
-        ImageView InvaderLaserBeam = (ImageView)findViewById(R.id.Invader_laser_beam);
+        ImageView Laserbeam = findViewById(R.id.laserbeam);
+        ImageView InvaderLaserBeam = findViewById(R.id.Invader_laser_beam);
 
-        ImageView Invader1 = (ImageView)findViewById(R.id.Invader1);
-        ImageView Invader1a = (ImageView)findViewById(R.id.Invader1a);
-        ImageView Invader2 = (ImageView)findViewById(R.id.Invader2);
-        ImageView Invader2a = (ImageView)findViewById(R.id.Invader2a);
-        ImageView Invader3 = (ImageView)findViewById(R.id.Invader3);
-        ImageView Invader3a = (ImageView)findViewById(R.id.Invader3a);
+        ImageView Invader1 = findViewById(R.id.Invader1);
+        ImageView Invader1a = findViewById(R.id.Invader1a);
+        ImageView Invader2 = findViewById(R.id.Invader2);
+        ImageView Invader2a = findViewById(R.id.Invader2a);
+        ImageView Invader3 = findViewById(R.id.Invader3);
+        ImageView Invader3a = findViewById(R.id.Invader3a);
 
-        ImageView Scoreboard = (ImageView)findViewById(R.id.Scoreboard);
-        ImageView Gameover = (ImageView)findViewById(R.id.gameover);
-        ImageView Start = (ImageView)findViewById(R.id.start);
+        ImageView Scoreboard = findViewById(R.id.Scoreboard);
+        ImageView Gameover = findViewById(R.id.gameover);
+        final ImageView Start = findViewById(R.id.start);
 
         Start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Start.setVisibility(ImageView.INVISIBLE);
                 Spaceship.setVisibility(ImageView.VISIBLE);
-                Spaceship.setY(30);
-                Spaceship.setX(40);
+                Brick1.setVisibility(ImageView.VISIBLE);
+                Brick2.setVisibility(ImageView.VISIBLE);
+                Brick3.setVisibility(ImageView.VISIBLE);
+
 
 
             }
