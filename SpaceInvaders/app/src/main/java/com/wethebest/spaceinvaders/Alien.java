@@ -42,4 +42,9 @@ class Alien {
         mRect.top = mRect.top + mAlienHeight;
         mRect.bottom = mRect.top + mAlienHeight;
     }
+
+    boolean isHit(RectF hitBox) {
+        return RectF.intersects(hitBox, mRect);
+
+    }
 }

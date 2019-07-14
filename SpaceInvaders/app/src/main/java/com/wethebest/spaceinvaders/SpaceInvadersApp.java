@@ -151,9 +151,15 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private void detectCollisions() {
         if(mAlien.getRect().left < 0 || mAlien.getRect().right > mScreenX) {
             mAlien.reverseXVelocity();
-            mAlien.advance();
+          //  mAlien.advance(); // buggy, sometimes advances all the way to the end of the screen
         }
 
+        for(Projectile mProj : mProjectiles) {
+            if(mAlien.isHit(mProj.getRect())) {
+                mAlien.reset(mScreenX, mScreenY); //currently just resets pos, but should remove alien object
+            }
+
+        }
     }
 
 }
