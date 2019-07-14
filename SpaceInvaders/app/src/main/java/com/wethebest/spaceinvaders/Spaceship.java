@@ -78,10 +78,10 @@ public class Spaceship {
                     mRect.bottom);
         }
     }
-    
+
 
     // checks whether it's been hit by a projectile
-    public boolean beenHit() {
+    public boolean beenHit(Projectile p) {
 
 
     }
