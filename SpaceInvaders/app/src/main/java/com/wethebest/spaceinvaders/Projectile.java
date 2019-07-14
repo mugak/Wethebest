@@ -53,7 +53,8 @@ public abstract class Projectile{
         this.yVel = yVel;
     }
 
-    // Added by Idan - A concept: aliens and
+    // Added by Idan - A concept: aliens, barriers, and spaceship implement
+    // an interface called gameobject
     /*boolean hasHit(GameObject g) {
         return g.beenHit();
     }*/
