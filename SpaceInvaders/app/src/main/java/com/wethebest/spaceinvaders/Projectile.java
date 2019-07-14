@@ -1,8 +1,13 @@
 package com.wethebest.spaceinvaders;
 import android.graphics.RectF;
 
-public class Projectile{
-    //Projectile will be a rectangle
+/*An abstract class is used for the ease of inheritance
+*for the player and alien projectiles.
+*The only difference between the two classes is the
+*direction of the velocity, yVel.
+*/
+public abstract class Projectile{
+    //Projectile will be a rectangle as a placeholder
     private RectF rect;
 
     private float xVel;
@@ -14,9 +19,7 @@ public class Projectile{
     Projectile(int screenX){
         projWidth = screenX/100;
         projHeight = screenX/100;
-
         xVel = 0;
-        yVel = -(screenX / 3);
         rect = new RectF();
     }
 
@@ -44,14 +47,18 @@ public class Projectile{
         rect.bottom = rect.top + projHeight;
     }
 }
-
+public class PlayerProj extends  Projectile{
+    PlayerProj(){
+        //Vertical velocity is negative for
+        //the proj to travel down the screen
+        yVel = -screenX/3;
+    }
+}
 public class AlienProj extends Projectile{
 
-    Projectile(int screenX){
-        projWidth = screenX/100;
-        projHeight = screenX/100;
-        xVel = 0;
+    AlienProj(){
+        //Vertical velocity is positive for
+        //the proj to travel down the screen
         yVel = screenX / 3;
-        rect = new RectF();
     }
 }
