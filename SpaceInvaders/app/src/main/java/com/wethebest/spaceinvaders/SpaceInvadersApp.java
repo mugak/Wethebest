@@ -25,6 +25,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private final int MILLIS_IN_SECOND = 1000;
 
     //private Cannon mCannon;
+    private SimpleCannon mCannon;
     private Alien mAlien;
 
 
@@ -44,7 +45,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenY = y;
 
         mAlien = new Alien(mScreenX);
-        mProjectile = new Projectile(mScreenX);
+        mProjectile = new AlienProj(mScreenX);
+        mCannon = new SimpleCannon(mScreenX);
 
 
         startGame();
@@ -53,6 +55,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private void startGame() {
         mAlien.reset(mScreenX, mScreenY);
         mProjectile.setPos(mScreenX / 2, mScreenY / 2);
+        mCannon.reset(mScreenX, mScreenY);
 
 
     }
@@ -82,10 +85,17 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public boolean onTouchEvent(MotionEvent motionEvent) {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                mPaused = !mPaused;
+                mPaused = false;
+                if(motionEvent.getX() > mScreenX / 2) {
+                    mCannon.setMovement(mCannon.MOVINGRIGHT);
+                }
+                else {
+                    mCannon.setMovement(mCannon.MOVINGLEFT);
+                }
                 break;
 
             case MotionEvent.ACTION_UP:
+                mCannon.setMovement(mCannon.STOPPED);
                 break;
         }
         return true;
@@ -99,6 +109,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
             mCanvas.drawRect(mAlien.getRect(), mPaint);
             mCanvas.drawRect(mProjectile.getRect(), mPaint);
+            mCanvas.drawRect(mCannon.getRect(), mPaint);
 
             mOurHolder.unlockCanvasAndPost(mCanvas);
         }
@@ -106,6 +117,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private void update() {
         mAlien.update(mFPS);
         mProjectile.update(mFPS);
+        mCannon.update(mFPS);
     }
 
     public void resume() {

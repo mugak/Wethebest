@@ -11,7 +11,7 @@ public abstract class Projectile{
     private RectF rect;
 
     private float xVel;
-    private float yVel;
+    protected float yVel;
 
     private float projWidth;
     private float projHeight;
@@ -47,16 +47,18 @@ public abstract class Projectile{
         rect.bottom = rect.top + projHeight;
     }
 }
-public class PlayerProj extends  Projectile{
-    PlayerProj(){
+class PlayerProj extends  Projectile{
+    PlayerProj(int screenX){
+        super(screenX);
         //Vertical velocity is negative for
         //the proj to travel down the screen
         yVel = -screenX/3;
     }
 }
-public class AlienProj extends Projectile{
+class AlienProj extends Projectile{
 
-    AlienProj(){
+    AlienProj(int screenX){
+        super(screenX);
         //Vertical velocity is positive for
         //the proj to travel down the screen
         yVel = screenX / 3;
