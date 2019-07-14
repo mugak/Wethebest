@@ -29,9 +29,9 @@ public class UI extends AppCompatActivity {
 
         final ImageView Spaceship = findViewById(R.id.Spaceship);
 
-        ImageView Brick1 = findViewById(R.id.Brick1);
-        ImageView Brick2 = findViewById(R.id.Brick2);
-        ImageView Brick3 = findViewById(R.id.Brick3);
+        final ImageView Brick1 = findViewById(R.id.Brick1);
+        final ImageView Brick2 = findViewById(R.id.Brick2);
+        final ImageView Brick3 = findViewById(R.id.Brick3);
         ImageView Brick4 = findViewById(R.id.Brick4);
 
         ImageView Laserbeam = findViewById(R.id.laserbeam);
@@ -53,6 +53,9 @@ public class UI extends AppCompatActivity {
             public void onClick(View view) {
                 Start.setVisibility(ImageView.INVISIBLE);
                 Spaceship.setVisibility(ImageView.VISIBLE);
+                Brick1.setVisibility(ImageView.VISIBLE);
+                Brick2.setVisibility(ImageView.VISIBLE);
+                Brick3.setVisibility(ImageView.VISIBLE);
 
 
 

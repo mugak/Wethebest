@@ -11,17 +11,53 @@
         android:id="@+id/Spaceship"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="-60dip"
+        android:layout_alignTop="@+id/bottombar"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:contentDescription="@string/app_name"
-
         android:visibility="invisible"
+
         app:srcCompat="@drawable/player"
         tools:layout_editor_absoluteX="127dp"
         tools:layout_editor_absoluteY="227dp" />
 
+    <TableLayout
+        android:id="@+id/tableLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/Spaceship"
+        android:layout_marginTop="-60dip"
+        android:layout_centerHorizontal="true"
+        android:stretchColumns="0,1,2"
+        >
+
+    <TableRow
+        android:gravity="center_horizontal"
+        >
     <ImageView
         android:id="@+id/Brick1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/app_name"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/def_brick_01"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="227dp"
+        />
+
+    <ImageView
+        android:id="@+id/Brick3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/app_name"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/def_brick_01"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="227dp"
+        />
+
+    <ImageView
+        android:id="@+id/Brick2"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:contentDescription="@string/app_name"
@@ -30,26 +66,9 @@
         tools:layout_editor_absoluteY="227dp"
         android:visibility="invisible"
         />
-    <ImageView
-        android:id="@+id/Brick2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/def_brick_02"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="227dp"
-        android:visibility="invisible"
-        />
-    <ImageView
-        android:id="@+id/Brick3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:contentDescription="@string/app_name"
-        app:srcCompat="@drawable/def_brick_03"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="227dp"
-        android:visibility="invisible"
-        />
+    </TableRow>
+    </TableLayout>
+
     <ImageView
         android:id="@+id/Brick4"
         android:layout_width="50dp"
@@ -140,16 +159,16 @@
         tools:layout_editor_absoluteY="227dp"
         android:visibility="invisible"
         />
+
     <ImageView
         android:id="@+id/Scoreboard"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
+        android:visibility="invisible"
         app:srcCompat="@drawable/yourscore"
         tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="227dp"
-        android:visibility="invisible"
-        />
+        tools:layout_editor_absoluteY="227dp" />
 
     <ImageView
         android:id="@+id/gameover"
@@ -166,9 +185,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
+        android:contentDescription="TODO"
         app:srcCompat="@drawable/start_button" />
 
-
+    <ImageView
+        android:id="@+id/bottombar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:srcCompat="?attr/colorPrimary"
+        android:layout_alignParentBottom = "true"/>
 
 
 </RelativeLayout>
