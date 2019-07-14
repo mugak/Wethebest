@@ -49,7 +49,7 @@ public class Spaceship {
         mXVelocity = (screenX / INITIAL_VELOCITY_DIVIDER);
     }
 
-    // shoot projectiles upwards,
+    // shoot projectiles upwards, hy                                                                                                        y67
     public void shoot(int screenX) {
         // initialize new projectile with width of screen
         Projectile p = new Projectile(screenX);
@@ -71,18 +71,10 @@ public class Spaceship {
         }
     }
 
-    public void beenHit() {
+    // checks whether it's been hit by a projectile
+    public boolean beenHit() {
         lives--;
-        // holds the animation for the cannon to disintegrate
-        UI.cannonDisintegrate();
-        // stops the alien army for the amount of time necessary for the cannon to
-        // disintegrate and restart
-        AlienArmy.stop(AlienArmy.CANNON_TIME);
 
-        // once cannon loses lives, set the gamestate to game over
-        if (lives == 0) SpaceInvadersApp.setGameState(SpaceInvadersApp.GAME_OVER);
-        // restarts the cannon if the current game is still in play
-        else UI.cannonReappear();
     }
 
     // upgrade is a multiplier of the current velocity
@@ -90,8 +82,9 @@ public class Spaceship {
         mShootVelocity *= upgrade;
     }
 
-    public void moveUpgrade(float) {
-        moveSpeed *= upgrade;
+    // upgrade is a multiplier of the current velocity
+    public void moveUpgrade(float upgrade) {
+        mXVelocity *= upgrade;
     }
 
 }
