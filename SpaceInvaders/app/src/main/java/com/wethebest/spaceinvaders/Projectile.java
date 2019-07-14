@@ -24,13 +24,13 @@ public abstract class Projectile{
     }
 
 
-    //Returns rect of projectile to be drawn
+    // Returns rect of projectile to be drawn
     RectF getRect(){
         return rect;
     }
 
 
-    //Updates the position of the projectile
+    // Updates the position of the projectile
     void update(long fps){
         rect.left = rect.left + (xVel/fps);
         rect.top = rect.top + (yVel/fps);

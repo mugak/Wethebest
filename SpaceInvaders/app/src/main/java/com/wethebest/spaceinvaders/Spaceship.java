@@ -12,12 +12,14 @@ public class Spaceship {
     private float mSpaceshipWidth;
     private float mSpaceshipHeight;
     private float mShootVelocity;
+    private int mMovementState;
 
     private final float WIDTH_DIVIDER = 8.0;
     private final float HEIGHT_DIVIDER = 10.0;
     private final float X_DIVIDER = 2.0;
     private final float Y_DIVIDER = 1.2;
     private final float INITIAL_VELOCITY_DIVIDER = 5.0;
+    private final int LEFT = 0, RIGHT = 1;
 
     // screenX is the width of the screen
     public Spaceship(int screenX) {
@@ -61,19 +63,26 @@ public class Spaceship {
         mShootVelocity = shootVelocity;
     }
 
-    // direction represented by ints LEFT and RIGHT
-    public void move(int direction, float speed) {
+    // Updates position of spaceship when player moves it
+    // Might need to represent direction some other way
+    public void update(long fps, int direction) {
+
         switch (direction) {
 
             // BASE_SPEED int in UI or SpaceInvadersApplication
-            case SpaceInvadersApp.LEFT: location.x -= (speed * SpaceInvadersApp.BASE_SPEED);
-            case SpaceInvadersApp.RIGHT: location.y += (speed * SpaceInvadersApp.BASE_SPEED);
+            case LEFT: mRect.set(mRect.left - (mXVelocity/fps),
+                                 mRect.top, mRect.right - (mXVelocity/fps),
+                                 mRect.bottom);
+            case RIGHT: mRect.set(mRect.left + (mXVelocity/fps),
+                    mRect.top, mRect.right + (mXVelocity/fps),
+                    mRect.bottom);
         }
     }
+    
 
     // checks whether it's been hit by a projectile
     public boolean beenHit() {
-        lives--;
+
 
     }
 
@@ -85,6 +94,11 @@ public class Spaceship {
     // upgrade is a multiplier of the current velocity
     public void moveUpgrade(float upgrade) {
         mXVelocity *= upgrade;
+    }
+
+    public void setmMovementState(int movementState) {
+        mMovementState = movementState;
+        // error if not LEFT or RIGHT
     }
 
 }
