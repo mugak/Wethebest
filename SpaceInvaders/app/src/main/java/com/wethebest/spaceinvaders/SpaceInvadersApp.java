@@ -28,8 +28,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private SimpleCannon mCannon;
     private Alien mAlien;
 
-
     private Projectile mProjectile;
+
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -92,6 +92,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 else {
                     mCannon.setMovement(mCannon.MOVINGLEFT);
                 }
+
+                mProjectile = mCannon.shoot();
                 break;
 
             case MotionEvent.ACTION_UP:

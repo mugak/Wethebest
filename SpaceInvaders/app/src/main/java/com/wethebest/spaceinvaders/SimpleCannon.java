@@ -36,27 +36,31 @@ class SimpleCannon {
 
     void update(long fps) {
 
-        if(cannonMovement == MOVINGLEFT) {
+        if (cannonMovement == MOVINGLEFT) {
             mRect.left = mRect.left - (mXVelocity / fps);
         }
-        if(cannonMovement == MOVINGRIGHT) {
+        if (cannonMovement == MOVINGRIGHT) {
             mRect.left = mRect.left + (mXVelocity / fps);
         }
-        if(mRect.left < 0) {
+        if (mRect.left < 0) {
             mRect.left = 0;
         } // left out of bounds
         mRect.right = mRect.left + mCannonWidth;
 
-        if(mRect.right > mScreenX) {
+        if (mRect.right > mScreenX) {
             mRect.right = mScreenX;
             mRect.left = mScreenX - mCannonWidth;
         } // right out of bounds
     }
 
-
-
     void setMovement(int state) {
         cannonMovement = state;
+    }
+
+    PlayerProj shoot() {
+        PlayerProj mProj = new PlayerProj(mScreenX);
+        mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
+        return mProj;
     }
 
 

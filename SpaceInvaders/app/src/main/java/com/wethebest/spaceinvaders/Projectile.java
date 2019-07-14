@@ -40,7 +40,7 @@ public abstract class Projectile{
     }
 
 
-    void setPos(int x, int y){
+    void setPos(float x, float y){
         rect.left = x + projWidth/2;
         rect.right = rect.left + projWidth;
         rect.top = y + projHeight/2;
