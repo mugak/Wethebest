@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
+import android.graphics.RectF;
 import android.os.Bundle;
 
 public class Barrier{
