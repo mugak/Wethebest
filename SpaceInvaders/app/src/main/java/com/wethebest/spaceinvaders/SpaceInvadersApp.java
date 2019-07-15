@@ -1,12 +1,9 @@
 package com.wethebest.spaceinvaders;
 
-import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
-import android.os.Bundle;
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -25,8 +22,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private long mFPS;
     private final int MILLIS_IN_SECOND = 1000;
-
-    LinkedList<Projectile> mProjectiles = new LinkedList<Projectile>();
 
     LinkedList<GameObject> gameObjects = new LinkedList<>();
     SimpleCannon mPlayer;
