@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.RectF;
 import android.os.Bundle;
 import android.content.Context;
@@ -23,6 +24,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private int mScreenX;
     private int mScreenY;
+    private Point mScreenSize;
 
     private long mFPS;
     private final int MILLIS_IN_SECOND = 1000;
@@ -48,17 +50,16 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenX = x;
         mScreenY = y;
 
-        mAlien = new Alien(mScreenX);
+        gameObjects.add(new Alien(mScreenSize));
+
         mCannon = new SimpleCannon(mScreenX);
 
         startGame();
     }
 
     private void startGame() {
-        mAlien.reset(mScreenX, mScreenY);
+        mAlien.reset(mScreenSize);
         mCannon.reset(mScreenX, mScreenY);
-
-
     }
 
     @Override
@@ -74,9 +75,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 detectCollisions();
             }
 
-            for (GameObject object : gameObjects) {
-                object.display();
-            }
+            draw();
 
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
@@ -109,22 +108,26 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         return true;
     }
 
-    /*private void draw() {
+    private void draw() {
         if (mOurHolder.getSurface().isValid()) {
             mCanvas = mOurHolder.lockCanvas();
-            mCanvas.drawColor(Color.argb(255, 26, 128, 182));
-            mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-            mCanvas.drawRect(mAlien.getRect(), mPaint);
+            mCanvas.drawColor(Color.argb(255, 26, 128, 182));
+
+            /*mCanvas.drawRect(mAlien.getRect(), mPaint);
 
             for(Projectile mProj : mProjectiles) {
                 mCanvas.drawRect(mProj.getRect(), mPaint);
             }
-            mCanvas.drawRect(mCannon.getRect(), mPaint);
+            mCanvas.drawRect(mCannon.getRect(), mPaint);*/
+
+            for (GameObject gameObject : gameObjects) {
+                gameObject.display(mCanvas);
+            }
 
             mOurHolder.unlockCanvasAndPost(mCanvas);
         }
-    }*/
+    }
 
     public void resume() {
         mPlaying = true;

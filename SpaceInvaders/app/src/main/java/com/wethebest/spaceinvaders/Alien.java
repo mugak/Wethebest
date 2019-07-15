@@ -1,5 +1,9 @@
 package com.wethebest.spaceinvaders;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.RectF;
 
 class Alien implements GameObject {
@@ -7,25 +11,35 @@ class Alien implements GameObject {
     private float mXVelocity;
     private float mAlienWidth;
     private float mAlienHeight;
-    private int mScreenX;
 
-    Alien(int screenX) {
-        mAlienWidth = screenX / 10;
-        mAlienHeight = screenX / 10;
+    private boolean isActive;
+
+    private Point mScreenSize;
+
+    private Paint mPaint;
+
+    Alien(Point screenSize) {
+        mScreenSize = screenSize;
+
+        mAlienWidth = mScreenSize.x / 10;
+        mAlienHeight = mScreenSize.y / 10;
+
+        isActive = true;
+
         mRect = new RectF();
-        mScreenX = screenX;
+        mPaint = new Paint();
     }
 
-    RectF getRect() {
+    public RectF getHitBox() {
         return mRect;
     }
 
-    public void reset(int x, int y) {
-        mRect.left = x / 2;
+    public void reset(Point location) {
+        mRect.left = location.x / 2;
         mRect.top = 0;
-        mRect.right = x / 2 + mAlienWidth;
+        mRect.right = location.x / 2 + mAlienWidth;
         mRect.bottom = mAlienHeight;
-        mXVelocity = (y / 3);
+        mXVelocity = (location.y / 3);
     }
 
     public void update(long fps) {
@@ -36,27 +50,50 @@ class Alien implements GameObject {
         mRect.bottom = mRect.top + mAlienHeight;
     }
 
-    void reverseXVelocity() {
+    private void reverseXVelocity() {
         mXVelocity = -mXVelocity;
     }
 
-    void advance() {
+    private void advance() {
         mRect.top = mRect.top + mAlienHeight;
         mRect.bottom = mRect.top + mAlienHeight; //moves alien down
 
-        if(mRect.left < 0) {
+        if (mRect.left < 0) {
             mRect.left = 0;
             mRect.right = 0 + mAlienWidth;
         } //reset to left edge
 
-        if(mRect.right > mScreenX) {
-            mRect.right = mScreenX;
-            mRect.left = mScreenX - mAlienWidth;
+        if (mRect.right > mScreenSize.x) {
+            mRect.right = mScreenSize.x;
+            mRect.left = mScreenSize.x - mAlienWidth;
         } //reset pos to right edge
     }
 
-    boolean isHit(RectF hitBox) {
-        return RectF.intersects(hitBox, mRect);
+    public void display(Canvas canvas) {
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
 
+        canvas.drawRect(mRect, mPaint);
+    }
+
+    public void collide(GameObject gameObject) {
+        //SpaceInvaders app already makes this check to make sure the gameObject is a projectile,
+        // but this is a good check to make sure the alien class still works if the spaceInvadersApp class changes
+        if (gameObject instanceof Projectile) {
+            if (RectF.intersects(mRect, gameObject.getHitBox())) {
+                reset(mScreenSize);
+                isActive = false;
+            }
+        }
+    }
+
+    public void checkBounds(Point screenSize) {
+        if (mRect.left < 0 || mRect.right > mScreenSize.x) {
+            reverseXVelocity();
+            advance();
+        }
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 }
