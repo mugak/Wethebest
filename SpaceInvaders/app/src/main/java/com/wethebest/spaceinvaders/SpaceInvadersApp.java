@@ -33,6 +33,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     List<Projectile> mProjectiles = new ArrayList<Projectile>();
 
+    List<GameObject> gameObjects = new ArrayList<>();
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;

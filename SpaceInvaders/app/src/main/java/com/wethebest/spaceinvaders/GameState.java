@@ -1,8 +1,11 @@
 package com.wethebest.spaceinvaders;
 
-import android.app.Activity;
-import android.os.Bundle;
-
+/*
+    This class keeps track of the objects in the game and
+ */
 public class GameState{
+    private SimpleCannon mCannon;
+    private Alien mAlien;
+
 
 }
