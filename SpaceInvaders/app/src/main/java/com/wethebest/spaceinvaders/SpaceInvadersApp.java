@@ -22,8 +22,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private Canvas mCanvas;
     private Paint mPaint;
 
-    private int mScreenX;
-    private int mScreenY;
     private Point mScreenSize;
 
     private long mFPS;
@@ -47,8 +45,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mOurHolder = getHolder();
         mPaint = new Paint();
 
-        mScreenX = x;
-        mScreenY = y;
+        mScreenSize = new Point(x, y);
 
         gameObjects.add(new Alien(mScreenSize));
         gameObjects.add(new SimpleCannon(mScreenSize));
@@ -76,6 +73,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
             draw();
 
+            removeInactiveObjects();
+
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
             if(timeThisFrame > 0) {
@@ -90,7 +89,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
                 mPaused = false;
-                if(motionEvent.getX() > mScreenX / 2) {
+                if(motionEvent.getX() > mScreenSize.x / 2) {
                     mCannon.setMovement(mCannon.MOVINGRIGHT);
                 }
                 else {
@@ -188,6 +187,18 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private void collide(GameObject object1, GameObject object2) {
         object1.collide(object2);
         object2.collide(object1);
+    }
+
+    private void removeInactiveObjects() {
+        Iterator<GameObject> gameObjectIterator = gameObjects.iterator();
+
+        while(gameObjectIterator.hasNext()) {
+            GameObject gameObject = gameObjectIterator.next();
+
+            if(!gameObject.isActive()) {
+                gameObjectIterator.remove();
+            }
+        }
     }
 
 }
