@@ -14,11 +14,11 @@ public class Spaceship {
     private float mShootVelocity;
     private int mMovementState;
 
-    private final float WIDTH_DIVIDER = 8.0;
-    private final float HEIGHT_DIVIDER = 10.0;
-    private final float X_DIVIDER = 2.0;
-    private final float Y_DIVIDER = 1.2;
-    private final float INITIAL_VELOCITY_DIVIDER = 5.0;
+    private final float WIDTH_DIVIDER = 8f;
+    private final float HEIGHT_DIVIDER = 10f;
+    private final float X_DIVIDER = 2f;
+    private final float Y_DIVIDER = 1.2f;
+    private final float INITIAL_VELOCITY_DIVIDER = 5f;
     private final int LEFT = 0, RIGHT = 1;
 
     // screenX is the width of the screen
@@ -53,10 +53,13 @@ public class Spaceship {
 
     // shoot projectiles upwards, hy                                                                                                        y67
     public void shoot(int screenX) {
+
         // initialize new projectile with width of screen
-        Projectile p = new Projectile(screenX);
-        p.setPos(mRect.centerX(), mRect.top);
-        while()
+        // I still don't think we should separate projectile into 2 classes
+        // but go off I guess
+        Projectile p = new PlayerProj(screenX);
+        p.setPos((int)mRect.centerX(), (int)mRect.top);
+
     }
 
     public void setShootVelocity(float shootVelocity) {
@@ -69,21 +72,21 @@ public class Spaceship {
 
         switch (direction) {
 
-            // BASE_SPEED int in UI or SpaceInvadersApplication
             case LEFT: mRect.set(mRect.left - (mXVelocity/fps),
                                  mRect.top, mRect.right - (mXVelocity/fps),
                                  mRect.bottom);
             case RIGHT: mRect.set(mRect.left + (mXVelocity/fps),
                     mRect.top, mRect.right + (mXVelocity/fps),
                     mRect.bottom);
+            //default: error
         }
     }
 
 
     // checks whether it's been hit by a projectile
-    public boolean beenHit(Projectile p) {
+    public boolean collisionDetection(Projectile p) {
 
-
+        return false;
     }
 
     // upgrade is a multiplier of the current velocity
