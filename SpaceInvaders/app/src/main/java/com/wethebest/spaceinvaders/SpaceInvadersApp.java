@@ -51,7 +51,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mAlien = new Alien(mScreenX);
         mCannon = new SimpleCannon(mScreenX);
 
-
         startGame();
     }
 
@@ -143,7 +142,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         }
 
     }
-    
+
     private void detectCollisions() {
         /*if(mAlien.getRect().left < 0 || mAlien.getRect().right > mScreenX) {
             mAlien.reverseXVelocity();

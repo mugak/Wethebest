@@ -13,5 +13,6 @@ public interface GameObject {
     //Checks to see if object is within screen
     void checkBounds(int screenX, int screenY);
 
-    //TODO isActive
+    //Checks to see if object should be in game
+    boolean isActive();
 }

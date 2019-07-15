@@ -2,7 +2,7 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.RectF;
 
-class Alien {
+class Alien implements GameObject {
     private RectF mRect;
     private float mXVelocity;
     private float mAlienWidth;
@@ -28,7 +28,7 @@ class Alien {
         mXVelocity = (y / 3);
     }
 
-    void update(long fps) {
+    public void update(long fps) {
         mRect.left = mRect.left + (mXVelocity / fps);
         mRect.top = mRect.top;
 
