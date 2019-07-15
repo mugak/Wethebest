@@ -1,13 +1,19 @@
 package com.wethebest.spaceinvaders;
 
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.RectF;
 
-class SimpleCannon {
+class SimpleCannon implements GameObject {
     private RectF mRect;
     private float mXVelocity;
     private float mCannonWidth;
     private float mCannonHeight;
-    private int mScreenX;
+
+    private Point mScreenSize;
+    private Paint mPaint;
 
     final int STOPPED = 0;
     final int MOVINGLEFT = 1;
@@ -15,26 +21,33 @@ class SimpleCannon {
 
     private int cannonMovement = STOPPED;
 
-    SimpleCannon(int screenX) {
-        mScreenX = screenX;
-        mCannonWidth = screenX / 10;
-        mCannonHeight = screenX / 10;
+    //Tells the game whether the object should still be in game
+    private boolean isActive;
+
+    SimpleCannon(Point screenSize) {
+        mScreenSize = screenSize;
+        mCannonWidth = mScreenSize.x / 10;
+        mCannonHeight = mScreenSize.x / 10;
         mRect = new RectF();
+
+        mPaint = new Paint();
+
+        isActive = true;
     }
 
-    RectF getRect() {
+    public RectF getHitBox() {
         return mRect;
     }
 
-    public void reset(int x, int y) {
-        mRect.left = x / 2;
-        mRect.top = y - mCannonHeight;
-        mRect.right = x / 2 + mCannonWidth;
-        mRect.bottom = y;
-        mXVelocity = (y / 3);
+    public void reset(Point location) {
+        mRect.left = location.x / 2;
+        mRect.top = location.y - mCannonHeight;
+        mRect.right = location.x / 2 + mCannonWidth;
+        mRect.bottom = location.y;
+        mXVelocity = (location.y / 3);
     }
 
-    void update(long fps) {
+    public void update(long fps) {
 
         if (cannonMovement == MOVINGLEFT) {
             mRect.left = mRect.left - (mXVelocity / fps);
@@ -42,15 +55,8 @@ class SimpleCannon {
         if (cannonMovement == MOVINGRIGHT) {
             mRect.left = mRect.left + (mXVelocity / fps);
         }
-        if (mRect.left < 0) {
-            mRect.left = 0;
-        } // left out of bounds
-        mRect.right = mRect.left + mCannonWidth;
 
-        if (mRect.right > mScreenX) {
-            mRect.right = mScreenX;
-            mRect.left = mScreenX - mCannonWidth;
-        } // right out of bounds
+        checkBounds();
     }
 
     void setMovement(int state) {
@@ -58,11 +64,36 @@ class SimpleCannon {
     }
 
     PlayerProj shoot() {
-        PlayerProj mProj = new PlayerProj(mScreenX);
+        PlayerProj mProj = new PlayerProj(mScreenSize.x);
         mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
         return mProj;
     }
 
+    public void display(Canvas canvas) {
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
 
+        canvas.drawRect(mRect, mPaint);
+    }
 
+    //Check alien.java for an example on how this is implemented
+    public void collide(GameObject gameObject) {
+
+    }
+
+    //Prevents cannon from moving out of bounds
+    private void checkBounds() {
+        if (mRect.left < 0) {
+            mRect.left = 0;
+        } // left out of bounds
+        mRect.right = mRect.left + mCannonWidth;
+
+        if (mRect.right > mScreenSize.x) {
+            mRect.right = mScreenSize.x;
+            mRect.left = mScreenSize.x - mCannonWidth;
+        } // right out of bounds
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
 }

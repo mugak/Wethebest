@@ -51,15 +51,14 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenY = y;
 
         gameObjects.add(new Alien(mScreenSize));
-
-        mCannon = new SimpleCannon(mScreenX);
+        gameObjects.add(new SimpleCannon(mScreenSize));
 
         startGame();
     }
 
     private void startGame() {
         mAlien.reset(mScreenSize);
-        mCannon.reset(mScreenX, mScreenY);
+        mCannon.reset(mScreenSize);
     }
 
     @Override

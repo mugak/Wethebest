@@ -19,9 +19,6 @@ public interface GameObject {
     //Necessary for calculating collisions
     RectF getHitBox();
 
-    //Checks to see if object is within screen
-    void checkBounds(Point screenSize);
-
     //Checks to see if object should be in game
     boolean isActive();
 }

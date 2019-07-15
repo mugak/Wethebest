@@ -12,6 +12,7 @@ class Alien implements GameObject {
     private float mAlienWidth;
     private float mAlienHeight;
 
+    //Tells the game whether the object should still be in game
     private boolean isActive;
 
     private Point mScreenSize;
@@ -48,6 +49,8 @@ class Alien implements GameObject {
 
         mRect.right = mRect.left + mAlienWidth;
         mRect.bottom = mRect.top + mAlienHeight;
+
+        checkBounds();
     }
 
     private void reverseXVelocity() {
@@ -86,7 +89,7 @@ class Alien implements GameObject {
         }
     }
 
-    public void checkBounds(Point screenSize) {
+    void checkBounds() {
         if (mRect.left < 0 || mRect.right > mScreenSize.x) {
             reverseXVelocity();
             advance();
