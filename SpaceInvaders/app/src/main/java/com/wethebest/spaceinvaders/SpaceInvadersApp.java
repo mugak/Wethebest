@@ -163,7 +163,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 i.remove();
             }
 
-            if(mAlien.isHit(mProj.getRect())) {
+            else if(mAlien.isHit(mProj.getRect())) {
                 mAlien.reset(mScreenX, mScreenY); //currently just resets pos
                 i.remove();
             }
