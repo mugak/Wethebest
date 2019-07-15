@@ -6,17 +6,19 @@ import android.graphics.RectF;
 *The only difference between the two classes is the
 *direction of the velocity, yVel.
 */
-public abstract class Projectile{
+public abstract class Projectile {
     //Projectile will be a rectangle as a placeholder
-    private RectF rect;
+    protected RectF rect;
 
-    private float xVel;
-    private float yVel;
+    protected float xVel;
+    protected float yVel;
 
-    private float projWidth;
-    private float projHeight;
+    protected float projWidth;
+    protected float projHeight;
 
-    Projectile(int screenX){
+    public Projectile(){}
+
+    public Projectile(int screenX){
         projWidth = screenX/100;
         projHeight = screenX/100;
         xVel = 0;
@@ -24,13 +26,13 @@ public abstract class Projectile{
     }
 
 
-    //Returns rect of projectile to be drawn
+    // Returns rect of projectile to be drawn
     RectF getRect(){
         return rect;
     }
 
 
-    //Updates the position of the projectile
+    // Updates the position of the projectile
     void update(long fps){
         rect.left = rect.left + (xVel/fps);
         rect.top = rect.top + (yVel/fps);
@@ -46,17 +48,29 @@ public abstract class Projectile{
         rect.top = y + projHeight/2;
         rect.bottom = rect.top + projHeight;
     }
+
+    // Added by Idan - created so that you can update the shooting speed
+    // of the Spaceship
+    void setyVel(float yVel) {
+        this.yVel = yVel;
+    }
+
+    // Added by Idan - A concept: aliens, barriers, and spaceship implement
+    // an interface called gameobject
+   /* boolean hasHit(GameObject g) {
+        return g.beenHit();
+    }*/
 }
-public class PlayerProj extends  Projectile{
-    PlayerProj(){
+class PlayerProj extends Projectile{
+    PlayerProj(int screenX){
         //Vertical velocity is negative for
         //the proj to travel down the screen
         yVel = -screenX/3;
     }
 }
-public class AlienProj extends Projectile{
+class AlienProj extends Projectile{
 
-    AlienProj(){
+    AlienProj(int screenX){
         //Vertical velocity is positive for
         //the proj to travel down the screen
         yVel = screenX / 3;

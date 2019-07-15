@@ -24,7 +24,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private long mFPS;
     private final int MILLIS_IN_SECOND = 1000;
 
-    //private Cannon mCannon;
+    //private Spaceship mSpaceship;
     private Alien mAlien;
 
 
