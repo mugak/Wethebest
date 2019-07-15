@@ -54,6 +54,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         for(GameObject gameObject : gameObjects) {
             gameObject.reset(mScreenSize);
         }
+
+        //Potentially removes leftover gameObjects from previous game
+        removeInactiveObjects();
     }
 
     @Override
@@ -110,13 +113,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
             mCanvas.drawColor(Color.argb(255, 26, 128, 182));
 
-            /*mCanvas.drawRect(mAlien.getRect(), mPaint);
-
-            for(Projectile mProj : mProjectiles) {
-                mCanvas.drawRect(mProj.getRect(), mPaint);
-            }
-            mCanvas.drawRect(mCannon.getRect(), mPaint);*/
-
             for (GameObject gameObject : gameObjects) {
                 gameObject.display(mCanvas);
             }
@@ -143,27 +139,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     }
 
     private void detectCollisions() {
-        /*if(mAlien.getRect().left < 0 || mAlien.getRect().right > mScreenX) {
-            mAlien.reverseXVelocity();
-            mAlien.advance();
-        }
-
-
-        Iterator<Projectile> i = mProjectiles.iterator(); //needs iterator so projectiles can be removed in a loop
-        while (i.hasNext()) {
-            Projectile mProj = i.next();
-
-            if(mProj.getRect().top <= 0) {
-                i.remove();
-            }
-
-            else if(mAlien.isHit(mProj.getRect())) {
-                mAlien.reset(mScreenX, mScreenY); //currently just resets pos
-                i.remove();
-            }
-
-        }*/
-
         //Checks to see if the first object is a projectile because in SpaceInvaders only
         // projectiles collide with non projectiles. There are no other types of collisions
         Iterator<GameObject> firstObjectItr = gameObjects.iterator();
