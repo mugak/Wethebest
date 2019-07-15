@@ -20,20 +20,16 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private SurfaceHolder mOurHolder;
     private Canvas mCanvas;
-    private Paint mPaint;
 
     private Point mScreenSize;
 
     private long mFPS;
     private final int MILLIS_IN_SECOND = 1000;
 
-    //private Cannon mCannon;
-    private SimpleCannon mCannon;
-    private Alien mAlien;
-
     LinkedList<Projectile> mProjectiles = new LinkedList<Projectile>();
 
     LinkedList<GameObject> gameObjects = new LinkedList<>();
+    SimpleCannon mPlayer;
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -43,19 +39,21 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
         mOurHolder = getHolder();
-        mPaint = new Paint();
 
         mScreenSize = new Point(x, y);
 
         gameObjects.add(new Alien(mScreenSize));
-        gameObjects.add(new SimpleCannon(mScreenSize));
+
+        mPlayer = new SimpleCannon(mScreenSize);
+        gameObjects.add(mPlayer);
 
         startGame();
     }
 
     private void startGame() {
-        mAlien.reset(mScreenSize);
-        mCannon.reset(mScreenSize);
+        for(GameObject gameObject : gameObjects) {
+            gameObject.reset(mScreenSize);
+        }
     }
 
     @Override
@@ -90,17 +88,17 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             case MotionEvent.ACTION_DOWN:
                 mPaused = false;
                 if(motionEvent.getX() > mScreenSize.x / 2) {
-                    mCannon.setMovement(mCannon.MOVINGRIGHT);
+                    mPlayer.setMovement(mPlayer.MOVINGRIGHT);
                 }
                 else {
-                    mCannon.setMovement(mCannon.MOVINGLEFT);
+                    mPlayer.setMovement(mPlayer.MOVINGLEFT);
                 }
 
-                mProjectiles.add(mCannon.shoot());
+                gameObjects.add(mPlayer.shoot());
                 break;
 
             case MotionEvent.ACTION_UP:
-                mCannon.setMovement(mCannon.STOPPED);
+                mPlayer.setMovement(mPlayer.STOPPED);
                 break;
         }
         return true;
@@ -166,6 +164,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         }*/
 
+        //Checks to see if the first object is a projectile because in SpaceInvaders only
+        // projectiles collide with non projectiles. There are no other types of collisions
         Iterator<GameObject> firstObjectItr = gameObjects.iterator();
         while(firstObjectItr.hasNext()) {
             GameObject object1 = firstObjectItr.next();
@@ -185,8 +185,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     }
 
     private void collide(GameObject object1, GameObject object2) {
-        object1.collide(object2);
-        object2.collide(object1);
+        if(RectF.intersects(object1.getHitBox(), object2.getHitBox())) {
+            object1.collide(object2);
+            object2.collide(object1);
+        }
     }
 
     private void removeInactiveObjects() {

@@ -11,6 +11,9 @@ public interface GameObject {
     //Implements the way the object will be displayed to the screen
     void display(Canvas canvas);
 
+    //Resets state of object to beginning of GameState
+    void reset(Point location);
+
     //Implements the behavior of how an object should change state when it is collided with
     //Implementations of GameObject should check to see if the passed gameObject parameter is
     //of the proper type to collide with
