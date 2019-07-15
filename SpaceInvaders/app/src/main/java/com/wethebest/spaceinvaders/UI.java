@@ -2,6 +2,7 @@ package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import android.view.View;
@@ -15,8 +16,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.animation.Animation;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import static android.view.MotionEvent.*;
 
 
 public class UI extends AppCompatActivity {
@@ -48,10 +54,16 @@ public class UI extends AppCompatActivity {
         final ImageView Invader3a = findViewById(R.id.Invader3a);
         final ImageView Invader3b = findViewById(R.id.Invader3b);
 
+
         final ImageView Scoreboard = findViewById(R.id.Scoreboard);
         final TextView Score = findViewById(R.id.Score);
         ImageView Gameover = findViewById(R.id.gameover);
         final ImageView Start = findViewById(R.id.start);
+
+
+
+        int xDelta;
+        int yDelta;
 
         Start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +89,29 @@ public class UI extends AppCompatActivity {
 
             }
         });
+
+        Spaceship.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+           public boolean onTouch(View view, MotionEvent motionEvent) {
+                TranslateAnimation animation = new TranslateAnimation(-900.0f, 900.0f,
+                        0.0f, 0.0f);//  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
+
+                animation.setDuration(5000);  // animation duration
+               animation.setRepeatCount(1);  // animation repeat count
+                animation.setRepeatMode(0);   // repeat animation (left to right, right to left )
+               animation.setFillAfter(true);
+
+                Spaceship.startAnimation(animation);  // start animation
+
+
+              return false;
+
+            }
+        });
+
+
+
+
 
 
 
