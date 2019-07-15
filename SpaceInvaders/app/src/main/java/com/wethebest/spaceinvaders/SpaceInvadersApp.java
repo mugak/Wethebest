@@ -33,7 +33,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     LinkedList<Projectile> mProjectiles = new LinkedList<Projectile>();
 
-    List<GameObject> gameObjects = new ArrayList<>();
+    LinkedList<GameObject> gameObjects = new LinkedList<>();
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -68,7 +68,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             long frameStartTime = System.currentTimeMillis();
 
             if(!mPaused) {
-                update();
+                for (GameObject object : gameObjects) {
+                    object.update(mFPS);
+                }
+
                 detectCollisions();
             }
 
@@ -121,15 +124,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             mOurHolder.unlockCanvasAndPost(mCanvas);
         }
     }
-    private void update() {
-        mAlien.update(mFPS);
-
-        for(Projectile mProj : mProjectiles) {
-            mProj.update(mFPS);
-        }
-
-        mCannon.update(mFPS);
-    }
 
     public void resume() {
         mPlaying = true;
@@ -150,7 +144,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
 
     private void detectCollisions() {
-        if(mAlien.getRect().left < 0 || mAlien.getRect().right > mScreenX) {
+        /*if(mAlien.getRect().left < 0 || mAlien.getRect().right > mScreenX) {
             mAlien.reverseXVelocity();
             mAlien.advance();
         }
@@ -169,7 +163,29 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 i.remove();
             }
 
+        }*/
+
+        Iterator<GameObject> firstObjectItr = gameObjects.iterator();
+        while(firstObjectItr.hasNext()) {
+            GameObject object1 = firstObjectItr.next();
+
+            if(object1 instanceof Projectile) {
+                Iterator<GameObject> secondObjectItr = gameObjects.iterator();
+
+                while(secondObjectItr.hasNext()) {
+                    GameObject object2 = secondObjectItr.next();
+
+                    if(!(object2 instanceof  Projectile)) {
+                        collide(object1, object2);
+                    }
+                }
+            }
         }
+    }
+
+    private void collide(GameObject object1, GameObject object2) {
+        object1.collide(object2);
+        object2.collide(object1);
     }
 
 }
