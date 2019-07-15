@@ -75,7 +75,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 detectCollisions();
             }
 
-            draw();
+            for (GameObject object : gameObjects) {
+                object.display();
+            }
 
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
@@ -108,7 +110,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         return true;
     }
 
-    private void draw() {
+    /*private void draw() {
         if (mOurHolder.getSurface().isValid()) {
             mCanvas = mOurHolder.lockCanvas();
             mCanvas.drawColor(Color.argb(255, 26, 128, 182));
@@ -123,7 +125,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
             mOurHolder.unlockCanvasAndPost(mCanvas);
         }
-    }
+    }*/
 
     public void resume() {
         mPlaying = true;
@@ -141,8 +143,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         }
 
     }
-
-
+    
     private void detectCollisions() {
         /*if(mAlien.getRect().left < 0 || mAlien.getRect().right > mScreenX) {
             mAlien.reverseXVelocity();
