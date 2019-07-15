@@ -7,11 +7,13 @@ class Alien {
     private float mXVelocity;
     private float mAlienWidth;
     private float mAlienHeight;
+    private int mScreenX;
 
     Alien(int screenX) {
         mAlienWidth = screenX / 10;
         mAlienHeight = screenX / 10;
         mRect = new RectF();
+        mScreenX = screenX;
     }
 
     RectF getRect() {
@@ -40,6 +42,21 @@ class Alien {
 
     void advance() {
         mRect.top = mRect.top + mAlienHeight;
-        mRect.bottom = mRect.top + mAlienHeight;
+        mRect.bottom = mRect.top + mAlienHeight; //moves alien down
+
+        if(mRect.left < 0) {
+            mRect.left = 0;
+            mRect.right = 0 + mAlienWidth;
+        } //reset to left edge
+
+        if(mRect.right > mScreenX) {
+            mRect.right = mScreenX;
+            mRect.left = mScreenX - mAlienWidth;
+        } //reset pos to right edge
+    }
+
+    boolean isHit(RectF hitBox) {
+        return RectF.intersects(hitBox, mRect);
+
     }
 }

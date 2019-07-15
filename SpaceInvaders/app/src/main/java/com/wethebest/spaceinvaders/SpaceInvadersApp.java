@@ -12,8 +12,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 class SpaceInvadersApp extends SurfaceView implements Runnable {
 
@@ -31,7 +31,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private SimpleCannon mCannon;
     private Alien mAlien;
 
-    List<Projectile> mProjectiles = new ArrayList<Projectile>();
+    LinkedList<Projectile> mProjectiles = new LinkedList<Projectile>();
 
 
     private Thread mGameThread = null;
@@ -154,6 +154,21 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             mAlien.advance();
         }
 
+
+        Iterator<Projectile> i = mProjectiles.iterator(); //needs iterator so projectiles can be removed in a loop
+        while (i.hasNext()) {
+            Projectile mProj = i.next();
+
+            if(mProj.getRect().top <= 0) {
+                i.remove();
+            }
+
+            else if(mAlien.isHit(mProj.getRect())) {
+                mAlien.reset(mScreenX, mScreenY); //currently just resets pos
+                i.remove();
+            }
+
+        }
     }
 
 }
