@@ -18,14 +18,14 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private SurfaceHolder mOurHolder;
     private Canvas mCanvas;
 
-    private Point mScreenSize;
+    private Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
 
     private long mFPS;
     private final int MILLIS_IN_SECOND = 1000;
 
     LinkedList<GameObject> gameObjects = new LinkedList<>();
     SimpleCannon mPlayer;
-    Barrier mBarrier;
+    Barrier mBarrier; //TODO: implement Barrier array
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -43,8 +43,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mPlayer = new SimpleCannon(mScreenSize);
         mBarrier = new Barrier(mScreenSize);
         gameObjects.add(mPlayer);
-        gameObjects.add(mBarrier);
-
+        gameObjects.addAll(mBarrier.getBarrierBlocks());
         startGame();
     }
 

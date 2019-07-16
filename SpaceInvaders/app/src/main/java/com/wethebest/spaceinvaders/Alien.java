@@ -85,7 +85,7 @@ class Alien implements GameObject {
         //NOTE: SpaceInvadersApp.java checks for the collision so there is no need to in this class
         //Collide only describes what the class should do when it is collided with
         if (gameObject instanceof Projectile) {
-            reset(mScreenSize);
+            //reset(mScreenSize);
             isActive = false;
         }
     }

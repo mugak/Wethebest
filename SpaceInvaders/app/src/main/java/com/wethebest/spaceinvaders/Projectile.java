@@ -79,6 +79,9 @@ public abstract class Projectile implements GameObject {
     public boolean isActive() {
         return isActive;
     }
+
+
+    //TODO: add checkBounds() method so isActive can be set to false when Projectile goes off screen, possibly include in GameObject interface
 }
 class PlayerProj extends  Projectile{
     PlayerProj(int screenX){
