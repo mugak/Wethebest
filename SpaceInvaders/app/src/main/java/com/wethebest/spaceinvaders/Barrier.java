@@ -1,40 +1,85 @@
 package com.wethebest.spaceinvaders;
 
-import android.app.Activity;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.RectF;
-import android.os.Bundle;
 
-public class Barrier{
-    private RectF rect;
+public class Barrier implements GameObject {
+    private RectF mRect;
+    private float mBarrierWidth;
+    private float mBarrierHeight;
 
-    private float barrierWidth;
-    private float barrierHeight;
+    //Tells the game whether the object should still be in game
+    private boolean isActive;
+
+    private Point mScreenSize;
+    private Paint mPaint;
 
     private int durability;
 
-    Barrier(int screenX){
-        barrierWidth = screenX/5;
-        barrierHeight = barrierWidth/2;
+    Barrier(Point screenSize){
+        mScreenSize = screenSize;
 
-        durability = 1;
+        mBarrierWidth = mScreenSize.x / 5;
+        mBarrierHeight = mScreenSize.y / 10;
+
+        isActive = true;
+
+        mRect = new RectF();
+        mPaint = new Paint();
+
+        durability = 3;
     }
 
-    RectF getRect(){
-        return rect;
+    public RectF getHitBox() {
+        return mRect;
+    }
+
+    public void update(long fps) {
+
     }
 
     //Set position of barrier, centered on x,y
-    void setPos(int x, int y){
-        rect.left = x + barrierWidth/2;
-        rect.right = rect.left + barrierWidth;
-        rect.top = y + barrierHeight/2;
-        rect.bottom = rect.top + barrierHeight;
+    public void reset(Point location) {
+        mRect.left = location.x / 2 + mBarrierWidth / 2;
+        mRect.top = location.y / 2 + mBarrierHeight / 2;
+        mRect.right = mRect.left + mBarrierWidth;
+        mRect.bottom = mRect.top + mBarrierHeight;
     }
 
-    int getBarDurability(){return durability;}
+
+    public void display(Canvas canvas) {
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
+
+        canvas.drawRect(mRect, mPaint);
+    }
+
+    public void collide(GameObject gameObject) {
+        //SpaceInvaders app already makes this check to make sure the gameObject is a projectile,
+        // but this is a good check to make sure the Barrier class still works if the spaceInvadersApp
+        // class changes
+        //NOTE: SpaceInvadersApp.java checks for the collision so there is no need to in this class
+        //Collide only describes what the class should do when it is collided with
+        if (gameObject instanceof Projectile) {
+            removeDurability(1);
+            checkDurability();
+        }
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
 
     //Updates the durability of barrier if hit
-    void addBarDurability(int x){
-        durability += x;
+    private void removeDurability(int x){
+        durability -= x;
+    }
+
+    private void checkDurability() {
+        if(durability <= 0) {
+            isActive = false;
+        }
     }
 }

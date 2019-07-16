@@ -22,7 +22,7 @@ public abstract class Projectile implements GameObject {
 
     private Paint mPaint;
 
-    private boolean isActive;
+    protected boolean isActive;
 
     Projectile(int screenX){
         projWidth = screenX/100;
@@ -83,17 +83,22 @@ public abstract class Projectile implements GameObject {
 class PlayerProj extends  Projectile{
     PlayerProj(int screenX){
         super(screenX);
-        //Vertical velocity is negative for
-        //the proj to travel down the screen
-        yVel = -screenX/3;
+        yVel = -screenX/3; //Projectile shoots up
     }
+
+    @Override
+    public void collide (GameObject gameObject) {
+        if(!(gameObject instanceof SimpleCannon)) {
+            isActive = false; //PlayerProj can't shoot the player
+        }
+    }
+
+
 }
 class AlienProj extends Projectile{
 
     AlienProj(int screenX){
         super(screenX);
-        //Vertical velocity is positive for
-        //the proj to travel down the screen
-        yVel = screenX / 3;
+        yVel = screenX / 3; //Projectile shoots down
     }
 }
