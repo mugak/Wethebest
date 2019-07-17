@@ -35,11 +35,15 @@ class Alien implements GameObject {
         return mRect;
     }
 
-    public void reset(Point location) {
+    public void setPosition(Point location) {
         mRect.left = location.x / 2;
         mRect.top = 0;
         mRect.right = location.x / 2 + mAlienWidth;
         mRect.bottom = mAlienHeight;
+    }
+
+    public void reset(Point location) {
+        setPosition(location);
         mXVelocity = (location.y / 3);
     }
 
@@ -84,7 +88,7 @@ class Alien implements GameObject {
         // class changes
         //NOTE: SpaceInvadersApp.java checks for the collision so there is no need to in this class
         //Collide only describes what the class should do when it is collided with
-        if (gameObject instanceof Projectile) {
+        if (gameObject instanceof PlayerProj) {
             //reset(mScreenSize);
             isActive = false;
         }
