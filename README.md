@@ -10,12 +10,5 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 * Muga Kim
 * Sach Samala
 
-## Sprint 1
-![Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Sprint_Storyboard.png)
-![CRC Cards](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/CRC_Cards.png) 
-![Acceptance Criteria](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Acceptance_Criteria.md)
-
-## Sprint 2
-![Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Sprint_Storyboard.png)
-![CRC Cards](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/CRC_Cards.png) 
-![Acceptance Criteria](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Acceptance_Criteria.md)
+[Sprint 1](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Sprint1.md)
+[Sprint 2](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Sprint2.md)
