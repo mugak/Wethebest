@@ -21,7 +21,7 @@ public class Barrier {
 
     //TODO: dynamically set the position on the screen, possibly depending on number of barriers
     private void setBarrierPosition() {
-        barrierPosition = new Point(mScreenSize.x / 2, mScreenSize.y / 2);
+        barrierPosition = new Point(mScreenSize.x / 2 - 100, mScreenSize.y / 2);
     }
 
 

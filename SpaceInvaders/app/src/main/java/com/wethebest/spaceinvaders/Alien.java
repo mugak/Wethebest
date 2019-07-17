@@ -23,7 +23,7 @@ class Alien implements GameObject {
         mScreenSize = screenSize;
 
         mAlienWidth = mScreenSize.x / 10;
-        mAlienHeight = mScreenSize.y / 10;
+        mAlienHeight = mScreenSize.y / 20;
 
         isActive = true;
 

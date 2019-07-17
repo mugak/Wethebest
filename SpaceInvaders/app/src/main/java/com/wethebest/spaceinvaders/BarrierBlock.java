@@ -21,7 +21,7 @@ public class BarrierBlock implements GameObject {
     BarrierBlock(Point ScreenSize){
         mScreenSize = ScreenSize;
 
-        barrierBlockSize = new Size(mScreenSize.x / 20, mScreenSize.y / 20); //TODO: find a better size
+        barrierBlockSize = new Size(mScreenSize.x / 20, mScreenSize.y / 40); //TODO: dynamically set better size
         isActive = true;
 
         mRect = new RectF();
