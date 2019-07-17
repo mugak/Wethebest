@@ -11,12 +11,12 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 * Sach Samala
 
 ## Sprint 1
-[Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Sprint_Storyboard.png)
-[CRC Cards](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/CRC_Cards.png) 
-[Acceptance Criteria](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Acceptance_Criteria.md)
-
+[Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Sprint_Storyboard.png)  
+[CRC Cards](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/CRC_Cards.png)   
+[Acceptance Criteria](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Acceptance_Criteria.md)  
+[Screenshots](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Screenshots.md)  
 
 ## Sprint 2
-[Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Sprint_Storyboard.png)
-[CRC Cards](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/CRC_Cards.png) 
-[Acceptance Criteria](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Acceptance_Criteria.md)
+[Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Sprint_Storyboard.png)  
+[CRC Cards](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/CRC_Cards.png)  
+[Acceptance Criteria](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Acceptance_Criteria.md)  
