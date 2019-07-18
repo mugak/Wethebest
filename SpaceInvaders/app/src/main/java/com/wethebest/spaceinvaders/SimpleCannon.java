@@ -40,11 +40,15 @@ class SimpleCannon implements GameObject {
     }
 
     public void reset(Point location) {
+        setPosition(location);
+        mXVelocity = (location.y / 3);
+    }
+
+    public void setPosition(Point location) {
         mRect.left = location.x / 2;
         mRect.top = location.y - mCannonHeight;
         mRect.right = location.x / 2 + mCannonWidth;
         mRect.bottom = location.y;
-        mXVelocity = (location.y / 3);
     }
 
     public void update(long fps) {
