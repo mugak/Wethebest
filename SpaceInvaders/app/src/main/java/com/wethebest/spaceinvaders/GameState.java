@@ -6,6 +6,4 @@ package com.wethebest.spaceinvaders;
 public class GameState{
     private SimpleCannon mCannon;
     private Alien mAlien;
-
-
 }

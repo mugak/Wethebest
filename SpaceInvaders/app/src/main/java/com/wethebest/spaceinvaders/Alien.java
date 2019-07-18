@@ -31,6 +31,22 @@ class Alien implements GameObject {
         mPaint = new Paint();
     }
 
+    public void update(long fps) {
+        mRect.left = mRect.left + (mXVelocity / fps);
+        mRect.top = mRect.top;
+
+        mRect.right = mRect.left + mAlienWidth;
+        mRect.bottom = mRect.top + mAlienHeight;
+
+        //If alien out of bounds change it's direction and lower it on screen
+        //NOTE: alien groups move as a unit not as individuals. This code will change if we
+        // introduce waves of aliens
+        if (mRect.left < 0 || mRect.right > mScreenSize.x) {
+            reverseXVelocity();
+            advance();
+        }
+    }
+
     public RectF getHitBox() {
         return mRect;
     }
@@ -44,17 +60,8 @@ class Alien implements GameObject {
 
     public void reset(Point location) {
         setPosition(location);
+        //Why is velocity dependent on location?
         mXVelocity = (location.y / 3);
-    }
-
-    public void update(long fps) {
-        mRect.left = mRect.left + (mXVelocity / fps);
-        mRect.top = mRect.top;
-
-        mRect.right = mRect.left + mAlienWidth;
-        mRect.bottom = mRect.top + mAlienHeight;
-
-        checkBounds();
     }
 
     private void reverseXVelocity() {
@@ -91,13 +98,6 @@ class Alien implements GameObject {
         if (gameObject instanceof PlayerProj) {
             //reset(mScreenSize);
             isActive = false;
-        }
-    }
-
-    void checkBounds() {
-        if (mRect.left < 0 || mRect.right > mScreenSize.x) {
-            reverseXVelocity();
-            advance();
         }
     }
 
