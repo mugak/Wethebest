@@ -17,7 +17,7 @@ Alien is removed when hit by a Projectile
 
 ![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Screenshots/UIScreenshot2.png) 
 ![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Screenshots/UIScreenshot3.png)  
-Score displayed on the screen
-Sprites of cannon, barriers, and different types of aliens drawn on screen
+Score displayed on the screen  
+Sprites of cannon, barriers, and different types of aliens drawn on screen  
 Cannon moves horizontally
 
