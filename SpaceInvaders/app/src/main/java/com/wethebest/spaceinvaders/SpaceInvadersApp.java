@@ -52,7 +52,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             gameObject.reset(mScreenSize);
         }
 
-        //Potentially removes leftover gameObjects from previous game
+        //Removes potentially leftover gameObjects from previous game
         removeInactiveObjects();
     }
 
