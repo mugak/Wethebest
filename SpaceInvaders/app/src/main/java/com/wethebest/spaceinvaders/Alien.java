@@ -129,7 +129,7 @@ class Alien implements GameObject {
     }
 
     public AlienProj shoot() {
-            mProj = new AlienProj(mScreenSize.x);
+            mProj = new AlienProj(mScreenSize);
             mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
             return mProj;
     }
