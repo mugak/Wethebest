@@ -19,7 +19,7 @@ class Alien implements GameObject {
 
     private static Random rand = new Random();
     private AlienProj mProj;
-    private static int shootInterval = 5;
+    private static int shootInterval = 3;
     private long framesUntilShoot;
     public boolean shootNow;
     private boolean waitingToShoot;
@@ -59,9 +59,9 @@ class Alien implements GameObject {
         }
 
             if(!waitingToShoot) {
-            //int seconds = rand.nextInt(shootInterval);
-            framesUntilShoot = fps;
-            waitingToShoot = true;
+                int seconds = rand.nextInt(shootInterval) + 3; // 3-5 seconds
+                framesUntilShoot = fps * seconds;
+                waitingToShoot = true;
             }
             else if(waitingToShoot) {
                 framesUntilShoot--;
