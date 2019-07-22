@@ -15,5 +15,4 @@ numAliens
 public class AlienArmy {
 
 
-
 }
