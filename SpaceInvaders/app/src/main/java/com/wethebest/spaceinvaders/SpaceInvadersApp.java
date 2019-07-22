@@ -69,9 +69,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 detectCollisions();
             }
 
+            removeInactiveObjects();
             draw();
 
-            removeInactiveObjects();
 
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
