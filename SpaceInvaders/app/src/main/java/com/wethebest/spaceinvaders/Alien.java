@@ -58,19 +58,7 @@ class Alien implements GameObject {
             advance();
         }
 
-            if(!waitingToShoot) {
-                int seconds = rand.nextInt(shootInterval) + 3; // 3-5 seconds
-                framesUntilShoot = fps * seconds;
-                waitingToShoot = true;
-            }
-            else if(waitingToShoot) {
-                framesUntilShoot--;
-                if (framesUntilShoot <= 0) {
-                    shootNow = true;
-                    waitingToShoot = false;
-                }
-            }
-
+        timeToShoot(fps);
 
     }
 
@@ -141,5 +129,21 @@ class Alien implements GameObject {
             mProj = new AlienProj(mScreenSize);
             mProj.setPos((mRect.right + mRect.left) / 2, mRect.bottom);
             return mProj;
+    }
+
+    private void timeToShoot(long fps) {
+        if(!waitingToShoot) {
+            int seconds = rand.nextInt(shootInterval) + 3; // 3-5 seconds
+            framesUntilShoot = fps * seconds;
+            waitingToShoot = true;
+        }
+        else if(waitingToShoot) {
+            framesUntilShoot--;
+            if (framesUntilShoot <= 0) {
+                shootNow = true;
+                waitingToShoot = false;
+            }
+        }
+
     }
 }
