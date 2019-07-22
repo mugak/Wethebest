@@ -15,6 +15,21 @@ class Alien implements GameObject {
     //Tells the game whether the object should still be in game
     private boolean isActive;
 
+    /*TODO: shoot()- alien owns an alien projectile object
+   if it exists or is active, then the alien cant shoot (add checkbounds in projectile class)
+   if not, then the alien shoots at random intervals - have a booolean turn on and off in update()
+
+
+    how to add alienproj to gameobject list in spaceinvadersapp.java???
+    have shoot return the alienproj
+    then in spaceinvadersapp...we need to poll for alien shoot()
+    how? either tag alien gameobjects, or add to detectcollisions(), when gameobjects are already being looped
+    */
+
+    AlienProj mProj =
+    private int shootInterval; //TODO: make this random
+    private boolean isShooting = true;
+
     private Point mScreenSize;
 
     private Paint mPaint;
@@ -29,6 +44,8 @@ class Alien implements GameObject {
 
         mRect = new RectF();
         mPaint = new Paint();
+
+        shootInterval = 1; //TODO
     }
 
     public void update(long fps) {
@@ -44,6 +61,10 @@ class Alien implements GameObject {
         if (mRect.left < 0 || mRect.right > mScreenSize.x) {
             reverseXVelocity();
             advance();
+        }
+
+        if(true) {
+            shoot();
         }
     }
 
@@ -101,7 +122,15 @@ class Alien implements GameObject {
         }
     }
 
+
     public boolean isActive() {
         return isActive;
+    }
+
+    private AlienProj shoot() {
+        if(!isShooting) {
+            AlienProj mProj = new AlienProj(mScreenSize.x);
+            return mProj;
+        }
     }
 }
