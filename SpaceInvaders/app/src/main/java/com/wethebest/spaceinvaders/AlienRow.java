@@ -8,9 +8,17 @@ size
 numAliens*/
 
 public class AlienRow {
+    private int numAliens;
+    private Point mScreenSize;
 
+    List<Alien> aliens;
 
+    AlienRow(Point screenSize) {
+        aliens = new LinkedList<Alien>();
+        mScreenSize = screenSize;
+    }
 
+    private void checkBounds() {
 
-
+    }
 }
