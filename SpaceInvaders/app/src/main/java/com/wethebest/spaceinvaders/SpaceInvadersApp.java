@@ -138,9 +138,17 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private void detectCollisions() {
         //Checks to see if the first object is a projectile because in SpaceInvaders only
         // projectiles collide with non projectiles. There are no other types of collisions
+        LinkedList<GameObject> alienProjs = new LinkedList<>(); // temp list because can't modify Collections while iterating
+
         Iterator<GameObject> firstObjectItr = gameObjects.iterator();
         while(firstObjectItr.hasNext()) {
             GameObject object1 = firstObjectItr.next();
+
+            if(object1 instanceof Alien) {
+                if(((Alien) object1).notShooting()) {
+                    alienProjs.add(((Alien) object1).shoot());
+                }
+            } // add AlienProj if Alien is shooting
 
             if(object1 instanceof Projectile) {
                 Iterator<GameObject> secondObjectItr = gameObjects.iterator();
@@ -154,6 +162,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 }
             }
         }
+        gameObjects.addAll(alienProjs);
     }
 
     private void collide(GameObject object1, GameObject object2) {
