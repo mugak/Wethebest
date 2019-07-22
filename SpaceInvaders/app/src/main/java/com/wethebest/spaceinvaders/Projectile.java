@@ -50,7 +50,9 @@ public abstract class Projectile implements GameObject {
         mRect.right = mRect.left + projWidth;
         mRect.bottom = mRect.top + projHeight;
 
-        checkBounds();
+        if(isActive) {
+            checkBounds();
+        }
     }
 
 
@@ -111,6 +113,13 @@ class AlienProj extends Projectile{
     AlienProj(Point screenSize){
         super(screenSize);
         yVel = mScreenSize.x/3; //Projectile shoots down
+    }
+
+    @Override
+    public void collide (GameObject gameObject) {
+        if(!(gameObject instanceof Alien)) {
+            isActive = false; //AlienProj can't shoot other Aliens
+        }
     }
 
     public void checkBounds() {
