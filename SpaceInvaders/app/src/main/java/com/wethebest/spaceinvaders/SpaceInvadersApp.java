@@ -179,8 +179,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         for (GameObject gameObject : gameObjects) {
             if(gameObject instanceof Alien) {
-                if(((Alien) gameObject).notShooting()) {
+                if(((Alien) gameObject).shootNow) {
                     alienProjs.add(((Alien) gameObject).shoot());
+                    ((Alien) gameObject).shootNow = false;
                 }
             }
 

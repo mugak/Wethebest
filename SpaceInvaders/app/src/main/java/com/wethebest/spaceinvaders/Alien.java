@@ -6,6 +6,8 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
 
+import java.util.Random;
+
 class Alien implements GameObject {
     private RectF mRect;
     private float mXVelocity;
@@ -15,20 +17,12 @@ class Alien implements GameObject {
     //Tells the game whether the object should still be in game
     private boolean isActive;
 
-    /*TODO: shoot()- alien owns an alien projectile object
-   if it exists or is active, then the alien cant shoot (add checkbounds in projectile class)
-   if not, then the alien shoots at random intervals - have a booolean turn on and off in update()
-
-
-    how to add alienproj to gameobject list in spaceinvadersapp.java???
-    have shoot return the alienproj
-    then in spaceinvadersapp...we need to poll for alien shoot()
-    how? either tag alien gameobjects, or add to detectcollisions(), when gameobjects are already being looped
-    */
-
-    AlienProj mProj;
-    private int shootInterval; //TODO: make this random
-    private boolean isShooting = true;
+    private static Random rand = new Random();
+    private AlienProj mProj;
+    private static int shootInterval = 5;
+    private long framesUntilShoot;
+    public boolean shootNow;
+    private boolean waitingToShoot;
 
     private Point mScreenSize;
 
@@ -44,9 +38,9 @@ class Alien implements GameObject {
 
         mRect = new RectF();
         mPaint = new Paint();
-
-        shootInterval = 1; //TODO
-        isShooting = true;
+        framesUntilShoot = 0;
+        shootNow = false;
+        waitingToShoot = false;
     }
 
     public void update(long fps) {
@@ -63,6 +57,21 @@ class Alien implements GameObject {
             reverseXVelocity();
             advance();
         }
+
+            if(!waitingToShoot) {
+            //int seconds = rand.nextInt(shootInterval);
+            framesUntilShoot = fps;
+            waitingToShoot = true;
+            }
+            else if(waitingToShoot) {
+                framesUntilShoot--;
+                if (framesUntilShoot <= 0) {
+                    shootNow = true;
+                    waitingToShoot = false;
+                }
+            }
+
+
     }
 
     public RectF getHitBox() {
@@ -124,7 +133,7 @@ class Alien implements GameObject {
         return isActive;
     }
 
-    public boolean notShooting() {
+    private boolean noProjectile() {
         return mProj == null || !mProj.isActive();
     }
 
