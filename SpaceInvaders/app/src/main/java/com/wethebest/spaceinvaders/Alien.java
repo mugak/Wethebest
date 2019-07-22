@@ -26,7 +26,7 @@ class Alien implements GameObject {
     how? either tag alien gameobjects, or add to detectcollisions(), when gameobjects are already being looped
     */
 
-    AlienProj mProj;
+    AlienProj mProj =
     private int shootInterval; //TODO: make this random
     private boolean isShooting = true;
 
@@ -46,7 +46,6 @@ class Alien implements GameObject {
         mPaint = new Paint();
 
         shootInterval = 1; //TODO
-        isShooting = true;
     }
 
     public void update(long fps) {
@@ -62,6 +61,10 @@ class Alien implements GameObject {
         if (mRect.left < 0 || mRect.right > mScreenSize.x) {
             reverseXVelocity();
             advance();
+        }
+
+        if(true) {
+            shoot();
         }
     }
 
@@ -124,13 +127,10 @@ class Alien implements GameObject {
         return isActive;
     }
 
-    public boolean notShooting() {
-        return mProj == null || !mProj.isActive();
-    }
-
-    public AlienProj shoot() {
-            mProj = new AlienProj(mScreenSize.x);
-            mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
+    private AlienProj shoot() {
+        if(!isShooting) {
+            AlienProj mProj = new AlienProj(mScreenSize.x);
             return mProj;
+        }
     }
 }
