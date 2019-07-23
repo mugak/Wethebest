@@ -41,5 +41,15 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+    <Button
+        android:id="@+id/Enterbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/EnterName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-60dp"
+        android:background="#33BE39"
+        android:text="Enter" />
+
 
 </RelativeLayout>
