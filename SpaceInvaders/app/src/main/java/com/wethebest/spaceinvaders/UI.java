@@ -2,6 +2,7 @@ package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
@@ -116,6 +117,14 @@ public class UI extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
     }
 
 }
