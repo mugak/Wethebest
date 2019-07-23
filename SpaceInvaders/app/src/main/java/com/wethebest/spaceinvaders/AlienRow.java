@@ -7,6 +7,11 @@ checkBounds
 size
 numAliens*/
 
+import android.graphics.Point;
+
+import java.util.LinkedList;
+import java.util.List;
+
 public class AlienRow {
     private int numAliens;
     private Point mScreenSize;
