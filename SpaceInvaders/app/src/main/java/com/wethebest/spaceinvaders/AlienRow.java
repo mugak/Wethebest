@@ -18,7 +18,7 @@ public class AlienRow {
     private Point alienPosition; //top left corner of first alien in row
     private int spaceBetweenAliens;
 
-    List<Alien> aliens;
+    public List<Alien> aliens;
 
     AlienRow(Point screenSize) {
         aliens = new LinkedList<Alien>();
@@ -36,7 +36,7 @@ public class AlienRow {
     private void setAliens() {
         for(int i = 0; i < numAliens; i++) {
             Alien mAlien = new Alien(mScreenSize);
-            mAlien.setPos( alienPosition.x + mAlien.alienSize.width + spaceBetweenAliens, alienPosition.y);
+            mAlien.setPos( alienPosition.x + i * (mAlien.alienSize.width + spaceBetweenAliens), alienPosition.y);
             aliens.add(mAlien);
         }
     }

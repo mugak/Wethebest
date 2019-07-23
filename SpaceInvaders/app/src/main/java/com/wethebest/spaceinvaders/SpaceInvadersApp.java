@@ -26,6 +26,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     LinkedList<GameObject> gameObjects = new LinkedList<>();
     SimpleCannon mPlayer;
     Barrier mBarrier; //TODO: implement Barrier array
+    AlienRow mAlienRow;
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -38,10 +39,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         mScreenSize = new Point(x, y);
 
-        gameObjects.add(new Alien(mScreenSize));
-
         mPlayer = new SimpleCannon(mScreenSize);
         mBarrier = new Barrier(mScreenSize);
+        mAlienRow = new AlienRow(mScreenSize);
+        gameObjects.addAll(mAlienRow.aliens);
         gameObjects.add(mPlayer);
         gameObjects.addAll(mBarrier.getBarrierBlocks());
         startGame();
