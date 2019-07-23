@@ -21,16 +21,25 @@
         android:textSize="36sp" />
 
     <EditText
-        android:id="@+id/EnterName"
+        android:id="@+id/ParentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
-
-        android:layout_alignTop="@+id/PlayerName"
+        android:visibility="invisible"
 
         />
+
+    <EditText
+        android:id="@+id/EnterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/PlayerName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-400dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
 
 </RelativeLayout>
