@@ -52,4 +52,30 @@
         android:text="Enter" />
 
 
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+
+        <ImageButton
+            android:id="@+id/action_bar_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ParentLayout"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+
+            android:contentDescription="TODO"
+            android:src="@drawable/menu" />
+
+
+    </TableRow>
+
+
+
+
+
 </RelativeLayout>
