@@ -11,7 +11,7 @@ import java.util.Random;
 class Alien implements GameObject {
     private RectF mRect;
     private float mXVelocity;
-    private Size alienSize;
+    public Size alienSize;
 
     //Tells the game whether the object should still be in game
     private boolean isActive;
@@ -40,6 +40,7 @@ class Alien implements GameObject {
         framesUntilShoot = 0;
         shootNow = false;
         waitingToShoot = false;
+        mXVelocity = 1000; //TODO hardcoded
     }
 
     public void update(long fps) {
@@ -65,17 +66,14 @@ class Alien implements GameObject {
         return mRect;
     }
 
-    public void setPosition(Point location) {
-        mRect.left = location.x / 2;
+    public void setPos(float x, float y) {
+        mRect.left = x / 2;
         mRect.top = 0;
-        mRect.right = location.x / 2 + alienSize.width;
+        mRect.right = x / 2 + alienSize.width;
         mRect.bottom = alienSize.height;
     }
 
     public void reset(Point location) {
-        setPosition(location);
-        //Why is velocity dependent on location?
-        mXVelocity = (location.y / 3);
     }
 
     private void reverseXVelocity() {
