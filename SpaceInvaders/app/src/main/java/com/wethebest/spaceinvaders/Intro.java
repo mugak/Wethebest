@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.app.ActionBar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,26 +22,7 @@ public class Intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        //custom bar
 
-      //  getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setCustomView(R.layout.custom_action_bar_layout);
-
-        View view =getSupportActionBar().getCustomView();
-
-
-
-        ImageButton imageButton2= (ImageButton)view.findViewById(R.id.action_bar_menu);
-
-        imageButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Menu Button is clicked",Toast.LENGTH_LONG).show();
-            }
-        });
-
-        //custom bar code ends
 
 
         TextView PlayerName = findViewById(R.id.PlayerName);
@@ -53,5 +36,19 @@ public class Intro extends AppCompatActivity {
             }
         });
 
+
+
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
 }
