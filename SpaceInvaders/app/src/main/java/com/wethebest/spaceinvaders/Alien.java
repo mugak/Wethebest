@@ -11,8 +11,7 @@ import java.util.Random;
 class Alien implements GameObject {
     private RectF mRect;
     private float mXVelocity;
-    private float mAlienWidth;
-    private float mAlienHeight;
+    private Size alienSize;
 
     //Tells the game whether the object should still be in game
     private boolean isActive;
@@ -31,8 +30,8 @@ class Alien implements GameObject {
     Alien(Point screenSize) {
         mScreenSize = screenSize;
 
-        mAlienWidth = mScreenSize.x / 10;
-        mAlienHeight = mScreenSize.y / 20;
+        alienSize.width = mScreenSize.x / 10;
+        alienSize.height = mScreenSize.y / 20;
 
         isActive = true;
 
@@ -47,8 +46,8 @@ class Alien implements GameObject {
         mRect.left = mRect.left + (mXVelocity / fps);
         mRect.top = mRect.top;
 
-        mRect.right = mRect.left + mAlienWidth;
-        mRect.bottom = mRect.top + mAlienHeight;
+        mRect.right = mRect.left + alienSize.width;
+        mRect.bottom = mRect.top + alienSize.height;
 
         //If alien out of bounds change it's direction and lower it on screen
         //NOTE: alien groups move as a unit not as individuals. This code will change if we
@@ -69,8 +68,8 @@ class Alien implements GameObject {
     public void setPosition(Point location) {
         mRect.left = location.x / 2;
         mRect.top = 0;
-        mRect.right = location.x / 2 + mAlienWidth;
-        mRect.bottom = mAlienHeight;
+        mRect.right = location.x / 2 + alienSize.width;
+        mRect.bottom = alienSize.height;
     }
 
     public void reset(Point location) {
@@ -84,17 +83,17 @@ class Alien implements GameObject {
     }
 
     private void advance() {
-        mRect.top = mRect.top + mAlienHeight;
-        mRect.bottom = mRect.top + mAlienHeight; //moves alien down
+        mRect.top = mRect.top + alienSize.height;
+        mRect.bottom = mRect.top + alienSize.height; //moves alien down
 
         if (mRect.left < 0) {
             mRect.left = 0;
-            mRect.right = 0 + mAlienWidth;
+            mRect.right = 0 + alienSize.width;
         } //reset to left edge
 
         if (mRect.right > mScreenSize.x) {
             mRect.right = mScreenSize.x;
-            mRect.left = mScreenSize.x - mAlienWidth;
+            mRect.left = mScreenSize.x - alienSize.width;
         } //reset pos to right edge
     }
 
