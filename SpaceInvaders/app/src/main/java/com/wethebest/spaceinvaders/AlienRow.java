@@ -9,7 +9,7 @@ numAliens*/
 
 import android.graphics.Point;
 import android.graphics.PointF;
-
+import android.content.Context;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -19,9 +19,12 @@ public class AlienRow {
     public PointF alienPos; //top left corner of first alien in the row
     private int spaceBetweenAliens;
 
+    private Context context;
+
     public List<Alien> aliens;
 
-    AlienRow(Point screenSize) {
+    AlienRow(Context context, Point screenSize) {
+        this.context = context;
         aliens = new LinkedList<Alien>();
         mScreenSize = screenSize;
         numAliens = 4; //TODO hardcoded
@@ -30,7 +33,7 @@ public class AlienRow {
 
     public void setAliens() {
         for(int i = 0; i < numAliens; i++) {
-            Alien mAlien = new Alien(mScreenSize);
+            Alien mAlien = new Alien(context, mScreenSize);
             mAlien.setPos(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
             aliens.add(mAlien);
         }

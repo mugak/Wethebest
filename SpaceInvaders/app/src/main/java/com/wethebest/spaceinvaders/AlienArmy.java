@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -15,7 +16,10 @@ public class AlienArmy {
     private int spaceBetweenRows;
     private List <AlienRow> alienRows;
 
-    AlienArmy(Point screenSize) {
+    private Context context;
+
+    AlienArmy(Context context, Point screenSize) {
+        this.context = context;
         mScreenSize = screenSize;
         numRows = 4; //TODO hardcoded
         spaceBetweenRows = mScreenSize.x / 2; //TODO set better spacing
@@ -32,7 +36,7 @@ public class AlienArmy {
 
     private void setRows() {
         for(int i = 0; i < numRows; i++) {
-            AlienRow mAlienRow = new AlienRow(mScreenSize);
+            AlienRow mAlienRow = new AlienRow(context, mScreenSize);
             mAlienRow.alienPos = new PointF(rowPosition.x, rowPosition.y + i * (Alien.alienSize.y + spaceBetweenRows));
             mAlienRow.setAliens();
             alienRows.add(mAlienRow);

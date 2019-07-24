@@ -40,7 +40,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         mPlayer = new SimpleCannon(context, mScreenSize);
         mBarrier = new Barrier(mScreenSize);
-        mAlienArmy = new AlienArmy(mScreenSize);
+        mAlienArmy = new AlienArmy(context, mScreenSize);
         gameObjects.addAll(mAlienArmy.getAliens());
         gameObjects.add(mPlayer);
         gameObjects.addAll(mBarrier.getBarrierBlocks());
