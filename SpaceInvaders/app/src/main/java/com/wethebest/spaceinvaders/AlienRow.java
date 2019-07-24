@@ -35,9 +35,11 @@ public class AlienRow {
 
     public void setAliens() {
         for(int i = 0; i < numAliens; i++) {
-            Alien mAlien = new Alien(app);
-            mAlien.setPos(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
-            aliens.add(mAlien);
+            //Alien mAlien = new Alien(app);
+
+            GameObject mAlien = GameObjectFactory.getGameObject("alien");
+            ((Alien) mAlien).setPos(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
+            aliens.add((Alien) mAlien); //TODO need to refactor GameObject so we don't have these ugly casts
         }
     }
 
