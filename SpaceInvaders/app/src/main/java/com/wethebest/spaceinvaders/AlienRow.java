@@ -8,6 +8,7 @@ size
 numAliens*/
 
 import android.graphics.Point;
+import android.graphics.PointF;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 public class AlienRow {
     private int numAliens;
     private Point mScreenSize;
-    private Point alienPosition; //top left corner of first alien in row
+    public PointF alienPos; //top left corner of first alien in the row
     private int spaceBetweenAliens;
 
     public List<Alien> aliens;
@@ -25,21 +26,16 @@ public class AlienRow {
         mScreenSize = screenSize;
         numAliens = 4; //TODO hardcoded
         spaceBetweenAliens = mScreenSize.x/10; //TODO set better spacing
-        setAlienPosition();
-        setAliens();
     }
 
-    private void setAlienPosition() {
-        alienPosition = new Point(mScreenSize.x / 10, mScreenSize.y / 10); //TODO set better position
-    }
-
-    private void setAliens() {
+    public void setAliens() {
         for(int i = 0; i < numAliens; i++) {
             Alien mAlien = new Alien(mScreenSize);
-            mAlien.setPos( alienPosition.x + i * (mAlien.alienSize.width + spaceBetweenAliens), alienPosition.y);
+            mAlien.setPos(alienPos.x + i * (Alien.alienSize.width + spaceBetweenAliens), alienPos.y);
             aliens.add(mAlien);
         }
     }
+
     private void checkBounds() {
 
     }
