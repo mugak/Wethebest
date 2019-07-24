@@ -30,8 +30,11 @@ class Alien implements GameObject {
     private long framesUntilShoot;
     public boolean shootNow;
     private boolean waitingToShoot;
-    private static boolean advance;
-
+    private boolean movingRight = true;
+    private boolean advanced = false;
+    final int MOVINGLEFT = 1;
+    final int MOVINGRIGHT = 2;
+    private int direction = MOVINGRIGHT;
 
     private Point mScreenSize;
 
@@ -53,29 +56,35 @@ class Alien implements GameObject {
     }
 
     public void update(long fps) {
-        mRect.left = mRect.left + (mXVelocity / fps);
-
-        mRect.right = mRect.left + alienSize.x;
-        mRect.bottom = mRect.top + alienSize.y;
 
         //If alien out of bounds change it's direction and lower it on screen
         //NOTE: alien groups move as a unit not as individuals. This code will change if we
         // introduce waves of aliens
 
         //Reverse direction if reaching the side of screen
-        if (mRect.left < 0){
+//        if (direction == MOVINGLEFT){
+//
+//            //Move right
+//            mXVelocity = -SPEED;
+//        }
+//
+//        else if (direction == MOVINGRIGHT){
+//
+//            //Move left
+//            mXVelocity = SPEED;
+//        }
 
-            //Move right
+        if(movingRight) {
             mXVelocity = SPEED;
-            advance();
+        }
+        else {
+            mXVelocity = -SPEED;
         }
 
-        else if (mRect.right > mScreenSize.x){
+        mRect.left = mRect.left + (mXVelocity / fps);
 
-            //Move left
-            mXVelocity = - SPEED;
-            advance();
-        }
+        mRect.right = mRect.left + alienSize.x;
+        mRect.bottom = mRect.top + alienSize.y;
 
         timeToShoot(fps);
 
@@ -84,6 +93,29 @@ class Alien implements GameObject {
     public RectF getHitBox() {
         return mRect;
     }
+
+    public boolean outOfBounds() {
+        if (!movingRight) {
+            return mRect.left < 0;
+        }
+
+        else {
+            return mRect.right > mScreenSize.x; //moving right
+        }
+    }
+
+    public void reverseXVelocity() {
+//        if(direction == MOVINGLEFT) {
+//            direction = MOVINGRIGHT;
+//        }
+//        else if(direction == MOVINGRIGHT) {
+//            direction = MOVINGLEFT;
+//        }
+        //mXVelocity = -mXVelocity;
+
+        movingRight = !movingRight;
+        advance();
+        }
 
     public Bitmap getBitmap(){ return mBitmap;}
 
