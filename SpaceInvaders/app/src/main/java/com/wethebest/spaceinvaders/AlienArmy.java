@@ -21,11 +21,12 @@ public class AlienArmy {
     public List<Alien> allAliens = new LinkedList<Alien>(); //
 
     private Context context;
+    private SpaceInvadersApp app;
     public boolean changeDirection;
 
-    AlienArmy(Context context, Point screenSize) {
-        this.context = context;
-        mScreenSize = screenSize;
+    AlienArmy(SpaceInvadersApp app) {
+        this.app = app;
+        mScreenSize = app.mScreenSize;
         numRows = 4; //TODO hardcoded
         spaceBetweenRows = mScreenSize.x / 6; //TODO set better spacing
         setPos();
@@ -43,7 +44,7 @@ public class AlienArmy {
 
     private void setRows() {
         for(int i = 0; i < numRows; i++) {
-            AlienRow mAlienRow = new AlienRow(context, mScreenSize);
+            AlienRow mAlienRow = new AlienRow(app);
             mAlienRow.alienPos = new PointF(rowPosition.x, rowPosition.y + i * (Alien.alienSize.y + spaceBetweenRows));
             mAlienRow.setAliens();
             alienRows.add(mAlienRow);

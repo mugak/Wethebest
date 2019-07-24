@@ -21,21 +21,21 @@ public class AlienRow {
     public PointF alienPos; //top left corner of first alien in the row
     private float spaceBetweenAliens;
 
-    private Context context;
+    private SpaceInvadersApp app;
 
     public List<Alien> aliens;
 
-    AlienRow(Context context, Point screenSize) {
-        this.context = context;
+    AlienRow(SpaceInvadersApp app) {
+        this.app = app;
         aliens = new LinkedList<Alien>();
-        mScreenSize = screenSize;
+        mScreenSize = app.mScreenSize;
         numAliens = 4; //TODO hardcoded
         spaceBetweenAliens = Alien.alienSize.x/2; //TODO set better spacing
     }
 
     public void setAliens() {
         for(int i = 0; i < numAliens; i++) {
-            Alien mAlien = new Alien(context, mScreenSize);
+            Alien mAlien = new Alien(app);
             mAlien.setPos(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
             aliens.add(mAlien);
         }

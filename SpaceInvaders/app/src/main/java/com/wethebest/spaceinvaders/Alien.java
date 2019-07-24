@@ -36,11 +36,12 @@ class Alien implements GameObject {
 
     private Paint mPaint;
 
-    Alien(Context context, Point screenSize) {
-        mScreenSize = screenSize;
+    Alien(SpaceInvadersApp app) {
+
+        mScreenSize = app.mScreenSize;
         isActive = true;
 
-        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader_a01);
+        mBitmap = BitmapFactory.decodeResource(app.context.getResources(), R.drawable.invader_a01);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)alienSize.x, (int)alienSize.y, true );
 
         mRect = new RectF();
