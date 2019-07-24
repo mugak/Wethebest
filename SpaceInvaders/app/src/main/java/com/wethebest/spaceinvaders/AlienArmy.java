@@ -28,7 +28,11 @@ public class AlienArmy {
     }
 
     private void setRows() {
-
+        for(int i = 0; i < numRows; i++) {
+            AlienRow mAlienRow = new AlienRow(mScreenSize);
+            mAlienRow.alienPosition = new Point(rowPosition.x, rowPosition.y + i * (mAlienRow.mAlien.alienSize.height + spaceBetweenRows));
+            alienRows.add(mAlienRow);
+        }
     }
 
     public List getRows() {
