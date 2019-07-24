@@ -16,7 +16,7 @@ import java.util.Random;
 //HitBox controls the hitboxes for each GameObject
 //It handles movement, drawing, and collision
 //TODO separate drawing into another class
-//TODO create hitboxbuilder for vertical and horizontal movement (projectiles and cannons/aliens respectively)
+//TODO create HitBox factory and HitBox interface
 //TODO make HitBoxList to replace Barrier and AlienArmy
 public class HitBox {
 
@@ -40,14 +40,6 @@ public class HitBox {
 
         //Tells the game whether the object should still be in game
         private boolean isActive;
-
-        //Shoots projectiles randomly
-        private AlienProj mProj;
-        private static Random rand = new Random();
-        private static int shootInterval = 3;
-        private long framesUntilShoot;
-        public boolean shootNow;
-        private boolean waitingToShoot;
 
         HitBox(SpaceInvadersApp app) {
             this.app = app;
