@@ -39,7 +39,7 @@ class Alien implements GameObject {
         mScreenSize = screenSize;
         isActive = true;
 
-        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader_a01);
+        //mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader_a01);
         mRect = new RectF();
         mPaint = new Paint();
         framesUntilShoot = 0;
