@@ -1,16 +1,20 @@
 package com.wethebest.spaceinvaders;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.content.Context;
 
 import java.util.Random;
 
 class Alien implements GameObject {
     private RectF mRect;
+    private Bitmap mBitmap;
     private float mXVelocity;
     public static PointF alienSize;
 
@@ -28,10 +32,11 @@ class Alien implements GameObject {
 
     private Paint mPaint;
 
-    Alien(Point screenSize) {
+    Alien(Context context, Point screenSize) {
         mScreenSize = screenSize;
         isActive = true;
 
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader_a01);
         mRect = new RectF();
         mPaint = new Paint();
         framesUntilShoot = 0;
@@ -62,6 +67,8 @@ class Alien implements GameObject {
     public RectF getHitBox() {
         return mRect;
     }
+
+    public Bitmap getBitmap(){ return mBitmap;}
 
     public void setPos(float x, float y) {
         mRect.left = x / 2;
@@ -95,7 +102,7 @@ class Alien implements GameObject {
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-        canvas.drawRect(mRect, mPaint);
+        canvas.drawBitmap(this.getBitmap(), this.getHitBox().left, this.getHitBox().top, mPaint);
     }
 
     public void collide(GameObject gameObject) {
