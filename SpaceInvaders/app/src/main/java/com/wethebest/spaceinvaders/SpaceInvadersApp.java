@@ -117,9 +117,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 gameObject.display(mCanvas);
             }
 
-            for (Alien a : mAlienArmy.allAliens) {
-                a.display(mCanvas); //
-            }
+            mAlienArmy.draw(mCanvas);
 
             mOurHolder.unlockCanvasAndPost(mCanvas);
         }

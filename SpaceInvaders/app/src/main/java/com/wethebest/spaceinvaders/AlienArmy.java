@@ -2,6 +2,7 @@ package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -80,6 +81,12 @@ public class AlienArmy {
         if(changeDirection == true) {
             changeDirection();
             changeDirection = false;
+        }
+    }
+
+    public void draw(Canvas canvas) {
+        for (Alien a : allAliens) {
+            a.display(canvas);
         }
     }
 }
