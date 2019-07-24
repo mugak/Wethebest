@@ -13,13 +13,15 @@ public class AlienArmy {
     private int spaceBetweenRows;
 
     AlienArmy(Point screenSize) {
+        mScreenSize = screenSize;
+        numRows = 4; //TODO hardcoded
+        spaceBetweenRows = mScreenSize.x / 10; //TODO set better spacing
+        rowPosition = setPos();
+
     }
 
-    )
 
-
-    private void setPos() {
-
+    private Point setPos() {
     }
 
     private void setRows() {
