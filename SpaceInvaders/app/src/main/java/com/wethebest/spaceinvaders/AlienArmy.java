@@ -19,12 +19,13 @@ public class AlienArmy {
         mScreenSize = screenSize;
         numRows = 4; //TODO hardcoded
         spaceBetweenRows = mScreenSize.x / 10; //TODO set better spacing
-        rowPosition = setPos();
+        setPos();
         alienRows = new LinkedList<AlienRow>();
+        setRows();
     }
 
 
-    private PointF setPos() {
+    private void setPos() {
         rowPosition = new PointF(mScreenSize.x / 10, mScreenSize.y / 10); //TODO set better position
     }
 
@@ -38,6 +39,10 @@ public class AlienArmy {
     }
 
     public List getRows() {
-
+        List<Alien> allAliens = new LinkedList<Alien>();
+        for(AlienRow mAlienRow : alienRows) {
+            allAliens.addAll(mAlienRow.aliens);
+        }
+        return allAliens;
     }
 }
