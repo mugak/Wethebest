@@ -11,7 +11,7 @@ import java.util.Random;
 class Alien implements GameObject {
     private RectF mRect;
     private float mXVelocity;
-    public Size alienSize;
+    public static Size alienSize;
 
     //Tells the game whether the object should still be in game
     private boolean isActive;
