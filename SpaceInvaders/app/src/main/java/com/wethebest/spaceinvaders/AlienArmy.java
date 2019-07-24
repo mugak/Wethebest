@@ -1,10 +1,13 @@
 package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
 
-public class AlienArmy {
+import java.util.List;
 
+public class AlienArmy {
+    
     AlienArmy(Point screenSize) {
     }
 
@@ -20,6 +23,6 @@ public class AlienArmy {
     }
 
     public List getRows() {
-    
+
     }
 }
