@@ -71,9 +71,9 @@ class Alien implements GameObject {
     public Bitmap getBitmap(){ return mBitmap;}
 
     public void setPos(float x, float y) {
-        mRect.left = x / 2;
-        mRect.top = 0;
-        mRect.right = x / 2 + alienSize.x;
+        mRect.left = x;
+        mRect.top = y;
+        mRect.right = x + alienSize.x;
         mRect.bottom = alienSize.y;
     }
 

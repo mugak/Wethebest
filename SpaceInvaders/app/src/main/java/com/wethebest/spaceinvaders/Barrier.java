@@ -29,8 +29,8 @@ public class Barrier {
         for(int i = 0; i < BARRIER_SIZE.x; i++) {
             for(int j = 0; j < BARRIER_SIZE.y; j++) {
                 BarrierBlock mBarrierBlock = new BarrierBlock(mScreenSize);
-                mBarrierBlock.setPos(barrierPosition.x + (i * mBarrierBlock.barrierBlockSize.width),
-                        barrierPosition.y + j * mBarrierBlock.barrierBlockSize.height);
+                mBarrierBlock.setPos(barrierPosition.x + (i * mBarrierBlock.barrierBlockSize.x),
+                        barrierPosition.y + j * mBarrierBlock.barrierBlockSize.y);
                 barrierBlocks[i][j] = mBarrierBlock;
             }
         }

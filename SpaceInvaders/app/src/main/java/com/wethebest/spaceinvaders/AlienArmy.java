@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class AlienArmy {
         this.context = context;
         mScreenSize = screenSize;
         numRows = 4; //TODO hardcoded
-        spaceBetweenRows = mScreenSize.x / 2; //TODO set better spacing
+        spaceBetweenRows = mScreenSize.x / 6; //TODO set better spacing
         setPos();
         alienRows = new LinkedList<AlienRow>();
         Alien.setAlienSize(new PointF(mScreenSize.x/10, mScreenSize.y/10));
@@ -40,6 +41,7 @@ public class AlienArmy {
             mAlienRow.alienPos = new PointF(rowPosition.x, rowPosition.y + i * (Alien.alienSize.y + spaceBetweenRows));
             mAlienRow.setAliens();
             alienRows.add(mAlienRow);
+
         }
     }
 

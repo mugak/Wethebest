@@ -10,6 +10,8 @@ numAliens*/
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.content.Context;
+import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.List;
 
