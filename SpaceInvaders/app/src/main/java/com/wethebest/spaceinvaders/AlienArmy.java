@@ -22,6 +22,7 @@ public class AlienArmy {
 
 
     private Point setPos() {
+        rowPosition = new Point(mScreenSize.x / 10, mScreenSize.y / 10); //TODO set better position
     }
 
     private void setRows() {
