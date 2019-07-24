@@ -4,16 +4,25 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
+
+import java.util.Random;
 
 class Alien implements GameObject {
     private RectF mRect;
     private float mXVelocity;
-    private float mAlienWidth;
-    private float mAlienHeight;
+    public static PointF alienSize;
 
     //Tells the game whether the object should still be in game
     private boolean isActive;
+
+    private static Random rand = new Random();
+    private AlienProj mProj;
+    private static int shootInterval = 3;
+    private long framesUntilShoot;
+    public boolean shootNow;
+    private boolean waitingToShoot;
 
     private Point mScreenSize;
 
@@ -21,22 +30,22 @@ class Alien implements GameObject {
 
     Alien(Point screenSize) {
         mScreenSize = screenSize;
-
-        mAlienWidth = mScreenSize.x / 10;
-        mAlienHeight = mScreenSize.y / 20;
-
         isActive = true;
 
         mRect = new RectF();
         mPaint = new Paint();
+        framesUntilShoot = 0;
+        shootNow = false;
+        waitingToShoot = false;
+        mXVelocity = 1000; //TODO hardcoded
     }
 
     public void update(long fps) {
         mRect.left = mRect.left + (mXVelocity / fps);
         mRect.top = mRect.top;
 
-        mRect.right = mRect.left + mAlienWidth;
-        mRect.bottom = mRect.top + mAlienHeight;
+        mRect.right = mRect.left + alienSize.x;
+        mRect.bottom = mRect.top + alienSize.y;
 
         //If alien out of bounds change it's direction and lower it on screen
         //NOTE: alien groups move as a unit not as individuals. This code will change if we
@@ -45,23 +54,23 @@ class Alien implements GameObject {
             reverseXVelocity();
             advance();
         }
+
+        timeToShoot(fps);
+
     }
 
     public RectF getHitBox() {
         return mRect;
     }
 
-    public void setPosition(Point location) {
-        mRect.left = location.x / 2;
-        mRect.top = 0;
-        mRect.right = location.x / 2 + mAlienWidth;
-        mRect.bottom = mAlienHeight;
+    public void setPos(float x, float y) {
+        mRect.left = x;
+        mRect.top = y;
+        mRect.right = x + alienSize.x;
+        mRect.bottom = alienSize.y;
     }
 
     public void reset(Point location) {
-        setPosition(location);
-        //Why is velocity dependent on location?
-        mXVelocity = (location.y / 3);
     }
 
     private void reverseXVelocity() {
@@ -69,17 +78,17 @@ class Alien implements GameObject {
     }
 
     private void advance() {
-        mRect.top = mRect.top + mAlienHeight;
-        mRect.bottom = mRect.top + mAlienHeight; //moves alien down
+        mRect.top = mRect.top + alienSize.x;
+        mRect.bottom = mRect.top + alienSize.y; //moves alien down
 
         if (mRect.left < 0) {
             mRect.left = 0;
-            mRect.right = 0 + mAlienWidth;
+            mRect.right = 0 + alienSize.x;
         } //reset to left edge
 
         if (mRect.right > mScreenSize.x) {
             mRect.right = mScreenSize.x;
-            mRect.left = mScreenSize.x - mAlienWidth;
+            mRect.left = mScreenSize.x - alienSize.x;
         } //reset pos to right edge
     }
 
@@ -101,7 +110,39 @@ class Alien implements GameObject {
         }
     }
 
+
     public boolean isActive() {
         return isActive;
+    }
+
+    private boolean noProjectile() {
+        return mProj == null || !mProj.isActive();
+    }
+
+    public AlienProj shoot() {
+            mProj = new AlienProj(mScreenSize);
+            mProj.setPos((mRect.right + mRect.left) / 2, mRect.bottom);
+            return mProj;
+    }
+
+    private void timeToShoot(long fps) {
+        if(!waitingToShoot) {
+            int seconds = rand.nextInt(shootInterval) + 3; // 3-5 seconds
+            framesUntilShoot = fps * seconds;
+            waitingToShoot = true;
+        }
+        else if(waitingToShoot) {
+            framesUntilShoot--;
+            if (framesUntilShoot <= 0) {
+                shootNow = true;
+                waitingToShoot = false;
+            }
+        }
+
+    }
+
+    public static void setAlienSize(PointF size) {
+        alienSize = size;
+
     }
 }

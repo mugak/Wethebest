@@ -26,6 +26,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     LinkedList<GameObject> gameObjects = new LinkedList<>();
     SimpleCannon mPlayer;
     Barrier mBarrier; //TODO: implement Barrier array
+    AlienArmy mAlienArmy;
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -38,10 +39,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         mScreenSize = new Point(x, y);
 
-        gameObjects.add(new Alien(mScreenSize));
-
         mPlayer = new SimpleCannon(mScreenSize);
         mBarrier = new Barrier(mScreenSize);
+        mAlienArmy = new AlienArmy(mScreenSize);
+        gameObjects.addAll(mAlienArmy.getAliens());
         gameObjects.add(mPlayer);
         gameObjects.addAll(mBarrier.getBarrierBlocks());
         startGame();
@@ -65,13 +66,13 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 for (GameObject object : gameObjects) {
                     object.update(mFPS);
                 }
-
+                addAlienProjs();
                 detectCollisions();
             }
 
+            removeInactiveObjects();
             draw();
 
-            removeInactiveObjects();
 
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
@@ -141,7 +142,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         Iterator<GameObject> firstObjectItr = gameObjects.iterator();
         while(firstObjectItr.hasNext()) {
             GameObject object1 = firstObjectItr.next();
-
             if(object1 instanceof Projectile) {
                 Iterator<GameObject> secondObjectItr = gameObjects.iterator();
 
@@ -173,6 +173,22 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 gameObjectIterator.remove();
             }
         }
+    }
+
+    private void addAlienProjs() {
+        LinkedList<GameObject> alienProjs = new LinkedList<>(); // need temp list because can't modify Collections being iterated
+
+        for (GameObject gameObject : gameObjects) {
+            if(gameObject instanceof Alien) {
+                if(((Alien) gameObject).shootNow) {
+                    alienProjs.add(((Alien) gameObject).shoot());
+                    ((Alien) gameObject).shootNow = false;
+                }
+            }
+
+        }
+        gameObjects.addAll(alienProjs);
+
     }
 
 }

@@ -12,7 +12,7 @@ import android.graphics.RectF;
 */
 public abstract class Projectile implements GameObject {
     //Projectile will be a rectangle as a placeholder
-    private RectF mRect;
+    protected RectF mRect;
 
     private float xVel;
     protected float yVel;
@@ -23,10 +23,12 @@ public abstract class Projectile implements GameObject {
     private Paint mPaint;
 
     protected boolean isActive;
+    protected Point mScreenSize;
 
-    Projectile(int screenX){
-        projWidth = screenX/100;
-        projHeight = screenX/100;
+    Projectile(Point screenSize){
+        mScreenSize = screenSize;
+        projWidth = mScreenSize.x/100;
+        projHeight = mScreenSize.x/100;
         xVel = 0;
         mRect = new RectF();
         mPaint = new Paint();
@@ -47,7 +49,12 @@ public abstract class Projectile implements GameObject {
 
         mRect.right = mRect.left + projWidth;
         mRect.bottom = mRect.top + projHeight;
+
+        if(isActive) {
+            checkBounds();
+        }
     }
+
 
 
     void setPos(float x, float y){
@@ -80,13 +87,15 @@ public abstract class Projectile implements GameObject {
         return isActive;
     }
 
+    public void checkBounds() {
+    }
 
-    //TODO: add checkBounds() method so isActive can be set to false when Projectile goes off screen, possibly include in GameObject interface
 }
+
 class PlayerProj extends  Projectile{
-    PlayerProj(int screenX){
-        super(screenX);
-        yVel = -screenX/3; //Projectile shoots up
+    PlayerProj(Point screenSize){
+        super(screenSize);
+        yVel = -mScreenSize.x/3; //Projectile shoots up
     }
 
     @Override
@@ -95,13 +104,27 @@ class PlayerProj extends  Projectile{
             isActive = false; //PlayerProj can't shoot the player
         }
     }
+    //TODO: add checkbounds(), possibly add to GameObject interface
 
 
 }
 class AlienProj extends Projectile{
 
-    AlienProj(int screenX){
-        super(screenX);
-        yVel = screenX / 3; //Projectile shoots down
+    AlienProj(Point screenSize){
+        super(screenSize);
+        yVel = mScreenSize.x/3; //Projectile shoots down
+    }
+
+    @Override
+    public void collide (GameObject gameObject) {
+        if(!(gameObject instanceof Alien)) {
+            isActive = false; //AlienProj can't shoot other Aliens
+        }
+    }
+
+    public void checkBounds() {
+        if(mRect.top >= mScreenSize.y) {
+            isActive = false;
+        }
     }
 }

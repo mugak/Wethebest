@@ -67,8 +67,8 @@ class SimpleCannon implements GameObject {
         cannonMovement = state;
     }
 
-    PlayerProj shoot() {
-        PlayerProj mProj = new PlayerProj(mScreenSize.x);
+    public PlayerProj shoot() {
+        PlayerProj mProj = new PlayerProj(mScreenSize);
         mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
         return mProj;
     }
