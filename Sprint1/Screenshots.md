@@ -13,7 +13,7 @@ Projectile hits barrier and removes a block from it
 Alien is removed when hit by a Projectile  
 
 # UI Screenshots
-![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Screenshots/UIScreenshot1.png)  Start menu displayed on the screen
+![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Screenshots/UIScreenshot1.png)    Start menu displayed on the screen
 
 ![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Screenshots/UIScreenshot2.png) 
 ![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Screenshots/UIScreenshot3.png)  
