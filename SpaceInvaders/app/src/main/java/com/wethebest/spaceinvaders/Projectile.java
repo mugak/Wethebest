@@ -4,6 +4,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 
 /*An abstract class is used for the ease of inheritance
 *for the player and alien projectiles.
@@ -22,6 +26,8 @@ public abstract class Projectile implements GameObject {
 
     private Paint mPaint;
 
+    private Bitmap mBitmap;
+
     protected boolean isActive;
     protected Point mScreenSize;
 
@@ -33,6 +39,7 @@ public abstract class Projectile implements GameObject {
         mRect = new RectF();
         mPaint = new Paint();
         isActive = true;
+        //mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_laser);
     }
 
 
@@ -110,7 +117,7 @@ class PlayerProj extends  Projectile{
 }
 class AlienProj extends Projectile{
 
-    AlienProj(Point screenSize){
+    AlienProj( Point screenSize){
         super(screenSize);
         yVel = mScreenSize.x/3; //Projectile shoots down
     }

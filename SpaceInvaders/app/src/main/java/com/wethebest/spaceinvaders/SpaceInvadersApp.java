@@ -17,7 +17,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private SurfaceHolder mOurHolder;
     private Canvas mCanvas;
-
     private Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
 
     private long mFPS;
@@ -39,7 +38,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         mScreenSize = new Point(x, y);
 
-        mPlayer = new SimpleCannon(mScreenSize);
+        mPlayer = new SimpleCannon(context, mScreenSize);
         mBarrier = new Barrier(mScreenSize);
         mAlienArmy = new AlienArmy(mScreenSize);
         gameObjects.addAll(mAlienArmy.getAliens());
@@ -110,6 +109,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             mCanvas = mOurHolder.lockCanvas();
 
             mCanvas.drawColor(Color.argb(255, 26, 128, 182));
+
 
             for (GameObject gameObject : gameObjects) {
                 gameObject.display(mCanvas);
