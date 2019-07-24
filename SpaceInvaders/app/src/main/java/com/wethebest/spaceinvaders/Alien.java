@@ -15,7 +15,10 @@ import java.util.Random;
 class Alien implements GameObject {
     private RectF mRect;
     private Bitmap mBitmap;
-    private float mXVelocity;
+
+    //Velocity is static for all the aliens in the row
+    private static float mXVelocity;
+    private final float SPEED = 1000;
     public static PointF alienSize;
 
     //Tells the game whether the object should still be in game
@@ -42,7 +45,7 @@ class Alien implements GameObject {
         framesUntilShoot = 0;
         shootNow = false;
         waitingToShoot = false;
-        mXVelocity = 1000; //TODO hardcoded
+        mXVelocity = SPEED; //TODO hardcoded
     }
 
     public void update(long fps) {
@@ -55,9 +58,17 @@ class Alien implements GameObject {
         //If alien out of bounds change it's direction and lower it on screen
         //NOTE: alien groups move as a unit not as individuals. This code will change if we
         // introduce waves of aliens
-        if (mRect.left < 0 || mRect.right > mScreenSize.x) {
-            reverseXVelocity();
+        if (mRect.left < 0){
+
+            //Move right
+            mXVelocity = SPEED;
             advance();
+        }
+
+        else if (mRect.right > mScreenSize.x){
+
+            //Move left
+            mXVelocity = - SPEED;
         }
 
         timeToShoot(fps);
@@ -80,9 +91,6 @@ class Alien implements GameObject {
     public void reset(Point location) {
     }
 
-    private void reverseXVelocity() {
-        mXVelocity = -mXVelocity;
-    }
 
     private void advance() {
         mRect.top = mRect.top + alienSize.x;
