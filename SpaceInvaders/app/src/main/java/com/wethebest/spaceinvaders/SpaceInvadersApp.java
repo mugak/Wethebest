@@ -31,7 +31,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private volatile boolean mPlaying;
     private boolean mPaused = true;
 
-
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
         mOurHolder = getHolder();
@@ -41,7 +40,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mPlayer = new SimpleCannon(context, mScreenSize);
         mBarrier = new Barrier(mScreenSize);
         mAlienArmy = new AlienArmy(context, mScreenSize);
-        gameObjects.addAll(mAlienArmy.getAliens());
+        mAlienArmy.setAliens();
+        //gameObjects.addAll(mAlienArmy.getAliens());
         gameObjects.add(mPlayer);
         gameObjects.addAll(mBarrier.getBarrierBlocks());
         startGame();
@@ -64,6 +64,17 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             if(!mPaused) {
                 for (GameObject object : gameObjects) {
                     object.update(mFPS);
+                }
+
+                for(Alien a : mAlienArmy.allAliens) {
+                    a.update(mFPS); //
+                    if(a.outOfBounds()) {
+                        mAlienArmy.changeDirection = true;
+                    }
+                }
+                if(mAlienArmy.changeDirection == true) {
+                    mAlienArmy.changeDirection();
+                    mAlienArmy.changeDirection = false;
                 }
                 addAlienProjs();
                 detectCollisions();
@@ -94,7 +105,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     mPlayer.setMovement(mPlayer.MOVINGLEFT);
                 }
 
-                gameObjects.add(mPlayer.shoot());
+               // gameObjects.add(mPlayer.shoot());
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -113,6 +124,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
             for (GameObject gameObject : gameObjects) {
                 gameObject.display(mCanvas);
+            }
+
+            for (Alien a : mAlienArmy.allAliens) {
+                a.display(mCanvas); //
             }
 
             mOurHolder.unlockCanvasAndPost(mCanvas);
