@@ -66,16 +66,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     object.update(mFPS);
                 }
 
-                for(Alien a : mAlienArmy.allAliens) {
-                    a.update(mFPS); //
-                    if(a.outOfBounds()) {
-                        mAlienArmy.changeDirection = true;
-                    }
-                }
-                if(mAlienArmy.changeDirection == true) {
-                    mAlienArmy.changeDirection();
-                    mAlienArmy.changeDirection = false;
-                }
+                mAlienArmy.update(mFPS);
                 addAlienProjs();
                 detectCollisions();
             }

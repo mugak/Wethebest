@@ -69,4 +69,17 @@ public class AlienArmy {
             a.reverseXVelocity();
         }
     }
+
+    public void update(long fps) {
+        for(Alien mAlien : allAliens) {
+            mAlien.update(fps);
+            if(mAlien.outOfBounds()) {
+                changeDirection = true;
+            }
+        }
+        if(changeDirection == true) {
+            changeDirection();
+            changeDirection = false;
+        }
+    }
 }
