@@ -25,13 +25,13 @@ public class AlienRow {
         aliens = new LinkedList<Alien>();
         mScreenSize = screenSize;
         numAliens = 4; //TODO hardcoded
-        spaceBetweenAliens = mScreenSize.x/10; //TODO set better spacing
+        spaceBetweenAliens = mScreenSize.x/6; //TODO set better spacing
     }
 
     public void setAliens() {
         for(int i = 0; i < numAliens; i++) {
             Alien mAlien = new Alien(mScreenSize);
-            mAlien.setPos(alienPos.x + i * (Alien.alienSize.width + spaceBetweenAliens), alienPos.y);
+            mAlien.setPos(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
             aliens.add(mAlien);
         }
     }

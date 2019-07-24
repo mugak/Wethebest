@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 
 import java.util.Random;
@@ -11,7 +12,7 @@ import java.util.Random;
 class Alien implements GameObject {
     private RectF mRect;
     private float mXVelocity;
-    public static Size alienSize;
+    public static PointF alienSize;
 
     //Tells the game whether the object should still be in game
     private boolean isActive;
@@ -29,8 +30,6 @@ class Alien implements GameObject {
 
     Alien(Point screenSize) {
         mScreenSize = screenSize;
-        alienSize = new Size(mScreenSize.x / 10, mScreenSize.y / 10);
-
         isActive = true;
 
         mRect = new RectF();
@@ -45,8 +44,8 @@ class Alien implements GameObject {
         mRect.left = mRect.left + (mXVelocity / fps);
         mRect.top = mRect.top;
 
-        mRect.right = mRect.left + alienSize.width;
-        mRect.bottom = mRect.top + alienSize.height;
+        mRect.right = mRect.left + alienSize.x;
+        mRect.bottom = mRect.top + alienSize.y;
 
         //If alien out of bounds change it's direction and lower it on screen
         //NOTE: alien groups move as a unit not as individuals. This code will change if we
@@ -67,8 +66,8 @@ class Alien implements GameObject {
     public void setPos(float x, float y) {
         mRect.left = x / 2;
         mRect.top = 0;
-        mRect.right = x / 2 + alienSize.width;
-        mRect.bottom = alienSize.height;
+        mRect.right = x / 2 + alienSize.x;
+        mRect.bottom = alienSize.y;
     }
 
     public void reset(Point location) {
@@ -79,17 +78,17 @@ class Alien implements GameObject {
     }
 
     private void advance() {
-        mRect.top = mRect.top + alienSize.height;
-        mRect.bottom = mRect.top + alienSize.height; //moves alien down
+        mRect.top = mRect.top + alienSize.x;
+        mRect.bottom = mRect.top + alienSize.y; //moves alien down
 
         if (mRect.left < 0) {
             mRect.left = 0;
-            mRect.right = 0 + alienSize.width;
+            mRect.right = 0 + alienSize.x;
         } //reset to left edge
 
         if (mRect.right > mScreenSize.x) {
             mRect.right = mScreenSize.x;
-            mRect.left = mScreenSize.x - alienSize.width;
+            mRect.left = mScreenSize.x - alienSize.x;
         } //reset pos to right edge
     }
 
@@ -139,6 +138,11 @@ class Alien implements GameObject {
                 waitingToShoot = false;
             }
         }
+
+    }
+
+    public static void setAlienSize(PointF size) {
+        alienSize = size;
 
     }
 }
