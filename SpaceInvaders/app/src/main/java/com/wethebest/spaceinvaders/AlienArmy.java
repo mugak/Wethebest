@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class AlienArmy {
@@ -11,13 +12,14 @@ public class AlienArmy {
     private Point mScreenSize;
     private Point rowPosition; //Position of top left corner of first alien in first row
     private int spaceBetweenRows;
+    private List <AlienRow> alienRows;
 
     AlienArmy(Point screenSize) {
         mScreenSize = screenSize;
         numRows = 4; //TODO hardcoded
         spaceBetweenRows = mScreenSize.x / 10; //TODO set better spacing
         rowPosition = setPos();
-
+        alienRows = new LinkedList<AlienRow>();
     }
 
 
