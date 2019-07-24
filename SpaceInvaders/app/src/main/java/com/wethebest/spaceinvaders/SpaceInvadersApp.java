@@ -36,8 +36,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         super(context);
         this.context = context;
         mOurHolder = getHolder();
-
         mScreenSize = new Point(x, y);
+
+        GameObjectFactory.app = this;
 
         mPlayer = new SimpleCannon(context, mScreenSize);
         mBarrier = new Barrier(mScreenSize);
