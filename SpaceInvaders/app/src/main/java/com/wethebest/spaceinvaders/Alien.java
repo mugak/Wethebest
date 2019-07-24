@@ -31,10 +31,6 @@ class Alien implements GameObject {
     public boolean shootNow;
     private boolean waitingToShoot;
     private boolean movingRight = true;
-    private boolean advanced = false;
-    final int MOVINGLEFT = 1;
-    final int MOVINGRIGHT = 2;
-    private int direction = MOVINGRIGHT;
 
     private Point mScreenSize;
 
@@ -62,17 +58,6 @@ class Alien implements GameObject {
         // introduce waves of aliens
 
         //Reverse direction if reaching the side of screen
-//        if (direction == MOVINGLEFT){
-//
-//            //Move right
-//            mXVelocity = -SPEED;
-//        }
-//
-//        else if (direction == MOVINGRIGHT){
-//
-//            //Move left
-//            mXVelocity = SPEED;
-//        }
 
         if(movingRight) {
             mXVelocity = SPEED;
@@ -95,26 +80,14 @@ class Alien implements GameObject {
     }
 
     public boolean outOfBounds() {
-        if (!movingRight) {
-            return mRect.left < 0;
-        }
-
-        else {
-            return mRect.right > mScreenSize.x; //moving right
-        }
+        return mRect.left < 0 || mRect.right > mScreenSize.x;
     }
 
     public void reverseXVelocity() {
-//        if(direction == MOVINGLEFT) {
-//            direction = MOVINGRIGHT;
-//        }
-//        else if(direction == MOVINGRIGHT) {
-//            direction = MOVINGLEFT;
-//        }
-        //mXVelocity = -mXVelocity;
 
         movingRight = !movingRight;
         advance();
+        stayInBounds();
         }
 
     public Bitmap getBitmap(){ return mBitmap;}
@@ -133,7 +106,9 @@ class Alien implements GameObject {
     private void advance() {
         mRect.top = mRect.top + alienSize.y;
         mRect.bottom = mRect.top + alienSize.y; //moves alien down
+    }
 
+    private void stayInBounds() {
         if (mRect.left < 0) {
             mRect.left = 0;
             mRect.right = 0 + alienSize.x;
