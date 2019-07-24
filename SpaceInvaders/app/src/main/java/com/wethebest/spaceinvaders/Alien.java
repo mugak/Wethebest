@@ -18,7 +18,7 @@ class Alien implements GameObject {
 
     //Velocity is static for all the aliens in the row
     private static float mXVelocity;
-    private final float SPEED = 1000;
+    private final float SPEED = 500;
     public static PointF alienSize;
 
     //Tells the game whether the object should still be in game
@@ -30,6 +30,8 @@ class Alien implements GameObject {
     private long framesUntilShoot;
     public boolean shootNow;
     private boolean waitingToShoot;
+    private static boolean advance;
+
 
     private Point mScreenSize;
 
@@ -39,7 +41,9 @@ class Alien implements GameObject {
         mScreenSize = screenSize;
         isActive = true;
 
-        //mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader_a01);
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader_a01);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)alienSize.x, (int)alienSize.y, true );
+
         mRect = new RectF();
         mPaint = new Paint();
         framesUntilShoot = 0;
@@ -50,7 +54,6 @@ class Alien implements GameObject {
 
     public void update(long fps) {
         mRect.left = mRect.left + (mXVelocity / fps);
-        mRect.top = mRect.top;
 
         mRect.right = mRect.left + alienSize.x;
         mRect.bottom = mRect.top + alienSize.y;
@@ -58,6 +61,8 @@ class Alien implements GameObject {
         //If alien out of bounds change it's direction and lower it on screen
         //NOTE: alien groups move as a unit not as individuals. This code will change if we
         // introduce waves of aliens
+
+        //Reverse direction if reaching the side of screen
         if (mRect.left < 0){
 
             //Move right
@@ -69,6 +74,7 @@ class Alien implements GameObject {
 
             //Move left
             mXVelocity = - SPEED;
+            advance();
         }
 
         timeToShoot(fps);
@@ -93,7 +99,7 @@ class Alien implements GameObject {
 
 
     private void advance() {
-        mRect.top = mRect.top + alienSize.x;
+        mRect.top = mRect.top + alienSize.y;
         mRect.bottom = mRect.top + alienSize.y; //moves alien down
 
         if (mRect.left < 0) {

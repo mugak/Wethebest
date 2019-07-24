@@ -19,7 +19,7 @@ public class AlienRow {
     private int numAliens;
     private Point mScreenSize;
     public PointF alienPos; //top left corner of first alien in the row
-    private int spaceBetweenAliens;
+    private float spaceBetweenAliens;
 
     private Context context;
 
@@ -30,7 +30,7 @@ public class AlienRow {
         aliens = new LinkedList<Alien>();
         mScreenSize = screenSize;
         numAliens = 4; //TODO hardcoded
-        spaceBetweenAliens = mScreenSize.x/6; //TODO set better spacing
+        spaceBetweenAliens = Alien.alienSize.x/2; //TODO set better spacing
     }
 
     public void setAliens() {
