@@ -17,7 +17,10 @@ public class AlienArmy {
     private int spaceBetweenRows;
     private List <AlienRow> alienRows;
 
+    public List<Alien> allAliens = new LinkedList<Alien>(); //
+
     private Context context;
+    public boolean changeDirection;
 
     AlienArmy(Context context, Point screenSize) {
         this.context = context;
@@ -28,6 +31,8 @@ public class AlienArmy {
         alienRows = new LinkedList<AlienRow>();
         Alien.setAlienSize(new PointF(mScreenSize.x/10, mScreenSize.y/10));
         setRows();
+
+        changeDirection = false;
     }
 
 
@@ -45,11 +50,23 @@ public class AlienArmy {
         }
     }
 
-    public List getAliens() {
+    /*public List getAliens() {
         List<Alien> allAliens = new LinkedList<Alien>();
         for(AlienRow mAlienRow : alienRows) {
             allAliens.addAll(mAlienRow.aliens);
         }
         return allAliens;
+    }*/
+
+    public void setAliens() {
+        for(AlienRow mAlienRow : alienRows) {
+            allAliens.addAll(mAlienRow.aliens);
+        }
+    }
+
+    public void changeDirection() {
+        for (Alien a : allAliens) {
+            a.reverseXVelocity();
+        }
     }
 }
