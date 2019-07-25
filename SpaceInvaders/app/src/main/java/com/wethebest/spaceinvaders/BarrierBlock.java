@@ -8,20 +8,18 @@ import android.graphics.RectF;
 
 public class BarrierBlock implements GameObject {
     private RectF mRect;
-    private Point mScreenSize;
-    public Size barrierBlockSize; //TODO: make this static?
+    public FloatVector2 barrierBlockSize; //TODO: make this static?
 
     //Tells the game whether the object should still be in game
     private boolean isActive; //TODO: maybe this should be public? since isActive() only returns isActive
     private Paint mPaint;
 
-
     private static int durability = 1;
 
-    BarrierBlock(Point ScreenSize){
-        mScreenSize = ScreenSize;
+    BarrierBlock(Point size, float x, float y){
+        barrierBlockSize = size;
+        setPos(x, y);
 
-        barrierBlockSize = new Size(mScreenSize.x / 20, mScreenSize.y / 40); //TODO: dynamically set better size
         isActive = true;
 
         mRect = new RectF();
