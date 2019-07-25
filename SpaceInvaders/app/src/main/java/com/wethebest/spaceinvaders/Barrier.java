@@ -37,7 +37,6 @@ public class Barrier {
                         mBarrierPosition.y + j * BLOCK_SIZE.y);
                 BarrierBlock mBarrierBlock = new BarrierBlock(BLOCK_SIZE, blockPos);
 
-                //The minus one is to keep the indices in bounds
                 barrierBlocks[i][j] = mBarrierBlock;
             }
         }

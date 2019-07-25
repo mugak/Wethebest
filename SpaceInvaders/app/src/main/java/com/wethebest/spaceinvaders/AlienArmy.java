@@ -1,6 +1,8 @@
 package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.os.Bundle;
@@ -16,14 +18,23 @@ public class AlienArmy {
     private int spaceBetweenRows;
     private List <AlienRow> alienRows;
 
-    AlienArmy(Point screenSize) {
-        mScreenSize = screenSize;
+    public List<Alien> allAliens = new LinkedList<Alien>(); //
+
+    private Context context;
+    private SpaceInvadersApp app;
+    public boolean changeDirection;
+
+    AlienArmy(SpaceInvadersApp app) {
+        this.app = app;
+        mScreenSize = app.mScreenSize;
         numRows = 4; //TODO hardcoded
         spaceBetweenRows = mScreenSize.x / 6; //TODO set better spacing
         setPos();
         alienRows = new LinkedList<AlienRow>();
         Alien.setAlienSize(new PointF(mScreenSize.x/10, mScreenSize.y/10));
         setRows();
+
+        changeDirection = false;
     }
 
 
@@ -33,7 +44,7 @@ public class AlienArmy {
 
     private void setRows() {
         for(int i = 0; i < numRows; i++) {
-            AlienRow mAlienRow = new AlienRow(mScreenSize);
+            AlienRow mAlienRow = new AlienRow(app);
             mAlienRow.alienPos = new PointF(rowPosition.x, rowPosition.y + i * (Alien.alienSize.y + spaceBetweenRows));
             mAlienRow.setAliens();
             alienRows.add(mAlienRow);
@@ -41,11 +52,42 @@ public class AlienArmy {
         }
     }
 
-    public List getAliens() {
+    /*public List getAliens() {
         List<Alien> allAliens = new LinkedList<Alien>();
         for(AlienRow mAlienRow : alienRows) {
             allAliens.addAll(mAlienRow.aliens);
         }
         return allAliens;
+    }*/
+
+    public void setAliens() {
+        for(AlienRow mAlienRow : alienRows) {
+            allAliens.addAll(mAlienRow.aliens);
+        }
+    }
+
+    public void changeDirection() {
+        for (Alien a : allAliens) {
+            a.reverseXVelocity();
+        }
+    }
+
+    public void update(long fps) {
+        for(Alien mAlien : allAliens) {
+            mAlien.update(fps);
+            if(mAlien.outOfBounds()) {
+                changeDirection = true;
+            }
+        }
+        if(changeDirection == true) {
+            changeDirection();
+            changeDirection = false;
+        }
+    }
+
+    public void draw(Canvas canvas) {
+        for (Alien a : allAliens) {
+            a.display(canvas);
+        }
     }
 }

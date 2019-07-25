@@ -9,6 +9,7 @@ numAliens*/
 
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.content.Context;
 import android.util.Log;
 
 import java.util.LinkedList;
@@ -18,22 +19,27 @@ public class AlienRow {
     private int numAliens;
     private Point mScreenSize;
     public PointF alienPos; //top left corner of first alien in the row
-    private int spaceBetweenAliens;
+    private float spaceBetweenAliens;
+
+    private SpaceInvadersApp app;
 
     public List<Alien> aliens;
 
-    AlienRow(Point screenSize) {
+    AlienRow(SpaceInvadersApp app) {
+        this.app = app;
         aliens = new LinkedList<Alien>();
-        mScreenSize = screenSize;
+        mScreenSize = app.mScreenSize;
         numAliens = 4; //TODO hardcoded
-        spaceBetweenAliens = mScreenSize.x/6; //TODO set better spacing
+        spaceBetweenAliens = Alien.alienSize.x/2; //TODO set better spacing
     }
 
     public void setAliens() {
         for(int i = 0; i < numAliens; i++) {
-            Alien mAlien = new Alien(mScreenSize);
-            mAlien.setPos(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
-            aliens.add(mAlien);
+            //Alien mAlien = new Alien(app);
+
+            GameObject mAlien = GameObjectFactory.getGameObject("alien");
+            ((Alien) mAlien).setPos(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
+            aliens.add((Alien) mAlien); //TODO need to refactor GameObject so we don't have these ugly casts
         }
     }
 

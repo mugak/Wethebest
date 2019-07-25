@@ -7,8 +7,10 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
+
 public class BarrierBlock implements GameObject {
     private RectF mRect;
+    private Point mScreenSize;
     public PointF barrierBlockSize; //TODO: make this static?
 
     //Tells the game whether the object should still be in game

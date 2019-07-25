@@ -5,8 +5,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.RectF;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 class SimpleCannon implements GameObject {
+    private Bitmap mBitmap;
+
     private RectF mRect;
     private float mXVelocity;
     private float mCannonWidth;
@@ -24,13 +29,14 @@ class SimpleCannon implements GameObject {
     //Tells the game whether the object should still be in game
     private boolean isActive;
 
-    SimpleCannon(Point screenSize) {
+    SimpleCannon(Context context, Point screenSize) {
         mScreenSize = screenSize;
         mCannonWidth = mScreenSize.x / 10;
         mCannonHeight = mScreenSize.x / 10;
         mRect = new RectF();
-
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player);
         mPaint = new Paint();
+
 
         isActive = true;
     }
@@ -39,6 +45,9 @@ class SimpleCannon implements GameObject {
         return mRect;
     }
 
+    public Bitmap getBitmap(){
+        return mBitmap;
+    }
     public void reset(Point location) {
         setPosition(location);
         mXVelocity = (location.y / 3);
@@ -76,8 +85,10 @@ class SimpleCannon implements GameObject {
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-        canvas.drawRect(mRect, mPaint);
+        //canvas.drawRect(mRect, mPaint);
+        canvas.drawBitmap(this.getBitmap(), this.getHitBox().left, this.getHitBox().top, mPaint);
     }
+
 
     //Check alien.java for an example on how this is implemented
     public void collide(GameObject gameObject) {

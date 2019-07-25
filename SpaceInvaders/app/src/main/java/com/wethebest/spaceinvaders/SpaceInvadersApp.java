@@ -18,8 +18,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private SurfaceHolder mOurHolder;
     private Canvas mCanvas;
-
-    private Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
+    public Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
+    public Context context;
 
     private long mFPS;
 
@@ -32,16 +32,18 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private volatile boolean mPlaying;
     private boolean mPaused = true;
 
-
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
+        this.context = context;
         mOurHolder = getHolder();
-
         mScreenSize = new Point(x, y);
 
-        mPlayer = new SimpleCannon(mScreenSize);
-        mAlienArmy = new AlienArmy(mScreenSize);
-        gameObjects.addAll(mAlienArmy.getAliens());
+        GameObjectFactory.app = this;
+
+        mPlayer = new SimpleCannon(context, mScreenSize);
+        mAlienArmy = new AlienArmy(this);
+        mAlienArmy.setAliens();
+        //gameObjects.addAll(mAlienArmy.getAliens());
         gameObjects.add(mPlayer);
 
         startGame();
@@ -50,10 +52,14 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private void createBarriers(int numBarriers) {
         for(int i = 1; i < numBarriers + 1; i++) {
             PointF barrierCenterPosition = Util.computeBarrierPosition(i, numBarriers, mScreenSize);
-            Barrier barrier = new Barrier(mScreenSize, barrierCenterPosition);
-            mBarriers.add(barrier);
-            gameObjects.addAll(barrier.getBarrierBlocks());
+
+            addBarrierToGameObjects(new Barrier(mScreenSize, barrierCenterPosition));
         }
+    }
+
+    private void addBarrierToGameObjects(Barrier barrier) {
+        mBarriers.add(barrier);
+        gameObjects.addAll(barrier.getBarrierBlocks());
     }
 
     private void startGame() {
@@ -76,6 +82,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 for (GameObject object : gameObjects) {
                     object.update(mFPS);
                 }
+
+                mAlienArmy.update(mFPS);
                 addAlienProjs();
                 detectCollisions();
             }
@@ -106,7 +114,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     mPlayer.setMovement(mPlayer.MOVINGLEFT);
                 }
 
-                gameObjects.add(mPlayer.shoot());
+               // gameObjects.add(mPlayer.shoot());
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -122,9 +130,12 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
             mCanvas.drawColor(Color.argb(255, 26, 128, 182));
 
+
             for (GameObject gameObject : gameObjects) {
                 gameObject.display(mCanvas);
             }
+
+            mAlienArmy.draw(mCanvas);
 
             mOurHolder.unlockCanvasAndPost(mCanvas);
         }
