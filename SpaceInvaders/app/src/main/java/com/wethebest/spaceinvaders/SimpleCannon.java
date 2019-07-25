@@ -26,10 +26,13 @@ class SimpleCannon implements GameObject {
 
     private int cannonMovement = STOPPED;
 
+    private Context context;
+
     //Tells the game whether the object should still be in game
     private boolean isActive;
 
     SimpleCannon(Context context, Point screenSize) {
+        this.context = context;
         mScreenSize = screenSize;
         mCannonWidth = mScreenSize.x / 10;
         mCannonHeight = mScreenSize.x / 10;
@@ -77,7 +80,7 @@ class SimpleCannon implements GameObject {
     }
 
     public PlayerProj shoot() {
-        PlayerProj mProj = new PlayerProj(mScreenSize);
+        PlayerProj mProj = new PlayerProj(context, mScreenSize);
         mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
         return mProj;
     }

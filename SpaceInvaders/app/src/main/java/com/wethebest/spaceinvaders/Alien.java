@@ -32,12 +32,16 @@ class Alien implements GameObject {
     private boolean waitingToShoot;
     private static boolean advance;
 
+    private Context context;
+
+
 
     private Point mScreenSize;
 
     private Paint mPaint;
 
     Alien(Context context, Point screenSize) {
+        this.context = context;
         mScreenSize = screenSize;
         isActive = true;
 
@@ -141,7 +145,7 @@ class Alien implements GameObject {
     }
 
     public AlienProj shoot() {
-            mProj = new AlienProj(mScreenSize);
+            mProj = new AlienProj(context, mScreenSize);
             mProj.setPos((mRect.right + mRect.left) / 2, mRect.bottom);
             return mProj;
     }
