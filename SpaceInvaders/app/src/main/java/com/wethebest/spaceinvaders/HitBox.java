@@ -9,7 +9,15 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-//The HitBox class controls the position of the HitBox
+
+//TODO create horizontal/vertical out of bounds methods
+//TODO create constants for HitBox
+//TODO create HitBoxBuilder
+//TODO separate bitmap drawing into another class
+//TODO create GameObjectHitBox classes, integrate HitBox into all of them
+//TODO make HitBoxList to replace Barrier and AlienArmy
+
+//The HitBox class controls the position and movement a GameObject's HitBox.
 public class HitBox {
     //Needed for Context and ScreenSize
     private SpaceInvadersApp app;

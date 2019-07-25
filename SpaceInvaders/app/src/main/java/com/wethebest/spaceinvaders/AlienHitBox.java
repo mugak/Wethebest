@@ -13,12 +13,6 @@ import android.graphics.RectF;
 import java.util.Random;
 
 
-//HitBox controls the hitboxes for each GameObject
-//It handles movement, drawing, and collision
-//TODO separate drawing into another class
-//TODO create HitBox factory and HitBox interface
-//TODO create HitBoxMovement interface (Vertical & Horizontal)
-//TODO make HitBoxList to replace Barrier and AlienArmy
 public class AlienHitBox {
 
         private HitBox mHitBox;
