@@ -114,7 +114,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     mPlayer.setMovement(mPlayer.MOVINGLEFT);
                 }
 
-               // gameObjects.add(mPlayer.shoot());
+                gameObjects.add(mPlayer.shoot());
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -171,6 +171,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                         collide(object1, object2);
                     }
                 }
+
+                for(GameObject alienObject : mAlienArmy.allAliens) {
+                    collide(object1, alienObject);
+                }
             }
         }
     }
@@ -192,6 +196,17 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 gameObjectIterator.remove();
             }
         }
+
+        Iterator<Alien> alienObjectIterator = mAlienArmy.allAliens.iterator();
+
+        while(alienObjectIterator.hasNext()) {
+            Alien alienObject = alienObjectIterator.next();
+
+            if(!alienObject.isActive()) {
+                alienObjectIterator.remove();
+            }
+        }
+
     }
 
     private void addAlienProjs() {
