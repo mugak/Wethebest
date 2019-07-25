@@ -3,6 +3,8 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
@@ -16,7 +18,6 @@ public class HitBox {
     private RectF mRect;
     private Bitmap mBitmap;
     private Paint mPaint;
-    private int spriteID;
 
     //
     public float velocity; //
@@ -25,8 +26,6 @@ public class HitBox {
     //Aliens have a constant movement speed
     private final float SPEED = 500;
 
-    //Current movement direction
-    private boolean movingRight;
 
     //Tells the game whether the object should still be in game
     private boolean isActive;
@@ -34,13 +33,10 @@ public class HitBox {
     HitBox(SpaceInvadersApp app) {
         this.app = app;
 
-        mBitmap = BitmapFactory.decodeResource(app.context.getResources(), spriteID);
-        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)size.x, (int)size.y, true );
-
         mRect = new RectF();
+        mPaint = new Paint();
 
         isActive = true;
-        movingRight = true;
         velocity = SPEED; //TODO hardcoded
     }
 
@@ -132,4 +128,14 @@ public class HitBox {
     }
 
 
+    public void setBitmap(int spriteID) {
+        mBitmap = BitmapFactory.decodeResource(app.context.getResources(), spriteID);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)size.x, (int)size.y, true );
+    }
+
+    public void display(Canvas canvas) {
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
+
+        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
+    }
 }
