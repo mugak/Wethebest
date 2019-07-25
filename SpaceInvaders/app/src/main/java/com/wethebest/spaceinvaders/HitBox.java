@@ -16,19 +16,19 @@ public class HitBox {
 
     //Used to draw on Canvas
     private RectF mRect;
-    private Bitmap mBitmap;
+    public Bitmap mBitmap;
     private Paint mPaint;
 
     //
     public float velocity; //
-    public PointF size; //
+    public static PointF size; //
 
     //Aliens have a constant movement speed
     private final float SPEED = 500;
 
 
     //Tells the game whether the object should still be in game
-    private boolean isActive;
+    public boolean isActive;
 
     HitBox(SpaceInvadersApp app) {
         this.app = app;
@@ -40,7 +40,7 @@ public class HitBox {
         velocity = SPEED; //TODO hardcoded
     }
 
-    private void moveHorizontally(float offset) {
+    public void moveHorizontally(float offset) {
         mRect.left = mRect.left + offset;
         updateRightSide();
     }
@@ -68,7 +68,7 @@ public class HitBox {
         updateBottomSide();
     }
 
-    private void moveDown() {
+    public void moveDown() {
         mRect.top = mRect.top + size.y;
         updateBottomSide();
     }
@@ -85,15 +85,21 @@ public class HitBox {
         updateBottomSide();
     }
 
-    void setSize(RectF rect) {
+    public void setSize(RectF rect) {
+        this.size = new PointF();
         size.x = rect.right - rect.left;
         size.y =  rect.top - rect.bottom;
+    }
+
+    public void setSize(PointF size) {
+        this.size = new PointF(size.x, size.y);
+
     }
 
 
     //Returns true when the hitbox touches the edge of the screen
     boolean outOfBounds() {
-        return mRect.left < 0 || mRect.right > app.mScreenSize.x || mRect.top < 0 || mRect.bottom > app.mScreenSize.y;
+        return mRect.left < 0 || mRect.right > app.mScreenSize.x;// || mRect.top < 0 || mRect.bottom > app.mScreenSize.y;
     }
 
     //Position of hitbox stays within screen boundaries
@@ -104,12 +110,12 @@ public class HitBox {
         else if (mRect.right > app.mScreenSize.x) {
             setPosition(new PointF(app.mScreenSize.x - size.x, mRect.top));
         } //reset pos to right edge
-        else if (mRect.top < 0) {
-            setPosition(new PointF(mRect.left, 0));
-        }
-        else if (mRect.bottom > app.mScreenSize.y) {
-            setPosition(new PointF(mRect.left, app.mScreenSize.y - size.y));
-        }
+//        else if (mRect.top < 0) {
+//            setPosition(new PointF(mRect.left, 0));
+//        }
+//        else if (mRect.bottom > app.mScreenSize.y) {
+//            setPosition(new PointF(mRect.left, app.mScreenSize.y - size.y));
+//        }
     }
 
     //Resets position of hitbox to default
