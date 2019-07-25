@@ -1,0 +1,555 @@
+commit 581ddfe7ede0b45724701d9ff967de6141bd0444
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Fri Jul 19 23:26:34 2019 -0700
+
+    Made comment clearer
+
+commit b6194afe861eb026b3623ff0629e340aa4233e51
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Thu Jul 18 12:25:35 2019 -0700
+
+    added setPosition method to simpleCannon class
+
+commit 4bb2b1ffc57709b5d66faeacf66c3062bfea7099
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Wed Jul 17 20:44:27 2019 -0700
+
+    added some unit tests for the alien class
+
+commit 42fd5aef914a5593d372dcc2d178020862a0f8db
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Wed Jul 17 16:15:18 2019 -0700
+
+    Added setPosition method to Alien class
+
+commit 0a9d3c456e20a8a3104f2eb23d42c431883ca59b
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Wed Jul 17 11:09:00 2019 -0700
+
+    adjusted sizes of Alien and BarrierBlock
+
+commit 912f92d77485b075c3b75475c401cdc81ba90b6a
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Tue Jul 16 02:46:29 2019 -0700
+
+    implemented BarrierBlock class
+
+commit f2ec4d274fec9b467a54c6e076efc03a4c818d13
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Mon Jul 15 18:27:07 2019 -0700
+
+    fixed PlayerProj colliding with SimpleCannon, integrated Barrier into GameObject interface
+
+commit da267dc5bd1d712f78398de10a1fbbcd429bef8a
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 15:46:36 2019 -0700
+
+    Added extra documentation to GameObject class
+
+commit 96c663ca065eab641a249acbe77c5080f1d2b9b8
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 15:42:32 2019 -0700
+
+    removed some unused lines of code
+
+commit 8c3d9abbcb1962ddd6b7f84c7bf46108ce658338
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 15:34:58 2019 -0700
+
+    added check so that no leftover gameObjects are left when a new game is started
+
+commit a6b52e7d36346556eb619f7c57912a76e22d10b1
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 15:32:57 2019 -0700
+
+    Refactored projectiles to implement GameObject
+
+commit 543a677089eb82b9ed62ddfda768b0ed1f4ca879
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 10:04:09 2019 -0700
+
+    Added check to remove inactive objects from game
+
+commit 894d67884005a7666beb0d9eaa19a04e10cb703f
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 09:58:41 2019 -0700
+
+    Refactored simpleCannon class to implement gameObject
+
+commit cb1ca3e47a057243612343d5e1d5d60e1bdc76b3
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 09:41:17 2019 -0700
+
+    Refactored alien class to implement GameObject
+
+commit d5e1c3c592a673956a898e84493a3b94e135c712
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 09:02:02 2019 -0700
+
+    added isActive requirement to GameObject interface
+
+commit 84252b9d962ac3ecd56912a07fc7616c00282f3a
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 08:58:10 2019 -0700
+
+    refactor drawing method to use GameObjects
+
+commit e4d829c61631733ddbb352a44c197976530167f0
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Mon Jul 15 08:54:02 2019 -0700
+
+    refactor detectCollisions to use GameObjects
+
+commit 28a553bf16182ee7ae964cdb6ae61cc4c42af962
+Merge: b095467 d28479d
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Sun Jul 14 17:07:58 2019 -0700
+
+    Merge branch 'workingskeleton' of https://github.com/ecs160ss12019/Wethebest into workingskeleton
+
+commit b095467f8dba552bd3be86187fb3294bb0e18d1e
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Sun Jul 14 17:07:46 2019 -0700
+
+    Added GameObject interface
+
+commit d28479dac8d397ec067ca258e6bd0a5fd0e0efb3
+Merge: e9828ed fa108a9
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Sun Jul 14 17:07:05 2019 -0700
+
+    Deleted Player class
+
+commit fa108a9f7152e1af14a7fa3f24b004ce8339ff08
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sun Jul 14 17:06:55 2019 -0700
+
+    increased detectcollisions() performance
+
+commit e9828edc2009e5c1e7bf976dd1bbb7273b1b8e55
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Sun Jul 14 17:06:29 2019 -0700
+
+    deleted redundant Player class
+
+commit a729eaf662d7ff793babf9ab7007800183fb02ed
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sun Jul 14 17:02:05 2019 -0700
+
+    changed projectiles to linked list, iterators to remove
+
+commit cade0878cfff7ff96c37b1e91015ee75e0c653e8
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sun Jul 14 16:39:20 2019 -0700
+
+    fixed alien advancing too far bug
+
+commit 294ef849f39fcd9dc7fd13c922d5fe6363b8f9dc
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sun Jul 14 16:32:33 2019 -0700
+
+    implemented alien collision with projectile
+
+commit d60948a58912219fe88238e24f2454cb75ea4cfd
+Merge: 1838e94 cf1a47f
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Sun Jul 14 16:21:39 2019 -0700
+
+    quicksave
+
+commit cf1a47f17d7cd142e9cc61b7e817406634d2c85f
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sun Jul 14 16:18:21 2019 -0700
+
+    multiple projectiles able to be shot on screen
+
+commit 45560167ba5f8da331f409a49ac3b920fa891d0c
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sun Jul 14 16:11:32 2019 -0700
+
+    implemented shoot in Cannon
+
+commit 53b616b6650b7db0830d05629296df14524cca3e
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sun Jul 14 15:31:27 2019 -0700
+
+    fixed abstract Projectile class, implemented functional Cannon movement
+
+commit 1838e948b8d3d6870416720e5eadb0c04ac56b85
+Merge: b5d39b6 31cf543
+Author: Sach Samala <sachit478@gmail.com>
+Date:   Sun Jul 14 15:18:49 2019 -0700
+
+    Merge branch 'master' of https://github.com/ecs160ss12019/Wethebest
+
+commit b5d39b6af6818594e857c31a19a560e1bd3716cc
+Author: Sach Samala <sachit478@gmail.com>
+Date:   Sun Jul 14 15:18:27 2019 -0700
+
+    UI updates
+
+commit 31cf5437eee086a5245b0ba56da6e73df304527d
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Sun Jul 14 14:57:45 2019 -0700
+
+    Added Barrier class
+
+commit dbaf7d20ef1e4897aa6cd64c718e2f84eda77959
+Merge: 6d040da 6fcc762
+Author: Sach Samala <sachit478@gmail.com>
+Date:   Sun Jul 14 14:49:44 2019 -0700
+
+    Merge branch 'master' of https://github.com/ecs160ss12019/Wethebest
+
+commit 6d040dac0043ad39169485ae51172e94409151ad
+Author: Sach Samala <sachit478@gmail.com>
+Date:   Sun Jul 14 14:49:34 2019 -0700
+
+    Delete divider_list.xml
+
+commit 6fcc762d4fdf040f3c34edea2e751b1d7d60386d
+Merge: 24739a2 abbdb93
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Sun Jul 14 14:04:59 2019 -0700
+
+    Fixed Projectile classes
+
+commit 24739a22b029e1442ef76d48e2f15451c2ca5f75
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Sun Jul 14 14:04:25 2019 -0700
+
+    Fixed Projectile classes
+
+commit abbdb93439d76f388139e30a9d521f9866560c49
+Author: Sach Samala <ssamala@ucdavis.edu>
+Date:   Sun Jul 14 13:58:38 2019 -0700
+
+    UI changes
+
+commit 64fb72292d801b76fec8f5e0b20911c79cf5ecb7
+Merge: b645e2e 9486c90
+Author: Sach Samala <ssamala@ucdavis.edu>
+Date:   Sat Jul 13 16:48:23 2019 -0700
+
+    Merge branch 'master' of https://github.com/ecs160ss12019/Wethebest
+
+commit b645e2e33e64699e6a1c5925b5447f4de61057f6
+Author: Sach Samala <ssamala@ucdavis.edu>
+Date:   Sat Jul 13 16:48:10 2019 -0700
+
+    Changes to UI and XML
+
+commit 9486c9076f0eca7a2166bc27a010abcfd3a26564
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sat Jul 13 16:40:44 2019 -0700
+
+    projectile
+
+commit 0f78692fc2ca470a479e4871b7e2bb75dd385f9f
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 16:39:10 2019 -0700
+
+    Added moveSpeed, shootSpeed, and upgrade function to Cannon
+
+commit be293282069f1fba415b7df3a14a7cddaebc1856
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 16:18:32 2019 -0700
+
+    Direction changes in Cannon
+
+commit ca834ebaa0458e39b5f5e3bf0907a4d40aa35813
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 16:15:01 2019 -0700
+
+    Minor changes to AlienArmy class
+
+commit 43d5b7e80ba55351393cb894e20c0f42d1443dc0
+Author: Sach Samala <ssamala@ucdavis.edu>
+Date:   Sat Jul 13 16:12:38 2019 -0700
+
+    Changes to UI class and XML
+
+commit a977e20c5f78cdb5f1921ba34e8c959d59d214e3
+Merge: 7fc91b6 156f20e
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 16:08:22 2019 -0700
+
+    Merge branch 'master' of https://github.com/ecs160ss12019/Wethebest
+    
+    "Updated beenHit() in Cannon"
+
+commit 7fc91b6da1360c734d28a6d6ee19d9b5523c14c0
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 16:07:55 2019 -0700
+
+    Updated beenHit() function
+
+commit 78f26fa46693c38f92dc2c26cbaf601222264819
+Merge: 6a33d0a 4ae2a32
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 16:05:42 2019 -0700
+
+    Merge branch 'master' of https://github.com/ecs160ss12019/Wethebest
+    
+    "Merging branches"
+
+commit 156f20eca68c929c8863cf7b6cc8570374e95a18
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sat Jul 13 16:04:18 2019 -0700
+
+    alien
+
+commit 6a33d0a19053bce53dc56826f3e174af5b318274
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 15:55:09 2019 -0700
+
+    Changed Point to Point 2D in Cannon
+
+commit 4ae2a32c562b3025dc2005757e15d6caf361f30d
+Merge: fb55e94 4b9f245
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Sat Jul 13 15:51:20 2019 -0700
+
+    Merge branch 'master' of https://github.com/ecs160ss12019/Wethebest
+
+commit 4b9f2455031e2fab41fa0dfba61d105a45770041
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 15:47:05 2019 -0700
+
+    Improvements to beenHit() method
+
+commit fb55e941321cdcb0f47c8a0d3924710834fe8071
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Sat Jul 13 15:37:50 2019 -0700
+
+    added Projectile class
+
+commit 5aad73c00cac4670ca1a6ba4e5e2e4192b079a30
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 15:36:06 2019 -0700
+
+    Added AlienArmy class
+
+commit 8cd154abc0871d3367e9d8be7d5f961d3b930780
+Author: Idan Shemy <ishemy@ucdavis.edu>
+Date:   Sat Jul 13 15:27:36 2019 -0700
+
+    Created cannon class, wrote suggestions for collaborating classes
+
+commit 782714a3213c698ee52d2f168e27adf0a6b167ec
+Merge: e509c37 83d66f2
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sat Jul 13 15:00:57 2019 -0700
+
+    Merge branch 'master' of https://github.com/ecs160ss12019/Wethebest
+
+commit e509c371275c9891b09546dcab11565bf58e2eee
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Sat Jul 13 15:00:50 2019 -0700
+
+    implemented display, drawing
+
+commit 83d66f250c6d50b8202617fb6679e870ce19dbbb
+Author: Sach Samala <ssamala@ucdavis.edu>
+Date:   Sat Jul 13 14:07:38 2019 -0700
+
+    XML changes
+    
+    changes to context & layout
+
+commit d53d906cd6dc37cd3462cdc4d2d03b5962ff60af
+Author: Sach Samala <ssamala@ucdavis.edu>
+Date:   Sat Jul 13 13:39:38 2019 -0700
+
+    added images to res
+
+commit b835704c066717c52873509442958a99ebf7dfef
+Author: ishemy <42452439+ishemy@users.noreply.github.com>
+Date:   Fri Jul 12 13:55:52 2019 -0700
+
+    final updates
+
+commit 180518a944b579f45d6efba3559d19de709bc1cc
+Author: samalas <sachit478@gmail.com>
+Date:   Fri Jul 12 13:49:18 2019 -0700
+
+    Update Acceptance_Criteria.md
+
+commit a012df97fde76a107857972cc2a02b88f657592e
+Author: samalas <sachit478@gmail.com>
+Date:   Fri Jul 12 13:48:26 2019 -0700
+
+    Update Acceptance_Criteria.md
+
+commit 4304a12fffd707ecd1a67312df6d77b8544a55ba
+Author: samalas <sachit478@gmail.com>
+Date:   Fri Jul 12 13:46:27 2019 -0700
+
+    Update Acceptance_Criteria.md
+
+commit f5a53b37fbe0d15f62de44a074e2afafb6e513b9
+Author: ishemy <42452439+ishemy@users.noreply.github.com>
+Date:   Fri Jul 12 13:44:16 2019 -0700
+
+    Update Acceptance_Criteria.md
+
+commit 568e4c00f29244b2a61f767425d0369ff44b9fe5
+Author: ishemy <42452439+ishemy@users.noreply.github.com>
+Date:   Fri Jul 12 13:43:29 2019 -0700
+
+    Updated projectile
+
+commit 772b617a10c6106e867663596063022498101d91
+Author: ishemy <42452439+ishemy@users.noreply.github.com>
+Date:   Fri Jul 12 13:41:20 2019 -0700
+
+    Added acceptance criteria to alien
+    
+    +other minor changes
+
+commit 1f429500cab2989e822818a2cfbef76b860b33a0
+Author: ishemy <42452439+ishemy@users.noreply.github.com>
+Date:   Fri Jul 12 13:37:08 2019 -0700
+
+    Update Acceptance_Criteria.md
+    
+    Merged
+
+commit 8b5a3baabfe3fe2ff716a6e079a23c78e296d968
+Author: ishemy <42452439+ishemy@users.noreply.github.com>
+Date:   Fri Jul 12 13:31:53 2019 -0700
+
+    Update Acceptance_Criteria.md
+    
+    - Changing to describe user stories rather than classes
+    - Added alien
+
+commit e9eca88104282f7c2b7cdb76768718a3a41a2805
+Author: jechen95 <47867344+jechen95@users.noreply.github.com>
+Date:   Fri Jul 12 13:00:37 2019 -0700
+
+    Update Acceptance_Criteria.md
+
+commit 9cc4b2bcc1f47dc7be65f822b58037b1e751b56c
+Author: ishemy <42452439+ishemy@users.noreply.github.com>
+Date:   Fri Jul 12 12:52:30 2019 -0700
+
+    Update Acceptance_Criteria.md
+
+commit e0dd6372b490a2c04946d562aa30b1060e300e8b
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Fri Jul 12 12:05:39 2019 -0700
+
+    Added cannon and gamestate criteria to acceptance criteria
+
+commit 5119ebc86f56f2461a8430759ab5ba7acf7e493e
+Author: Jeffrey Chen <jefche@ucdavis.edu>
+Date:   Fri Jul 12 10:22:30 2019 -0700
+
+    Added game classes from CRC
+
+commit ccc4186206134ce08aa41891539c678175280412
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 23:17:17 2019 -0700
+
+    Update README.md
+
+commit 7251f52f5484c9b2b4b95972c11f75a5a3d53536
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 23:15:56 2019 -0700
+
+    Update Acceptance_Criteria.md
+
+commit 41baee4bc9fdb1dc1d2d967afe82b7a3644b3093
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 23:15:19 2019 -0700
+
+    Update Acceptance_Criteria.md
+
+commit 32c24f8447d7da3073df34e1fa519d33b3b1b373
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 23:14:42 2019 -0700
+
+    updated with GUI info
+
+commit 4b8135c8a17afa0b37074fc11948fea1fff767dc
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 22:07:32 2019 -0700
+
+    Update CRC_Sprint_1.md
+
+commit 4b12c9beec28772bfa867e5a8e64b4c0731fdde4
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 22:06:24 2019 -0700
+
+    Update CRC_Sprint_1.md
+
+commit 8f27fbfd4308ae048f73f180c3aca56feb1464d5
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 22:05:22 2019 -0700
+
+    Add files via upload
+
+commit 4aebdc30f874fe74979b2fe16293bc3efe7f66fd
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 21:43:41 2019 -0700
+
+    Update Readme.md with CRC link
+
+commit 17074f4ce22c3891f9ece6c06f5346d64289709a
+Author: samalas <sachit478@gmail.com>
+Date:   Thu Jul 11 21:42:08 2019 -0700
+
+    Create CRC for Sprint 1
+
+commit c17acd3625dec306d3b725e4733894dc5aa54c8f
+Author: jtlemkin <jtlemkin@gmail.com>
+Date:   Tue Jul 9 18:33:29 2019 -0700
+
+    changed SpaceInvader's to extend Activity class
+
+commit 3a3757119f1c6018b24872d44f8ece35b1f1cad1
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Tue Jul 9 16:47:26 2019 -0700
+
+    changed image file name
+
+commit b6049f46bbacbb06b50fab58d8b74cdb108120f0
+Author: samalas <sachit478@gmail.com>
+Date:   Mon Jul 8 22:12:31 2019 -0700
+
+    update storymapping.md -- add png
+    
+    added png
+
+commit b0370cf87c97017815c1c4990d52084b94415cd4
+Author: samalas <sachit478@gmail.com>
+Date:   Mon Jul 8 22:09:39 2019 -0700
+
+    screenshot
+
+commit 4f29d1cadfc4c3fd4d1c5bac2d9d40d1fac78487
+Author: samalas <sachit478@gmail.com>
+Date:   Mon Jul 8 22:08:49 2019 -0700
+
+    update storymapping.md
+    
+    added description to file
+
+commit 2d4a6e84d7b88be27751ea464fe0fcce625c86fa
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Mon Jul 8 20:01:40 2019 -0700
+
+    project description in readme.md, created android project
+
+commit 5543727485ce50fa61a99a8a980dff03eb1c6950
+Author: Muga Kim <ukim@ucdavis.edu>
+Date:   Mon Jul 8 18:59:44 2019 -0700
+
+    updated md files
+
+commit ad2243eed75f63e01632775d74287fb7700936f2
+Author: ahnaqvi <ahnaqvi@ucdavis.edu>
+Date:   Fri Jul 5 20:36:34 2019 -0700
+
+    Initial commit

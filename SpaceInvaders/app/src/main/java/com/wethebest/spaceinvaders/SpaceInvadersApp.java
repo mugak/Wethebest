@@ -47,14 +47,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         startGame();
     }
 
-    private PointF computeBarrierPosition(int i, int numBarriers) {
-        return new PointF((float) mScreenSize.x *  i / (numBarriers + 1), (float) mScreenSize.y * 3 / 4);
-    }
-
     private void createBarriers(int numBarriers) {
         for(int i = 1; i < numBarriers + 1; i++) {
-            PointF barrierPosition = computeBarrierPosition(i, numBarriers);
-            Barrier barrier = new Barrier(mScreenSize, barrierPosition);
+            PointF barrierCenterPosition = Util.computeBarrierPosition(i, numBarriers, mScreenSize);
+            Barrier barrier = new Barrier(mScreenSize, barrierCenterPosition);
             mBarriers.add(barrier);
             gameObjects.addAll(barrier.getBarrierBlocks());
         }
