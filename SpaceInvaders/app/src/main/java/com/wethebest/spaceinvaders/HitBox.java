@@ -1,6 +1,9 @@
 package com.wethebest.spaceinvaders;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
@@ -35,7 +38,6 @@ public class HitBox {
         mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)size.x, (int)size.y, true );
 
         mRect = new RectF();
-        mPaint = new Paint();
 
         isActive = true;
         movingRight = true;
