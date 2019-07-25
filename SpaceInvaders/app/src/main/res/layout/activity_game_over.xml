@@ -8,6 +8,25 @@
     tools:context=".GameOver">
 
 
+    <ImageView
+        android:id="@+id/Scoreboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/app_name"
+        android:visibility="visible"
+        app:srcCompat="@drawable/yourscore"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="227dp" />
+
+    <TextView
+        android:id="@+id/Score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/Scoreboard"
+        android:text="00000"
+        android:visibility="visible"
+        android:textSize="36sp" />
 
 
 
