@@ -20,6 +20,7 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 [Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Sprint_Storyboard.png)  
 [CRC Cards](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/CRC_Cards.png)  
 [Acceptance Criteria](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Acceptance_Criteria.md)  
+[Screenshots](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Screenshots.md)  
 
 ### Design Updates
 * Aliens shoot projectiles at random intervals
