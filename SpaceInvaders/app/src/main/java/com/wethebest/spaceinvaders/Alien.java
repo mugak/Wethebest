@@ -30,7 +30,10 @@ class Alien implements GameObject {
 //    private boolean waitingToShoot;
 
     Alien(SpaceInvadersApp app) {
+        this.app = app;
         mHitBox = new AlienHitBox(app);
+        alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
+
 //        shootNow = false;
 //        waitingToShoot = false;
 //        framesUntilShoot = 0;
@@ -57,8 +60,8 @@ class Alien implements GameObject {
 
     public Bitmap getBitmap(){ return mHitBox.getBitmap();}
 
-    public void setPos(float x, float y) {
-        mHitBox.setPos(x, y);
+    public void setPos(PointF position) {
+        mHitBox.setPos(position);
     }
 
     public void reset(Point location) {
@@ -83,7 +86,7 @@ class Alien implements GameObject {
 
     public static void setAlienSize(PointF size) {
         alienSize = size;
-        AlienHitBox.alienSize = size;
+        AlienHitBox.alienSize = alienSize;
         //TODO change to setHitBoxSize and hitBoxSize?
     }
 

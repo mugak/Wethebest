@@ -31,7 +31,6 @@ public class AlienArmy {
         spaceBetweenRows = mScreenSize.x / 6; //TODO set better spacing
         setPos();
         alienRows = new LinkedList<AlienRow>();
-        Alien.setAlienSize(new PointF(mScreenSize.x/10, mScreenSize.y/10));
         setRows();
 
         changeDirection = false;
@@ -45,6 +44,7 @@ public class AlienArmy {
     private void setRows() {
         for(int i = 0; i < numRows; i++) {
             AlienRow mAlienRow = new AlienRow(app);
+            Alien.setAlienSize(new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10));
             mAlienRow.alienPos = new PointF(rowPosition.x, rowPosition.y + i * (Alien.alienSize.y + spaceBetweenRows));
             mAlienRow.setAliens();
             alienRows.add(mAlienRow);
