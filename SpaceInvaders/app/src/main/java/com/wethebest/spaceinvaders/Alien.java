@@ -16,7 +16,7 @@ class Alien implements GameObject {
     //Needed for Context and ScreenSize
     private SpaceInvadersApp app;
 
-    private HitBox mHitBox;
+    private AlienHitBox mHitBox;
 
     //Used to draw on Canvas
     private RectF mRect;
@@ -45,7 +45,7 @@ class Alien implements GameObject {
     private boolean waitingToShoot;
 
     Alien(SpaceInvadersApp app) {
-        mHitBox = new HitBox(app);
+        mHitBox = new AlienHitBox(app);
         shootNow = false;
         waitingToShoot = false;
     }
@@ -96,7 +96,7 @@ class Alien implements GameObject {
 
     public static void setAlienSize(PointF size) {
         alienSize = size;
-        HitBox.alienSize = size;
+        AlienHitBox.alienSize = size;
         //TODO change to setHitBoxSize and hitBoxSize?
     }
 
