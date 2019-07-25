@@ -128,7 +128,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         if (mOurHolder.getSurface().isValid()) {
             mCanvas = mOurHolder.lockCanvas();
 
-            mCanvas.drawColor(Color.argb(255, 26, 128, 182));
+            mCanvas.drawColor(Color.argb(255, 0, 0, 0));
 
 
             for (GameObject gameObject : gameObjects) {
