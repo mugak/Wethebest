@@ -3,6 +3,7 @@ package com.wethebest.spaceinvaders;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.content.Context;
 import android.util.Log;
@@ -21,12 +22,11 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public Context context;
 
     private long mFPS;
-    private final int MILLIS_IN_SECOND = 1000;
 
     LinkedList<GameObject> gameObjects = new LinkedList<>();
     SimpleCannon mPlayer;
-    Barrier mBarrier; //TODO: implement Barrier array
     AlienArmy mAlienArmy;
+    LinkedList<Barrier> mBarriers = new LinkedList<Barrier>();
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -41,19 +41,33 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         GameObjectFactory.app = this;
 
         mPlayer = new SimpleCannon(context, mScreenSize);
-        mBarrier = new Barrier(mScreenSize);
         mAlienArmy = new AlienArmy(this);
         mAlienArmy.setAliens();
         //gameObjects.addAll(mAlienArmy.getAliens());
         gameObjects.add(mPlayer);
-        gameObjects.addAll(mBarrier.getBarrierBlocks());
+
         startGame();
+    }
+
+    private void createBarriers(int numBarriers) {
+        for(int i = 1; i < numBarriers + 1; i++) {
+            PointF barrierCenterPosition = Util.computeBarrierPosition(i, numBarriers, mScreenSize);
+
+            addBarrierToGameObjects(new Barrier(mScreenSize, barrierCenterPosition));
+        }
+    }
+
+    private void addBarrierToGameObjects(Barrier barrier) {
+        mBarriers.add(barrier);
+        gameObjects.addAll(barrier.getBarrierBlocks());
     }
 
     private void startGame() {
         for(GameObject gameObject : gameObjects) {
             gameObject.reset(mScreenSize);
         }
+
+        createBarriers(3);
 
         //Removes potentially leftover gameObjects from previous game
         removeInactiveObjects();
@@ -81,6 +95,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
             if(timeThisFrame > 0) {
+                int MILLIS_IN_SECOND = 1000;
                 mFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
         }
@@ -150,12 +165,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         while(firstObjectItr.hasNext()) {
             GameObject object1 = firstObjectItr.next();
             if(object1 instanceof Projectile) {
-                Iterator<GameObject> secondObjectItr = gameObjects.iterator();
 
-                while(secondObjectItr.hasNext()) {
-                    GameObject object2 = secondObjectItr.next();
-
-                    if(!(object2 instanceof  Projectile)) {
+                for (GameObject object2 : gameObjects) {
+                    if (!(object2 instanceof Projectile)) {
                         collide(object1, object2);
                     }
                 }
@@ -186,8 +198,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         LinkedList<GameObject> alienProjs = new LinkedList<>(); // need temp list because can't modify Collections being iterated
 
         for (GameObject gameObject : gameObjects) {
-            if(gameObject instanceof Alien) {
-                if(((Alien) gameObject).shootNow) {
+            if (gameObject instanceof Alien) {
+                if (((Alien) gameObject).shootNow) {
                     alienProjs.add(((Alien) gameObject).shoot());
                     ((Alien) gameObject).shootNow = false;
                 }
@@ -195,7 +207,5 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         }
         gameObjects.addAll(alienProjs);
-
     }
-
 }

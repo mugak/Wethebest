@@ -43,6 +43,25 @@ class Alien implements GameObject {
     private long framesUntilShoot;
     public boolean shootNow;
     private boolean waitingToShoot;
+    private static boolean advance;
+
+    private Context context;
+
+    private Point mScreenSize;
+
+
+    Alien(Context context, Point screenSize) {
+        this.context = context;
+        mScreenSize = screenSize;
+        isActive = true;
+
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.invader_a01);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) alienSize.x, (int) alienSize.y, true);
+
+        mRect = new RectF();
+        mPaint = new Paint();
+        framesUntilShoot = 0;
+    }
 
     Alien(SpaceInvadersApp app) {
         mHitBox = new AlienHitBox(app);
@@ -105,7 +124,7 @@ class Alien implements GameObject {
     }
 
     public AlienProj shoot() {
-            mProj = new AlienProj(app.mScreenSize);
+            mProj = new AlienProj(context, mScreenSize);
             RectF tempRect = mHitBox.getHitBox();
             mProj.setPos((tempRect.right + tempRect.left) / 2, tempRect.bottom);
             return mProj;

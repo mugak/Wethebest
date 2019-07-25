@@ -7,16 +7,12 @@ import android.view.Display;
 
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
-import android.graphics.Paint;
-import android.widget.ImageView;
 
 public class SpaceInvaders extends Activity {
 
     private SpaceInvadersApp mSpaceInvadersApp;
-    ImageView myImageView;
     Bitmap myBlankBitmap;
     Canvas myCanvas;
-    Paint myPaint;
 
 
 

@@ -26,7 +26,7 @@ public abstract class Projectile implements GameObject {
 
     private Paint mPaint;
 
-    private Bitmap mBitmap;
+    protected Bitmap mBitmap;
 
     protected boolean isActive;
     protected Point mScreenSize;
@@ -34,12 +34,11 @@ public abstract class Projectile implements GameObject {
     Projectile(Point screenSize){
         mScreenSize = screenSize;
         projWidth = mScreenSize.x/100;
-        projHeight = mScreenSize.x/100;
+        projHeight = mScreenSize.x/50;
         xVel = 0;
         mRect = new RectF();
         mPaint = new Paint();
         isActive = true;
-        //mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_laser);
     }
 
 
@@ -47,6 +46,8 @@ public abstract class Projectile implements GameObject {
     RectF getRect(){
         return mRect;
     }
+
+    Bitmap getBitmap() {return mBitmap;}
 
 
     //Updates the position of the projectile
@@ -79,7 +80,8 @@ public abstract class Projectile implements GameObject {
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-        canvas.drawRect(mRect, mPaint);
+        canvas.drawBitmap(this.getBitmap(), this.getHitBox().left, this.getHitBox().top, mPaint);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)projWidth, (int)projHeight, true );
     }
 
     public void collide(GameObject gameObject) {
@@ -100,8 +102,9 @@ public abstract class Projectile implements GameObject {
 }
 
 class PlayerProj extends  Projectile{
-    PlayerProj(Point screenSize){
+    PlayerProj(Context context, Point screenSize){
         super(screenSize);
+        this.mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_laser);
         yVel = -mScreenSize.x/3; //Projectile shoots up
     }
 
@@ -117,7 +120,7 @@ class PlayerProj extends  Projectile{
 }
 class AlienProj extends Projectile{
 
-    AlienProj( Point screenSize){
+    AlienProj(Context context, Point screenSize){
         super(screenSize);
         yVel = mScreenSize.x/3; //Projectile shoots down
     }

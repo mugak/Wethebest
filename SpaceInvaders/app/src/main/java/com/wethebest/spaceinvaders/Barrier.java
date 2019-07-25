@@ -1,41 +1,46 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Point;
+import android.graphics.PointF;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Barrier {
 
     private Point mScreenSize;
-    private Point barrierPosition; //top left corner of the barrier
-    private final Point BARRIER_SIZE = new Point(5, 5); //size is in units of barrier blocks
+    private PointF mBarrierPosition; //top left corner of the barrier
+    private final Point BARRIER_SIZE = new Point(3, 3); //size is in units of barrier blocks
+    private final PointF BLOCK_SIZE;
     private BarrierBlock[][] barrierBlocks;
 
-    Barrier(Point ScreenSize) {
-        mScreenSize = ScreenSize;
+    Barrier(Point screenSize, PointF centerPosition) {
+        mScreenSize = screenSize;
         barrierBlocks = new BarrierBlock[BARRIER_SIZE.x][BARRIER_SIZE.y];
-        setBarrierPosition();
+        BLOCK_SIZE = new PointF(mScreenSize.x / (float) 20, mScreenSize.y / (float) 40);
+
+        PointF dimensions = getBarrierDimensions();
+        mBarrierPosition = Util.getTopLeftPosFromCenterPos(centerPosition, dimensions);
+
         setBarrierBlocks();
     }
 
-    //TODO: dynamically set the position on the screen, possibly depending on number of barriers
-    private void setBarrierPosition() {
-        barrierPosition = new Point(mScreenSize.x / 2 - 100, mScreenSize.y / 2);
+    private PointF getBarrierDimensions() {
+        return new PointF(BARRIER_SIZE.x * BLOCK_SIZE.x, BARRIER_SIZE.y * BLOCK_SIZE.y);
     }
-
 
     private void setBarrierBlocks() {
         for(int i = 0; i < BARRIER_SIZE.x; i++) {
             for(int j = 0; j < BARRIER_SIZE.y; j++) {
-                BarrierBlock mBarrierBlock = new BarrierBlock(mScreenSize);
-                mBarrierBlock.setPos(barrierPosition.x + (i * mBarrierBlock.barrierBlockSize.x),
-                        barrierPosition.y + j * mBarrierBlock.barrierBlockSize.y);
+                PointF blockPos = new PointF(mBarrierPosition.x + i * BLOCK_SIZE.x,
+                        mBarrierPosition.y + j * BLOCK_SIZE.y);
+                BarrierBlock mBarrierBlock = new BarrierBlock(BLOCK_SIZE, blockPos);
+
                 barrierBlocks[i][j] = mBarrierBlock;
             }
         }
     }
-
 
     //gameObjects in SpaceInvadersApp.java only takes Collections in its addAll method
     //barrierBlocks is a primitive 2D array
@@ -44,9 +49,7 @@ public class Barrier {
     public List getBarrierBlocks() {
         List<BarrierBlock> barrierBlockList = new ArrayList<BarrierBlock>();
         for(BarrierBlock[] arr : barrierBlocks) {
-            for(BarrierBlock barrierBlock : arr) {
-                barrierBlockList.add(barrierBlock);
-            }
+            barrierBlockList.addAll(Arrays.asList(arr));
         }
 
        return barrierBlockList;
