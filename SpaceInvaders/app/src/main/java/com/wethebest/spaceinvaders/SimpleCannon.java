@@ -38,6 +38,8 @@ class SimpleCannon implements GameObject {
         mCannonHeight = mScreenSize.x / 10;
         mRect = new RectF();
         mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mCannonWidth, (int) mCannonHeight, true);
+
         mPaint = new Paint();
 
 
