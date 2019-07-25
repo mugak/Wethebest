@@ -23,5 +23,9 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 [Screenshots](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Screenshots.md)  
 
 ### Design Updates
+* Sprites are drawn for all game objects
+* Multiple aliens are spawned using observer pattern
+* Multiple barriers are spawned
 * Aliens shoot projectiles at random intervals
-* Multiple aliens are spawned
+* GameObjects are created using GameObjectFactory
+* GameObjects contain HitBox classes
