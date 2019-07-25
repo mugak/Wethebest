@@ -14,33 +14,29 @@ public class BarrierBlock implements GameObject {
     public PointF barrierBlockSize; //TODO: make this static?
 
     //Tells the game whether the object should still be in game
-    private boolean isActive; //TODO: maybe this should be public? since isActive() only returns isActive
+    private boolean isActive;
     private Paint mPaint;
-
 
     private static int durability = 1;
 
-    BarrierBlock(Point ScreenSize){
-        mScreenSize = ScreenSize;
-
-        barrierBlockSize = new PointF(mScreenSize.x / 20, mScreenSize.y / 40); //TODO: dynamically set better size
-        isActive = true;
-
+    BarrierBlock(PointF size, PointF position){
+        barrierBlockSize = size;
         mRect = new RectF();
         mPaint = new Paint();
+        isActive = true;
+
+        setPos(position);
     }
 
     public RectF getHitBox() {
         return mRect;
     }
 
-    public void update(long fps) {
-
-    }
+    public void update(long fps) { }
 
     public void reset(Point location) { //TODO: refactor reset to take no parameters?
-    }
 
+    }
 
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
@@ -75,9 +71,9 @@ public class BarrierBlock implements GameObject {
     }
 
     //Set position of BarrierBlock, top left corner on x,y
-    public void setPos(float x, float y) { //TODO: refactor with float point class
-        mRect.left = x;
-        mRect.top = y;
+    public void setPos(PointF pos) { //TODO: refactor with float point class
+        mRect.left = pos.x;
+        mRect.top = pos.y;
         mRect.right = mRect.left + barrierBlockSize.x;
         mRect.bottom = mRect.top + barrierBlockSize.y;
     }
