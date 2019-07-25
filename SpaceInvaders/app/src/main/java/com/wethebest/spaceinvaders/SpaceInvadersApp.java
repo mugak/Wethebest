@@ -91,7 +91,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             removeInactiveObjects();
             draw();
 
-
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
             if (timeThisFrame > 0) {
@@ -154,7 +153,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             Log.e("Error:", "joining thread");
 
         }
-
     }
 
     private void detectCollisions() {

@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,8 +15,7 @@ class SimpleCannon implements GameObject {
 
     private RectF mRect;
     private float mXVelocity;
-    private float mCannonWidth;
-    private float mCannonHeight;
+    private PointF mSize;
 
     private Point mScreenSize;
     private Paint mPaint;
@@ -34,8 +34,7 @@ class SimpleCannon implements GameObject {
     SimpleCannon(Context context, Point screenSize) {
         this.context = context;
         mScreenSize = screenSize;
-        mCannonWidth = mScreenSize.x / 10;
-        mCannonHeight = mScreenSize.x / 10;
+        mSize = new PointF(mScreenSize.x / 10, mScreenSize.x / 10);
         mRect = new RectF();
         mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mCannonWidth, (int) mCannonHeight, true);
@@ -60,8 +59,8 @@ class SimpleCannon implements GameObject {
 
     public void setPosition(Point location) {
         mRect.left = location.x / 2;
-        mRect.top = location.y - mCannonHeight;
-        mRect.right = location.x / 2 + mCannonWidth;
+        mRect.top = location.y - mSize.y;
+        mRect.right = location.x / 2 + mSize.x;
         mRect.bottom = location.y;
     }
 
@@ -105,11 +104,11 @@ class SimpleCannon implements GameObject {
         if (mRect.left < 0) {
             mRect.left = 0;
         } // left out of bounds
-        mRect.right = mRect.left + mCannonWidth;
+        mRect.right = mRect.left + mSize.x;
 
         if (mRect.right > mScreenSize.x) {
             mRect.right = mScreenSize.x;
-            mRect.left = mScreenSize.x - mCannonWidth;
+            mRect.left = mScreenSize.x - mSize.x;
         } // right out of bounds
     }
 
