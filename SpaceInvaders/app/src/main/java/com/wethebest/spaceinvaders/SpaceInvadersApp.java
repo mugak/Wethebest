@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.content.Context;
+import android.media.SoundPool;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -35,6 +36,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public int score;
 
     private boolean shootNow;
+
 
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
@@ -131,8 +133,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 } else {
                     mPlayer.setMovement(mPlayer.MOVINGLEFT);
                 }
-
                 shootNow = true;
+
                 break;
 
             case MotionEvent.ACTION_UP:

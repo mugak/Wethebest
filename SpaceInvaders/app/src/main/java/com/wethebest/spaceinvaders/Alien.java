@@ -51,29 +51,19 @@ class Alien implements GameObject {
     }
 
     public boolean outOfBounds() {
-        return mHitBox.outOfBounds();
+        return mHitBox.horizontalOutOfBounds();
     }
 
     public void reverseXVelocity() {
         mHitBox.reverseXVelocity();
     }
 
-    public Bitmap getBitmap(){ return mHitBox.getBitmap();}
 
     public void setPos(PointF position) {
-        mHitBox.setPos(position);
+        mHitBox.setPosition(position);
     }
 
     public void reset(Point location) {
-    }
-
-
-    private void advance() {
-        mHitBox.advance();
-    }
-
-    private void stayInBounds() {
-        mHitBox.stayInBounds();
     }
 
     public void display(Canvas canvas) {
