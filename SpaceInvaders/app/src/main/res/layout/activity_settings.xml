@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_setup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".Settings">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:layout_centerInParent="true"
+        android:text="Settings"
+        android:textColor="#78DA7C"
+        android:textSize="100sp" />
+
+    <Button
+        android:id="@+id/Lower_Volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lower Volume"
+        />
+
+    <Button
+        android:id="@+id/higher_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Higher Volume"
+        android:layout_centerInParent="true"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginBottom="-100dip"/>
+
+</RelativeLayout>
