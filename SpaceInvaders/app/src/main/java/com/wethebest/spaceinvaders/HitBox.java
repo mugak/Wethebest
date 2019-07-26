@@ -3,49 +3,52 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-//The HitBox class controls the position of the HitBox
+
+//TODO create horizontal/vertical out of bounds methods
+//TODO create constants for HitBox
+//TODO create HitBoxBuilder
+//TODO separate bitmap drawing into another class
+//TODO create GameObjectHitBox classes, integrate HitBox into all of them
+//TODO make HitBoxList to replace Barrier and AlienArmy
+
+//The HitBox class controls the position and movement a GameObject's HitBox.
 public class HitBox {
     //Needed for Context and ScreenSize
     private SpaceInvadersApp app;
 
     //Used to draw on Canvas
     private RectF mRect;
-    private Bitmap mBitmap;
+    public Bitmap mBitmap;
     private Paint mPaint;
-    private int spriteID;
 
     //
     public float velocity; //
-    public PointF size; //
+    public static PointF size; //
 
     //Aliens have a constant movement speed
     private final float SPEED = 500;
 
-    //Current movement direction
-    private boolean movingRight;
 
     //Tells the game whether the object should still be in game
-    private boolean isActive;
+    public boolean isActive;
 
     HitBox(SpaceInvadersApp app) {
         this.app = app;
-
-        mBitmap = BitmapFactory.decodeResource(app.context.getResources(), spriteID);
-        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)size.x, (int)size.y, true );
 
         mRect = new RectF();
         mPaint = new Paint();
 
         isActive = true;
-        movingRight = true;
         velocity = SPEED; //TODO hardcoded
     }
 
-    private void moveHorizontally(float offset) {
+    public void moveHorizontally(float offset) {
         mRect.left = mRect.left + offset;
         updateRightSide();
     }
@@ -73,7 +76,7 @@ public class HitBox {
         updateBottomSide();
     }
 
-    private void moveDown() {
+    public void moveDown() {
         mRect.top = mRect.top + size.y;
         updateBottomSide();
     }
@@ -90,15 +93,21 @@ public class HitBox {
         updateBottomSide();
     }
 
-    void setSize(RectF rect) {
+    public void setSize(RectF rect) {
+        this.size = new PointF();
         size.x = rect.right - rect.left;
         size.y =  rect.top - rect.bottom;
+    }
+
+    public void setSize(PointF size) {
+        this.size = new PointF(size.x, size.y);
+
     }
 
 
     //Returns true when the hitbox touches the edge of the screen
     boolean outOfBounds() {
-        return mRect.left < 0 || mRect.right > app.mScreenSize.x || mRect.top < 0 || mRect.bottom > app.mScreenSize.y;
+        return mRect.left < 0 || mRect.right > app.mScreenSize.x;// || mRect.top < 0 || mRect.bottom > app.mScreenSize.y;
     }
 
     //Position of hitbox stays within screen boundaries
@@ -109,12 +118,12 @@ public class HitBox {
         else if (mRect.right > app.mScreenSize.x) {
             setPosition(new PointF(app.mScreenSize.x - size.x, mRect.top));
         } //reset pos to right edge
-        else if (mRect.top < 0) {
-            setPosition(new PointF(mRect.left, 0));
-        }
-        else if (mRect.bottom > app.mScreenSize.y) {
-            setPosition(new PointF(mRect.left, app.mScreenSize.y - size.y));
-        }
+//        else if (mRect.top < 0) {
+//            setPosition(new PointF(mRect.left, 0));
+//        }
+//        else if (mRect.bottom > app.mScreenSize.y) {
+//            setPosition(new PointF(mRect.left, app.mScreenSize.y - size.y));
+//        }
     }
 
     //Resets position of hitbox to default
@@ -133,4 +142,14 @@ public class HitBox {
     }
 
 
+    public void setBitmap(int spriteID) {
+        mBitmap = BitmapFactory.decodeResource(app.context.getResources(), spriteID);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)size.x, (int)size.y, true );
+    }
+
+    public void display(Canvas canvas) {
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
+
+        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
+    }
 }

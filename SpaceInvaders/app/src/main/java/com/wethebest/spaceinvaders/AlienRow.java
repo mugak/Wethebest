@@ -30,7 +30,6 @@ public class AlienRow {
         aliens = new LinkedList<Alien>();
         mScreenSize = app.mScreenSize;
         numAliens = 4; //TODO hardcoded
-        spaceBetweenAliens = Alien.alienSize.x/2; //TODO set better spacing
     }
 
     public void setAliens() {
@@ -38,7 +37,10 @@ public class AlienRow {
             //Alien mAlien = new Alien(app);
 
             GameObject mAlien = GameObjectFactory.getGameObject("alien");
-            ((Alien) mAlien).setPos(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
+            PointF position = new PointF(alienPos.x + i * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
+            spaceBetweenAliens = Alien.alienSize.x/2; //TODO set better spacing
+
+            ((Alien) mAlien).setPos(position);
             aliens.add((Alien) mAlien); //TODO need to refactor GameObject so we don't have these ugly casts
         }
     }

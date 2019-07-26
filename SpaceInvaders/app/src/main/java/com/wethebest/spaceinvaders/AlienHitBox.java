@@ -13,13 +13,9 @@ import android.graphics.RectF;
 import java.util.Random;
 
 
-//HitBox controls the hitboxes for each GameObject
-//It handles movement, drawing, and collision
-//TODO separate drawing into another class
-//TODO create HitBox factory and HitBox interface
-//TODO create HitBoxMovement interface (Vertical & Horizontal)
-//TODO make HitBoxList to replace Barrier and AlienArmy
 public class AlienHitBox {
+
+        private HitBox mHitBox;
 
         //Needed for Context and ScreenSize
         private SpaceInvadersApp app;
@@ -30,8 +26,7 @@ public class AlienHitBox {
         private Paint mPaint;
 
         //All aliens have the same size and velocity
-        private static float mXVelocity;
-        public static PointF alienSize; //TODO set in AlienRow
+        public static PointF alienSize;
 
         //Aliens have a constant movement speed
         private final float SPEED = 500;
@@ -43,85 +38,76 @@ public class AlienHitBox {
         private boolean isActive;
 
         AlienHitBox(SpaceInvadersApp app) {
+            alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
+            mHitBox = new HitBox(app);
+
+            mHitBox.setSize(alienSize);
+            mHitBox.setBitmap(R.drawable.invader_a01);
+
+
+
             this.app = app;
 
-            mBitmap = BitmapFactory.decodeResource(app.context.getResources(), R.drawable.invader_a01);
-            mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)alienSize.x, (int)alienSize.y, true );
+            //mBitmap = BitmapFactory.decodeResource(app.context.getResources(), R.drawable.invader_a01);
+            //mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)alienSize.x, (int)alienSize.y, true );
+
 
             mRect = new RectF();
             mPaint = new Paint();
 
             isActive = true;
             movingRight = true;
-            mXVelocity = SPEED; //TODO hardcoded
         }
 
         public void update(long fps) {
             //Moves horizontally until it hits a screen edge
 
             if(movingRight) {
-                mXVelocity = SPEED;
+                mHitBox.velocity = SPEED;
             }
             else {
-                mXVelocity = -SPEED;
+                mHitBox.velocity = -SPEED;
             }
 
-            mRect.left = mRect.left + (mXVelocity / fps);
-
-            mRect.right = mRect.left + alienSize.x;
-            mRect.bottom = mRect.top + alienSize.y;
+            mHitBox.moveHorizontally(mHitBox.velocity / fps);
 
         }
 
         public RectF getHitBox() {
-            return mRect;
+            return mHitBox.getHitBox();
         }
 
         public boolean outOfBounds() {
-            return mRect.left < 0 || mRect.right > app.mScreenSize.x;
+            return mHitBox.outOfBounds();
         }
 
         public void reverseXVelocity() {
-
             movingRight = !movingRight;
             advance();
             stayInBounds();
         }
 
-        public Bitmap getBitmap(){ return mBitmap;}
+        public Bitmap getBitmap(){ return mHitBox.mBitmap;}
 
-        public void setPos(float x, float y) {
-            mRect.left = x;
-            mRect.top = y;
-            mRect.right = x + alienSize.x;
-            mRect.bottom = alienSize.y;
+        public void setPos(PointF position) {
+            mHitBox.setPosition(position);
         }
 
-        public void reset(Point location) {
+        public void reset(PointF location) {
+            mHitBox.resetPosition(location);
         }
 
 
         public void advance() {
-            mRect.top = mRect.top + alienSize.y;
-            mRect.bottom = mRect.top + alienSize.y; //moves alien down
+           mHitBox.moveDown();
         }
 
         public void stayInBounds() {
-            if (mRect.left < 0) {
-                mRect.left = 0;
-                mRect.right = 0 + alienSize.x;
-            } //reset to left edge
-
-            if (mRect.right > app.mScreenSize.x) {
-                mRect.right = app.mScreenSize.x;
-                mRect.left = app.mScreenSize.x - alienSize.x;
-            } //reset pos to right edge
+            mHitBox.stayInBounds();
         }
 
         public void display(Canvas canvas) {
-            mPaint.setColor(Color.argb(255, 255, 255, 255));
-
-            canvas.drawBitmap(this.getBitmap(), this.getHitBox().left, this.getHitBox().top, mPaint);
+           mHitBox.display(canvas);
         }
 
         public void collide(GameObject gameObject) {
@@ -132,18 +118,13 @@ public class AlienHitBox {
             //Collide only describes what the class should do when it is collided with
             if (gameObject instanceof PlayerProj) {
                 //reset(mScreenSize);
-                isActive = false;
+                mHitBox.isActive = false;
             }
         }
 
 
         public boolean isActive() {
-            return isActive;
-        }
-
-        public static void setAlienSize(PointF size) {
-            alienSize = size;
-
+            return mHitBox.isActive();
         }
     }
 

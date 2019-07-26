@@ -39,7 +39,7 @@ public class BarrierBlock implements GameObject {
     }
 
     public void display(Canvas canvas) {
-        mPaint.setColor(Color.argb(255, 255, 255, 255));
+        mPaint.setColor(Color.argb(255, 0, 243, 0));
 
         canvas.drawRect(mRect, mPaint);
     }
