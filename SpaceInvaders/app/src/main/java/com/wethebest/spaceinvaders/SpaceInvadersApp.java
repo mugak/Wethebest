@@ -29,8 +29,11 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     LinkedList<Barrier> mBarriers = new LinkedList<Barrier>();
 
     private Thread mGameThread = null;
+
     private volatile boolean mPlaying;
     private boolean mPaused = true;
+
+    GameState mGameState;
 
     public int score;
 
@@ -42,9 +45,17 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mOurHolder = getHolder();
         mScreenSize = new Point(x, y);
 
+        mGameState = new WaveState();
+
         GameObjectFactory.app = this;
 
         startGame();
+    }
+
+    public void setState(GameState newGameState) {
+        if(newGameState != null) {
+            mGameState = newGameState;
+        }
     }
 
     private void createBarriers(int numBarriers) {
