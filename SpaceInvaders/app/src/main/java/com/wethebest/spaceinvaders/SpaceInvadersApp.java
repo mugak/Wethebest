@@ -34,6 +34,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     public int score;
 
+    private boolean shootNow;
+
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
         this.context = context;
@@ -87,6 +89,12 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             long frameStartTime = System.currentTimeMillis();
 
             if (!mPaused) {
+
+                if(shootNow) {
+                    gameObjects.add(mPlayer.shoot());
+                    shootNow = false;
+                }
+
                 for (GameObject object : gameObjects) {
                     object.update(mFPS);
                 }
@@ -124,7 +132,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     mPlayer.setMovement(mPlayer.MOVINGLEFT);
                 }
 
-                gameObjects.add(mPlayer.shoot());
+                shootNow = true;
                 break;
 
             case MotionEvent.ACTION_UP:
