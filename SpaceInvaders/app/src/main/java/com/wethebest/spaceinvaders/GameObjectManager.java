@@ -1,16 +1,20 @@
 package com.wethebest.spaceinvaders;
 
+import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/*
+    Potentially collisions should be handled by another class
+ */
 public class GameObjectManager {
-    LinkedList<GameObject> gameObjects;
-    SimpleCannon mPlayer;
-    AlienArmy mAlienArmy;
-    LinkedList<Barrier> mBarriers;
+    private LinkedList<GameObject> gameObjects;
+    public SimpleCannon mPlayer;
+    private AlienArmy mAlienArmy;
+    private LinkedList<Barrier> mBarriers;
 
     SpaceInvadersApp app;
 
@@ -101,6 +105,30 @@ public class GameObjectManager {
         if(gameObjects != null) {
             gameObjects.add(gameObject);
         }
+    }
+
+    // This function updates all gameobjects each frame
+    public void updateState(long fps) {
+        updateGameObjects(fps);
+        detectCollisions();
+        removeInactiveObjects();
+    }
+
+    public void updateGameObjects(long fps) {
+        for(GameObject gameObject : gameObjects) {
+            gameObject.update(fps);
+        }
+
+        mAlienArmy.update(fps);
+        //addAlienProjs();
+    }
+
+    public void displayGameObjects(Canvas canvas) {
+        for (GameObject gameObject : gameObjects) {
+            gameObject.display(canvas);
+        }
+
+        mAlienArmy.draw(canvas);
     }
 
     //    private void addAlienProjs() {

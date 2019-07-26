@@ -16,16 +16,15 @@ import java.util.LinkedList;
 
 class SpaceInvadersApp extends SurfaceView implements Runnable {
 
-    private SurfaceHolder mOurHolder;
-    private Canvas mCanvas;
+    public SurfaceHolder mOurHolder;
+    public Canvas mCanvas;
     public Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
     public Context context;
-
-    private long mFPS;
 
     private Thread mGameThread = null;
 
     GameState mGameState;
+    GameObjectManager mGameObjectManager;
 
     public int score;
 
@@ -40,7 +39,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         GameObjectFactory.app = this;
 
         //start game
-        mGameState = new WaveState();
+        mGameObjectManager = new GameObjectManager(this);
+        mGameState = new PauseState();
     }
 
     public void setState(GameState newGameState) {
@@ -49,126 +49,51 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         }
     }
 
-    private boolean isGameOver() {
-        return mPlayer.lives == 0;
-    }
-
+    //This method isn't very good
+    //Maybe implement set player movement function
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                mPaused = false;
-                if (motionEvent.getX() > mScreenSize.x / 2) {
-                    mPlayer.setMovement(mPlayer.MOVINGRIGHT);
-                } else {
-                    mPlayer.setMovement(mPlayer.MOVINGLEFT);
+                if(mGameState instanceof PauseState) {
+                    mGameState.changeState(this, State.WAVE);
+                } else if(mGameState instanceof WaveState) {
+                    if (motionEvent.getX() > mScreenSize.x / 2) {
+                        mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGRIGHT);
+                    } else {
+                        mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGLEFT);
+                    }
                 }
 
                 shootNow = true;
                 break;
 
             case MotionEvent.ACTION_UP:
-                mPlayer.setMovement(mPlayer.STOPPED);
+                mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.STOPPED);
                 break;
         }
         return true;
     }
 
-    private void draw() {
-        if (mOurHolder.getSurface().isValid()) {
-            mCanvas = mOurHolder.lockCanvas();
-
-            mCanvas.drawColor(Color.argb(255, 0, 0, 0));
-
-
-            for (GameObject gameObject : gameObjects) {
-                gameObject.display(mCanvas);
-            }
-
-            mAlienArmy.draw(mCanvas);
-
-            mOurHolder.unlockCanvasAndPost(mCanvas);
-        }
-    }
-
     public void resume() {
-        mPlaying = true;
         mGameThread = new Thread(this);
         mGameThread.start();
+
+        mGameState.changeState(this, State.WAVE);
     }
 
     public void pause() {
-        mPlaying = false;
         try {
             mGameThread.join();
         } catch (InterruptedException e) {
             Log.e("Error:", "joining thread");
-
         }
+
+        mGameState.changeState(this, State.PAUSE);
     }
 
-    private void detectCollisions() {
-        //Checks to see if the first object is a projectile because in SpaceInvaders only
-        // projectiles collide with non projectiles. There are no other types of collisions
-        Iterator<GameObject> firstObjectItr = gameObjects.iterator();
-        while (firstObjectItr.hasNext()) {
-            GameObject object1 = firstObjectItr.next();
-            if (object1 instanceof Projectile) {
-
-                for (GameObject object2 : gameObjects) {
-                    if (!(object2 instanceof Projectile)) {
-                        collide(object1, object2);
-                    }
-                }
-
-                for (GameObject alienObject : mAlienArmy.allAliens) {
-                    collide(object1, alienObject);
-                }
-            }
-        }
-    }
-
-    private void collide(GameObject object1, GameObject object2) {
-        if (RectF.intersects(object1.getHitBox(), object2.getHitBox())) {
-            object1.collide(object2);
-            object2.collide(object1);
-        }
-    }
-
-    private void removeInactiveObjects() {
-        Iterator<GameObject> gameObjectIterator = gameObjects.iterator();
-
-        while (gameObjectIterator.hasNext()) {
-            GameObject gameObject = gameObjectIterator.next();
-
-            if (!gameObject.isActive()) {
-                gameObjectIterator.remove();
-            }
-        }
-
-        Iterator<Alien> alienObjectIterator = mAlienArmy.allAliens.iterator();
-
-        while (alienObjectIterator.hasNext()) {
-            Alien alienObject = alienObjectIterator.next();
-
-            if (!alienObject.isActive()) {
-                alienObjectIterator.remove();
-            }
-        }
-
+    @Override
+    public void run() {
+        mGameState.run(this);
     }
 }
-//    private void addAlienProjs() {
-//        LinkedList<GameObject> alienProjs = new LinkedList<>(); // need temp list because can't modify Collections being iterated
-//
-//        for (GameObject gameObject : gameObjects) {
-//            if (gameObject instanceof Alien) {
-//                if (((Alien) gameObject).shootNow) {
-//                    alienProjs.add(((Alien) gameObject).shoot());
-//                    ((Alien) gameObject).shootNow = false;
-//                }
-//            }
-//
-//        }
-//        gameObjects.addAll(alienProjs);
-//    }

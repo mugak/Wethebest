@@ -7,12 +7,8 @@ public class GameOverState implements GameState {
     }
 
     @Override
-    public void run() {
+    public void run(SpaceInvadersApp app) {
 
     }
 
-    @Override
-    public void draw() {
-
-    }
 }
