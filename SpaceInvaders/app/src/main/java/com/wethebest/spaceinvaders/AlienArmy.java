@@ -52,13 +52,13 @@ public class AlienArmy {
         }
     }
 
-    /*public List getAliens() {
+    public List getAliens() {
         List<Alien> allAliens = new LinkedList<Alien>();
         for(AlienRow mAlienRow : alienRows) {
             allAliens.addAll(mAlienRow.aliens);
         }
         return allAliens;
-    }*/
+    }
 
     public void setAliens() {
         for(AlienRow mAlienRow : alienRows) {
