@@ -29,7 +29,7 @@ public class AlienHitBox {
         public static PointF alienSize;
 
         //Aliens have a constant movement speed
-        private final float SPEED = 500;
+        private final float SPEED = 200;
 
         //Current movement direction
         private boolean movingRight;

@@ -28,7 +28,7 @@ public class AlienArmy {
         this.app = app;
         mScreenSize = app.mScreenSize;
         numRows = 4; //TODO hardcoded
-        spaceBetweenRows = mScreenSize.x / 9; //TODO set better spacing
+        spaceBetweenRows = mScreenSize.x / 15; //TODO set better spacing
         setPos();
         alienRows = new LinkedList<AlienRow>();
         setRows();
