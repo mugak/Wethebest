@@ -78,7 +78,7 @@ public class AlienHitBox {
         }
 
         public boolean outOfBounds() {
-            return mHitBox.outOfBounds();
+            return mHitBox.horizontalOutOfBounds();
         }
 
         public void reverseXVelocity() {
@@ -103,7 +103,7 @@ public class AlienHitBox {
         }
 
         public void stayInBounds() {
-            mHitBox.stayInBounds();
+            mHitBox.horizontalStayInBounds();
         }
 
         public void display(Canvas canvas) {

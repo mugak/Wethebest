@@ -10,7 +10,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 
 
-//TODO create horizontal/vertical out of bounds methods
 //TODO create constants for HitBox
 //TODO create HitBoxBuilder
 //TODO separate bitmap drawing into another class
@@ -104,29 +103,36 @@ public class HitBox {
 
     }
 
-
     //Returns true when the hitbox touches the edge of the screen
-    boolean outOfBounds() {
-        return mRect.left < 0 || mRect.right > app.mScreenSize.x;// || mRect.top < 0 || mRect.bottom > app.mScreenSize.y;
+    boolean horizontalOutOfBounds() {
+        return mRect.left < 0 || mRect.right > app.mScreenSize.x;
     }
 
+    boolean verticalOutOfBounds() {
+        return mRect.top < 0 || mRect.bottom > app.mScreenSize.y;
+    }
+
+
     //Position of hitbox stays within screen boundaries
-    void stayInBounds() {
+    void horizontalStayInBounds() {
         if (mRect.left < 0) {
             setPosition(new PointF(0, mRect.top));
         } //reset to left edge
         else if (mRect.right > app.mScreenSize.x) {
             setPosition(new PointF(app.mScreenSize.x - size.x, mRect.top));
         } //reset pos to right edge
-//        else if (mRect.top < 0) {
-//            setPosition(new PointF(mRect.left, 0));
-//        }
-//        else if (mRect.bottom > app.mScreenSize.y) {
-//            setPosition(new PointF(mRect.left, app.mScreenSize.y - size.y));
-//        }
     }
 
-    //Resets position of hitbox to default
+    void verticalStayInBounds() {
+        if (mRect.top < 0) {
+            setPosition(new PointF(mRect.left, 0));
+        } //reset to top edge
+        else if (mRect.bottom > app.mScreenSize.y) {
+            setPosition(new PointF(mRect.left, app.mScreenSize.y - size.y));
+        } //reset to bottom edge
+    }
+
+        //Resets position of hitbox to default
     void resetPosition(PointF position) {
 
     }
