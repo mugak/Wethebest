@@ -110,7 +110,7 @@ class Alien implements GameObject {
 
     }
 
-    private boolean reachedBottomOfScreen() {
+    private void reachedBottomOfScreen() {
         if (mHitBox.bottomOutOfBounds()) {
             //CHANGE TO GAME OVER STATE
         }
