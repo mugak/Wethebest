@@ -25,7 +25,7 @@ class Alien implements GameObject {
     //Shoots projectiles randomly
     private AlienProj mProj;
     private static Random rand = new Random();
-    private static int shootInterval = 10;
+    private static Point shootInterval = new Point(5, 20); // shoots every 5-20 seconds
     private long framesUntilShoot;
     public boolean shootNow;
     private boolean waitingToShoot;
@@ -97,8 +97,7 @@ class Alien implements GameObject {
     //calculates when to shoot shooting by counting the number of frames
     private void timeToShoot(long fps) {
         if(!waitingToShoot) {
-            int seconds = rand.nextInt(shootInterval) + 5; // 5 to shootInterval + 5 seconds
-            Log.d("dasda" , Integer.toString(seconds));
+            int seconds = rand.nextInt(shootInterval.y - shootInterval.x) + shootInterval.x ; //
             framesUntilShoot = fps * seconds;
             waitingToShoot = true;
         }
@@ -111,6 +110,4 @@ class Alien implements GameObject {
         }
 
     }
-
-
 }
