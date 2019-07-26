@@ -25,13 +25,6 @@ public class AlienArmy {
 
     public List<Alien> allAliens = new LinkedList<Alien>(); //
 
-    //These lists contain the corresponding speed multiplier to the number of aliens left
-    //When there is a certain amount of aliens, the speed multiplier at the same index is applied
-    //Values set in the constructor
-    public List<Float> speedMultipliers = new ArrayList<Float>();
-    public List<Integer> numAliensWhenSpeedIncreases = new ArrayList<Integer>();
-
-
     private SpaceInvadersApp app;
     public boolean changeDirection;
 
@@ -48,16 +41,6 @@ public class AlienArmy {
         setRows();
 
         changeDirection = false;
-
-        speedMultipliers.add(1.5f); //first speed multiplier
-        speedMultipliers.add(2f);
-        speedMultipliers.add(4f);
-        numAliensWhenSpeedIncreases.add((int) (maxNumAliens / 2)); //number of aliens when first speed multiplier is applied
-        numAliensWhenSpeedIncreases.add((int) (maxNumAliens / 4));
-        numAliensWhenSpeedIncreases.add((int) (maxNumAliens / 8));
-        //numAliensWhenSpeedIncreases.add((int) (maxNumAliens / 1.5));
-
-
     }
 
 
@@ -108,21 +91,23 @@ public class AlienArmy {
             changeDirection = false;
         }
 
-        checkIfIncreaseSpeed();
+        increaseSpeed();
     }
 
-    public void checkIfIncreaseSpeed() {
-        if(!numAliensWhenSpeedIncreases.isEmpty()) { //if there are more speed multipliers
-            if (allAliens.size() <= numAliensWhenSpeedIncreases.get(0)) { //when the number of aliens is right, apply speed multiplier
-                increaseSpeed(speedMultipliers.get(0));
-            }
-        }
+    //calculates speed based on exponential growth: y(t) = a × e^(kt)
+    //a = base_speed
+    //k = rate of growth - tweak based on game feel
+    //t = number of aliens killed (time)
+    //y(t) = new speed at the number of aliens killed
+    public void increaseSpeed() {
+        int aliensKilled = maxNumAliens - allAliens.size();
+        float multiplier = exponentialGrowth(.09f, aliensKilled);
+        AlienHitBox.speedUp(multiplier); //sets SPEED aka y(t) in AlienHitBox
     }
 
-    public void increaseSpeed(float multiplier) {
-        AlienHitBox.speedUp(multiplier);
-        numAliensWhenSpeedIncreases.remove(0);
-        speedMultipliers.remove(0);
+    //returns e^(kt)
+    public float exponentialGrowth(float rateOfGrowth, int time) {
+        return (float) Math.exp(rateOfGrowth * time);
     }
 
 
