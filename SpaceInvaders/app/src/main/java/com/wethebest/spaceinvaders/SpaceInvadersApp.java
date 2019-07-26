@@ -23,21 +23,13 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private long mFPS;
 
-    LinkedList<GameObject> gameObjects;
-    SimpleCannon mPlayer;
-    AlienArmy mAlienArmy;
-    LinkedList<Barrier> mBarriers = new LinkedList<Barrier>();
-
     private Thread mGameThread = null;
-
-    private volatile boolean mPlaying;
-    private boolean mPaused = true;
 
     GameState mGameState;
 
     public int score;
 
-    private boolean shootNow;
+    public boolean shootNow;
 
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
@@ -45,11 +37,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mOurHolder = getHolder();
         mScreenSize = new Point(x, y);
 
-        mGameState = new WaveState();
-
         GameObjectFactory.app = this;
 
-        startGame();
+        //start game
+        mGameState = new WaveState();
     }
 
     public void setState(GameState newGameState) {
@@ -58,78 +49,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         }
     }
 
-    private void createBarriers(int numBarriers) {
-        for (int i = 1; i < numBarriers + 1; i++) {
-            PointF barrierCenterPosition = Util.computeBarrierPosition(i, numBarriers, mScreenSize);
-
-            addBarrierToGameObjects(new Barrier(mScreenSize, barrierCenterPosition));
-        }
-    }
-
-    private void addBarrierToGameObjects(Barrier barrier) {
-        mBarriers.add(barrier);
-        gameObjects.addAll(barrier.getBarrierBlocks());
-    }
-
-    private void startGame() {
-        gameObjects = new LinkedList<>();
-
-        mPlayer = new SimpleCannon(context, mScreenSize);
-        mAlienArmy = new AlienArmy(this);
-        mAlienArmy.setAliens();
-
-        gameObjects.addAll(mAlienArmy.getAliens());
-        gameObjects.add(mPlayer);
-
-        score = 0;
-
-        for (GameObject gameObject : gameObjects) {
-            gameObject.reset(mScreenSize);
-        }
-
-        createBarriers(3);
-    }
-
     private boolean isGameOver() {
         return mPlayer.lives == 0;
-    }
-
-    @Override
-    public void run() {
-        while (mPlaying) {
-            long frameStartTime = System.currentTimeMillis();
-
-            if (!mPaused) {
-
-                if(shootNow) {
-                    gameObjects.add(mPlayer.shoot());
-                    shootNow = false;
-                }
-
-                for (GameObject object : gameObjects) {
-                    object.update(mFPS);
-                }
-
-                mAlienArmy.update(mFPS);
-                //addAlienProjs();
-                detectCollisions();
-            }
-
-            removeInactiveObjects();
-            draw();
-
-            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
-
-            if (timeThisFrame > 0) {
-                int MILLIS_IN_SECOND = 1000;
-                mFPS = MILLIS_IN_SECOND / timeThisFrame;
-            }
-
-            if (isGameOver()) {
-                startGame();
-            }
-        }
-
     }
 
     @Override

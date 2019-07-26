@@ -122,4 +122,6 @@ class SimpleCannon implements GameObject {
     public boolean isActive() {
         return isActive;
     }
+
+
 }
