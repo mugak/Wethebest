@@ -41,15 +41,6 @@ public abstract class Projectile implements GameObject {
         isActive = true;
     }
 
-
-    //Returns rect of projectile to be drawn
-    RectF getRect(){
-        return mRect;
-    }
-
-    Bitmap getBitmap() {return mBitmap;}
-
-
     //Updates the position of the projectile
     public void update(long fps){
         mRect.left = mRect.left + (xVel/fps);
@@ -80,7 +71,7 @@ public abstract class Projectile implements GameObject {
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-        canvas.drawBitmap(this.getBitmap(), this.getHitBox().left, this.getHitBox().top, mPaint);
+        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)projWidth, (int)projHeight, true );
     }
 
@@ -88,6 +79,7 @@ public abstract class Projectile implements GameObject {
         isActive = false;
     }
 
+    //Returns rect of projectile to be drawn
     public RectF getHitBox() {
         return mRect;
     }

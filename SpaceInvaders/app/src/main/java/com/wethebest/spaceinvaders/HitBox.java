@@ -1,6 +1,9 @@
 package com.wethebest.spaceinvaders;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
