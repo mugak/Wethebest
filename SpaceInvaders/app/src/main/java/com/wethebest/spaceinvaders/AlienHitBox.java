@@ -38,7 +38,7 @@ public class AlienHitBox {
         private boolean isActive;
 
         AlienHitBox(SpaceInvadersApp app) {
-            alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
+            alienSize = new PointF(app.mScreenSize.x/8, app.mScreenSize.y/12);
             mHitBox = new HitBox(app);
 
             mHitBox.setSize(alienSize);
