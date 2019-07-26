@@ -32,6 +32,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private volatile boolean mPlaying;
     private boolean mPaused = true;
 
+    public int score;
+
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
         this.context = context;
@@ -65,6 +67,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         gameObjects.addAll(mAlienArmy.getAliens());
         gameObjects.add(mPlayer);
+
+        score = 0;
 
         for (GameObject gameObject : gameObjects) {
             gameObject.reset(mScreenSize);

@@ -82,6 +82,7 @@ class Alien implements GameObject {
 
     public void collide(GameObject gameObject) {
         mHitBox.collide(gameObject);
+        app.score += 100;
     }
 
     public static void setAlienSize(PointF size) {
