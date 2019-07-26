@@ -43,7 +43,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mPlayer = new SimpleCannon(context, mScreenSize);
         mAlienArmy = new AlienArmy(this);
         mAlienArmy.setAliens();
-        //gameObjects.addAll(mAlienArmy.getAliens());
+        gameObjects.addAll(mAlienArmy.getAliens());
         gameObjects.add(mPlayer);
 
         startGame();
@@ -169,9 +169,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     }
                 }
 
-                for (GameObject alienObject : mAlienArmy.allAliens) {
+                /*for (GameObject alienObject : mAlienArmy.allAliens) {
                     collide(object1, alienObject);
-                }
+                }*/
             }
         }
     }
