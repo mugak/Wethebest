@@ -107,10 +107,13 @@ public class HitBox {
         return mRect.left < 0 || mRect.right > app.mScreenSize.x;
     }
 
-    boolean verticalOutOfBounds() {
-        return mRect.top < 0 || mRect.bottom > app.mScreenSize.y;
+    boolean bottomOutOfBounds() {
+        return mRect.bottom > app.mScreenSize.y;
     }
 
+    boolean topOutOfBounds() {
+        return mRect.top < 0;
+    }
 
     //Position of hitbox stays within screen boundaries
     void horizontalStayInBounds() {

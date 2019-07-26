@@ -93,7 +93,6 @@ class Alien implements GameObject {
             return mProj;
     }
 
-
     //calculates when to shoot shooting by counting the number of frames
     private void timeToShoot(long fps) {
         if(!waitingToShoot) {
@@ -109,5 +108,11 @@ class Alien implements GameObject {
             }
         }
 
+    }
+
+    private boolean reachedBottomOfScreen() {
+        if (mHitBox.bottomOutOfBounds()) {
+            //CHANGE TO GAME OVER STATE
+        }
     }
 }

@@ -47,13 +47,11 @@ public class AlienHitBox extends HitBox {
 
         }
 
-
         public void reverseXVelocity() {
             movingRight = !movingRight;
             moveDown();
             horizontalStayInBounds();
         }
-
 
         public void collide(GameObject gameObject) {
             //SpaceInvaders app already makes this check to make sure the gameObject is a projectile,
