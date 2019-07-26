@@ -5,6 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.app.ActionBar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.media.AudioManager;
+
+
+
 
 public class Settings extends AppCompatActivity {
 
@@ -17,10 +35,10 @@ public class Settings extends AppCompatActivity {
         Button lower_volume = findViewById(R.id.Lower_Volume);
         Button Higher_Volume = findViewById(R.id.higher_volume);
 
-        AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+        final AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
 
         //To increase volume
-        Higher_Volume.setOnClickListener(new OnClickListener() {
+        Higher_Volume.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -31,7 +49,7 @@ public class Settings extends AppCompatActivity {
         });
 
         //To decrease volume
-        lower_volume.setOnClickListener(new OnClickListener() {
+        lower_volume.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
