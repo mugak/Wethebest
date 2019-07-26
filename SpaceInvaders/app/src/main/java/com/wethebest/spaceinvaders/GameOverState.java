@@ -1,6 +1,6 @@
 package com.wethebest.spaceinvaders;
 
-public class PauseState implements GameState {
+public class GameOverState implements GameState {
     @Override
     public void changeState(SpaceInvadersApp app, State nextState) {
 
