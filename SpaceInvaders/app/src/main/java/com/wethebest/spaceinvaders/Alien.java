@@ -17,7 +17,7 @@ class Alien implements GameObject {
     //Needed for Context and ScreenSize
     private SpaceInvadersApp app;
 
-    private AlienHitBox mHitBox;
+    public AlienHitBox mHitBox;
 
     //All aliens have the same size and velocity
     public static PointF alienSize; //TODO set in AlienRow
