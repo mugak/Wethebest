@@ -23,7 +23,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private long mFPS;
 
-    LinkedList<GameObject> gameObjects = new LinkedList<>();
+    LinkedList<GameObject> gameObjects;
     SimpleCannon mPlayer;
     AlienArmy mAlienArmy;
     LinkedList<Barrier> mBarriers = new LinkedList<Barrier>();
@@ -39,12 +39,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenSize = new Point(x, y);
 
         GameObjectFactory.app = this;
-
-        mPlayer = new SimpleCannon(context, mScreenSize);
-        mAlienArmy = new AlienArmy(this);
-        mAlienArmy.setAliens();
-        gameObjects.addAll(mAlienArmy.getAliens());
-        gameObjects.add(mPlayer);
 
         startGame();
     }
@@ -63,14 +57,24 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     }
 
     private void startGame() {
+        gameObjects = new LinkedList<>();
+
+        mPlayer = new SimpleCannon(context, mScreenSize);
+        mAlienArmy = new AlienArmy(this);
+        mAlienArmy.setAliens();
+
+        gameObjects.addAll(mAlienArmy.getAliens());
+        gameObjects.add(mPlayer);
+
         for (GameObject gameObject : gameObjects) {
             gameObject.reset(mScreenSize);
         }
 
         createBarriers(3);
+    }
 
-        //Removes potentially leftover gameObjects from previous game
-        removeInactiveObjects();
+    private boolean isGameOver() {
+        return mPlayer.lives == 0;
     }
 
     @Override
@@ -96,6 +100,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             if (timeThisFrame > 0) {
                 int MILLIS_IN_SECOND = 1000;
                 mFPS = MILLIS_IN_SECOND / timeThisFrame;
+            }
+
+            if (isGameOver()) {
+                startGame();
             }
         }
 
@@ -169,9 +177,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     }
                 }
 
-                /*for (GameObject alienObject : mAlienArmy.allAliens) {
+                for (GameObject alienObject : mAlienArmy.allAliens) {
                     collide(object1, alienObject);
-                }*/
+                }
             }
         }
     }

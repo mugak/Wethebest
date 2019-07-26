@@ -99,11 +99,11 @@ class SimpleCannon implements GameObject {
 
     //Check alien.java for an example on how this is implemented
     public void collide(GameObject gameObject) {
-        if(gameObject instanceof AlienProj) {
+        /*if(gameObject instanceof AlienProj) {
             lives -= 1;
         }
 
-        reset(mScreenSize);
+        reset(mScreenSize);*/
     }
 
     //Prevents cannon from moving out of bounds
