@@ -29,16 +29,23 @@
         android:id="@+id/Lower_Volume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/higher_volume"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-100dip"
+
+        android:background="#00FFFFFF"
         android:text="Lower Volume"
-        />
+        android:textColor="#78DA7C" />
 
     <Button
         android:id="@+id/higher_volume"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Higher Volume"
-        android:layout_centerInParent="true"
         android:layout_alignBottom="@+id/textView"
-        android:layout_marginBottom="-100dip"/>
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-100dip"
+        android:background="#00FFFFFF"
+        android:text="Higher Volume"
+        android:textColor="#78DA7C" />
 
 </RelativeLayout>
