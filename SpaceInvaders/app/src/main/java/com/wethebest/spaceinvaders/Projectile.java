@@ -115,6 +115,7 @@ class AlienProj extends Projectile{
 
     AlienProj(Context context, Point screenSize){
         super(screenSize);
+        this.mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_laser);
         yVel = mScreenSize.x/3; //Projectile shoots down
     }
 

@@ -8,6 +8,7 @@ import android.graphics.PointF;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -88,6 +89,31 @@ public class AlienArmy {
     public void draw(Canvas canvas) {
         for (Alien a : allAliens) {
             a.display(canvas);
+        }
+    }
+
+
+    public List getAlienProjs() {
+        List<GameObject> alienProjs = new LinkedList<>();
+
+        for (Alien a : allAliens) {
+                if (a.shootNow) {
+                    alienProjs.add(a.shoot());
+                    a.shootNow = false;
+                }
+            }
+        return alienProjs;
+    }
+
+    public void removeInactiveObjects() {
+        Iterator<Alien> alienObjectIterator = allAliens.iterator();
+
+        while (alienObjectIterator.hasNext()) {
+            Alien alienObject = alienObjectIterator.next();
+
+            if (!alienObject.isActive()) {
+                alienObjectIterator.remove();
+            }
         }
     }
 }
