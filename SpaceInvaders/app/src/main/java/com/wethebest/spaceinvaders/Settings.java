@@ -30,7 +30,17 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        
+        //To decrease volume
+        lower_volume.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+
+                audioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
+            }
+        });
+
 
 
     }
