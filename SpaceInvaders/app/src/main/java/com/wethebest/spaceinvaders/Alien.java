@@ -97,7 +97,7 @@ class Alien implements GameObject {
     //calculates when to shoot shooting by counting the number of frames
     private void timeToShoot(long fps) {
         if(!waitingToShoot) {
-            int seconds = rand.nextInt(shootInterval.y - shootInterval.x) + shootInterval.x ; //
+            int seconds = rand.nextInt(shootInterval.y - shootInterval.x) + shootInterval.x ; //random int in shooting interval
             framesUntilShoot = fps * seconds;
             waitingToShoot = true;
         }
