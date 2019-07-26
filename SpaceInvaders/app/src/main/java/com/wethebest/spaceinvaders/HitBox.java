@@ -10,7 +10,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 
 
-//TODO create constants for HitBox
 //TODO create HitBoxBuilder
 //TODO separate bitmap drawing into another class
 //TODO create GameObjectHitBox classes, integrate HitBox into all of them
