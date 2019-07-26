@@ -96,4 +96,25 @@ public class GameObjectManager {
         }
 
     }
+
+    public void add(GameObject gameObject) {
+        if(gameObjects != null) {
+            gameObjects.add(gameObject);
+        }
+    }
+
+    //    private void addAlienProjs() {
+//        LinkedList<GameObject> alienProjs = new LinkedList<>(); // need temp list because can't modify Collections being iterated
+//
+//        for (GameObject gameObject : gameObjects) {
+//            if (gameObject instanceof Alien) {
+//                if (((Alien) gameObject).shootNow) {
+//                    alienProjs.add(((Alien) gameObject).shoot());
+//                    ((Alien) gameObject).shootNow = false;
+//                }
+//            }
+//
+//        }
+//        gameObjects.addAll(alienProjs);
+//    }
 }
