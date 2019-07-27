@@ -1,17 +1,23 @@
 package com.wethebest.spaceinvaders;
 
+import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.content.Context;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -37,6 +43,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private boolean shootNow;
 
+    Sound sound;
+
+
+
 
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
@@ -45,6 +55,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenSize = new Point(x, y);
 
         GameObjectFactory.app = this;
+
+        //Sound
+        sound = new Sound(context);
+        sound.setup();
 
         startGame();
     }
@@ -102,7 +116,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 }
 
                 mAlienArmy.update(mFPS);
-                //addAlienProjs();
                 detectCollisions();
             }
 
@@ -202,6 +215,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         if (RectF.intersects(object1.getHitBox(), object2.getHitBox())) {
             object1.collide(object2);
             object2.collide(object1);
+            sound.playBeep();
         }
     }
 
