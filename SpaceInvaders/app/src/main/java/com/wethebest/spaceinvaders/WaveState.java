@@ -20,7 +20,7 @@ public class WaveState implements GameState {
     public void changeState(SpaceInvadersApp app, State nextState) {
         switch(nextState) {
             case PAUSE:
-                app.setState(new PauseState());
+                app.setState(new PauseState(app));
             case GAMEOVER:
                 app.setState(new GameOverState());
         }
@@ -56,7 +56,6 @@ public class WaveState implements GameState {
             mApp.mCanvas = mApp.mOurHolder.lockCanvas();
 
             mApp.mCanvas.drawColor(Color.argb(255, 0, 0, 0));
-
 
             mApp.mGameObjectManager.displayGameObjects(mApp.mCanvas);
 

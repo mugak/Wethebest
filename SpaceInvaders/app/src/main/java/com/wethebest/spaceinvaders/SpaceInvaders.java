@@ -14,8 +14,6 @@ public class SpaceInvaders extends Activity {
     Bitmap myBlankBitmap;
     Canvas myCanvas;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -40,7 +40,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         //start game
         mGameObjectManager = new GameObjectManager(this);
-        mGameState = new PauseState();
+        mGameState = new PauseState(this);
     }
 
     public void setState(GameState newGameState) {
