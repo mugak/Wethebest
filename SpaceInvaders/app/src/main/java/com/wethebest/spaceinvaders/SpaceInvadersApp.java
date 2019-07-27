@@ -165,6 +165,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
             for (GameObject gameObject : gameObjects) {
                 gameObject.display(mCanvas);
+                gameObject.playAudio();
             }
 
             mAlienArmy.draw(mCanvas);
