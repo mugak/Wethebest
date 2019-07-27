@@ -48,6 +48,12 @@ class Alien implements GameObject {
 
     }
 
+    public void display(Canvas canvas) {
+        mHitBox.display(canvas);
+    }
+
+    
+
     public RectF getHitBox() {
         return mHitBox.getHitBox();
     }
@@ -68,9 +74,7 @@ class Alien implements GameObject {
     public void reset(Point location) {
     }
 
-    public void display(Canvas canvas) {
-        mHitBox.display(canvas);
-    }
+
 
     public void collide(GameObject gameObject) {
         mHitBox.collide(gameObject);
