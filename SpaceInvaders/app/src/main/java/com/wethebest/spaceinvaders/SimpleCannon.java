@@ -20,7 +20,8 @@ class SimpleCannon implements GameObject {
     private Point mScreenSize;
     private Paint mPaint;
 
-    public int lives;
+    public static final int MAX_LIVES = 3;
+    public static int lives;
 
 //    final int STOPPED = 0;
 //    final int MOVINGLEFT = 1;
@@ -37,7 +38,7 @@ class SimpleCannon implements GameObject {
     SimpleCannon(Context context, Point screenSize) {
         this.context = context;
 
-        lives = 3;
+        lives = MAX_LIVES;
 
         mScreenSize = screenSize;
         mSize = new PointF(mScreenSize.x / 10, mScreenSize.x / 10);
