@@ -32,7 +32,7 @@ public class Intro extends AppCompatActivity {
         Enterbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Intro.this, UI.class));
+                startActivity(new Intent(Intro.this, SpaceInvaders.class));
             }
         });
 
