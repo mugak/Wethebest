@@ -55,6 +55,9 @@ class SimpleCannon implements GameObject {
     }
 
 
+    public Bitmap getBitmap(){
+        return mBitmap;
+    }
 
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
@@ -64,13 +67,18 @@ class SimpleCannon implements GameObject {
     }
 
     public void update(long fps) {
+        if(((SpaceInvaders)context).yAcceleration >= .08f || ((SpaceInvaders)context).yAcceleration<= -.08f) {
+            mRect.left += ((SpaceInvaders)context).yAcceleration * 10;
+            mRect.right = mRect.left + mSize.x;
+        }
 
-        if (cannonMovement == MOVINGLEFT) {
-            mRect.left = mRect.left - (mXVelocity / fps);
-        }
-        if (cannonMovement == MOVINGRIGHT) {
-            mRect.left = mRect.left + (mXVelocity / fps);
-        }
+
+//        if (cannonMovement == MOVINGLEFT) {
+//            mRect.left = mRect.left - (mXVelocity / fps);
+//        }
+//        if (cannonMovement == MOVINGRIGHT) {
+//            mRect.left = mRect.left + (mXVelocity / fps);
+//        }
 
         checkBounds();
     }
@@ -93,9 +101,6 @@ class SimpleCannon implements GameObject {
         mRect.bottom = location.y;
     }
 
-    public Bitmap getBitmap(){
-        return mBitmap;
-    }
     public void reset(Point location) {
         setPosition(location);
         mXVelocity = (location.y / 3);
@@ -108,6 +113,10 @@ class SimpleCannon implements GameObject {
     void setMovement(int state) {
         cannonMovement = state;
     }
+
+//    void setMovement(int state) {
+//        cannonMovement = state;
+//    }
 
     public PlayerProj shoot() {
         PlayerProj mProj = new PlayerProj(context, mScreenSize);

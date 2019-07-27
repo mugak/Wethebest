@@ -137,17 +137,17 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
                 mPaused = false;
-                if (motionEvent.getX() > mScreenSize.x / 2) {
-                    mPlayer.setMovement(mPlayer.MOVINGRIGHT);
-                } else {
-                    mPlayer.setMovement(mPlayer.MOVINGLEFT);
-                }
+//                if (motionEvent.getX() > mScreenSize.x / 2) {
+//                    mPlayer.setMovement(mPlayer.MOVINGRIGHT);
+//                } else {
+//                    mPlayer.setMovement(mPlayer.MOVINGLEFT);
+//                }
                 shootNow = true;
 
                 break;
 
             case MotionEvent.ACTION_UP:
-                mPlayer.setMovement(mPlayer.STOPPED);
+                //mPlayer.setMovement(mPlayer.STOPPED);
                 break;
         }
         return true;
