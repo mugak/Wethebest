@@ -1,6 +1,12 @@
 package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.graphics.Point;
 import android.view.Display;
@@ -8,17 +14,20 @@ import android.view.Display;
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
 
-public class SpaceInvaders extends Activity {
+public class SpaceInvaders extends Activity implements SensorEventListener {
 
     private SpaceInvadersApp mSpaceInvadersApp;
     Bitmap myBlankBitmap;
     Canvas myCanvas;
 
-
+    public float yAcceleration;
+    private SensorManager sensorManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
         int widthInPixels = 800;
         int heightInPixels = 600;
 
@@ -33,6 +42,8 @@ public class SpaceInvaders extends Activity {
         Point size = new Point();
         display.getSize(size);
 
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
 
         mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
         setContentView(mSpaceInvadersApp);
@@ -41,12 +52,30 @@ public class SpaceInvaders extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_GAME);
         mSpaceInvadersApp.resume();
+    }
+
+    @Override
+    protected void onStop() {
+        sensorManager.unregisterListener(this);
+        super.onStop();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         mSpaceInvadersApp.pause();
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        if (sensorEvent.sensor.getType() == Sensor.TYPE_GRAVITY) {
+            yAcceleration = sensorEvent.values[1];
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int x) {
     }
 }
