@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".GameOver"></activity>
         <activity android:name=".UI" />
+        <activity android:name=".SpaceInvaders"></activity>
         <activity android:name=".Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
