@@ -14,7 +14,7 @@ class SimpleCannon implements GameObject {
     private Bitmap mBitmap;
 
     private RectF mRect;
-    private float mXVelocity;
+    //private float mXVelocity;
     private PointF mSize;
 
     private Point mScreenSize;
@@ -22,11 +22,11 @@ class SimpleCannon implements GameObject {
 
     public int lives;
 
-    final int STOPPED = 0;
-    final int MOVINGLEFT = 1;
-    final int MOVINGRIGHT = 2;
+//    final int STOPPED = 0;
+//    final int MOVINGLEFT = 1;
+//    final int MOVINGRIGHT = 2;
 
-    private int cannonMovement = STOPPED;
+    //private int cannonMovement = STOPPED;
 
     private Context context;
     private SoundEngine soundEngine;
@@ -61,7 +61,7 @@ class SimpleCannon implements GameObject {
     }
     public void reset(Point location) {
         setPosition(location);
-        mXVelocity = (location.y / 3);
+        //mXVelocity = (location.y / 3);
     }
 
     public void setPosition(Point location) {
@@ -88,9 +88,9 @@ class SimpleCannon implements GameObject {
         checkBounds();
     }
 
-    void setMovement(int state) {
-        cannonMovement = state;
-    }
+//    void setMovement(int state) {
+//        cannonMovement = state;
+//    }
 
     public PlayerProj shoot() {
         PlayerProj mProj = new PlayerProj(context, mScreenSize);
