@@ -15,30 +15,33 @@ import android.graphics.BitmapFactory;
 *direction of the velocity, yVel.
 */
 public abstract class Projectile implements GameObject {
-    //Projectile will be a rectangle as a placeholder
+    //Hitbox associated with rect
     protected RectF mRect;
 
-    private float xVel;
+    protected float xVel;
     protected float yVel;
 
     private float projWidth;
     private float projHeight;
 
     private Paint mPaint;
-
     protected Bitmap mBitmap;
 
     protected boolean isActive;
     protected Point mScreenSize;
 
-    Projectile(Point screenSize){
+    protected SoundEngine soundEngine;
+
+
+    Projectile(Context context, Point screenSize){
         mScreenSize = screenSize;
-        projWidth = mScreenSize.x/100;
-        projHeight = mScreenSize.x/50;
+        projWidth = mScreenSize.x/75;
+        projHeight = mScreenSize.x/40;
         xVel = 0;
         mRect = new RectF();
         mPaint = new Paint();
         isActive = true;
+        soundEngine = new SoundEngine(context);
     }
 
     //Updates the position of the projectile
@@ -71,8 +74,9 @@ public abstract class Projectile implements GameObject {
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)projWidth, (int)projHeight, true );
+
+        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
     }
 
     public void collide(GameObject gameObject) {
@@ -95,9 +99,10 @@ public abstract class Projectile implements GameObject {
 
 class PlayerProj extends  Projectile{
     PlayerProj(Context context, Point screenSize){
-        super(screenSize);
-        this.mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_laser);
+        super(context, screenSize);
+        this.mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.powerup_blue01);
         yVel = -mScreenSize.x/3; //Projectile shoots up
+        //soundEngine.playerShoot();
     }
 
     @Override
@@ -113,7 +118,8 @@ class PlayerProj extends  Projectile{
 class AlienProj extends Projectile{
 
     AlienProj(Context context, Point screenSize){
-        super(screenSize);
+        super(context, screenSize);
+        this.mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.alien_laser);
         yVel = mScreenSize.x/3; //Projectile shoots down
     }
 

@@ -34,6 +34,13 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     public int score;
 
+    private boolean shootNow;
+
+    SoundEngine soundEngine;
+
+
+
+
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
         this.context = context;
@@ -41,6 +48,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenSize = new Point(x, y);
 
         GameObjectFactory.app = this;
+
+        //SoundEngine
+        soundEngine = new SoundEngine(context);
 
         startGame();
     }
@@ -87,16 +97,25 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             long frameStartTime = System.currentTimeMillis();
 
             if (!mPaused) {
+
+                if(shootNow) {
+                    gameObjects.add(mPlayer.shoot());
+                    //soundEngine.playerShoot();
+                    shootNow = false;
+                }
+
                 for (GameObject object : gameObjects) {
                     object.update(mFPS);
                 }
 
                 mAlienArmy.update(mFPS);
-                //addAlienProjs();
+                gameObjects.addAll(mAlienArmy.getAlienProjs());
                 detectCollisions();
             }
 
             removeInactiveObjects();
+            mAlienArmy.removeInactiveObjects();
+
             draw();
 
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
@@ -123,8 +142,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 } else {
                     mPlayer.setMovement(mPlayer.MOVINGLEFT);
                 }
+                shootNow = true;
 
-                gameObjects.add(mPlayer.shoot());
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -205,30 +224,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 gameObjectIterator.remove();
             }
         }
-
-        Iterator<Alien> alienObjectIterator = mAlienArmy.allAliens.iterator();
-
-        while (alienObjectIterator.hasNext()) {
-            Alien alienObject = alienObjectIterator.next();
-
-            if (!alienObject.isActive()) {
-                alienObjectIterator.remove();
-            }
-        }
-
     }
 }
-//    private void addAlienProjs() {
-//        LinkedList<GameObject> alienProjs = new LinkedList<>(); // need temp list because can't modify Collections being iterated
-//
-//        for (GameObject gameObject : gameObjects) {
-//            if (gameObject instanceof Alien) {
-//                if (((Alien) gameObject).shootNow) {
-//                    alienProjs.add(((Alien) gameObject).shoot());
-//                    ((Alien) gameObject).shootNow = false;
-//                }
-//            }
-//
-//        }
-//        gameObjects.addAll(alienProjs);
-//    }
+

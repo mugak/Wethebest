@@ -29,6 +29,7 @@ class SimpleCannon implements GameObject {
     private int cannonMovement = STOPPED;
 
     private Context context;
+    private SoundEngine soundEngine;
 
     //Tells the game whether the object should still be in game
     private boolean isActive;
@@ -47,6 +48,8 @@ class SimpleCannon implements GameObject {
         mPaint = new Paint();
 
         isActive = true;
+
+        soundEngine = new SoundEngine(context);
     }
 
     public RectF getHitBox() {
@@ -87,6 +90,7 @@ class SimpleCannon implements GameObject {
     public PlayerProj shoot() {
         PlayerProj mProj = new PlayerProj(context, mScreenSize);
         mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
+        soundEngine.playerShoot();
         return mProj;
     }
 

@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
+
 import android.os.Bundle;
 import android.graphics.Point;
 import android.view.Display;
@@ -34,7 +35,10 @@ public class SpaceInvaders extends Activity {
         display.getSize(size);
 
 
-        mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
+
+
+
+            mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
         setContentView(mSpaceInvadersApp);
     }
 
