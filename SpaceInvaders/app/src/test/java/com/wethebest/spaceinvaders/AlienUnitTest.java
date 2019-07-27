@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.content.Context;
 import android.graphics.Point;
 
 import org.junit.Test;
@@ -7,7 +8,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AlienUnitTest {
-    Alien alien = new Alien(new Point(100,100));
+    Context context;
+    Alien alien = new Alien(context, new Point(100,100));
 
     /*@Test
     public void collision_with_player_missile_deactivates_alien() {

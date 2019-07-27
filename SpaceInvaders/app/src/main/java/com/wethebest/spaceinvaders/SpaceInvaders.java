@@ -45,7 +45,10 @@ public class SpaceInvaders extends Activity implements SensorEventListener {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
 
-        mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
+
+
+
+            mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
         setContentView(mSpaceInvadersApp);
     }
 

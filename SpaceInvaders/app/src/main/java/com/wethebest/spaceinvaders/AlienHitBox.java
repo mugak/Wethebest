@@ -13,48 +13,24 @@ import android.graphics.RectF;
 import java.util.Random;
 
 
-public class AlienHitBox {
-
-        private HitBox mHitBox;
-
-        //Needed for Context and ScreenSize
-        private SpaceInvadersApp app;
-
-        //Used to draw on Canvas
-        private RectF mRect;
-        private Bitmap mBitmap;
-        private Paint mPaint;
-
+public class AlienHitBox extends HitBox {
         //All aliens have the same size and velocity
         public static PointF alienSize;
 
         //Aliens have a constant movement speed
-        private final float SPEED = 500;
+        private static final float BASE_SPEED = 200;
+        private static float SPEED;
 
         //Current movement direction
         private boolean movingRight;
 
-        //Tells the game whether the object should still be in game
-        private boolean isActive;
-
         AlienHitBox(SpaceInvadersApp app) {
+            super(app);
             alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
-            mHitBox = new HitBox(app);
+            setSize(alienSize);
+            setBitmap(R.drawable.invader_a01);
 
-            mHitBox.setSize(alienSize);
-            mHitBox.setBitmap(R.drawable.invader_a01);
-
-
-
-            this.app = app;
-
-            //mBitmap = BitmapFactory.decodeResource(app.context.getResources(), R.drawable.invader_a01);
-            //mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)alienSize.x, (int)alienSize.y, true );
-
-
-            mRect = new RectF();
-            mPaint = new Paint();
-
+            SPEED = BASE_SPEED;
             isActive = true;
             movingRight = true;
         }
@@ -63,51 +39,20 @@ public class AlienHitBox {
             //Moves horizontally until it hits a screen edge
 
             if(movingRight) {
-                mHitBox.velocity = SPEED;
+                velocity = SPEED;
             }
             else {
-                mHitBox.velocity = -SPEED;
+                velocity = -SPEED;
             }
 
-            mHitBox.moveHorizontally(mHitBox.velocity / fps);
+            moveHorizontally(velocity / fps);
 
-        }
-
-        public RectF getHitBox() {
-            return mHitBox.getHitBox();
-        }
-
-        public boolean outOfBounds() {
-            return mHitBox.outOfBounds();
         }
 
         public void reverseXVelocity() {
             movingRight = !movingRight;
-            advance();
-            stayInBounds();
-        }
-
-        public Bitmap getBitmap(){ return mHitBox.mBitmap;}
-
-        public void setPos(PointF position) {
-            mHitBox.setPosition(position);
-        }
-
-        public void reset(PointF location) {
-            mHitBox.resetPosition(location);
-        }
-
-
-        public void advance() {
-           mHitBox.moveDown();
-        }
-
-        public void stayInBounds() {
-            mHitBox.stayInBounds();
-        }
-
-        public void display(Canvas canvas) {
-           mHitBox.display(canvas);
+            moveDown();
+            horizontalStayInBounds();
         }
 
         public void collide(GameObject gameObject) {
@@ -118,13 +63,12 @@ public class AlienHitBox {
             //Collide only describes what the class should do when it is collided with
             if (gameObject instanceof PlayerProj) {
                 //reset(mScreenSize);
-                mHitBox.isActive = false;
+                isActive = false;
             }
         }
 
-
-        public boolean isActive() {
-            return mHitBox.isActive();
+        public static void speedUp(float multiplier) {
+            SPEED = BASE_SPEED * multiplier;
         }
     }
 

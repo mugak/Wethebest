@@ -20,6 +20,8 @@ class SimpleCannon implements GameObject {
     private Point mScreenSize;
     private Paint mPaint;
 
+    public int lives;
+
     final int STOPPED = 0;
     final int MOVINGLEFT = 1;
     final int MOVINGRIGHT = 2;
@@ -27,12 +29,16 @@ class SimpleCannon implements GameObject {
     private int cannonMovement = STOPPED;
 
     private Context context;
+    private SoundEngine soundEngine;
 
     //Tells the game whether the object should still be in game
     private boolean isActive;
 
     SimpleCannon(Context context, Point screenSize) {
         this.context = context;
+
+        lives = 3;
+
         mScreenSize = screenSize;
         mSize = new PointF(mScreenSize.x / 10, mScreenSize.x / 10);
         mRect = new RectF();
@@ -41,8 +47,9 @@ class SimpleCannon implements GameObject {
 
         mPaint = new Paint();
 
-
         isActive = true;
+
+        soundEngine = new SoundEngine(context);
     }
 
     public RectF getHitBox() {
@@ -83,6 +90,7 @@ class SimpleCannon implements GameObject {
     public PlayerProj shoot() {
         PlayerProj mProj = new PlayerProj(context, mScreenSize);
         mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
+        soundEngine.playerShoot();
         return mProj;
     }
 
@@ -93,10 +101,13 @@ class SimpleCannon implements GameObject {
         canvas.drawBitmap(this.getBitmap(), this.getHitBox().left, this.getHitBox().top, mPaint);
     }
 
-
     //Check alien.java for an example on how this is implemented
     public void collide(GameObject gameObject) {
+        /*if(gameObject instanceof AlienProj) {
+            lives -= 1;
+        }
 
+        reset(mScreenSize);*/
     }
 
     //Prevents cannon from moving out of bounds
