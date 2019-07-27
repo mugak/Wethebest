@@ -52,7 +52,11 @@ class Alien implements GameObject {
         mHitBox.display(canvas);
     }
 
-    
+    public void playAudio(){
+        if(shootNow){
+            //soundEngine.playerShoot();
+        }
+    }
 
     public RectF getHitBox() {
         return mHitBox.getHitBox();

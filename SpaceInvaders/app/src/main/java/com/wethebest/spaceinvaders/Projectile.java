@@ -57,6 +57,17 @@ public abstract class Projectile implements GameObject {
         }
     }
 
+    public void display(Canvas canvas) {
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
+
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)projWidth, (int)projHeight, true );
+
+        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
+    }
+
+    public void playAudio(){
+        
+    }
 
 
     void setPos(float x, float y){
@@ -71,13 +82,7 @@ public abstract class Projectile implements GameObject {
         isActive = false;
     }
 
-    public void display(Canvas canvas) {
-        mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)projWidth, (int)projHeight, true );
-
-        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
-    }
 
     public void collide(GameObject gameObject) {
         isActive = false;

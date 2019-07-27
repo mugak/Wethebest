@@ -34,6 +34,7 @@ class SimpleCannon implements GameObject {
     //Tells the game whether the object should still be in game
     private boolean isActive;
 
+    private boolean shootNow;
     SimpleCannon(Context context, Point screenSize) {
         this.context = context;
 
@@ -48,27 +49,18 @@ class SimpleCannon implements GameObject {
         mPaint = new Paint();
 
         isActive = true;
+        shootNow = false;
 
         soundEngine = new SoundEngine(context);
     }
 
-    public RectF getHitBox() {
-        return mRect;
-    }
 
-    public Bitmap getBitmap(){
-        return mBitmap;
-    }
-    public void reset(Point location) {
-        setPosition(location);
-        mXVelocity = (location.y / 3);
-    }
 
-    public void setPosition(Point location) {
-        mRect.left = location.x / 2;
-        mRect.top = location.y - mSize.y;
-        mRect.right = location.x / 2 + mSize.x;
-        mRect.bottom = location.y;
+    public void display(Canvas canvas) {
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
+
+        //canvas.drawRect(mRect, mPaint);
+        canvas.drawBitmap(this.getBitmap(), this.getHitBox().left, this.getHitBox().top, mPaint);
     }
 
     public void update(long fps) {
@@ -83,6 +75,36 @@ class SimpleCannon implements GameObject {
         checkBounds();
     }
 
+    public void playAudio(){
+        if(shootNow) {
+            soundEngine.playerShoot();
+            shootNow = false;
+        }
+    }
+
+    public RectF getHitBox() {
+        return mRect;
+    }
+
+    public void setPosition(Point location) {
+        mRect.left = location.x / 2;
+        mRect.top = location.y - mSize.y;
+        mRect.right = location.x / 2 + mSize.x;
+        mRect.bottom = location.y;
+    }
+
+    public Bitmap getBitmap(){
+        return mBitmap;
+    }
+    public void reset(Point location) {
+        setPosition(location);
+        mXVelocity = (location.y / 3);
+    }
+
+
+
+
+
     void setMovement(int state) {
         cannonMovement = state;
     }
@@ -90,16 +112,11 @@ class SimpleCannon implements GameObject {
     public PlayerProj shoot() {
         PlayerProj mProj = new PlayerProj(context, mScreenSize);
         mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
-        soundEngine.playerShoot();
+        shootNow = true;
         return mProj;
     }
 
-    public void display(Canvas canvas) {
-        mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-        //canvas.drawRect(mRect, mPaint);
-        canvas.drawBitmap(this.getBitmap(), this.getHitBox().left, this.getHitBox().top, mPaint);
-    }
 
     //Check alien.java for an example on how this is implemented
     public void collide(GameObject gameObject) {
