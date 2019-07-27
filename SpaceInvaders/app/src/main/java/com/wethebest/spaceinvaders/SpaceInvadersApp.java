@@ -1,23 +1,16 @@
 package com.wethebest.spaceinvaders;
 
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.content.Context;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Build;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -43,7 +36,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private boolean shootNow;
 
-    Sound sound;
+    SoundEngine soundEngine;
 
 
 
@@ -56,9 +49,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         GameObjectFactory.app = this;
 
-        //Sound
-        sound = new Sound(context);
-        sound.setup();
+        //SoundEngine
+        soundEngine = new SoundEngine(context);
 
         startGame();
     }
@@ -108,6 +100,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
                 if(shootNow) {
                     gameObjects.add(mPlayer.shoot());
+                    //soundEngine.playerShoot();
                     shootNow = false;
                 }
 
@@ -116,10 +109,13 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 }
 
                 mAlienArmy.update(mFPS);
+                gameObjects.addAll(mAlienArmy.getAlienProjs());
                 detectCollisions();
             }
 
             removeInactiveObjects();
+            mAlienArmy.removeInactiveObjects();
+
             draw();
 
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
@@ -215,7 +211,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         if (RectF.intersects(object1.getHitBox(), object2.getHitBox())) {
             object1.collide(object2);
             object2.collide(object1);
-            sound.playBeep();
         }
     }
 
@@ -229,30 +224,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 gameObjectIterator.remove();
             }
         }
-
-        Iterator<Alien> alienObjectIterator = mAlienArmy.allAliens.iterator();
-
-        while (alienObjectIterator.hasNext()) {
-            Alien alienObject = alienObjectIterator.next();
-
-            if (!alienObject.isActive()) {
-                alienObjectIterator.remove();
-            }
-        }
-
     }
 }
-//    private void addAlienProjs() {
-//        LinkedList<GameObject> alienProjs = new LinkedList<>(); // need temp list because can't modify Collections being iterated
-//
-//        for (GameObject gameObject : gameObjects) {
-//            if (gameObject instanceof Alien) {
-//                if (((Alien) gameObject).shootNow) {
-//                    alienProjs.add(((Alien) gameObject).shoot());
-//                    ((Alien) gameObject).shootNow = false;
-//                }
-//            }
-//
-//        }
-//        gameObjects.addAll(alienProjs);
-//    }
+

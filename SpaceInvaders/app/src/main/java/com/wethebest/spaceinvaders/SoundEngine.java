@@ -12,21 +12,22 @@ import android.util.Log;
 
 import java.io.IOException;
 
-public class Sound {
+public class SoundEngine {
 
     Context context;
 
     private SoundPool sp;
-    private int beepID = -1;
+    private int playerShootID = -1;
+    private int alienShootID = -1;
 
     int nowPlaying =-1;
     float volume = 1;// Volumes range from 0 through 1
 
 
 
-    Sound(Context context){this.context = context;}
+    SoundEngine(Context context){
+        this.context = context;
 
-    public void setup(){
         // Instantiate a SoundPool dependent on Android version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
@@ -48,19 +49,27 @@ public class Sound {
 
             // Create objects of the 2 required classes
             AssetManager assetManager = context.getAssets();
-            AssetFileDescriptor descriptor;
 
-            //Load all sound files in memory
-            descriptor = assetManager.openFd("beep.ogg");
-            beepID = sp.load(descriptor, 0);
+            //Load all soundEngine files in memory
+            playerShootID = sp.load(assetManager.openFd("proj_shoot.ogg"), 0);
+            alienShootID = sp.load(assetManager.openFd("alien_shoot.ogg"), 0);
+
+
         }catch(IOException e){
 
             // Print an error message to the console
-            Log.d("error", "failed to load sound files");
+            Log.d("error", "failed to load soundEngine files");
         }
     }
 
-    public void playBeep(){
-        sp.play(beepID, 1, 1, 0, 0, 1);
+    public void playerShoot(){
+
+        sp.play(playerShootID, .5f, .5f, 0, 0, 1);
+        //sp.stop(nowplaying);
+    }
+
+    public void alienShoot(){
+
+        sp.play(alienShootID , .5f, .5f , 0 , 0 , 1);
     }
 }
