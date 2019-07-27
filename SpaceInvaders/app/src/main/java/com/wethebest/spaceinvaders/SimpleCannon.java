@@ -72,13 +72,18 @@ class SimpleCannon implements GameObject {
     }
 
     public void update(long fps) {
+        if(((SpaceInvaders)context).yAcceleration >= .08f || ((SpaceInvaders)context).yAcceleration<= -.08f) {
+            mRect.left += ((SpaceInvaders)context).yAcceleration * 10;
+            mRect.right = mRect.left + mSize.x;
+        }
 
-        if (cannonMovement == MOVINGLEFT) {
-            mRect.left = mRect.left - (mXVelocity / fps);
-        }
-        if (cannonMovement == MOVINGRIGHT) {
-            mRect.left = mRect.left + (mXVelocity / fps);
-        }
+
+//        if (cannonMovement == MOVINGLEFT) {
+//            mRect.left = mRect.left - (mXVelocity / fps);
+//        }
+//        if (cannonMovement == MOVINGRIGHT) {
+//            mRect.left = mRect.left + (mXVelocity / fps);
+//        }
 
         checkBounds();
     }
