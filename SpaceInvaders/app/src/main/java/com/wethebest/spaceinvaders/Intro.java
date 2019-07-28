@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
 
+
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -35,12 +38,6 @@ public class Intro extends AppCompatActivity {
         final ImageView Seagullpoop = findViewById(R.id.imageView4);
         final ImageView usermessage = findViewById(R.id.imageView6);
 
-        Enterbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intro.this, SpaceInvaders.class));
-            }
-        });
 
         Nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +66,11 @@ public class Intro extends AppCompatActivity {
                     {
                         case KeyEvent.KEYCODE_DPAD_CENTER:
                         case KeyEvent.KEYCODE_ENTER:
-                            startActivity(new Intent(Intro.this, SpaceInvaders.class));
+
+                            Intent intent=new Intent(Intro.this,SpaceInvaders.class);
+                            startActivityForResult(intent,0);
+                            overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
+
                             return true;
                         default:
                             break;
