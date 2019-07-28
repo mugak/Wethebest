@@ -81,6 +81,7 @@ public class Intro extends AppCompatActivity {
 
 
 
+
     }
 
     //main menu
@@ -90,6 +91,17 @@ public class Intro extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    //back button forces to go to intro activity and stops app from crashing
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            
+            startActivity(new Intent(Intro.this, Intro.class));
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
 

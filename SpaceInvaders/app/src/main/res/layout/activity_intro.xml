@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/messageplayer1"
         android:visibility="invisible"
+        android:layout_centerHorizontal="true"
         />
 
     <ImageView
@@ -35,7 +36,8 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/dumbbird"
         android:visibility="invisible"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
 
     <ImageView
         android:id="@+id/imageView3"
