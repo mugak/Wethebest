@@ -35,7 +35,7 @@ public class AlienArmy {
         aliensPerRow = AlienRow.numAliens;
         maxNumAliens = numRows * aliensPerRow;
 
-        spaceBetweenRows = mScreenSize.x / 15; //TODO set better spacing
+        spaceBetweenRows = 0; //TODO set better spacing
         setPos();
         alienRows = new LinkedList<AlienRow>();
         setRows();
