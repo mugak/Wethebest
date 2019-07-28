@@ -196,6 +196,17 @@ public class SpriteSheetAnimation extends Activity {
                 //canvas.drawBitmap(bitmapBob, bobXPosition, 200, paint);
 
                 // New drawing code goes here
+                whereToDraw.set((int)bobXPosition,
+                        0,
+                        (int)bobXPosition + frameWidth,
+                        frameHeight);
+
+                getCurrentFrame();
+
+                canvas.drawBitmap(bitmapBob,
+                        frameToDraw,
+                        whereToDraw, paint);
+
 
                 // Draw everything to the screen
                 ourHolder.unlockCanvasAndPost(canvas);
