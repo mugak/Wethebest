@@ -1,5 +1,3 @@
-// source: http://gamecodeschool.com/android/coding-android-sprite-sheet-animations/?fbclid=IwAR058Eq8h-hJHmIh8lbXh9uwGl6B8tiEHsr0m92_Wrh5Ja3D3rHI5ueAKJ0
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -74,7 +72,7 @@ public class SpriteSheetAnimation extends Activity {
         // He starts 10 pixels from the left
         float bobXPosition = 10;
 
-        // New variables for the sprite sheet animation
+        // New for the sprite sheet animation
 
         // These next two values can be anything you like
         // As long as the ratio doesn't distort the sprite too much
@@ -108,7 +106,6 @@ public class SpriteSheetAnimation extends Activity {
                 bobXPosition + frameWidth,
                 frameHeight);
 
-
         // When the we initialize (call new()) on gameView
         // This special constructor method runs
         public GameView(Context context) {
@@ -131,6 +128,9 @@ public class SpriteSheetAnimation extends Activity {
                     frameWidth * frameCount,
                     frameHeight,
                     false);
+
+            // Set our boolean to true - game on!
+            //playing = true;
 
         }
 
@@ -160,7 +160,7 @@ public class SpriteSheetAnimation extends Activity {
         }
 
         // Everything that needs to be updated goes in here
-        // In later projects, we will have dozens (arrays) of objects.
+        // In later projects we will have dozens (arrays) of objects.
         // We will also do other things like collision detection.
         public void update() {
 
@@ -172,7 +172,28 @@ public class SpriteSheetAnimation extends Activity {
 
         }
 
-        // Draw the newly updated scene
+        public void getCurrentFrame(){
+
+            long time  = System.currentTimeMillis();
+            if(isMoving) {// Only animate if bob is moving
+                if ( time > lastFrameChangeTime + frameLengthInMilliseconds) {
+                    lastFrameChangeTime = time;
+                    currentFrame++;
+                    if (currentFrame >= frameCount) {
+
+                        currentFrame = 0;
+                    }
+                }
+            }
+            //update the left and right values of the source of
+            //the next frame on the spritesheet
+            frameToDraw.left = currentFrame * frameWidth;
+            frameToDraw.right = frameToDraw.left + frameWidth;
+
+        }
+
+// Draw the newly updated scene
+
         public void draw() {
 
             // Make sure our drawing surface is valid or we crash
@@ -181,7 +202,7 @@ public class SpriteSheetAnimation extends Activity {
                 canvas = ourHolder.lockCanvas();
 
                 // Draw the background color
-                canvas.drawColor(Color.argb(255, 26, 128, 182));
+                canvas.drawColor(Color.argb(255,  26, 128, 182));
 
                 // Choose the brush color for drawing
                 paint.setColor(Color.argb(255,  249, 129, 0));
@@ -195,7 +216,6 @@ public class SpriteSheetAnimation extends Activity {
                 // Draw bob at bobXPosition, 200 pixels
                 //canvas.drawBitmap(bitmapBob, bobXPosition, 200, paint);
 
-                // New drawing code goes here
                 whereToDraw.set((int)bobXPosition,
                         0,
                         (int)bobXPosition + frameWidth,
@@ -206,7 +226,6 @@ public class SpriteSheetAnimation extends Activity {
                 canvas.drawBitmap(bitmapBob,
                         frameToDraw,
                         whereToDraw, paint);
-
 
                 // Draw everything to the screen
                 ourHolder.unlockCanvasAndPost(canvas);
@@ -280,26 +299,5 @@ public class SpriteSheetAnimation extends Activity {
         // Tell the gameView pause method to execute
         gameView.pause();
     }
-
-    public void getCurrentFrame(){
-
-        long time  = System.currentTimeMillis();
-        if(isMoving) {// Only animate if bob is moving
-            if ( time > lastFrameChangeTime + frameLengthInMilliseconds) {
-                lastFrameChangeTime = time;
-                currentFrame ++;
-                if (currentFrame >= frameCount) {
-
-                    currentFrame = 0;
-                }
-            }
-        }
-        //update the left and right values of the source of
-        //the next frame on the spritesheet
-        frameToDraw.left = currentFrame * frameWidth;
-        frameToDraw.right = frameToDraw.left + frameWidth;
-
-    }
-
 
 }
