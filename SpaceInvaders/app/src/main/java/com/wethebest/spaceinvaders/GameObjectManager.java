@@ -99,6 +99,7 @@ public class GameObjectManager {
     public void displayGameObjects(Canvas canvas) {
         for (GameObject gameObject : gameObjects) {
             gameObject.display(canvas);
+            gameObject.playAudio();
         }
 
         mAlienArmy.draw(canvas);
