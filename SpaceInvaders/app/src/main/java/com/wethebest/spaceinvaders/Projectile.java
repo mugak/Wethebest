@@ -34,9 +34,9 @@ public abstract class Projectile implements GameObject {
 
     Projectile(SpaceInvadersApp app){
         mScreenSize = app.mScreenSize;
-        projWidth = mScreenSize.x/75;
+        projWidth = mScreenSize.x/40;
         projHeight = mScreenSize.x/40;
-        xVel = 0;
+        xVel = 0;//Projectile only shoots straight
         mRect = new RectF();
         mPaint = new Paint();
         isActive = true;
@@ -97,6 +97,12 @@ public abstract class Projectile implements GameObject {
     }
 
     public void checkBounds() {
+        if(mRect.centerX() > mScreenSize.x || mRect.centerX() < 0){
+            isActive = false;
+        }
+        if(mRect.centerY() > mScreenSize.y || mRect.centerY() < 0 ){
+            isActive = false;
+        }
     }
 
 }

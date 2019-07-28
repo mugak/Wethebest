@@ -91,13 +91,7 @@ class   SpaceInvadersApp extends SurfaceView implements Runnable {
     }
 
     private boolean isGameOver() {
-        try {
             return mPlayer.lives == 0;
-        }
-        catch(NullPointerException n){
-            //Error with Null Pointer
-        }
-        return true;
     }
 
     @Override
