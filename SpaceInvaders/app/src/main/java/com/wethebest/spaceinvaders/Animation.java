@@ -32,4 +32,25 @@ public class Animation {
         this.bitmapName = "" + bitmapName;
         this.pixelsPerMetre = pixelsPerMetre;
     }
+
+    public Rect getCurrentFrame(long time, float xVelocity, boolean moves){
+
+        if(xVelocity!=0 || moves == false) {// Only animate if the object is moving or it is an object which doesn't move
+            if (time > frameTicker + framePeriod) {
+                frameTicker = time;
+                currentFrame++;
+                if (currentFrame >= frameCount) {
+                    //if (currentFrame >= frameCount) {
+                    currentFrame = 0;
+                }
+            }
+        }
+        //update the left and right values of the source of
+        //the next frame on the spritesheet
+        this.sourceRect.left = currentFrame * frameWidth;
+        this.sourceRect.right = this.sourceRect.left + frameWidth;
+
+        return sourceRect;
+    }
+
 }
