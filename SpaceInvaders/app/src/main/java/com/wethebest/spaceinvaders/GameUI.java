@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
@@ -10,15 +11,15 @@ public class GameUI {
     public int mLives;
     private Paint mPaint;
 
-    GameUI() {
+    GameUI(Context context) {
         mScore = 0;
         mLives = SimpleCannon.MAX_LIVES;
         mPaint = new Paint();
-        mPaint.setTypeface(Typeface.create("Arial",Typeface.BOLD));
+
+        Typeface mTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/Bangers-Regular.ttf");
+        mPaint.setTypeface(mTypeface);
         mPaint.setTextSize(100);
         mPaint.setARGB(255, 255,255, 255);
-
-
     }
 
 
