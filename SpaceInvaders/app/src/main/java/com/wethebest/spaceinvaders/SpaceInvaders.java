@@ -11,13 +11,16 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.graphics.Point;
 import android.view.Display;
-
+import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.Window;
 
-public class SpaceInvaders extends Activity implements SensorEventListener {
+
+
+public class SpaceInvaders extends AppCompatActivity implements SensorEventListener {
 
     private SpaceInvadersApp mSpaceInvadersApp;
     Bitmap myBlankBitmap;
@@ -28,8 +31,11 @@ public class SpaceInvaders extends Activity implements SensorEventListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+
 
         int widthInPixels = 800;
         int heightInPixels = 600;
@@ -97,5 +103,14 @@ public class SpaceInvaders extends Activity implements SensorEventListener {
 
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    //main menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        return super.onCreateOptionsMenu(menu);
     }
 }
