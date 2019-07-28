@@ -13,6 +13,7 @@ import android.view.Display;
 
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
+import android.view.Menu;
 
 public class SpaceInvaders extends Activity implements SensorEventListener {
 
@@ -71,6 +72,7 @@ public class SpaceInvaders extends Activity implements SensorEventListener {
         mSpaceInvadersApp.pause();
     }
 
+
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_GRAVITY) {
@@ -81,4 +83,5 @@ public class SpaceInvaders extends Activity implements SensorEventListener {
     @Override
     public void onAccuracyChanged(Sensor sensor, int x) {
     }
+
 }

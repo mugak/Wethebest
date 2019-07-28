@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-class SpaceInvadersApp extends SurfaceView implements Runnable {
+class   SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private SurfaceHolder mOurHolder;
     private Canvas mCanvas;
@@ -33,6 +33,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     private volatile boolean mPlaying;
     private boolean mPaused = true;
 
+    GameUI mGameUI;
     public int score;
 
     private boolean shootNow;
@@ -80,6 +81,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         gameObjects.add(mPlayer);
 
         score = 0;
+        mGameUI = new GameUI(this);
 
         for (GameObject gameObject : gameObjects) {
             gameObject.reset(mScreenSize);
@@ -123,6 +125,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             removeInactiveObjects();
             mAlienArmy.removeInactiveObjects();
 
+            mGameUI.update(score);
             draw();
 
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
@@ -173,7 +176,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             }
 
             mAlienArmy.draw(mCanvas);
-
+            mGameUI.draw(mCanvas);
             mOurHolder.unlockCanvasAndPost(mCanvas);
         }
     }

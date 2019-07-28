@@ -14,19 +14,20 @@ class SimpleCannon implements GameObject {
     private Bitmap mBitmap;
 
     private RectF mRect;
-    private float mXVelocity;
+    //private float mXVelocity;
     private PointF mSize;
 
     private Point mScreenSize;
     private Paint mPaint;
 
-    public int lives;
+    public static final int MAX_LIVES = 3;
+    public static int lives;
 
-    final int STOPPED = 0;
-    final int MOVINGLEFT = 1;
-    final int MOVINGRIGHT = 2;
-
-    private int cannonMovement = STOPPED;
+//    final int STOPPED = 0;
+//    final int MOVINGLEFT = 1;
+//    final int MOVINGRIGHT = 2;
+//
+//    private int cannonMovement = STOPPED;
 
     private Context context;
     private SoundEngine soundEngine;
@@ -40,7 +41,7 @@ class SimpleCannon implements GameObject {
     SimpleCannon(SpaceInvadersApp app) {
         context = app.context;
         this.app = app;
-        lives = 3;
+        lives = MAX_LIVES;
 
         mScreenSize = app.mScreenSize;
         mSize = new PointF(mScreenSize.x / 10, mScreenSize.x / 10);
@@ -69,8 +70,8 @@ class SimpleCannon implements GameObject {
     }
 
     public void update(long fps) {
-        if(((SpaceInvaders)context).yAcceleration >= .08f || ((SpaceInvaders)context).yAcceleration<= -.08f) {
-            mRect.left += ((SpaceInvaders)context).yAcceleration * 10;
+        if(((SpaceInvaders)context).yAcceleration >= .08f || ((SpaceInvaders)context).yAcceleration<= -.08f) { //tilt thresholds for cannon to stay still
+            mRect.left += ((SpaceInvaders)context).yAcceleration * 10; //change this multiplying constant to change movement speed
             mRect.right = mRect.left + mSize.x;
         }
 
@@ -105,15 +106,7 @@ class SimpleCannon implements GameObject {
 
     public void reset(Point location) {
         setPosition(location);
-        mXVelocity = (location.y / 3);
-    }
-
-
-
-
-
-    void setMovement(int state) {
-        cannonMovement = state;
+        //mXVelocity = (location.y / 3);
     }
 
 //    void setMovement(int state) {
@@ -131,11 +124,10 @@ class SimpleCannon implements GameObject {
 
     //Check alien.java for an example on how this is implemented
     public void collide(GameObject gameObject) {
-        /*if(gameObject instanceof AlienProj) {
+        if(gameObject instanceof AlienProj) {
             lives -= 1;
+            reset(mScreenSize);
         }
-
-        reset(mScreenSize);*/
     }
 
     //Prevents cannon from moving out of bounds

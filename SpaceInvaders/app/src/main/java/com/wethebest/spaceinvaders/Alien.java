@@ -45,6 +45,7 @@ class Alien implements GameObject {
     public void update(long fps) {
         mHitBox.update(fps);
         timeToShoot(fps);
+        checkAlienWin();
 
     }
 
@@ -85,7 +86,6 @@ class Alien implements GameObject {
 
     public void collide(GameObject gameObject) {
         mHitBox.collide(gameObject);
-        app.score += 100;
     }
 
     public static void setAlienSize(PointF size) {
@@ -122,9 +122,9 @@ class Alien implements GameObject {
 
     }
 
-    private void reachedBottomOfScreen() {
-        if (mHitBox.bottomOutOfBounds()) {
-            //CHANGE TO GAME OVER STATE
+    private void checkAlienWin() {
+        if(mHitBox.bottomOutOfBounds()) {
+            SimpleCannon.lives = 0; //game over when aliens reach bottom of screen
         }
     }
 }
