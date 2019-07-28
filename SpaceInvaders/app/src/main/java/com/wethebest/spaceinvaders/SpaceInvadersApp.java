@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -72,7 +73,7 @@ class   SpaceInvadersApp extends SurfaceView implements Runnable {
     private void startGame() {
         gameObjects = new LinkedList<>();
 
-        mPlayer = new SimpleCannon(context, mScreenSize);
+        mPlayer = new SimpleCannon(this);
         mAlienArmy = new AlienArmy(this);
         mAlienArmy.setAliens();
 
@@ -80,7 +81,7 @@ class   SpaceInvadersApp extends SurfaceView implements Runnable {
         gameObjects.add(mPlayer);
 
         score = 0;
-        mGameUI = new GameUI();
+        mGameUI = new GameUI(this);
 
         for (GameObject gameObject : gameObjects) {
             gameObject.reset(mScreenSize);
@@ -90,7 +91,13 @@ class   SpaceInvadersApp extends SurfaceView implements Runnable {
     }
 
     private boolean isGameOver() {
-        return mPlayer.lives == 0;
+        try {
+            return mPlayer.lives == 0;
+        }
+        catch(NullPointerException n){
+            //Error with Null Pointer
+        }
+        return true;
     }
 
     @Override

@@ -32,16 +32,15 @@ public abstract class Projectile implements GameObject {
 
     protected SoundEngine soundEngine;
 
-
-    Projectile(Context context, Point screenSize){
-        mScreenSize = screenSize;
+    Projectile(SpaceInvadersApp app){
+        mScreenSize = app.mScreenSize;
         projWidth = mScreenSize.x/75;
         projHeight = mScreenSize.x/40;
         xVel = 0;
         mRect = new RectF();
         mPaint = new Paint();
         isActive = true;
-        soundEngine = new SoundEngine(context);
+        soundEngine = new SoundEngine(app.context);
     }
 
     //Updates the position of the projectile
@@ -66,7 +65,7 @@ public abstract class Projectile implements GameObject {
     }
 
     public void playAudio(){
-        
+
     }
 
 
@@ -102,42 +101,3 @@ public abstract class Projectile implements GameObject {
 
 }
 
-class PlayerProj extends  Projectile{
-    PlayerProj(Context context, Point screenSize){
-        super(context, screenSize);
-        this.mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.powerup_blue01);
-        yVel = -mScreenSize.x/3; //Projectile shoots up
-        //soundEngine.playerShoot();
-    }
-
-    @Override
-    public void collide (GameObject gameObject) {
-        if(!(gameObject instanceof SimpleCannon)) {
-            isActive = false; //PlayerProj can't shoot the player
-        }
-    }
-    //TODO: add checkbounds(), possibly add to GameObject interface
-
-
-}
-class AlienProj extends Projectile{
-
-    AlienProj(Context context, Point screenSize){
-        super(context, screenSize);
-        this.mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.alien_laser);
-        yVel = mScreenSize.x/3; //Projectile shoots down
-    }
-
-    @Override
-    public void collide (GameObject gameObject) {
-        if(!(gameObject instanceof Alien)) {
-            isActive = false; //AlienProj can't shoot other Aliens
-        }
-    }
-
-    public void checkBounds() {
-        if(mRect.top >= mScreenSize.y) {
-            isActive = false;
-        }
-    }
-}
