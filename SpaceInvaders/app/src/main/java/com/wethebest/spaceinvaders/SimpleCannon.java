@@ -23,6 +23,10 @@ class SimpleCannon implements GameObject {
     public static final int MAX_LIVES = 3;
     public static int lives;
 
+    private boolean invincible;
+    private long frameCount;
+    private final int INVICIBLE_SECONDS = 2; //how long cannon is invincible
+
 //    final int STOPPED = 0;
 //    final int MOVINGLEFT = 1;
 //    final int MOVINGRIGHT = 2;
@@ -44,8 +48,7 @@ class SimpleCannon implements GameObject {
         mScreenSize = screenSize;
         mSize = new PointF(mScreenSize.x / 10, mScreenSize.x / 10);
         mRect = new RectF();
-        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player);
-        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mSize.x, (int) mSize.y, true);
+        setBitmap();
 
         mPaint = new Paint();
 
@@ -53,12 +56,26 @@ class SimpleCannon implements GameObject {
         shootNow = false;
 
         soundEngine = new SoundEngine(context);
+
+        invincible = false;
+        frameCount = 0;
     }
 
 
     public Bitmap getBitmap(){
         return mBitmap;
     }
+
+    public void setBitmap () {
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mSize.x, (int) mSize.y, true);
+    }
+
+    public void setInvincibleBitmap() {
+        mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_invincible);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mSize.x, (int) mSize.y, true);
+    }
+
 
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
@@ -73,6 +90,16 @@ class SimpleCannon implements GameObject {
             mRect.right = mRect.left + mSize.x;
         }
 
+        if(invincible && frameCount <= 0) {
+            frameCount = fps * INVICIBLE_SECONDS;
+        }
+        else {
+            frameCount--;
+            if(frameCount <= 0) {
+                invincible = false;
+                setBitmap();
+            }
+        }
 
 //        if (cannonMovement == MOVINGLEFT) {
 //            mRect.left = mRect.left - (mXVelocity / fps);
@@ -123,8 +150,12 @@ class SimpleCannon implements GameObject {
     //Check alien.java for an example on how this is implemented
     public void collide(GameObject gameObject) {
         if(gameObject instanceof AlienProj) {
-            lives -= 1;
-            reset(mScreenSize);
+            if(!invincible) {
+                lives -= 1;
+                reset(mScreenSize);
+                invincible = true;
+                setInvincibleBitmap();
+            }
         }
     }
 
