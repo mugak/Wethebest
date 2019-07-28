@@ -2,6 +2,7 @@ package com.wethebest.spaceinvaders;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -13,6 +14,7 @@ import android.view.Display;
 
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
+import android.view.KeyEvent;
 import android.view.Menu;
 
 public class SpaceInvaders extends Activity implements SensorEventListener {
@@ -84,4 +86,16 @@ public class SpaceInvaders extends Activity implements SensorEventListener {
     public void onAccuracyChanged(Sensor sensor, int x) {
     }
 
+    //back button forces to go to intro activity and stops app from crashing
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+
+            Intent intent=new Intent(SpaceInvaders.this,Intro.class);
+            startActivityForResult(intent,0);
+            overridePendingTransition( R.anim.trans_right_in, R.anim.trans_right_out );
+
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
