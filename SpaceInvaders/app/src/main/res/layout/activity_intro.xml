@@ -1,22 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_setup"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="#D0EEFD"
     tools:context=".UI">
 
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
+        android:text="WarnMe: Seagulls"
+        android:textColor="#F44336"
+        android:textSize="45sp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+
+        app:srcCompat="@drawable/phonepic2" />
+
+
+    <Button
+        android:id="@+id/Next_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:background="#F44336"
+        android:text="NEXT"
+        android:textColor="#CDE8FA" />
 
     <TextView
         android:id="@+id/PlayerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_marginBottom="100dp"
         android:layout_centerInParent="true"
         android:text="@string/player_name"
+        android:visibility="invisible"
+
 
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#33BE39"
+        android:textColor="#F44336"
 
         android:textSize="36sp" />
 
@@ -37,9 +74,10 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/PlayerName"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-400dp"
+        android:layout_marginBottom="-50dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:visibility="invisible"/>
 
     <Button
         android:id="@+id/Enterbtn"
@@ -48,14 +86,9 @@
         android:layout_alignBottom="@+id/EnterName"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-60dp"
-        android:background="#33BE39"
-        android:text="Enter" />
-
-
-
-
-
-
+        android:background="#F44336"
+        android:text="Enter"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>
