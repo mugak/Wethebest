@@ -102,7 +102,7 @@ public class AlienArmy {
     public void increaseSpeed() {
         int aliensKilled = maxNumAliens - allAliens.size();
         float multiplier = exponentialGrowth(.09f, aliensKilled);
-        AlienHitBox.speedUp(multiplier); //sets SPEED aka y(t) in AlienHitBox
+        Alien.speedUp(multiplier); //sets SPEED aka y(t) in AlienHitBox
     }
 
     //returns e^(kt)

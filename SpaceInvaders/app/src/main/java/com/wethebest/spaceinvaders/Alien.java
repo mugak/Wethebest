@@ -8,7 +8,7 @@ import android.graphics.RectF;
 
 import java.util.Random;
 
-class Alien implements GameObject {
+class Alien extends HitBox implements GameObject {
     //Needed for Context and ScreenSize
     private SpaceInvadersApp app;
 
@@ -26,15 +26,27 @@ class Alien implements GameObject {
     private boolean waitingToShoot;
 
     private SoundEngine soundEngine;
-    private Context context;
+
+    //Aliens have a constant movement speed
+    private static final float BASE_SPEED = 200;
+    private static float SPEED;
+
+    //Current movement direction
+    private boolean movingRight;
 
     Alien(SpaceInvadersApp app) {
+        super(app);
         this.app = app;
-        context = app.context;
-        soundEngine = new SoundEngine(context);
+        soundEngine = new SoundEngine(app.context);
 
         mHitBox = new AlienHitBox(app);
         alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
+        setSize(alienSize);
+        setBitmap(R.drawable.invader_a01);
+
+        SPEED = BASE_SPEED;
+        isActive = true;
+        movingRight = true;
 
         shootNow = false;
         waitingToShoot = false;
@@ -44,13 +56,24 @@ class Alien implements GameObject {
 
     public void update(long fps) {
         mHitBox.update(fps);
+//        if(movingRight) {
+//            velocity = SPEED;
+//        }
+//        else {
+//            velocity = -SPEED;
+//        }
+//
+//        moveHorizontally(velocity / fps);
+
         timeToShoot(fps);
         checkAlienWin();
 
     }
 
+
+
     public void display(Canvas canvas) {
-        mHitBox.display(canvas);
+        display(canvas);
     }
 
     public void playAudio() {
@@ -68,7 +91,15 @@ class Alien implements GameObject {
     }
 
     public void reverseXVelocity() {
-        mHitBox.reverseXVelocity();
+        //mHitBox.reverseXVelocity();
+            movingRight = !movingRight;
+            moveDown();
+            horizontalStayInBounds();
+
+    }
+
+    public static void speedUp(float multiplier) {
+        SPEED = BASE_SPEED * multiplier;
     }
 
 
@@ -82,7 +113,16 @@ class Alien implements GameObject {
 
 
     public void collide(GameObject gameObject) {
-        mHitBox.collide(gameObject);
+        //mHitBox.collide(gameObject);
+            //SpaceInvaders app already makes this check to make sure the gameObject is a projectile,
+            // but this is a good check to make sure the Alien class still works if the spaceInvadersApp
+            // class changes
+            //NOTE: SpaceInvadersApp.java checks for the collision so there is no need to in this class
+            //Collide only describes what the class should do when it is collided with
+            if (gameObject instanceof PlayerProj) {
+                //reset(mScreenSize);
+                isActive = false;
+            }
     }
 
     public static void setAlienSize(PointF size) {
@@ -99,7 +139,7 @@ class Alien implements GameObject {
             mProj = new AlienProj(app);
             RectF tempRect = mHitBox.getHitBox();
             mProj.setPos((tempRect.right + tempRect.left) / 2, tempRect.bottom);
-            //soundEngine.alienShoot();
+            soundEngine.alienShoot();
             return mProj;
     }
 
@@ -117,7 +157,6 @@ class Alien implements GameObject {
                 waitingToShoot = false;
             }
         }
-
     }
 
     private void checkAlienWin() {
@@ -125,4 +164,6 @@ class Alien implements GameObject {
             SimpleCannon.lives = 0; //game over when aliens reach bottom of screen
         }
     }
+
+
 }

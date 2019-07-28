@@ -16,6 +16,7 @@ import android.graphics.BitmapFactory;
 */
 public abstract class Projectile implements GameObject {
     //Hitbox associated with rect
+
     protected RectF mRect;
 
     protected float xVel;
