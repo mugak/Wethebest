@@ -8,6 +8,7 @@ import android.view.Display;
 
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
+import android.view.Menu;
 
 public class SpaceInvaders extends Activity {
 
@@ -53,4 +54,8 @@ public class SpaceInvaders extends Activity {
         super.onPause();
         mSpaceInvadersApp.pause();
     }
+
+
+
+
 }

@@ -14,7 +14,7 @@ import android.view.SurfaceView;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-class SpaceInvadersApp extends SurfaceView implements Runnable {
+class   SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private SurfaceHolder mOurHolder;
     private Canvas mCanvas;
