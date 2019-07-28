@@ -24,14 +24,12 @@ public class Intro extends AppCompatActivity {
         setContentView(R.layout.activity_intro);
 
 
-
-
-        TextView PlayerName = findViewById(R.id.PlayerName);
-        EditText EnterName = findViewById(R.id.EnterName);
-        Button Enterbtn = findViewById(R.id.Enterbtn);
-        Button Nextbtn = findViewById(R.id.Next_btn);
-        TextView title = findViewById(R.id.textView2);
-        ImageView MainImage = findViewById(R.id.imageView3);
+        final TextView PlayerName = findViewById(R.id.PlayerName);
+        final EditText EnterName = findViewById(R.id.EnterName);
+        final Button Enterbtn = findViewById(R.id.Enterbtn);
+        final Button Nextbtn = findViewById(R.id.Next_btn);
+        final TextView title = findViewById(R.id.textView2);
+        final ImageView MainImage = findViewById(R.id.imageView3);
 
         Enterbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +41,14 @@ public class Intro extends AppCompatActivity {
         Nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                MainImage.setVisibility(ImageView.INVISIBLE);
+                title.setVisibility(ImageView.INVISIBLE);
+                Nextbtn.setVisibility(ImageView.INVISIBLE);
+                Enterbtn.setVisibility(ImageView.VISIBLE);
+                EnterName.setVisibility(ImageView.VISIBLE);
+                PlayerName.setVisibility(ImageView.VISIBLE);
+
 
 
 
