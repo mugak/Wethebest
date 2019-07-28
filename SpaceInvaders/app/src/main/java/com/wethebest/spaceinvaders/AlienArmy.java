@@ -138,6 +138,7 @@ public class AlienArmy {
             Alien alienObject = alienObjectIterator.next();
 
             if (!alienObject.isActive()) {
+                app.score += 100;
                 alienObjectIterator.remove();
             }
         }

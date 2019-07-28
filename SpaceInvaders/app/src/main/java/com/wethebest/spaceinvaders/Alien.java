@@ -48,6 +48,16 @@ class Alien implements GameObject {
 
     }
 
+    public void display(Canvas canvas) {
+        mHitBox.display(canvas);
+    }
+
+    public void playAudio(){
+        if(shootNow){
+            //soundEngine.playerShoot();
+        }
+    }
+
     public RectF getHitBox() {
         return mHitBox.getHitBox();
     }
@@ -68,13 +78,10 @@ class Alien implements GameObject {
     public void reset(Point location) {
     }
 
-    public void display(Canvas canvas) {
-        mHitBox.display(canvas);
-    }
+
 
     public void collide(GameObject gameObject) {
         mHitBox.collide(gameObject);
-        app.score += 100;
     }
 
     public static void setAlienSize(PointF size) {
