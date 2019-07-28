@@ -15,29 +15,33 @@ import java.util.List;
 
 public class AlienArmy {
     private int numRows;
-    private int aliensPerRow;
     private int maxNumAliens;
 
     private Point mScreenSize;
     private PointF rowPosition; //Position of top left corner of first alien in first row
-    private int spaceBetweenRows;
-    private List <AlienRow> alienRows;
+    private float spaceBetweenRows;
+    private float spaceBetweenAliens;
 
+
+    private PointF alienPos;
+    private int numAliensInRow;
     public List<Alien> allAliens = new LinkedList<Alien>(); //
 
     private SpaceInvadersApp app;
     public boolean changeDirection;
 
     AlienArmy(SpaceInvadersApp app) {
+
         this.app = app;
+        Alien.setAlienSize(new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10));
         mScreenSize = app.mScreenSize;
         numRows = 4; //TODO hardcoded
-        aliensPerRow = AlienRow.numAliens;
-        maxNumAliens = numRows * aliensPerRow;
+        numAliensInRow = 4;
+        maxNumAliens = numRows * numAliensInRow;
 
         spaceBetweenRows = 0; //TODO set better spacing
+        spaceBetweenAliens = Alien.alienSize.x/2; //TODO set better spacing
         setPos();
-        alienRows = new LinkedList<AlienRow>();
         setRows();
 
         changeDirection = false;
@@ -50,28 +54,21 @@ public class AlienArmy {
 
     private void setRows() {
         for(int i = 0; i < numRows; i++) {
-            AlienRow mAlienRow = new AlienRow(app);
-            Alien.setAlienSize(new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10));
-            mAlienRow.alienPos = new PointF(rowPosition.x, rowPosition.y + i * (Alien.alienSize.y + spaceBetweenRows));
-            mAlienRow.setAliens();
-            alienRows.add(mAlienRow);
+            alienPos = new PointF(rowPosition.x, rowPosition.y + i * (Alien.alienSize.y + spaceBetweenRows));
 
+            for(int j = 0; j < numAliensInRow; j++) {
+                Alien mAlien = new Alien(app);
+                PointF position = new PointF(alienPos.x + j * (Alien.alienSize.x + spaceBetweenAliens), alienPos.y);
+                mAlien.setPos(position);
+                allAliens.add(mAlien);
+            }
         }
     }
 
     public List getAliens() {
-        List<Alien> allAliens = new LinkedList<Alien>();
-        for(AlienRow mAlienRow : alienRows) {
-            allAliens.addAll(mAlienRow.getAliens());
-        }
         return allAliens;
     }
 
-    public void setAliens() {
-        for(AlienRow mAlienRow : alienRows) {
-            allAliens.addAll(mAlienRow.aliens);
-        }
-    }
 
     public void changeDirection() {
         for (Alien a : allAliens) {
