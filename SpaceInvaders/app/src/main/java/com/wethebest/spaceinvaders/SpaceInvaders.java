@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.graphics.Point;
 import android.view.Display;
@@ -16,11 +18,12 @@ import android.graphics.Canvas;
 import android.graphics.Bitmap;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
 
 
 
-public class SpaceInvaders extends AppCompatActivity implements SensorEventListener {
+public class SpaceInvaders extends Activity implements SensorEventListener { //AppCompatActivity implements SensorEventListener {
 
     private SpaceInvadersApp mSpaceInvadersApp;
     Bitmap myBlankBitmap;
@@ -31,11 +34,8 @@ public class SpaceInvaders extends AppCompatActivity implements SensorEventListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
-
 
         int widthInPixels = 800;
         int heightInPixels = 600;
@@ -53,11 +53,8 @@ public class SpaceInvaders extends AppCompatActivity implements SensorEventListe
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
-
-
-
-
-            mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
+        mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
+        enableImmersiveMode();
         setContentView(mSpaceInvadersApp);
     }
 
@@ -105,12 +102,34 @@ public class SpaceInvaders extends AppCompatActivity implements SensorEventListe
         return super.onKeyDown(keyCode, event);
     }
 
-    //main menu
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
 
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
+        if(hasFocus) {
+            enableImmersiveMode();
+        }
     }
+
+    protected void enableImmersiveMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            );
+        }
+    } //enables full screen - took from https://stackoverflow.com/questions/29186081/android-immersive-mode-reset-when-changing-activity
+
+//    //main menu
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        return super.onCreateOptionsMenu(menu);
+//    }
 }
