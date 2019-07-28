@@ -16,8 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AlienRow {
-    private int numAliens;
-    private Point mScreenSize;
+    public static int numAliens = 4;
     public PointF alienPos; //top left corner of first alien in the row
     private float spaceBetweenAliens;
 
@@ -28,8 +27,10 @@ public class AlienRow {
     AlienRow(SpaceInvadersApp app) {
         this.app = app;
         aliens = new LinkedList<Alien>();
-        mScreenSize = app.mScreenSize;
-        numAliens = 4; //TODO hardcoded
+    }
+
+    public List<Alien> getAliens(){
+        return aliens;
     }
 
     public void setAliens() {

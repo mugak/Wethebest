@@ -11,10 +11,11 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-class SpaceInvadersApp extends SurfaceView implements Runnable {
+class   SpaceInvadersApp extends SurfaceView implements Runnable {
 
     public SurfaceHolder mOurHolder;
     public Canvas mCanvas;
@@ -26,9 +27,12 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     GameState mGameState;
     GameObjectManager mGameObjectManager;
 
+    GameUI mGameUI;
     public int score;
 
     public boolean shootNow;
+
+    SoundEngine soundEngine;
 
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
@@ -37,6 +41,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mScreenSize = new Point(x, y);
 
         GameObjectFactory.app = this;
+
+        soundEngine = new SoundEngine(context);
+        mGameUI = new GameUI(this);
 
         //start game
         mGameObjectManager = new GameObjectManager(this);
@@ -49,27 +56,25 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         }
     }
 
-    //This method isn't very good
-    //Maybe implement set player movement function
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
                 if(mGameState instanceof PauseState) {
                     mGameState.changeState(this, State.WAVE);
-                } else if(mGameState instanceof WaveState) {
-                    if (motionEvent.getX() > mScreenSize.x / 2) {
-                        mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGRIGHT);
-                    } else {
-                        mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGLEFT);
-                    }
-                }
+                } //else if(mGameState instanceof WaveState) {
+                    //if (motionEvent.getX() > mScreenSize.x / 2) {
+                    //    mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGRIGHT);
+                    //} else {
+                    //    mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGLEFT);
+                    //}
+                //}
 
                 shootNow = true;
                 break;
 
             case MotionEvent.ACTION_UP:
-                mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.STOPPED);
+                //mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.STOPPED);
                 break;
         }
         return true;
@@ -99,3 +104,4 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         }
     }
 }
+

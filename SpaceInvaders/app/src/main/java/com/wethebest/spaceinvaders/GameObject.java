@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.RectF;
@@ -13,6 +14,10 @@ public interface GameObject {
     //Implements the way the object will be displayed to the screen
     //Requires the class to have it's own Paint object to draw itself to the canvas
     void display(Canvas canvas);
+
+    //Object plays the appropriate sound at the current frame, e.g. during collision or
+    //shooting a projectile
+    void playAudio();
 
     //Resets state of object to beginning of GameState
     //Examples would include moving GameObjects to their starting positions in the game or

@@ -38,6 +38,7 @@ public class WaveState implements GameState {
         }
 
         app.mGameObjectManager.updateState(mFPS);
+        app.mGameUI.update(score);
 
         draw();
 
@@ -58,6 +59,7 @@ public class WaveState implements GameState {
             mApp.mCanvas.drawColor(Color.argb(255, 0, 0, 0));
 
             mApp.mGameObjectManager.displayGameObjects(mApp.mCanvas);
+            mApp.mGameUI.draw(mApp.mCanvas);
 
             mApp.mOurHolder.unlockCanvasAndPost(mApp.mCanvas);
         }

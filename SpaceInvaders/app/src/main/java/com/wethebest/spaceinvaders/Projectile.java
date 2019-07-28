@@ -15,30 +15,32 @@ import android.graphics.BitmapFactory;
 *direction of the velocity, yVel.
 */
 public abstract class Projectile implements GameObject {
-    //Projectile will be a rectangle as a placeholder
+    //Hitbox associated with rect
     protected RectF mRect;
 
-    private float xVel;
+    protected float xVel;
     protected float yVel;
 
     private float projWidth;
     private float projHeight;
 
     private Paint mPaint;
-
     protected Bitmap mBitmap;
 
     protected boolean isActive;
     protected Point mScreenSize;
 
-    Projectile(Point screenSize){
-        mScreenSize = screenSize;
-        projWidth = mScreenSize.x/100;
-        projHeight = mScreenSize.x/50;
-        xVel = 0;
+    protected SoundEngine soundEngine;
+
+    Projectile(SpaceInvadersApp app){
+        mScreenSize = app.mScreenSize;
+        projWidth = mScreenSize.x/40;
+        projHeight = mScreenSize.x/40;
+        xVel = 0;//Projectile only shoots straight
         mRect = new RectF();
         mPaint = new Paint();
         isActive = true;
+        soundEngine = new SoundEngine(app.context);
     }
 
     //Updates the position of the projectile
@@ -54,6 +56,17 @@ public abstract class Projectile implements GameObject {
         }
     }
 
+    public void display(Canvas canvas) {
+        mPaint.setColor(Color.argb(255, 255, 255, 255));
+
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)projWidth, (int)projHeight, true );
+
+        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
+    }
+
+    public void playAudio(){
+
+    }
 
 
     void setPos(float x, float y){
@@ -68,13 +81,7 @@ public abstract class Projectile implements GameObject {
         isActive = false;
     }
 
-    public void display(Canvas canvas) {
-        mPaint.setColor(Color.argb(255, 255, 255, 255));
 
-        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)projWidth, (int)projHeight, true );
-
-        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
-    }
 
     public void collide(GameObject gameObject) {
         isActive = false;
@@ -90,44 +97,13 @@ public abstract class Projectile implements GameObject {
     }
 
     public void checkBounds() {
-    }
-
-}
-
-class PlayerProj extends  Projectile{
-    PlayerProj(Context context, Point screenSize){
-        super(screenSize);
-        this.mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player_laser);
-        yVel = -mScreenSize.x/3; //Projectile shoots up
-    }
-
-    @Override
-    public void collide (GameObject gameObject) {
-        if(!(gameObject instanceof SimpleCannon)) {
-            isActive = false; //PlayerProj can't shoot the player
+        if(mRect.centerX() > mScreenSize.x || mRect.centerX() < 0){
+            isActive = false;
         }
-    }
-    //TODO: add checkbounds(), possibly add to GameObject interface
-
-
-}
-class AlienProj extends Projectile{
-
-    AlienProj(Context context, Point screenSize){
-        super(screenSize);
-        yVel = mScreenSize.x/3; //Projectile shoots down
-    }
-
-    @Override
-    public void collide (GameObject gameObject) {
-        if(!(gameObject instanceof Alien)) {
-            isActive = false; //AlienProj can't shoot other Aliens
-        }
-    }
-
-    public void checkBounds() {
-        if(mRect.top >= mScreenSize.y) {
+        if(mRect.centerY() > mScreenSize.y || mRect.centerY() < 0 ){
             isActive = false;
         }
     }
+
 }
+

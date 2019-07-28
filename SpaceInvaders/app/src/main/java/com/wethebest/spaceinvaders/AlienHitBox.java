@@ -18,7 +18,8 @@ public class AlienHitBox extends HitBox {
         public static PointF alienSize;
 
         //Aliens have a constant movement speed
-        private final float SPEED = 200;
+        private static final float BASE_SPEED = 200;
+        private static float SPEED;
 
         //Current movement direction
         private boolean movingRight;
@@ -29,6 +30,7 @@ public class AlienHitBox extends HitBox {
             setSize(alienSize);
             setBitmap(R.drawable.invader_a01);
 
+            SPEED = BASE_SPEED;
             isActive = true;
             movingRight = true;
         }
@@ -47,13 +49,11 @@ public class AlienHitBox extends HitBox {
 
         }
 
-
         public void reverseXVelocity() {
             movingRight = !movingRight;
             moveDown();
             horizontalStayInBounds();
         }
-
 
         public void collide(GameObject gameObject) {
             //SpaceInvaders app already makes this check to make sure the gameObject is a projectile,
@@ -65,6 +65,10 @@ public class AlienHitBox extends HitBox {
                 //reset(mScreenSize);
                 isActive = false;
             }
+        }
+
+        public static void speedUp(float multiplier) {
+            SPEED = BASE_SPEED * multiplier;
         }
     }
 

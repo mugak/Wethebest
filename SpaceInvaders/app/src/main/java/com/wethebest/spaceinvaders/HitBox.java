@@ -104,13 +104,16 @@ public class HitBox {
 
     //Returns true when the hitbox touches the edge of the screen
     boolean horizontalOutOfBounds() {
-        return mRect.left < 0 || mRect.right > app.mScreenSize.x;
+        return mRect.left <= 0 || mRect.right >= app.mScreenSize.x;
     }
 
-    boolean verticalOutOfBounds() {
-        return mRect.top < 0 || mRect.bottom > app.mScreenSize.y;
+    boolean bottomOutOfBounds() {
+        return mRect.bottom >= app.mScreenSize.y;
     }
 
+    boolean topOutOfBounds() {
+        return mRect.top <= 0;
+    }
 
     //Position of hitbox stays within screen boundaries
     void horizontalStayInBounds() {
@@ -154,7 +157,6 @@ public class HitBox {
 
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
-
         canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
     }
 }

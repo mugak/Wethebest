@@ -34,15 +34,21 @@ public class BarrierBlock implements GameObject {
 
     public void update(long fps) { }
 
-    public void reset(Point location) { //TODO: refactor reset to take no parameters?
-
-    }
-
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 0, 243, 0));
 
         canvas.drawRect(mRect, mPaint);
     }
+
+    public void playAudio(){
+
+    }
+
+    public void reset(Point location) { //TODO: refactor reset to take no parameters?
+
+    }
+
+
 
     public void collide(GameObject gameObject) {
         //SpaceInvaders app already makes this check to make sure the gameObject is a projectile,

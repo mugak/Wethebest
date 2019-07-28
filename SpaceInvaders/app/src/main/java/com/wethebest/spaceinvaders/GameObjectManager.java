@@ -23,7 +23,7 @@ public class GameObjectManager {
 
         gameObjects = new LinkedList<>();
 
-        mPlayer = new SimpleCannon(app.context, app.mScreenSize);
+        mPlayer = new SimpleCannon(app);
         mBarriers = new LinkedList<Barrier>();
         mAlienArmy = new AlienArmy(app);
         mAlienArmy.setAliens();

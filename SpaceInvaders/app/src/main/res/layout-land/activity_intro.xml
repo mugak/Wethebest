@@ -9,6 +9,9 @@
     tools:context=".UI">
 
 
+
+
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -43,10 +46,9 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_centerHorizontal="true"
-
-        app:srcCompat="@drawable/phonepic2" />
+        app:srcCompat="@drawable/phonepic2"
+        android:layout_marginTop="70dp"/>
 
 
     <Button
@@ -59,54 +61,45 @@
         android:text="NEXT"
         android:textColor="#CDE8FA" />
 
-    <TextView
-        android:id="@+id/PlayerName"
+
+    <TableLayout
+        android:id="@+id/tableLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView3"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="10dp"
         android:layout_centerInParent="true"
-        android:text="@string/player_name"
-        android:visibility="invisible"
+        android:stretchColumns="0,1,2"
+        >
+
+        <TableRow
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/PlayerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_name"
+                android:visibility="invisible"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#F44336"
+                android:textSize="36sp" />
 
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#F44336"
+            <EditText
+                android:id="@+id/EnterName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:visibility="invisible"
+                tools:ignore="NotSibling" />
 
-        android:textSize="36sp" />
 
-    <EditText
-        android:id="@+id/ParentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        </TableRow>
+    </TableLayout>
 
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:visibility="invisible"
 
-        />
-
-    <EditText
-        android:id="@+id/EnterName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/PlayerName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:visibility="invisible"/>
-
-    <Button
-        android:id="@+id/Enterbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/EnterName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-60dp"
-        android:background="#F44336"
-        android:text="Enter"
-        android:visibility="invisible"/>
 
 
 </RelativeLayout>
