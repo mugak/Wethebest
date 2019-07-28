@@ -35,12 +35,14 @@ class SimpleCannon implements GameObject {
     private boolean isActive;
 
     private boolean shootNow;
-    SimpleCannon(Context context, Point screenSize) {
-        this.context = context;
 
+    SpaceInvadersApp app;
+    SimpleCannon(SpaceInvadersApp app) {
+        context = app.context;
+        this.app = app;
         lives = 3;
 
-        mScreenSize = screenSize;
+        mScreenSize = app.mScreenSize;
         mSize = new PointF(mScreenSize.x / 10, mScreenSize.x / 10);
         mRect = new RectF();
         mBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.player);
@@ -119,7 +121,7 @@ class SimpleCannon implements GameObject {
 //    }
 
     public PlayerProj shoot() {
-        PlayerProj mProj = new PlayerProj(context, mScreenSize);
+        PlayerProj mProj = new PlayerProj(app);
         mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
         shootNow = true;
         return mProj;
