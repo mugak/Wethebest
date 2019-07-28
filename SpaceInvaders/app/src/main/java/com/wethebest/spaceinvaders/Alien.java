@@ -55,7 +55,7 @@ class Alien implements GameObject {
 
     public void playAudio() {
         if (shootNow) {
-            //soundEngine.alienShoot();
+            soundEngine.alienShoot();
         }
 //        if(hit){
 //            soundEngine.alientHit();

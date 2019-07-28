@@ -62,7 +62,7 @@ public class AlienArmy {
     public List getAliens() {
         List<Alien> allAliens = new LinkedList<Alien>();
         for(AlienRow mAlienRow : alienRows) {
-            allAliens.addAll(mAlienRow.aliens);
+            allAliens.addAll(mAlienRow.getAliens());
         }
         return allAliens;
     }
