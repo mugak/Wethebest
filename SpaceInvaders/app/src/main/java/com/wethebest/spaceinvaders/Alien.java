@@ -57,9 +57,6 @@ class Alien implements GameObject {
         if (shootNow) {
             soundEngine.alienShoot();
         }
-//        if(hit){
-//            soundEngine.alientHit();
-//        }
     }
 
     public RectF getHitBox() {
@@ -102,6 +99,7 @@ class Alien implements GameObject {
             mProj = new AlienProj(app);
             RectF tempRect = mHitBox.getHitBox();
             mProj.setPos((tempRect.right + tempRect.left) / 2, tempRect.bottom);
+            //soundEngine.alienShoot();
             return mProj;
     }
 
