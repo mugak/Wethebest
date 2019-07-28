@@ -31,7 +31,18 @@ public class GameUI {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawText(Integer.toString(mScore), mApp.mScreenSize.y/12, mApp.mScreenSize.y/12, mPaint);
-
+        drawScore(canvas);
+        drawLives(canvas);
     }
+
+    public void drawScore(Canvas canvas) {
+        mPaint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText("Score: " + Integer.toString(mScore), mApp.mScreenSize.y/12, mApp.mScreenSize.y/12, mPaint);
+    }
+
+    public void drawLives(Canvas canvas) {
+        mPaint.setTextAlign(Paint.Align.RIGHT);
+        canvas.drawText("Lives: " + Integer.toString(mLives), mApp.mScreenSize.x - (mApp.mScreenSize.y/12), mApp.mScreenSize.y/12, mPaint);
+    }
+
 }
