@@ -19,7 +19,4 @@ class PlayerProj extends  Projectile{
             isActive = false; //PlayerProj can't shoot the player
         }
     }
-    //TODO: add checkbounds(), possibly add to GameObject interface
-
-
 }

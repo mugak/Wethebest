@@ -51,7 +51,7 @@ public class SoundEngine {
             AssetManager assetManager = context.getAssets();
 
             //Load all soundEngine files in memory
-            playerShootID = sp.load(assetManager.openFd("proj_shoot.ogg"), 0);
+            playerShootID = sp.load(assetManager.openFd("player_shoot.ogg"), 0);
             alienShootID = sp.load(assetManager.openFd("alien_shoot.ogg"), 0);
 
 

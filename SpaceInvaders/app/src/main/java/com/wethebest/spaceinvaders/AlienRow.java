@@ -29,6 +29,10 @@ public class AlienRow {
         aliens = new LinkedList<Alien>();
     }
 
+    public List<Alien> getAliens(){
+        return aliens;
+    }
+
     public void setAliens() {
         for(int i = 0; i < numAliens; i++) {
             //Alien mAlien = new Alien(app);

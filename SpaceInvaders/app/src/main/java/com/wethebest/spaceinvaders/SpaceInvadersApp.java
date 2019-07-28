@@ -103,7 +103,6 @@ class   SpaceInvadersApp extends SurfaceView implements Runnable {
 
                 if(shootNow) {
                     gameObjects.add(mPlayer.shoot());
-                    //soundEngine.playerShoot();
                     shootNow = false;
                 }
 
