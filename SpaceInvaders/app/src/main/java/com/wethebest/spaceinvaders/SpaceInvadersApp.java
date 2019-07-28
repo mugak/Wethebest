@@ -94,6 +94,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     @Override
     public void run() {
-        mGameState.run(this);
+        while(true) {
+            mGameState.run(this);
+        }
     }
 }
