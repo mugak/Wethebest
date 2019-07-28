@@ -28,17 +28,17 @@ class Alien implements GameObject {
     private SoundEngine soundEngine;
     private Context context;
 
-    Alien(Context context, SpaceInvadersApp app) {
+    Alien(SpaceInvadersApp app) {
         this.app = app;
-        this.context = context;
+        context = app.context;
+        soundEngine = new SoundEngine(context);
+
         mHitBox = new AlienHitBox(app);
         alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
 
         shootNow = false;
         waitingToShoot = false;
         framesUntilShoot = 0;
-
-        //soundEngine = new SoundEngine(context);
 
     }
 
@@ -53,10 +53,13 @@ class Alien implements GameObject {
         mHitBox.display(canvas);
     }
 
-    public void playAudio(){
-        if(shootNow){
-            //soundEngine.playerShoot();
+    public void playAudio() {
+        if (shootNow) {
+            //soundEngine.alienShoot();
         }
+//        if(hit){
+//            soundEngine.alientHit();
+//        }
     }
 
     public RectF getHitBox() {
@@ -96,7 +99,7 @@ class Alien implements GameObject {
     }
 
     public AlienProj shoot() {
-            mProj = new AlienProj(app.context, app.mScreenSize);
+            mProj = new AlienProj(app);
             RectF tempRect = mHitBox.getHitBox();
             mProj.setPos((tempRect.right + tempRect.left) / 2, tempRect.bottom);
             return mProj;

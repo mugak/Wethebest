@@ -12,6 +12,8 @@ import android.widget.Toast;
 import android.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View.OnKeyListener;
+import android.view.KeyEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +32,8 @@ public class Intro extends AppCompatActivity {
         final Button Nextbtn = findViewById(R.id.Next_btn);
         final TextView title = findViewById(R.id.textView2);
         final ImageView MainImage = findViewById(R.id.imageView3);
+        final ImageView Seagullpoop = findViewById(R.id.imageView4);
+        final ImageView usermessage = findViewById(R.id.imageView6);
 
         Enterbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,21 +49,41 @@ public class Intro extends AppCompatActivity {
                 MainImage.setVisibility(ImageView.INVISIBLE);
                 title.setVisibility(ImageView.INVISIBLE);
                 Nextbtn.setVisibility(ImageView.INVISIBLE);
-                Enterbtn.setVisibility(ImageView.VISIBLE);
                 EnterName.setVisibility(ImageView.VISIBLE);
                 PlayerName.setVisibility(ImageView.VISIBLE);
-
-
+                Seagullpoop.setVisibility(ImageView.VISIBLE);
+                usermessage.setVisibility(ImageView.VISIBLE);
 
 
             }
         });
 
+        //goes to next activity once name is entered
+        EnterName.setOnKeyListener(new OnKeyListener()
+        {
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    switch (keyCode)
+                    {
+                        case KeyEvent.KEYCODE_DPAD_CENTER:
+                        case KeyEvent.KEYCODE_ENTER:
+                            startActivity(new Intent(Intro.this, SpaceInvaders.class));
+                            return true;
+                        default:
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
 
 
 
     }
 
+    //main menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

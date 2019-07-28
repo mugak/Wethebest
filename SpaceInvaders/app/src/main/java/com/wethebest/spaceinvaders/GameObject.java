@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.RectF;
