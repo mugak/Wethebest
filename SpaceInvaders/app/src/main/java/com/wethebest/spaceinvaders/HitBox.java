@@ -112,10 +112,10 @@ public class HitBox {
 
     //Position of hitbox stays within screen boundaries
     void horizontalStayInBounds() {
-        if (mRect.left < 0) {
+        if (mRect.left <= 0) {
             setPosition(new PointF(0, mRect.top));
         } //reset to left edge
-        else if (mRect.right > app.mScreenSize.x) {
+        else if (mRect.right >= app.mScreenSize.x) {
             setPosition(new PointF(app.mScreenSize.x - size.x, mRect.top));
         } //reset pos to right edge
     }
@@ -135,11 +135,11 @@ public class HitBox {
     }
 
 
-    public PointF getMiddleFromBottom() {
+    public PointF centerBottom() {
         return new PointF((mRect.left + mRect.right) / 2, mRect.bottom);
     }
 
-    public PointF getMiddleFromTop() {
+    public PointF centerTop() {
         return new PointF((mRect.left + mRect.right) / 2, mRect.top);
     }
 

@@ -10,15 +10,16 @@ public class GameUI {
     public int mScore;
     public int mLives;
     private Paint mPaint;
-    SpaceInvadersApp mApp;
+    SpaceInvadersApp app;
 
     GameUI(SpaceInvadersApp app) {
-        mScore = 0;
-        mLives = SimpleCannon.MAX_LIVES;
-        mPaint = new Paint();
-        mApp = app;
+        this.app = app;
 
-        Typeface mTypeface = Typeface.createFromAsset(mApp.context.getAssets(), "fonts/Bangers-Regular.ttf");
+        mScore = 0;
+        mLives = app.mPlayer.MAX_LIVES;
+        mPaint = new Paint();
+
+        Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");
         mPaint.setTypeface(mTypeface);
         mPaint.setTextSize(100);
         mPaint.setARGB(255, 255,255, 255);
@@ -27,7 +28,7 @@ public class GameUI {
 
     public void update(int score) {
         mScore = score;
-        mLives = SimpleCannon.lives;
+        mLives = app.mPlayer.lives;
     }
 
     public void draw(Canvas canvas) {
@@ -37,12 +38,12 @@ public class GameUI {
 
     public void drawScore(Canvas canvas) {
         mPaint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("Score: " + Integer.toString(mScore), mApp.mScreenSize.y/12, mApp.mScreenSize.y/12, mPaint);
+        canvas.drawText("Score: " + Integer.toString(mScore), app.mScreenSize.y/12, app.mScreenSize.y/12, mPaint);
     }
 
     public void drawLives(Canvas canvas) {
         mPaint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawText("Lives: " + Integer.toString(mLives), mApp.mScreenSize.x - (mApp.mScreenSize.y/12), mApp.mScreenSize.y/12, mPaint);
+        canvas.drawText("Lives: " + Integer.toString(mLives), app.mScreenSize.x - (app.mScreenSize.y/12), app.mScreenSize.y/12, mPaint);
     }
 
 }
