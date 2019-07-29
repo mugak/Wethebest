@@ -29,6 +29,7 @@ public class Alien implements GameObject {
     //Movement
     private float speed = BASE_SPEED;
     private boolean movingRight = true; //Current movement direction
+    private boolean isActive = true;
 
     //Audio
     private boolean playShoot = false;
@@ -78,7 +79,7 @@ public class Alien implements GameObject {
     public void collide(GameObject gameObject) {
         if (gameObject instanceof PlayerProj) {
             //reset(mScreenSize);
-            mHitBox.isActive = false;
+            isActive = false;
         }
     }
 
@@ -87,7 +88,7 @@ public class Alien implements GameObject {
     }
 
     public boolean isActive(){
-        return mHitBox.isActive();
+        return isActive;
     }
 
     public boolean outOfBounds() {

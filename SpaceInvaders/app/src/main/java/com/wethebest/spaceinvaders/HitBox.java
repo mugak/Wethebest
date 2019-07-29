@@ -32,17 +32,12 @@ public class HitBox {
     //Aliens have a constant movement speed
     private final float SPEED = 500;
 
-    //Checks to see if object should be in game
-    //If false then the SpaceInvadersApp will remove it's reference to the object and it will dissapear
-    public boolean isActive;
 
     HitBox(SpaceInvadersApp app) {
         this.app = app;
 
         mRect = new RectF();
         mPaint = new Paint();
-
-        isActive = true;
         velocity = SPEED; //TODO hardcoded
     }
 
@@ -148,10 +143,6 @@ public class HitBox {
         return new PointF((mRect.left + mRect.right) / 2, mRect.top);
     }
 
-    //Returns true when hitbox is still active
-    public boolean isActive() {
-        return isActive;
-    }
 
     //Returns the hitbox
     RectF getmRect() {
