@@ -29,7 +29,6 @@ class SimpleCannon implements GameObject {
 
     SimpleCannon(SpaceInvadersApp app) {
         this.app = app;
-        //lives = MAX_LIVES;
 
         mHitBox = new HitBox(app);
         SIZE = new PointF(app.mScreenSize.x / 10, app.mScreenSize.x / 10);
