@@ -94,6 +94,7 @@ public class Intro extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //items in the menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 

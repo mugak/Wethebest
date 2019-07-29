@@ -63,6 +63,8 @@ public class Settings extends AppCompatActivity {
 
     }
 
+
+    //main menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -71,6 +73,22 @@ public class Settings extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        if(item.getItemId() == R.id.action_settings) {
+            startActivity(new Intent(Settings.this, Settings.class));
+        }
+
+        if(item.getItemId() == R.id.action_startover) {
+            startActivity(new Intent(Settings.this, SpaceInvaders.class));
+
+        }
+        if(item.getItemId() == R.id.action_newgame) {
+            startActivity(new Intent(Settings.this, Intro.class));
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }
