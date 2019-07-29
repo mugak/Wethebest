@@ -26,18 +26,17 @@ public class AlienArmy {
         COL_SPACING = app.mScreenSize.y / 10;
         STARTING_POSITION = new PointF(app.mScreenSize.y / 10, app.mScreenSize.y / 10);
 
-        Alien.setAlienSize(new PointF(app.mScreenSize.x / 10, app.mScreenSize.y / 10)); //TODO delete setAlienSize, access alienSize directly
-
         setAliens();
     }
 
     //Instantiates and sets positions of every alien
     private void setAliens() {
+        PointF alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);//TODO Size shared with Alien. maybe get from GameConfig
         for(int numRow = 0; numRow < NUM_ROWS; numRow++) {
-            float rowPosition = getNewPosition(STARTING_POSITION.y, numRow, Alien.alienSize.y + ROW_SPACING);
+            float rowPosition = getNewPosition(STARTING_POSITION.y, numRow, alienSize.y + ROW_SPACING);
 
             for(int numCol = 0; numCol < NUM_COLS; numCol++) {
-                float colPosition = getNewPosition(STARTING_POSITION.x, numCol, Alien.alienSize.x + COL_SPACING);
+                float colPosition = getNewPosition(STARTING_POSITION.x, numCol, alienSize.x + COL_SPACING);
 
                 Alien alien = new Alien(app);
                 alien.setPos(new PointF(colPosition, rowPosition));
@@ -83,7 +82,9 @@ public class AlienArmy {
     private void increaseSpeed() {
         int aliensKilled = (NUM_ROWS * NUM_COLS) - aliens.size(); //number of max aliens - number of current aliens
         float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
-        Alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in AlienHitBox
+        for(Alien alien : aliens) {
+            alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in HitBoxs
+        }
     }
 
     //Returns e^(kt)

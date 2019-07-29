@@ -11,24 +11,24 @@ class Alien implements GameObject {
     //Needed for Context and ScreenSize
     private SpaceInvadersApp app;
 
-    public HitBox mHitBox;
+    private HitBox mHitBox;
 
     //All aliens have the same size and velocity
-    public static PointF alienSize; //TODO set in AlienRow
+    private PointF alienSize;
 
     //Shoots projectiles randomly
     private AlienProj mProj;
     private static Random rand = new Random();
-    private static Point shootInterval = new Point(5, 20); // shoots every 5-20 seconds
+    private Point shootInterval = new Point(5, 20); // shoots every 5-20 seconds
     private long framesUntilShoot;
-    public boolean shootNow;
-    private boolean waitingToShoot;
+    public boolean shootNow = false;
+    private boolean waitingToShoot = false;
 
     private SoundEngine soundEngine;
 
     //Aliens have a constant movement speed
-    private static final float BASE_SPEED = 200;
-    private static float SPEED;
+    private final float BASE_SPEED = 200;
+    private float SPEED;
 
     //Current movement direction
     private boolean movingRight;
@@ -39,7 +39,7 @@ class Alien implements GameObject {
         soundEngine = new SoundEngine(app.context);
 
         //mHitBox = new AlienHitBox(app);
-        alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
+        alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);//TODO maybe get from GameConfig
         mHitBox.setSize(alienSize);
         mHitBox.setBitmap(R.drawable.invader_a01);
 
@@ -50,6 +50,7 @@ class Alien implements GameObject {
         shootNow = false;
         waitingToShoot = false;
         framesUntilShoot = 0;
+
 
     }
 
@@ -95,7 +96,7 @@ class Alien implements GameObject {
 
     }
 
-    public static void speedUp(float multiplier) {
+    public void speedUp(float multiplier) {
         SPEED = BASE_SPEED * multiplier;
     }
 
@@ -122,10 +123,6 @@ class Alien implements GameObject {
             }
     }
 
-    public static void setAlienSize(PointF size) {
-        alienSize = size;
-        //TODO change to setHitBoxSize and hitBoxSize?
-    }
 
 
     public AlienProj shoot() {
