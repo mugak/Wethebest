@@ -21,7 +21,7 @@ class AlienProj implements GameObject{
         this.app = app;
         mScreenSize = app.mScreenSize;
         mHitBox = new HitBox(app);
-        mHitBox.setSize(new PointF(mScreenSize.x / 80, mScreenSize.x / 40));
+        mHitBox.setSize(new PointF(mScreenSize.x /160, mScreenSize.x / 40));
         mHitBox.setBitmap(R.drawable.alien_laser);
         yVel = mScreenSize.y/3;
     }

@@ -200,7 +200,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             if (object1 instanceof AlienProj || object1 instanceof PlayerProj) {
 
                 for (GameObject object2 : gameObjects) {
-                    if (!(object2 instanceof Projectile)) {
+                    if (!(object2 instanceof AlienProj || object2 instanceof  PlayerProj)) {
                         collide(object1, object2);
                     }
                 }
