@@ -14,6 +14,7 @@ import android.view.SurfaceView;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Random;
 
 class SpaceInvadersApp extends SurfaceView implements Runnable {
 
@@ -37,8 +38,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public int score;
 
     private boolean shootNow;
-
-    SoundEngine soundEngine;
+    public Random rand;
+    public SoundEngine soundEngine;
 
 
 
@@ -71,6 +72,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     }
 
     private void startGame() {
+        rand = new Random();
         gameObjects = new LinkedList<>();
 
         mPlayer = new SimpleCannon(this);

@@ -7,99 +7,66 @@ import android.graphics.RectF;
 
 import java.util.Random;
 
-class Alien implements GameObject {
-    //Needed for Context and ScreenSize
-    private SpaceInvadersApp app;
+public class Alien implements GameObject {
+    //DEFAULTS
+    private final int SPRITE_ID = R.drawable.invader_a01;
+    private final float BASE_SPEED = 200;
+    private final Point SHOOT_INTERVAL = new Point(5, 20); // shoots every 5-20 seconds
 
+    //SET BASED ON SCREEN SIZE
+    private final PointF SIZE;
+
+    private SpaceInvadersApp app;
     private HitBox mHitBox;
 
-    //All aliens have the same size and velocity
-    private PointF alienSize;
-
-    //Shoots projectiles randomly
+    //Shoot projectiles randomly
     private AlienProj mProj;
-    private static Random rand = new Random();
-    private Point shootInterval = new Point(5, 20); // shoots every 5-20 seconds
-    private long framesUntilShoot;
+    private Point shootInterval = SHOOT_INTERVAL;
+    private long framesUntilShoot = 0;
+    private boolean idle = true;
     public boolean shootNow = false;
-    private boolean waitingToShoot = false;
 
-    private SoundEngine soundEngine;
+    //Movement
+    private float speed = BASE_SPEED;
+    private boolean movingRight = true; //Current movement direction
 
-    //Aliens have a constant movement speed
-    private final float BASE_SPEED = 200;
-    private float SPEED;
-
-    //Current movement direction
-    private boolean movingRight;
+    //Audio
+    private boolean playShoot = false;
 
     Alien(SpaceInvadersApp app) {
-        mHitBox = new HitBox(app);
         this.app = app;
-        soundEngine = new SoundEngine(app.context);
 
-        //mHitBox = new AlienHitBox(app);
-        alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);//TODO maybe get from GameConfig
-        mHitBox.setSize(alienSize);
-        mHitBox.setBitmap(R.drawable.invader_a01);
-
-        mHitBox.velocity = SPEED = BASE_SPEED;
-
-        movingRight = true;
-
-        shootNow = false;
-        waitingToShoot = false;
-        framesUntilShoot = 0;
-
-
+        mHitBox = new HitBox(app);
+        SIZE = new PointF(app.mScreenSize.x / 10, app.mScreenSize.y / 10);//TODO repeated in AlienArmy, maybe get from GameConfig
+        mHitBox.setSize(SIZE);
+        mHitBox.setBitmap(SPRITE_ID);
+        mHitBox.velocity = speed;
     }
 
     public void update(long fps) {
-        //mHitBox.update(fps);
         if(movingRight) {
-            mHitBox.velocity = SPEED;
+            mHitBox.velocity = speed;
         }
         else {
-            mHitBox.velocity = -SPEED;
+            mHitBox.velocity = -speed;
         }
 
         mHitBox.moveHorizontally(mHitBox.velocity / fps);
 
         timeToShoot(fps);
         checkAlienWin();
-
     }
 
     public void display(Canvas canvas){
         mHitBox.display(canvas);
     }
 
-
-
     public void playAudio() {
-        if (shootNow) {
-            soundEngine.alienShoot();
+        if(playShoot) {
+            app.soundEngine.alienShoot();
+            playShoot = false;
         }
     }
-
-
-    public boolean outOfBounds() {
-        //return mHitBox.horizontalOutOfBounds();
-        return mHitBox.horizontalOutOfBounds();
-    }
-
-    public void reverseXVelocity() {
-        //mHitBox.reverseXVelocity();
-            movingRight = !movingRight;
-            mHitBox.moveDown();
-        mHitBox.horizontalStayInBounds();
-
-    }
-
-    public void speedUp(float multiplier) {
-        SPEED = BASE_SPEED * multiplier;
-    }
-
 
     public void setPos(PointF position) {
         mHitBox.setPosition(position);
@@ -108,51 +75,10 @@ class Alien implements GameObject {
     public void reset(Point location) {
     }
 
-
-
     public void collide(GameObject gameObject) {
-        //mHitBox.collide(gameObject);
-            //SpaceInvaders app already makes this check to make sure the gameObject is a projectile,
-            // but this is a good check to make sure the Alien class still works if the spaceInvadersApp
-            // class changes
-            //NOTE: SpaceInvadersApp.java checks for the collision so there is no need to in this class
-            //Collide only describes what the class should do when it is collided with
-            if (gameObject instanceof PlayerProj) {
-                //reset(mScreenSize);
-                mHitBox.isActive = false;
-            }
-    }
-
-
-
-    public AlienProj shoot() {
-            mProj = new AlienProj(app);
-            //RectF tempRect = mHitBox.getmRect();
-            RectF tempRect = mHitBox.getmRect();
-            mProj.setPos((tempRect.right + tempRect.left) / 2, tempRect.bottom);
-            soundEngine.alienShoot();
-            return mProj;
-    }
-
-    //calculates when to shoot shooting by counting the number of frames
-    private void timeToShoot(long fps) {
-        if(!waitingToShoot) {
-            int seconds = rand.nextInt(shootInterval.y - shootInterval.x) + shootInterval.x ; //random int in shooting interval
-            framesUntilShoot = fps * seconds;
-            waitingToShoot = true;
-        }
-        else if(waitingToShoot) {
-            framesUntilShoot--;
-            if (framesUntilShoot <= 0) {
-                shootNow = true;
-                waitingToShoot = false;
-            }
-        }
-    }
-
-    private void checkAlienWin() {
-        if(/*mHitBox.*/mHitBox.bottomOutOfBounds()) {
-            SimpleCannon.lives = 0; //game over when aliens reach bottom of screen
+        if (gameObject instanceof PlayerProj) {
+            //reset(mScreenSize);
+            mHitBox.isActive = false;
         }
     }
 
@@ -164,4 +90,54 @@ class Alien implements GameObject {
         return mHitBox.isActive();
     }
 
+    public boolean outOfBounds() {
+        return mHitBox.horizontalOutOfBounds();
+    }
+
+
+
+
+
+    public void reverseXVelocity() {
+        movingRight = !movingRight;
+        mHitBox.moveDown();
+        mHitBox.horizontalStayInBounds();
+    }
+
+    public void speedUp(float multiplier) {
+        speed = BASE_SPEED * multiplier;
+    }
+
+    public AlienProj shoot() {
+            mProj = new AlienProj(app);
+            mProj.setPos(mHitBox.getMiddleFromBottom().x, mHitBox.getMiddleFromBottom().y);
+            playShoot = true;
+            return mProj;
+    }
+
+    //calculates when to shoot shooting by counting the number of frames
+    private void timeToShoot(long fps) {
+        if(idle) {
+            int seconds = getRandomInt(shootInterval);
+            framesUntilShoot = fps * seconds;
+            idle = false;
+        } //when idle, get a random number of seconds
+        else if(!idle) {
+            framesUntilShoot--;
+            if (framesUntilShoot <= 0) {
+                shootNow = true;
+                idle = true;
+            }
+        } //when not idle, decrease frame count until ready to shoot
+    }
+
+    private int getRandomInt(Point interval) {
+        return app.rand.nextInt(interval.y - interval.x) + interval.x;
+    }
+
+    private void checkAlienWin() {
+        if(mHitBox.bottomOutOfBounds()) {
+            SimpleCannon.lives = 0; //game over when aliens reach bottom of screen
+        }
+    }
 }

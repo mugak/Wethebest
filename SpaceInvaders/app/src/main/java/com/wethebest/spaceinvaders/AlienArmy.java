@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AlienArmy {
+    //DEFAULTS
     private final int NUM_ROWS = 4;
     private final int NUM_COLS = 4;
 
@@ -31,12 +32,12 @@ public class AlienArmy {
 
     //Instantiates and sets positions of every alien
     private void setAliens() {
-        PointF alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);//TODO Size shared with Alien. maybe get from GameConfig
+        PointF size = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);//TODO Size shared with Alien. maybe get from GameConfig
         for(int numRow = 0; numRow < NUM_ROWS; numRow++) {
-            float rowPosition = getNewPosition(STARTING_POSITION.y, numRow, alienSize.y + ROW_SPACING);
+            float rowPosition = getNewPosition(STARTING_POSITION.y, numRow, size.y + ROW_SPACING);
 
             for(int numCol = 0; numCol < NUM_COLS; numCol++) {
-                float colPosition = getNewPosition(STARTING_POSITION.x, numCol, alienSize.x + COL_SPACING);
+                float colPosition = getNewPosition(STARTING_POSITION.x, numCol, size.x + COL_SPACING);
 
                 Alien alien = new Alien(app);
                 alien.setPos(new PointF(colPosition, rowPosition));
@@ -82,6 +83,7 @@ public class AlienArmy {
     private void increaseSpeed() {
         int aliensKilled = (NUM_ROWS * NUM_COLS) - aliens.size(); //number of max aliens - number of current aliens
         float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
+
         for(Alien alien : aliens) {
             alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in HitBoxs
         }
