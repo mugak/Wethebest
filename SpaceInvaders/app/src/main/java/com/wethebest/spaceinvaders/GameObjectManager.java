@@ -123,9 +123,7 @@ public class GameObjectManager {
     private void detectCollisions() {
         //Checks to see if the first object is a projectile because in SpaceInvaders only
         // projectiles collide with non projectiles. There are no other types of collisions
-        Iterator<GameObject> firstObjectItr = gameObjects.iterator();
-        while (firstObjectItr.hasNext()) {
-            GameObject object1 = firstObjectItr.next();
+        for (GameObject object1 : gameObjects) {
             if (object1 instanceof Projectile) {
 
                 for (GameObject object2 : gameObjects) {
