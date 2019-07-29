@@ -22,8 +22,7 @@ public class Alien implements GameObject {
     //Shoot projectiles randomly
     private AlienProj mProj;
     private Point shootInterval = SHOOT_INTERVAL;
-    private long framesUntilShoot = 0;
-    private boolean idle = true;
+    private long frameCount = 0;
     public boolean shootNow = false;
 
     //Movement
@@ -73,7 +72,7 @@ public class Alien implements GameObject {
         mHitBox.setPosition(position);
     }
 
-    public void reset(Point location) {
+    public void reset() {
     }
 
     public void collide(GameObject gameObject) {
@@ -111,25 +110,23 @@ public class Alien implements GameObject {
 
     public AlienProj shoot() {
             mProj = new AlienProj(app);
-            mProj.mHitBox.setPosition(new PointF(mHitBox.getMiddleFromBottom().x, mHitBox.getMiddleFromBottom().y));
+            mProj.mHitBox.setPosition(mHitBox.centerBottom());
             playShoot = true;
             return mProj;
     }
 
     //calculates when to shoot shooting by counting the number of frames
     private void timeToShoot(long fps) {
-        if(idle) {
+        if(frameCount <= 0) {
             int seconds = getRandomInt(shootInterval);
-            framesUntilShoot = fps * seconds;
-            idle = false;
-        } //when idle, get a random number of seconds
-        else if(!idle) {
-            framesUntilShoot--;
-            if (framesUntilShoot <= 0) {
+            frameCount = fps * seconds;
+        } //if alien is not waiting to shoot, assign frameCount
+        else {
+            frameCount--;
+            if (frameCount <= 0) {
                 shootNow = true;
-                idle = true;
             }
-        } //when not idle, decrease frame count until ready to shoot
+        } //alien is waiting to shoot
     }
 
     private int getRandomInt(Point interval) {
@@ -138,7 +135,7 @@ public class Alien implements GameObject {
 
     private void checkAlienWin() {
         if(mHitBox.bottomOutOfBounds()) {
-            SimpleCannon.lives = 0; //game over when aliens reach bottom of screen
+            app.mPlayer.lives = 0; //game over when aliens reach bottom of screen
         }
     }
 }
