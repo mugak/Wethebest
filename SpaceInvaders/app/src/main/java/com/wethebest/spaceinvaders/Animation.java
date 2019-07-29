@@ -1,4 +1,4 @@
-//source: http://gamecodeschool.com/android/coding-android-sprite-sheet-animations/?fbclid=IwAR058Eq8h-hJHmIh8lbXh9uwGl6B8tiEHsr0m92_Wrh5Ja3D3rHI5ueAKJ0
+//starter code: http://gamecodeschool.com/android/coding-android-sprite-sheet-animations/?fbclid=IwAR058Eq8h-hJHmIh8lbXh9uwGl6B8tiEHsr0m92_Wrh5Ja3D3rHI5ueAKJ0
 
 package com.wethebest.spaceinvaders;
 
@@ -33,20 +33,18 @@ public class Animation {
         this.pixelsPerMetre = pixelsPerMetre;
     }
 
-    public Rect getCurrentFrame(long time, float xVelocity, boolean moves){
+    public Rect getCurrentFrame(long time, float xVelocity, boolean moves) {
 
-        if(xVelocity!=0 || moves == false) {// Only animate if the object is moving or it is an object which doesn't move
-            if (time > frameTicker + framePeriod) {
-                frameTicker = time;
-                currentFrame++;
-                if (currentFrame >= frameCount) {
-                    //if (currentFrame >= frameCount) {
-                    currentFrame = 0;
-                }
+        if (time > frameTicker + framePeriod) {
+            frameTicker = time;
+            currentFrame++;
+            // loop around to first frame
+            if (currentFrame >= frameCount) {
+                currentFrame = 0;
             }
         }
-        //update the left and right values of the source of
-        //the next frame on the spritesheet
+        // update the left and right values of the source of
+        // the next frame on the spritesheet
         this.sourceRect.left = currentFrame * frameWidth;
         this.sourceRect.right = this.sourceRect.left + frameWidth;
 
