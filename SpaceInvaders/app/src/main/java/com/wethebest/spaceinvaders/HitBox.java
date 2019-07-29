@@ -139,6 +139,15 @@ public class HitBox {
 
     }
 
+
+    public PointF getMiddleFromBottom() {
+        return new PointF((mRect.left + mRect.right) / 2, mRect.bottom);
+    }
+
+    public PointF getMiddleFromTop() {
+        return new PointF((mRect.left + mRect.right) / 2, mRect.top);
+    }
+
     //Returns true when hitbox is still active
     public boolean isActive() {
         return isActive;

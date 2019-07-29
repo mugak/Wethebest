@@ -98,9 +98,9 @@ public class UI extends AppCompatActivity {
                         0.0f, 0.0f);//  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
 
                 animation.setDuration(5000);  // animation duration
-               animation.setRepeatCount(1);  // animation repeat count
+                animation.setRepeatCount(1);   // animation repeat count
                 animation.setRepeatMode(0);   // repeat animation (left to right, right to left )
-               animation.setFillAfter(true);
+                animation.setFillAfter(true);
 
                 Spaceship.startAnimation(animation);  // start animation
 
