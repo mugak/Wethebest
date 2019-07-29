@@ -27,9 +27,9 @@ public class Alien implements GameObject {
     public boolean shootNow = false;
 
     //Movement
+    private boolean isActive = true;
     private float speed = BASE_SPEED;
     private boolean movingRight = true; //Current movement direction
-    private boolean isActive = true;
 
     //Audio
     private boolean playShoot = false;

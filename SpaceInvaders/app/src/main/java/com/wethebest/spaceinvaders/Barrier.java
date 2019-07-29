@@ -15,7 +15,11 @@ public class Barrier {
     private final PointF BLOCK_SIZE;
     private BarrierBlock[][] barrierBlocks;
 
-    Barrier(Point screenSize, PointF centerPosition) {
+    private SpaceInvadersApp app;
+    Barrier(Point screenSize, PointF centerPosition, SpaceInvadersApp app) {
+
+        this.app = app;
+
         mScreenSize = screenSize;
         barrierBlocks = new BarrierBlock[BARRIER_SIZE.x][BARRIER_SIZE.y];
         BLOCK_SIZE = new PointF(mScreenSize.x / (float) 20, mScreenSize.y / (float) 40);
@@ -35,7 +39,8 @@ public class Barrier {
             for(int j = 0; j < BARRIER_SIZE.y; j++) {
                 PointF blockPos = new PointF(mBarrierPosition.x + i * BLOCK_SIZE.x,
                         mBarrierPosition.y + j * BLOCK_SIZE.y);
-                BarrierBlock mBarrierBlock = new BarrierBlock(BLOCK_SIZE, blockPos);
+                BarrierBlock mBarrierBlock = new BarrierBlock(app);
+                mBarrierBlock.setPos(blockPos);
 
                 barrierBlocks[i][j] = mBarrierBlock;
             }

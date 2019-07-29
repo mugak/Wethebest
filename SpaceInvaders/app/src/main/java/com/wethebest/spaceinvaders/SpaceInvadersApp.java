@@ -62,7 +62,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         for (int i = 1; i < numBarriers + 1; i++) {
             PointF barrierCenterPosition = Util.computeBarrierPosition(i, numBarriers, mScreenSize);
 
-            addBarrierToGameObjects(new Barrier(mScreenSize, barrierCenterPosition));
+            addBarrierToGameObjects(new Barrier(mScreenSize, barrierCenterPosition, this));
         }
     }
 
@@ -114,6 +114,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 mAlienArmy.update(mFPS);
                 gameObjects.addAll(mAlienArmy.getAlienProjs());
                 detectCollisions();
+
+                for(GameObject object : gameObjects) {
+                    object.playAudio();
+                }
             }
 
             removeInactiveObjects();
@@ -166,7 +170,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
             for (GameObject gameObject : gameObjects) {
                 gameObject.display(mCanvas);
-                gameObject.playAudio();
             }
 
             mAlienArmy.draw(mCanvas);
