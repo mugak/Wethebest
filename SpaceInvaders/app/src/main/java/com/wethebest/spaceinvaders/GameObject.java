@@ -22,7 +22,7 @@ public interface GameObject {
     //Resets state of object to beginning of GameState
     //Examples would include moving GameObjects to their starting positions in the game or
     // deactivating an object that shouldn't be instantiated yet
-    void reset(Point location);
+    void reset();
 
     //Implements the behavior of how an object should change state when it is collided with
     //Implementations of GameObject should check to see if the passed gameObject parameter is

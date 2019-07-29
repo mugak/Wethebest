@@ -135,11 +135,11 @@ public class HitBox {
     }
 
 
-    public PointF getMiddleFromBottom() {
+    public PointF centerBottom() {
         return new PointF((mRect.left + mRect.right) / 2, mRect.bottom);
     }
 
-    public PointF getMiddleFromTop() {
+    public PointF centerTop() {
         return new PointF((mRect.left + mRect.right) / 2, mRect.top);
     }
 

@@ -76,7 +76,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mGameUI = new GameUI(this);
 
         for (GameObject gameObject : gameObjects) {
-            gameObject.reset(mScreenSize);
+            gameObject.reset();
         }
     }
 
