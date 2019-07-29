@@ -8,6 +8,7 @@ class AlienProj extends Projectile{
 
     AlienProj(SpaceInvadersApp app){
         super(app);
+
         this.mBitmap = BitmapFactory.decodeResource(app.context.getResources(), R.drawable.alien_laser);
         yVel = mScreenSize.x/3; //Projectile shoots down
     }

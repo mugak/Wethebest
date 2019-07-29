@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-class   SpaceInvadersApp extends SurfaceView implements Runnable {
+class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     private SurfaceHolder mOurHolder;
     private Canvas mCanvas;
@@ -75,9 +75,8 @@ class   SpaceInvadersApp extends SurfaceView implements Runnable {
 
         mPlayer = new SimpleCannon(this);
         mAlienArmy = new AlienArmy(this);
-        mAlienArmy.setAliens();
 
-        gameObjects.addAll(mAlienArmy.getAliens());
+        gameObjects.addAll(mAlienArmy.aliens);
         gameObjects.add(mPlayer);
 
         score = 0;
@@ -204,7 +203,7 @@ class   SpaceInvadersApp extends SurfaceView implements Runnable {
                     }
                 }
 
-                for (GameObject alienObject : mAlienArmy.allAliens) {
+                for (GameObject alienObject : mAlienArmy.aliens) {
                     collide(object1, alienObject);
                 }
             }
