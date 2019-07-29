@@ -33,8 +33,7 @@ public class Animation {
         this.pixelsPerMetre = pixelsPerMetre;
     }
 
-
-    public Rect getCurrentFrame(long time, float xVelocity, boolean moves){
+    public Rect getCurrentFrame(long time, float xVelocity, boolean moves) {
 
         if (time > frameTicker + framePeriod) {
             frameTicker = time;
