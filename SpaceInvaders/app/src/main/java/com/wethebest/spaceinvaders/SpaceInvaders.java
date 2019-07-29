@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.graphics.Point;
 import android.view.Display;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
@@ -47,13 +49,18 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
         // with the Bitmap to draw on
         myCanvas = new Canvas(myBlankBitmap);
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         enableImmersiveMode();
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            display.getRealSize(size);
+        }
+        else {
+            display.getSize(size);
+        }
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
         setContentView(mSpaceInvadersApp);
     }

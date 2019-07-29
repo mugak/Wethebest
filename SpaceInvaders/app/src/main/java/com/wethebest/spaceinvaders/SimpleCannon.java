@@ -5,7 +5,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-class SimpleCannon implements GameObject {
+public class SimpleCannon implements GameObject {
     //DEFAULTS
     private final int SPRITE_ID = R.drawable.player;
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
@@ -77,7 +77,7 @@ class SimpleCannon implements GameObject {
     }
 
     public void reset() {
-        setPosition(DEFAULT_POSITION);
+        //setPosition(DEFAULT_POSITION);
     }
 
     public boolean isActive() {
