@@ -94,6 +94,25 @@ public class Intro extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //items in the menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.action_settings) {
+            startActivity(new Intent(Intro.this, Settings.class));
+        }
+
+        if(item.getItemId() == R.id.action_startover) {
+            startActivity(new Intent(Intro.this, SpaceInvaders.class));
+
+        }
+        if(item.getItemId() == R.id.action_newgame) {
+            startActivity(new Intent(Intro.this, Intro.class));
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     //back button forces to go to intro activity and stops app from crashing
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -3,18 +3,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
+    <item
+        android:icon="@drawable/settingsicon"
+        android:title="gameover_menu"
+        app2:showAsAction="always">
+        <menu>
+
+            <item android:id="@+id/action_settings"
+                android:orderInCategory="1"
+                android:title="Settings"/>
+
+            <item android:title="High Score"
+                android:id="@+id/action_highscore"
+                android:orderInCategory="2" />
+
+            <item android:title="Intro Page"
+                android:id="@+id/action_newgame"
+                android:orderInCategory="3"/>
+
+        </menu>
+    </item>
 
 
-    <item android:id="@+id/action_settings"
-        android:title="Settings"
-        />
-
-    <item android:title="Intro Page"
-        android:id="@+id/action_newgame" />
 
 
-    <item android:title="High Score"
-        android:id="@+id/action_highscore" />
+
+
 
 
 

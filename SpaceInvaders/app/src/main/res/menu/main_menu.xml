@@ -3,19 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
  >
 
+    <item
+        android:icon="@drawable/settingsicon"
+        android:title="menu"
+        app2:showAsAction="always">
+        <menu>
 
+            <item android:id="@+id/action_settings"
+                android:orderInCategory="1"
+                android:title="Settings"/>
 
-    <item android:id="@+id/action_settings"
-        android:title="Settings"
-         />
+            <item android:title="New Game"
+                android:id="@+id/action_startover"
+                android:orderInCategory="2" />
 
+            <item android:title="Intro Page"
+                android:id="@+id/action_newgame"
+                android:orderInCategory="3"/>
 
-    <item android:title="New Game"
-        android:id="@+id/action_startover" />
-
-    <item android:title="Intro Page"
-        android:id="@+id/action_newgame" />
-
+        </menu>
+    </item>
 
 
 

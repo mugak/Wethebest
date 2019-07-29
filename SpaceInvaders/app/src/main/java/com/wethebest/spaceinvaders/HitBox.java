@@ -27,13 +27,13 @@ public class HitBox {
 
     //
     public float velocity; //
-    public static PointF size; //
+    public PointF size; //
 
     //Aliens have a constant movement speed
     private final float SPEED = 500;
 
-
-    //Tells the game whether the object should still be in game
+    //Checks to see if object should be in game
+    //If false then the SpaceInvadersApp will remove it's reference to the object and it will dissapear
     public boolean isActive;
 
     HitBox(SpaceInvadersApp app) {
@@ -145,7 +145,7 @@ public class HitBox {
     }
 
     //Returns the hitbox
-    RectF getHitBox() {
+    RectF getmRect() {
         return mRect;
     }
 
@@ -157,6 +157,14 @@ public class HitBox {
 
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
-        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
+        canvas.drawBitmap(mBitmap, this.getmRect().left, this.getmRect().top, mPaint);
     }
+
+    //Necessary for the SpaceInvadersApp class to calculate if a collision has occured between two
+    // objects
+    public RectF getHitBox(){
+        return mRect;
+    }
+
+
 }
