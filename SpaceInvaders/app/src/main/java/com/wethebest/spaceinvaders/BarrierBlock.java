@@ -54,7 +54,7 @@ public class BarrierBlock implements GameObject {
         mHitBox.setPosition(pos);
     }
 
-    public void reset() { }
+    public void reset(Point location) { }
 
     public RectF getHitBox() {
         return mHitBox.getHitBox();

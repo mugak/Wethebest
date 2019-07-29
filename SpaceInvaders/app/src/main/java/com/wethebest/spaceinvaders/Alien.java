@@ -73,7 +73,7 @@ public class Alien implements GameObject {
         mHitBox.setPosition(position);
     }
 
-    public void reset() {
+    public void reset(Point location) {
     }
 
     public void collide(GameObject gameObject) {
@@ -111,7 +111,7 @@ public class Alien implements GameObject {
 
     public AlienProj shoot() {
             mProj = new AlienProj(app);
-            mProj.mHitBox.setPosition(mHitBox.centerBottom());
+            mProj.mHitBox.setPosition(new PointF(mHitBox.getMiddleFromBottom().x, mHitBox.getMiddleFromBottom().y));
             playShoot = true;
             return mProj;
     }

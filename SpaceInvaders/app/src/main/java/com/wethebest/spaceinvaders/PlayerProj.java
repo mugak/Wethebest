@@ -37,7 +37,7 @@ class PlayerProj implements GameObject{
         //Creation and removal of projectile is handled in cannon and invader classes
     }
 
-    public void reset(){
+    public void reset(Point location){
         //Probably will override supermethod in GameObject class
     }
 
