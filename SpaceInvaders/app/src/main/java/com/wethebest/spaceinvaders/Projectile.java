@@ -18,10 +18,10 @@ public abstract class Projectile implements GameObject {
     //Hitbox associated with rect
 
     public HitBox mHitBox;
-//    protected RectF mRect = new RectF();
-//
-//    protected float xVel = 0;
-//    protected float yVel = 0;
+    protected RectF mRect = new RectF();
+
+    protected float xVel = 0;
+    protected float yVel = 0;
 
     private float projWidth;
     private float projHeight;
@@ -46,17 +46,17 @@ public abstract class Projectile implements GameObject {
     }
 
     //Updates the position of the projectile
-//    public void update(long fps){
-//        mRect.left = mRect.left + (xVel/fps);
-//        mRect.top = mRect.top + (yVel/fps);
-//
-//        mRect.right = mRect.left + projWidth;
-//        mRect.bottom = mRect.top + projHeight;
-//
-//        if(isActive) {
-//            checkBounds();
-//        }
-//    }
+    public void update(long fps){
+        mRect.left = mRect.left + (xVel/fps);
+        mRect.top = mRect.top + (yVel/fps);
+
+        mRect.right = mRect.left + projWidth;
+        mRect.bottom = mRect.top + projHeight;
+
+        if(isActive) {
+            checkBounds();
+        }
+    }
 
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));
