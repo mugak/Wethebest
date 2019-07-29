@@ -1,6 +1,5 @@
 package com.wethebest.spaceinvaders;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PointF;
@@ -8,11 +7,11 @@ import android.graphics.RectF;
 
 import java.util.Random;
 
-class Alien extends HitBox implements GameObject {
+class Alien implements GameObject {
     //Needed for Context and ScreenSize
     private SpaceInvadersApp app;
 
-    public AlienHitBox mHitBox;
+    public HitBox mHitBox;
 
     //All aliens have the same size and velocity
     public static PointF alienSize; //TODO set in AlienRow
@@ -35,17 +34,17 @@ class Alien extends HitBox implements GameObject {
     private boolean movingRight;
 
     Alien(SpaceInvadersApp app) {
-        super(app);
+        mHitBox = new HitBox(app);
         this.app = app;
         soundEngine = new SoundEngine(app.context);
 
-        mHitBox = new AlienHitBox(app);
+        //mHitBox = new AlienHitBox(app);
         alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
-        setSize(alienSize);
-        setBitmap(R.drawable.invader_a01);
+        mHitBox.setSize(alienSize);
+        mHitBox.setBitmap(R.drawable.invader_a01);
 
-        SPEED = BASE_SPEED;
-        isActive = true;
+        mHitBox.velocity = SPEED = BASE_SPEED;
+
         movingRight = true;
 
         shootNow = false;
@@ -55,26 +54,26 @@ class Alien extends HitBox implements GameObject {
     }
 
     public void update(long fps) {
-        mHitBox.update(fps);
-//        if(movingRight) {
-//            velocity = SPEED;
-//        }
-//        else {
-//            velocity = -SPEED;
-//        }
-//
-//        moveHorizontally(velocity / fps);
+        //mHitBox.update(fps);
+        if(movingRight) {
+            mHitBox.velocity = SPEED;
+        }
+        else {
+            mHitBox.velocity = -SPEED;
+        }
+
+        mHitBox.moveHorizontally(mHitBox.velocity / fps);
 
         timeToShoot(fps);
         checkAlienWin();
 
     }
 
-
-
-    public void display(Canvas canvas) {
-        display(canvas);
+    public void display(Canvas canvas){
+        mHitBox.display(canvas);
     }
+
+
 
     public void playAudio() {
         if (shootNow) {
@@ -82,19 +81,17 @@ class Alien extends HitBox implements GameObject {
         }
     }
 
-    public RectF getHitBox() {
-        return mHitBox.getHitBox();
-    }
 
     public boolean outOfBounds() {
+        //return mHitBox.horizontalOutOfBounds();
         return mHitBox.horizontalOutOfBounds();
     }
 
     public void reverseXVelocity() {
         //mHitBox.reverseXVelocity();
             movingRight = !movingRight;
-            moveDown();
-            horizontalStayInBounds();
+            mHitBox.moveDown();
+        mHitBox.horizontalStayInBounds();
 
     }
 
@@ -121,23 +118,20 @@ class Alien extends HitBox implements GameObject {
             //Collide only describes what the class should do when it is collided with
             if (gameObject instanceof PlayerProj) {
                 //reset(mScreenSize);
-                isActive = false;
+                mHitBox.isActive = false;
             }
     }
 
     public static void setAlienSize(PointF size) {
         alienSize = size;
-        AlienHitBox.alienSize = alienSize;
         //TODO change to setHitBoxSize and hitBoxSize?
     }
 
-    public boolean isActive() {
-        return mHitBox.isActive();
-    }
 
     public AlienProj shoot() {
             mProj = new AlienProj(app);
-            RectF tempRect = mHitBox.getHitBox();
+            //RectF tempRect = mHitBox.getmRect();
+            RectF tempRect = mHitBox.getmRect();
             mProj.setPos((tempRect.right + tempRect.left) / 2, tempRect.bottom);
             soundEngine.alienShoot();
             return mProj;
@@ -160,10 +154,17 @@ class Alien extends HitBox implements GameObject {
     }
 
     private void checkAlienWin() {
-        if(mHitBox.bottomOutOfBounds()) {
+        if(/*mHitBox.*/mHitBox.bottomOutOfBounds()) {
             SimpleCannon.lives = 0; //game over when aliens reach bottom of screen
         }
     }
 
+    public RectF getHitBox(){
+        return mHitBox.getHitBox();
+    }
+
+    public boolean isActive(){
+        return mHitBox.isActive();
+    }
 
 }
