@@ -40,7 +40,7 @@ public class AlienArmy {
                         STARTING_POSITION.y + j * (size.y + ROW_SPACING));
 
                 Alien alien = new Alien(app);
-                alien.setPos(position);
+                alien.setPosition(position);
                 aliens.add(alien);
             }
         }

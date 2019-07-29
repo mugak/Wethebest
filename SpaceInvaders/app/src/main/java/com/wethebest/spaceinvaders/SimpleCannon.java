@@ -5,22 +5,14 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-public class SimpleCannon implements GameObject {
+public class SimpleCannon extends GameObject {
     //DEFAULTS
     private final int SPRITE_ID = R.drawable.player;
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
-    private final PointF DEFAULT_POSITION;
 
     private final int INVICIBLE_SECONDS = 2; //how long cannon is invincible
     public final int MAX_LIVES = 3;
     public int lives = MAX_LIVES;
-
-    //SET BASED ON SCREEN SIZE
-    private final PointF SIZE;
-
-    private SpaceInvadersApp app;
-    private HitBox mHitBox;
-    private boolean isActive = true;
 
     private boolean playShoot = false;
 
@@ -28,15 +20,8 @@ public class SimpleCannon implements GameObject {
     private long frameCount = 0;
 
     SimpleCannon(SpaceInvadersApp app) {
-        this.app = app;
-
-        SIZE = new PointF(app.mScreenSize.x / 10, app.mScreenSize.x / 10);
-        DEFAULT_POSITION = new PointF(app.mScreenSize.x / 2, app.mScreenSize.y - SIZE.y);
-
-        mHitBox = new HitBox.Builder(this.app, SIZE).withPosition(DEFAULT_POSITION).withSprite(SPRITE_ID).build();
-
-        //mHitBox.setSize(SIZE);
-        //mHitBox.setBitmap(SPRITE_ID);
+        super(app, new PointF(app.mScreenSize.x / 10, app.mScreenSize.x / 10), R.drawable.player, new PointF(app.mScreenSize.x / 2, app.mScreenSize.y - app.mScreenSize.x/10));
+        //super(app, size, sprite, position)
     }
 
     public void update(long fps) {
@@ -57,31 +42,11 @@ public class SimpleCannon implements GameObject {
         }
     }
 
-    public void display(Canvas canvas) {
-        mHitBox.display(canvas);
-    }
-
     public void playAudio(){
         if(playShoot) {
             app.soundEngine.playerShoot();
             playShoot = false;
         }
-    }
-
-    public RectF getHitBox() {
-        return mHitBox.getHitBox();
-    }
-
-    public void setPosition(PointF position) {
-        mHitBox.setPosition(position);
-    }
-
-    public void reset() {
-        //setPosition(DEFAULT_POSITION);
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 
     public void collide(GameObject gameObject) {

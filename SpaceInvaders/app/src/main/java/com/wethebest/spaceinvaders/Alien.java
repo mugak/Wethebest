@@ -1,23 +1,10 @@
 package com.wethebest.spaceinvaders;
 
-import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.RectF;
 
-import java.util.Random;
-
-public class Alien implements GameObject {
-    //DEFAULTS
-    private final int SPRITE_ID = R.drawable.invader_a01;
-    private final float BASE_SPEED = 200;
-    private final Point SHOOT_INTERVAL = new Point(5, 20); // shoots every 5-20 seconds
-
-    //SET BASED ON SCREEN SIZE
-    private final PointF SIZE;
-
-    private SpaceInvadersApp app;
-    private HitBox mHitBox;
+public class Alien extends GameObject {
+    private final Point SHOOT_INTERVAL = new Point(5, 20); //shoots every 5-20 seconds
 
     //Shoot projectiles randomly
     private AlienProj mProj;
@@ -25,41 +12,26 @@ public class Alien implements GameObject {
     private long frameCount = 0;
     public boolean shootNow = false;
 
-    //Movement
-    private boolean isActive = true;
-    private float speed = BASE_SPEED;
     private boolean movingRight = true; //Current movement direction
-
-    //Audio
-    private boolean playShoot = false;
+    private boolean playShoot = false; //Sound effect
 
     Alien(SpaceInvadersApp app) {
-        this.app = app;
-
-        //mHitBox = new HitBox(app);
-        SIZE = new PointF(app.mScreenSize.x / 10, app.mScreenSize.y / 10);//TODO repeated in AlienArmy, maybe get from GameConfig
-        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).withVelocity(speed).build();
-        //mHitBox.setSize(SIZE);
-        //mHitBox.setBitmap(SPRITE_ID);
-        //mHitBox.velocity = speed;
+        super(app, new PointF(app.mScreenSize.x / 10, app.mScreenSize.y / 10), R.drawable.invader_a01, 200);
+        //super(app, size, sprite, velocity)
     }
 
     public void update(long fps) {
         if(movingRight) {
-            mHitBox.velocity = speed;
+            mHitBox.velocity = mHitBox.speed;
         }
         else {
-            mHitBox.velocity = -speed;
+            mHitBox.velocity = -mHitBox.speed;
         }
 
         mHitBox.moveHorizontally(mHitBox.velocity / fps);
 
         timeToShoot(fps);
         checkAlienWin();
-    }
-
-    public void display(Canvas canvas){
-        mHitBox.display(canvas);
     }
 
     public void playAudio() {
@@ -69,33 +41,15 @@ public class Alien implements GameObject {
         }
     }
 
-    public void setPos(PointF position) {
-        mHitBox.setPosition(position);
-    }
-
-    public void reset() {
-    }
-
     public void collide(GameObject gameObject) {
         if (gameObject instanceof PlayerProj) {
-            //reset(mScreenSize);
             isActive = false;
         }
-    }
-
-    public RectF getHitBox(){
-        return mHitBox.getHitBox();
-    }
-
-    public boolean isActive(){
-        return isActive;
     }
 
     public boolean outOfBounds() {
         return mHitBox.horizontalOutOfBounds();
     }
-
-
 
 
 
@@ -106,7 +60,7 @@ public class Alien implements GameObject {
     }
 
     public void speedUp(float multiplier) {
-        speed = BASE_SPEED * multiplier;
+        mHitBox.speed = SPEED * multiplier;
     }
 
     public AlienProj shoot() {

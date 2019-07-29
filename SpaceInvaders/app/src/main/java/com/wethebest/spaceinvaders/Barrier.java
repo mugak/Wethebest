@@ -30,7 +30,7 @@ public class Barrier {
                 PointF blockPos = new PointF(position.x + i * BLOCK_SIZE.x,
                         position.y + j * BLOCK_SIZE.y);
                 BarrierBlock mBarrierBlock = new BarrierBlock(app);
-                mBarrierBlock.setPos(blockPos);
+                mBarrierBlock.setPosition(blockPos);
 
                 barrierBlocks.add(mBarrierBlock);
             }
