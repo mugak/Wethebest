@@ -31,7 +31,7 @@ public class BarrierBlock implements GameObject {
         this.app = app;
 
         mHitBox = new HitBox(app);
-        SIZE = new PointF(app.mScreenSize.x / (float) 20, app.mScreenSize.y / (float) 40); //TODO repeated in Barrier, maybe get from GameConfig
+        SIZE = new PointF(app.mScreenSize.x / 20, app.mScreenSize.y / 40); //TODO repeated in Barrier, maybe get from GameConfig
         mHitBox.setSize(SIZE);
         mHitBox.setBitmap(SPRITE_ID);
         mHitBox.velocity = speed;

@@ -28,7 +28,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     LinkedList<GameObject> gameObjects;
     SimpleCannon mPlayer;
     AlienArmy mAlienArmy;
-    LinkedList<Barrier> mBarriers = new LinkedList<Barrier>();
+    //LinkedList<Barrier> mBarriers = new LinkedList<Barrier>();
+    Barriers mBarriers;
 
     private Thread mGameThread = null;
     private volatile boolean mPlaying;
@@ -58,28 +59,18 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         startGame();
     }
 
-    private void createBarriers(int numBarriers) {
-        for (int i = 1; i < numBarriers + 1; i++) {
-            PointF barrierCenterPosition = Util.computeBarrierPosition(i, numBarriers, mScreenSize);
-
-            addBarrierToGameObjects(new Barrier(mScreenSize, barrierCenterPosition, this));
-        }
-    }
-
-    private void addBarrierToGameObjects(Barrier barrier) {
-        mBarriers.add(barrier);
-        gameObjects.addAll(barrier.getBarrierBlocks());
-    }
-
     private void startGame() {
         rand = new Random();
         gameObjects = new LinkedList<>();
 
         mPlayer = new SimpleCannon(this);
         mAlienArmy = new AlienArmy(this);
+        mBarriers = new Barriers(this);
 
-        gameObjects.addAll(mAlienArmy.aliens);
         gameObjects.add(mPlayer);
+        gameObjects.addAll(mAlienArmy.aliens);
+        gameObjects.addAll(mBarriers.getBarrierBlocks());
+
 
         score = 0;
         mGameUI = new GameUI(this);
@@ -87,8 +78,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         for (GameObject gameObject : gameObjects) {
             gameObject.reset(mScreenSize);
         }
-
-        createBarriers(3);
     }
 
     private boolean isGameOver() {
