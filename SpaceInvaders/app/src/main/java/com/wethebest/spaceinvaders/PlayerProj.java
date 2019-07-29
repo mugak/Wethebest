@@ -2,15 +2,31 @@ package com.wethebest.spaceinvaders;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.widget.Space;
 
-class PlayerProj extends  Projectile{
+class PlayerProj {
+    SpaceInvadersApp app;
+
+    public HitBox mHitBox;
+    private Paint mPaint = new Paint();
+    private boolean isActive = true;
+    protected Point mScreenSize;
+
     PlayerProj(SpaceInvadersApp app){
-        super(app);
-        this.mBitmap = BitmapFactory.decodeResource(app.context.getResources(), R.drawable.powerup_blue01);
-        yVel = -mScreenSize.x/3; //Projectile shoots up
-        //soundEngine.playerShoot();
+        this.app = app;
+        mScreenSize = app.mScreenSize;
+        mHitBox = new HitBox(app);
+        mHitBox.setSize(new PointF(mScreenSize.x/80, mScreenSize.x/40));
+        mHitBox.setBitmap(R.drawable.projectile_a);
+
+    }
+
+
+    public void update(long fps){
+        mHitBox.moveUp();
     }
 
     @Override

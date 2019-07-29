@@ -69,7 +69,7 @@ public class HitBox {
         mRect.top = mRect.top + offset;
         updateBottomSide();
     }
-    private void moveUp() {
+    public void moveUp() {
         mRect.top = mRect.top - size.y;
         updateBottomSide();
     }

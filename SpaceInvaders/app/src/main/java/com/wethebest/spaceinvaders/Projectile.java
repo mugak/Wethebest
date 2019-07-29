@@ -17,45 +17,46 @@ import android.graphics.BitmapFactory;
 public abstract class Projectile implements GameObject {
     //Hitbox associated with rect
 
-    protected RectF mRect;
-
-    protected float xVel;
-    protected float yVel;
+    public HitBox mHitBox;
+//    protected RectF mRect = new RectF();
+//
+//    protected float xVel = 0;
+//    protected float yVel = 0;
 
     private float projWidth;
     private float projHeight;
 
-    private Paint mPaint;
+    private Paint mPaint = new Paint();
     protected Bitmap mBitmap;
 
-    protected boolean isActive;
+    protected boolean isActive = true;
     protected Point mScreenSize;
 
     protected SoundEngine soundEngine;
 
     Projectile(SpaceInvadersApp app){
         mScreenSize = app.mScreenSize;
-        projWidth = mScreenSize.x/40;
+
+
+        projWidth = mScreenSize.x/80;
         projHeight = mScreenSize.x/40;
-        xVel = 0;//Projectile only shoots straight
-        mRect = new RectF();
-        mPaint = new Paint();
+
         isActive = true;
         soundEngine = new SoundEngine(app.context);
     }
 
     //Updates the position of the projectile
-    public void update(long fps){
-        mRect.left = mRect.left + (xVel/fps);
-        mRect.top = mRect.top + (yVel/fps);
-
-        mRect.right = mRect.left + projWidth;
-        mRect.bottom = mRect.top + projHeight;
-
-        if(isActive) {
-            checkBounds();
-        }
-    }
+//    public void update(long fps){
+//        mRect.left = mRect.left + (xVel/fps);
+//        mRect.top = mRect.top + (yVel/fps);
+//
+//        mRect.right = mRect.left + projWidth;
+//        mRect.bottom = mRect.top + projHeight;
+//
+//        if(isActive) {
+//            checkBounds();
+//        }
+//    }
 
     public void display(Canvas canvas) {
         mPaint.setColor(Color.argb(255, 255, 255, 255));

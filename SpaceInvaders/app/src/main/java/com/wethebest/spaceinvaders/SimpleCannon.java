@@ -142,7 +142,7 @@ class SimpleCannon implements GameObject {
 
     public PlayerProj shoot() {
         PlayerProj mProj = new PlayerProj(app);
-        mProj.setPos((mRect.right + mRect.left) / 2, mRect.top);
+        mProj.mHitBox.setPosition(new PointF((mRect.right + mRect.left) / 2, mRect.top));
         shootNow = true;
         return mProj;
     }
