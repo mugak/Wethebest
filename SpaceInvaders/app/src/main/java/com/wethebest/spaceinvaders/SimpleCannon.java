@@ -97,7 +97,7 @@ class SimpleCannon implements GameObject {
 
     public PlayerProj shoot() {
         PlayerProj mProj = new PlayerProj(app);
-        mProj.mHitBox.setPosition(mHitBox.centerTop());
+        mProj.setPosition(mHitBox.centerTop());
         playShoot = true;
         return mProj;
     }

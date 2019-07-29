@@ -111,7 +111,7 @@ public class Alien implements GameObject {
 
     public AlienProj shoot() {
             mProj = new AlienProj(app);
-            mProj.mHitBox.setPosition(mHitBox.centerBottom());
+            mProj.setPosition(mHitBox.centerBottom());
             playShoot = true;
             return mProj;
     }

@@ -1,36 +1,29 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-class PlayerProj implements GameObject{
-    SpaceInvadersApp app;
-
-    public HitBox mHitBox;
-    private Paint mPaint = new Paint();
-    private boolean isActive = true;
-    private float yVel;
-    protected Point mScreenSize;
-
-    private final PointF SIZE;
+public class PlayerProj implements GameObject{
     private final int SPRITE_ID = R.drawable.projectile_a;
+    private final PointF SIZE;
+    private final float VELOCITY;
 
-    PlayerProj(SpaceInvadersApp app) {
+    private SpaceInvadersApp app;
+    private HitBox mHitBox;
+    private boolean isActive = true;
+
+    public PlayerProj(SpaceInvadersApp app) {
         this.app = app;
-        mScreenSize = app.mScreenSize;
-        SIZE = new PointF(mScreenSize.x / 80, mScreenSize.x / 40);
-        yVel = -mScreenSize.y;
+        SIZE = new PointF(app.mScreenSize.x / 80, app.mScreenSize.x / 40);
+        VELOCITY = -app.mScreenSize.y;
 
-        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).withVelocity(yVel).build();
-
+        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).withVelocity(VELOCITY).build();
     }
 
     @Override
     public void update(long fps){
-        mHitBox.moveVertically(yVel/fps);
+        mHitBox.moveVertically(VELOCITY/fps);
     }
 
     public void display(Canvas canvas){
@@ -39,6 +32,10 @@ class PlayerProj implements GameObject{
 
     public void playAudio(){
         //Creation and removal of projectile is handled in cannon and invader classes
+    }
+
+    public void setPosition(PointF position) {
+        mHitBox.setPosition(position);
     }
 
     public void reset(){

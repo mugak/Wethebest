@@ -1,40 +1,30 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-class AlienProj implements GameObject{
-    SpaceInvadersApp app;
-
-    public HitBox mHitBox;
-    private Paint mPaint = new Paint();
-    private boolean isActive = true;
-    private float yVel;
-    protected Point mScreenSize;
-    private final PointF SIZE;
+public class AlienProj implements GameObject{
+    //DEFAULTS
     private final int SPRITE_ID = R.drawable.alien_laser;
+    private final PointF SIZE;
+    private final float VELOCITY;
+
+    private SpaceInvadersApp app;
+    private HitBox mHitBox;
+    private boolean isActive = true;
 
     AlienProj(SpaceInvadersApp app) {
         this.app = app;
-        mScreenSize = app.mScreenSize;
-        SIZE = new PointF(mScreenSize.x /160, mScreenSize.x / 40);
-        yVel = mScreenSize.y/3;
+        SIZE = new PointF(app.mScreenSize.x / 160, app.mScreenSize.x / 40);
+        VELOCITY = app.mScreenSize.y / 3;
 
-        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).withVelocity(yVel).build();
-
+        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).withVelocity(VELOCITY).build();
     }
 
-    @Override
-    public void update(long fps){
-        mHitBox.moveVertically(yVel/fps);
-    }
+    public void update(long fps){ mHitBox.moveVertically(VELOCITY / fps); }
 
-    public void display(Canvas canvas){
-        mHitBox.display(canvas);
-    }
+    public void display(Canvas canvas){ mHitBox.display(canvas); }
 
     public void playAudio(){
         //Creation and removal of projectile is handled in cannon and invader classes
@@ -44,6 +34,9 @@ class AlienProj implements GameObject{
         //Probably will override supermethod in GameObject class
     }
 
+    public void setPosition(PointF position) {
+        mHitBox.setPosition(position);
+    }
     public RectF getHitBox(){
         return mHitBox.getHitBox();
     }
