@@ -36,7 +36,7 @@ class SimpleCannon implements GameObject {
     private Context context;
     private SoundEngine soundEngine;
 
-    //Tells the game whether the object should still be in game
+    //Tells the game w hether the object should still be in game
     private boolean isActive;
 
     private boolean shootNow;

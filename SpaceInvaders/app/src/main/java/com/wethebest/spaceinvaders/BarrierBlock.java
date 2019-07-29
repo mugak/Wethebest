@@ -65,7 +65,7 @@ public class BarrierBlock implements GameObject {
     }
 
     public void collide(GameObject gameObject) {
-        if (gameObject instanceof Projectile) {
+        if (gameObject instanceof AlienProj || gameObject instanceof PlayerProj) {
             playHit = true;
             removeDurability(1); //TODO could implement projectile.damage in the future, for now just 1
             if(durability <= 0) {
