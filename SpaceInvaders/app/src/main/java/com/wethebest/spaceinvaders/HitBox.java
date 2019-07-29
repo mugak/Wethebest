@@ -65,11 +65,11 @@ public class HitBox {
         mRect.right = mRect.left + size.x;
     }
 
-    private void moveVertically(float offset) {
+    public void moveVertically(float offset) {
         mRect.top = mRect.top + offset;
         updateBottomSide();
     }
-    public void moveUp() {
+    private void moveUp() {
         mRect.top = mRect.top - size.y;
         updateBottomSide();
     }

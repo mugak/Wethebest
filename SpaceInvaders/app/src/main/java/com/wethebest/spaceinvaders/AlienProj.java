@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Point;
 
 class AlienProj extends Projectile{
+    public HitBox mHitBox;
 
     AlienProj(SpaceInvadersApp app) {
         super(app);

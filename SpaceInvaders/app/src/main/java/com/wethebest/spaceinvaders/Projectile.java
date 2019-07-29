@@ -85,9 +85,9 @@ public abstract class Projectile implements GameObject {
 
 
 
-    public void collide(GameObject gameObject) {
-        isActive = false;
-    }
+//    public void collide(GameObject gameObject) {
+//        isActive = false;
+//    }
 
     //Returns rect of projectile to be drawn
     public RectF getHitBox() {

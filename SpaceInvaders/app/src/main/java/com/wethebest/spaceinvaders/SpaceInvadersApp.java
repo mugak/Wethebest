@@ -197,7 +197,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         Iterator<GameObject> firstObjectItr = gameObjects.iterator();
         while (firstObjectItr.hasNext()) {
             GameObject object1 = firstObjectItr.next();
-            if (object1 instanceof Projectile) {
+            if (object1 instanceof AlienProj || object1 instanceof PlayerProj) {
 
                 for (GameObject object2 : gameObjects) {
                     if (!(object2 instanceof Projectile)) {

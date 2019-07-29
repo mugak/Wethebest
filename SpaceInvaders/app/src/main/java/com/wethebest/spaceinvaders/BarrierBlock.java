@@ -56,7 +56,7 @@ public class BarrierBlock implements GameObject {
         // class changes
         //NOTE: SpaceInvadersApp.java checks for the collision so there is no need to in this class
         //Collide only describes what the class should do when it is collided with
-        if (gameObject instanceof Projectile) {
+        if (gameObject instanceof PlayerProj || gameObject instanceof AlienProj) {
             removeDurability(1); //could implement projectile.damage in the future, for now just 1
             if(durability <= 0) {
                 removeBarrierBlock();
