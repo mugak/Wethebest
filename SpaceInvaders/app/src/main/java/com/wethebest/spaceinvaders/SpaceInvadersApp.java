@@ -125,7 +125,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
             if (timeThisFrame > 0) {
-                int MILLIS_IN_SECOND = 1000;
+                final int MILLIS_IN_SECOND = 1000;
                 mFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
 
