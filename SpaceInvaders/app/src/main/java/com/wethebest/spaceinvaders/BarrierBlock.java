@@ -1,16 +1,12 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
 public class BarrierBlock implements GameObject {
     //DEFAULTS
     private final int SPRITE_ID = R.drawable.def_brick_01;
-    private final float BASE_SPEED = 0;
     private final int MAX_DURABILITY = 1;
 
     //SET BASED ON SCREEN SIZE
@@ -22,7 +18,6 @@ public class BarrierBlock implements GameObject {
 
     //Movement
     private boolean isActive = true;
-    private float speed = BASE_SPEED;
 
     //Audio
     private boolean playHit = false;
@@ -30,11 +25,12 @@ public class BarrierBlock implements GameObject {
     BarrierBlock(SpaceInvadersApp app){
         this.app = app;
 
-        mHitBox = new HitBox(app);
+        //mHitBox = new HitBox(app);
         SIZE = new PointF(app.mScreenSize.x / 20, app.mScreenSize.y / 40); //TODO repeated in Barrier, maybe get from GameConfig
-        mHitBox.setSize(SIZE);
-        mHitBox.setBitmap(SPRITE_ID);
-        mHitBox.velocity = speed;
+        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).build();
+        //mHitBox.setSize(SIZE);
+        //mHitBox.setBitmap(SPRITE_ID);
+        //mHitBox.velocity = speed;
     }
 
     public void update(long fps) { }

@@ -14,14 +14,17 @@ class AlienProj implements GameObject{
     private boolean isActive = true;
     private float yVel;
     protected Point mScreenSize;
+    private final PointF SIZE;
+    private final int SPRITE_ID = R.drawable.alien_laser;
 
     AlienProj(SpaceInvadersApp app) {
         this.app = app;
         mScreenSize = app.mScreenSize;
-        mHitBox = new HitBox(app);
-        mHitBox.setSize(new PointF(mScreenSize.x /160, mScreenSize.x / 40));
-        mHitBox.setBitmap(R.drawable.alien_laser);
+        SIZE = new PointF(mScreenSize.x /160, mScreenSize.x / 40);
         yVel = mScreenSize.y/3;
+
+        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).withVelocity(yVel).build();
+
     }
 
     @Override

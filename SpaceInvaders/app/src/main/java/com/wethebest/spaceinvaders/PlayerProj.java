@@ -15,13 +15,17 @@ class PlayerProj implements GameObject{
     private float yVel;
     protected Point mScreenSize;
 
+    private final PointF SIZE;
+    private final int SPRITE_ID = R.drawable.projectile_a;
+
     PlayerProj(SpaceInvadersApp app) {
         this.app = app;
         mScreenSize = app.mScreenSize;
-        mHitBox = new HitBox(app);
-        mHitBox.setSize(new PointF(mScreenSize.x / 80, mScreenSize.x / 40));
-        mHitBox.setBitmap(R.drawable.projectile_a);
+        SIZE = new PointF(mScreenSize.x / 80, mScreenSize.x / 40);
         yVel = -mScreenSize.y;
+
+        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).withVelocity(yVel).build();
+
     }
 
     @Override

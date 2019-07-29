@@ -36,11 +36,12 @@ public class Alien implements GameObject {
     Alien(SpaceInvadersApp app) {
         this.app = app;
 
-        mHitBox = new HitBox(app);
+        //mHitBox = new HitBox(app);
         SIZE = new PointF(app.mScreenSize.x / 10, app.mScreenSize.y / 10);//TODO repeated in AlienArmy, maybe get from GameConfig
-        mHitBox.setSize(SIZE);
-        mHitBox.setBitmap(SPRITE_ID);
-        mHitBox.velocity = speed;
+        mHitBox = new HitBox.Builder(this.app, SIZE).withSprite(SPRITE_ID).withVelocity(speed).build();
+        //mHitBox.setSize(SIZE);
+        //mHitBox.setBitmap(SPRITE_ID);
+        //mHitBox.velocity = speed;
     }
 
     public void update(long fps) {

@@ -30,11 +30,13 @@ class SimpleCannon implements GameObject {
     SimpleCannon(SpaceInvadersApp app) {
         this.app = app;
 
-        mHitBox = new HitBox(app);
         SIZE = new PointF(app.mScreenSize.x / 10, app.mScreenSize.x / 10);
         DEFAULT_POSITION = new PointF(app.mScreenSize.x / 2, app.mScreenSize.y - SIZE.y);
-        mHitBox.setSize(SIZE);
-        mHitBox.setBitmap(SPRITE_ID);
+
+        mHitBox = new HitBox.Builder(this.app, SIZE).withPosition(DEFAULT_POSITION).withSprite(SPRITE_ID).build();
+
+        //mHitBox.setSize(SIZE);
+        //mHitBox.setBitmap(SPRITE_ID);
     }
 
     public void update(long fps) {
