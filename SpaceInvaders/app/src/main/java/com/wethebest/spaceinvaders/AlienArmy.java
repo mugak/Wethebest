@@ -17,7 +17,7 @@ public class AlienArmy {
 
     private SpaceInvadersApp app;
     public List<Alien> aliens = new LinkedList<Alien>();
-    public boolean reverseNow= false;
+    private boolean reverseNow = false;
 
     AlienArmy(SpaceInvadersApp app) {
         this.app = app;
@@ -80,14 +80,14 @@ public class AlienArmy {
     //k = rate of growth
     //t = time (number of aliens killed)
     //y(t) = new speed at the given time
-    public void increaseSpeed() {
+    private void increaseSpeed() {
         int aliensKilled = (NUM_ROWS * NUM_COLS) - aliens.size(); //number of max aliens - number of current aliens
         float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
-        AlienHitBox.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in AlienHitBox
+        Alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in AlienHitBox
     }
 
     //Returns e^(kt)
-    public float exponentialGrowth(float rateOfGrowth, int time) {
+    private float exponentialGrowth(float rateOfGrowth, int time) {
         return (float) Math.exp(rateOfGrowth * time);
     }
 
@@ -125,7 +125,7 @@ public class AlienArmy {
     }
 
     //TODO put in spaceinvadersapp
-    public void increaseScore() {
+    private void increaseScore() {
         app.score += 100;
     }
 
