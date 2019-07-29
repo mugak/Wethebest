@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/*
+    SpaceInvadersApp works as a manager of the different game states: wave and gameover
+ */
 class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     public SurfaceHolder mOurHolder;
@@ -29,6 +32,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     GameUI mGameUI;
     public int score;
+
+    private volatile boolean mPlaying;
 
     public boolean shootNow;
 
@@ -81,6 +86,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     }
 
     public void resume() {
+        mPlaying = true;
         mGameThread = new Thread(this);
         mGameThread.start();
 
@@ -88,6 +94,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     }
 
     public void pause() {
+        mPlaying = false;
         try {
             mGameThread.join();
         } catch (InterruptedException e) {
@@ -99,7 +106,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     @Override
     public void run() {
-        while(true) {
+        while(mPlaying) {
             mGameState.run(this);
         }
     }
