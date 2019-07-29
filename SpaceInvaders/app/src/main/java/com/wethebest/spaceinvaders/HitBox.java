@@ -27,7 +27,7 @@ public class HitBox {
 
     //
     public float velocity; //
-    public static PointF size; //
+    public PointF size; //
 
     //Aliens have a constant movement speed
     private final float SPEED = 500;
