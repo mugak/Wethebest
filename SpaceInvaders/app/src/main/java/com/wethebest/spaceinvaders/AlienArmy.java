@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
+import android.graphics.Point;
 import android.graphics.PointF;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -8,8 +9,7 @@ import java.util.List;
 
 public class AlienArmy {
     //DEFAULTS
-    private final int NUM_ROWS = 4;
-    private final int NUM_COLS = 4;
+    private final Point DIMENSIONS = new Point(4, 4);
 
     //SET BASED ON SCREEN SIZE
     private final float ROW_SPACING;
@@ -27,28 +27,23 @@ public class AlienArmy {
         COL_SPACING = app.mScreenSize.y / 10;
         STARTING_POSITION = new PointF(app.mScreenSize.y / 10, app.mScreenSize.y / 10);
 
-        setAliens();
+        createAliens();
     }
 
     //Instantiates and sets positions of every alien
-    private void setAliens() {
+    private void createAliens() {
         PointF size = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);//TODO Size shared with Alien. maybe get from GameConfig
-        for(int numRow = 0; numRow < NUM_ROWS; numRow++) {
-            float rowPosition = getNewPosition(STARTING_POSITION.y, numRow, size.y + ROW_SPACING);
 
-            for(int numCol = 0; numCol < NUM_COLS; numCol++) {
-                float colPosition = getNewPosition(STARTING_POSITION.x, numCol, size.x + COL_SPACING);
+        for(int i = 0; i < DIMENSIONS.x; i++) {
+            for(int j = 0; j < DIMENSIONS.y; j++) {
+                PointF position = new PointF(STARTING_POSITION.x + i * (size.x + COL_SPACING),
+                        STARTING_POSITION.y + j * (size.y + ROW_SPACING));
 
                 Alien alien = new Alien(app);
-                alien.setPos(new PointF(colPosition, rowPosition));
+                alien.setPos(position);
                 aliens.add(alien);
             }
         }
-    }
-
-    //Calculates new position using an index
-    private float getNewPosition(float startingPosition, int index, float spacing) {
-        return startingPosition + (index * spacing);
     }
 
     //Updates aliens, reverses direction and increases speed if needed
@@ -81,7 +76,7 @@ public class AlienArmy {
     //t = time (number of aliens killed)
     //y(t) = new speed at the given time
     private void increaseSpeed() {
-        int aliensKilled = (NUM_ROWS * NUM_COLS) - aliens.size(); //number of max aliens - number of current aliens
+        int aliensKilled = (DIMENSIONS.x * DIMENSIONS.y) - aliens.size(); //number of max aliens - number of current aliens
         float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
 
         for(Alien alien : aliens) {
