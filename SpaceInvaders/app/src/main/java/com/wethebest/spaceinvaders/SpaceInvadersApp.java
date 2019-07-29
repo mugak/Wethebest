@@ -118,7 +118,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
             if (timeThisFrame > 0) {
-                int MILLIS_IN_SECOND = 1000;
+                final int MILLIS_IN_SECOND = 1000;
                 mFPS = MILLIS_IN_SECOND / timeThisFrame;
             }
 
@@ -189,10 +189,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         Iterator<GameObject> firstObjectItr = gameObjects.iterator();
         while (firstObjectItr.hasNext()) {
             GameObject object1 = firstObjectItr.next();
-            if (object1 instanceof Projectile) {
+            if (object1 instanceof AlienProj || object1 instanceof PlayerProj) {
 
                 for (GameObject object2 : gameObjects) {
-                    if (!(object2 instanceof Projectile)) {
+                    if (!(object2 instanceof AlienProj || object2 instanceof  PlayerProj)) {
                         collide(object1, object2);
                     }
                 }
