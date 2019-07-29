@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-class   SpaceInvadersApp extends SurfaceView implements Runnable {
+class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     public SurfaceHolder mOurHolder;
     public Canvas mCanvas;
@@ -62,13 +62,13 @@ class   SpaceInvadersApp extends SurfaceView implements Runnable {
             case MotionEvent.ACTION_DOWN:
                 if(mGameState instanceof PauseState) {
                     mGameState.changeState(this, State.WAVE);
-                } //else if(mGameState instanceof WaveState) {
-                    //if (motionEvent.getX() > mScreenSize.x / 2) {
-                    //    mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGRIGHT);
-                    //} else {
-                    //    mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGLEFT);
-                    //}
-                //}
+                } /*else if(mGameState instanceof WaveState) {
+                    if (motionEvent.getX() > mScreenSize.x / 2) {
+                        mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGRIGHT);
+                    } else {
+                        mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGLEFT);
+                    }
+                }*/
 
                 shootNow = true;
                 break;

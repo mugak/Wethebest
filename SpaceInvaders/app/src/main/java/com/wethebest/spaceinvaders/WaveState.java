@@ -8,11 +8,9 @@ import android.graphics.Color;
  */
 public class WaveState implements GameState {
     private long mFPS;
-    private int score;
     private SpaceInvadersApp mApp;
 
     public WaveState(SpaceInvadersApp app) {
-        score = 0;
         mApp = app;
     }
 
@@ -38,7 +36,7 @@ public class WaveState implements GameState {
         }
 
         app.mGameObjectManager.updateState(mFPS);
-        app.mGameUI.update(score);
+        app.mGameUI.update(app.score);
 
         draw();
 
