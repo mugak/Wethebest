@@ -25,6 +25,7 @@ import android.view.Window;
 
 
 
+
 public class SpaceInvaders extends Activity implements SensorEventListener { //AppCompatActivity implements SensorEventListener {
 
     private SpaceInvadersApp mSpaceInvadersApp;
@@ -41,6 +42,8 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
 
         int widthInPixels = 800;
         int heightInPixels = 600;
+
+
 
         myBlankBitmap = Bitmap.createBitmap(widthInPixels,
                 heightInPixels,
@@ -110,6 +113,7 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     }
 
 
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -130,6 +134,8 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
         }
+
+
     } //enables full screen - took from https://stackoverflow.com/questions/29186081/android-immersive-mode-reset-when-changing-activity
 
 //    //main menu
