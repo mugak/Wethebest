@@ -16,6 +16,7 @@ public class PlayerProj extends GameObject {
 
     public void update(long fps){
         mHitBox.moveVertically(mHitBox.velocity/fps);
+        checkBounds();
     }
 
     public void collide(GameObject gameObject) {

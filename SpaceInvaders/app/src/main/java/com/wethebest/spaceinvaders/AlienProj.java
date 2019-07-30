@@ -14,7 +14,10 @@ public class AlienProj extends GameObject{
 
     public void playAudio() { }
 
-    public void update(long fps){ mHitBox.moveVertically(mHitBox.velocity / fps); }
+    public void update(long fps){
+        mHitBox.moveVertically(mHitBox.velocity / fps);
+        checkBounds();
+    }
 
     public void collide(GameObject gameObject) {
         if((gameObject instanceof SimpleCannon || gameObject instanceof BarrierBlock)) {
