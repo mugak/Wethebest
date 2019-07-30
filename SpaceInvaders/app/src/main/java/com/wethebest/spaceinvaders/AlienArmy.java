@@ -9,7 +9,9 @@ import java.util.List;
 
 public class AlienArmy {
     //DEFAULTS
-    private final Point DIMENSIONS = new Point(4, 4);
+    private final int NUM_ALIENS = 13;
+    private final Point DIMENSIONS = new Point(NUM_ALIENS/4 + NUM_ALIENS % 4,
+                                                NUM_ALIENS/4 + NUM_ALIENS % 4);
 
     //SET BASED ON SCREEN SIZE
     private final float ROW_SPACING;
@@ -32,17 +34,22 @@ public class AlienArmy {
 
     //Instantiates and sets positions of every alien
     private void createAliens() {
-        PointF size = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);//TODO Size shared with Alien. maybe get from GameConfig
+        //First get the size of an alien
+        GameObject tempAlien = GameObjectFactory.getGameObject("Alien");
+        PointF size = new PointF(tempAlien.getHitBox().width(), tempAlien.getHitBox().height());
+        int numAliensToAdd = NUM_ALIENS;
 
         for(int i = 0; i < DIMENSIONS.x; i++) {
             for(int j = 0; j < DIMENSIONS.y; j++) {
+                if(numAliensToAdd <=0){break;}
+
                 PointF position = new PointF(STARTING_POSITION.x + i * (size.x + COL_SPACING),
                         STARTING_POSITION.y + j * (size.y + ROW_SPACING));
 
-                //Alien alien = new Alien(app);
                 GameObject alien = GameObjectFactory.getGameObject("Alien");
                 alien.setPosition(position);
                 aliens.add((Alien) alien);
+                numAliensToAdd--;
             }
         }
     }
@@ -51,11 +58,13 @@ public class AlienArmy {
     public void update(long fps) {
         for(Alien alien : aliens) {
             alien.update(fps);
-
+            alien.setShootInterval((float)aliens.size()/NUM_ALIENS);
             if(alien.outOfBounds()) {
                 reverseNow = true;
             }
         }
+
+
 
         reverse();
         increaseSpeed();
