@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AlienArmy {
     //DEFAULTS
-    private final int NUM_ALIENS = 14;
+    private final int NUM_ALIENS = 12;
 
     //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
     private final Point DIMENSIONS = new Point(NUM_ALIENS/4 + NUM_ALIENS % 4,
