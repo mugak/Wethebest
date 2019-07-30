@@ -69,9 +69,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public boolean onTouchEvent(MotionEvent motionEvent) {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                if(mGameState instanceof PauseState) {
-                    mGameState.changeState(this, State.WAVE);
-                } /*else if(mGameState instanceof WaveState) {
+                     /*else if(mGameState instanceof WaveState) {
                     if (motionEvent.getX() > mScreenSize.x / 2) {
                         mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGRIGHT);
                     } else {

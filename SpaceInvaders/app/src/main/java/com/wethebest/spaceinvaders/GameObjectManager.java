@@ -81,21 +81,6 @@ public class GameObjectManager {
         mAlienArmy.draw(canvas);
     }
 
-    //    private void addAlienProjs() {
-//        LinkedList<GameObject> alienProjs = new LinkedList<>(); // need temp list because can't modify Collections being iterated
-//
-//        for (GameObject gameObject : gameObjects) {
-//            if (gameObject instanceof Alien) {
-//                if (((Alien) gameObject).shootNow) {
-//                    alienProjs.add(((Alien) gameObject).shoot());
-//                    ((Alien) gameObject).shootNow = false;
-//                }
-//            }
-//
-//        }
-//        gameObjects.addAll(alienProjs);
-//    }
-
     private void detectCollisions() {
         //Checks to see if the first object is a projectile because in SpaceInvaders only
         // projectiles collide with non projectiles. There are no other types of collisions
