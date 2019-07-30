@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.graphics.Canvas;
 import android.graphics.PointF;
 
 /*@SimpleCannon
@@ -12,9 +13,10 @@ public class SimpleCannon extends GameObject {
     //DEFAULTS
     private final int SPRITE_ID = R.drawable.player;
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
+    private final int WAIT_SPRITE_ID = R.drawable.player_wait;
 
     private final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
-    private final int FIRING_RATE = 1; //fire every second
+    private final float FIRING_RATE = 0.5f; //how frequently the player can shoot
     public final int MAX_AMMO = 99; //total projectiles the player can shoot
     public final int MAX_LIVES = 3;
     public int lives = MAX_LIVES;
@@ -23,7 +25,7 @@ public class SimpleCannon extends GameObject {
     private boolean playShoot = false;
     private boolean playHit = true; //Sound effect
 
-    private Counter waitToShoot = new Counter(FIRING_RATE);
+    public Counter waitToShoot = new Counter(FIRING_RATE);
     private Counter invincible = new Counter(INVINCIBLE_SECONDS);
 
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
@@ -40,10 +42,11 @@ public class SimpleCannon extends GameObject {
         }
 
         if(invincible.on && !invincible.isCountingDown) {
+            mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);
             invincible.setFPS(fps);
         }
         else if(invincible.on && invincible.isCountingDown) {
-            if (invincible.finished()) {
+            if(invincible.finished()) {
                 mHitBox.setBitmap(SPRITE_ID);
             }
         }
@@ -74,10 +77,14 @@ public class SimpleCannon extends GameObject {
                 lives -= 1;
                 reset();
                 invincible.on = true;
-                mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);
             }
         }
     }
+
+    public void reset() {
+        waitToShoot.reset();
+    }
+
 
     public GameObject shoot() {
         ammo--;
