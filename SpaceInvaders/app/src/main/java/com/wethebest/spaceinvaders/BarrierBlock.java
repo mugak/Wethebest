@@ -9,9 +9,8 @@ public class BarrierBlock extends GameObject {
     private int durability = MAX_DURABILITY;
     private boolean playHit = false; //Sound effect
 
-    BarrierBlock(SpaceInvadersApp app){
-        super(app, new PointF(app.mScreenSize.x / 20, app.mScreenSize.y / 40), R.drawable.def_brick_01);
-        //super(app, size, sprite)
+    BarrierBlock(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+        super(app, size, spriteID, position, velocity);
     }
 
     public void update(long fps) { }

@@ -63,7 +63,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         rand = new Random();
         gameObjects = new LinkedList<>();
 
-        mPlayer = new SimpleCannon(this);
+        mPlayer = (SimpleCannon) GameObjectFactory.getGameObject("Player");
         mAlienArmy = new AlienArmy(this);
         mBarriers = new Barriers(this);
 

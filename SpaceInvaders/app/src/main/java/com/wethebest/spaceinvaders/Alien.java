@@ -7,7 +7,7 @@ public class Alien extends GameObject {
     private final Point SHOOT_INTERVAL = new Point(5, 20); //shoots every 5-20 seconds
 
     //Shoot projectiles randomly
-    private AlienProj mProj;
+    private GameObject mProj;
     private Point shootInterval = SHOOT_INTERVAL;
     private long frameCount = 0;
     public boolean shootNow = false;
@@ -15,9 +15,8 @@ public class Alien extends GameObject {
     private boolean movingRight = true; //Current movement direction
     private boolean playShoot = false; //Sound effect
 
-    Alien(SpaceInvadersApp app) {
-        super(app, new PointF(app.mScreenSize.x / 10, app.mScreenSize.y / 10), R.drawable.invader_a01, 200);
-        //super(app, size, sprite, velocity)
+    Alien(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+        super(app, size, spriteID, position, velocity);
     }
 
     public void update(long fps) {
@@ -63,8 +62,8 @@ public class Alien extends GameObject {
         mHitBox.speed = SPEED * multiplier;
     }
 
-    public AlienProj shoot() {
-            mProj = new AlienProj(app);
+    public GameObject shoot() {
+            mProj = GameObjectFactory.getGameObject("AlienProj");
             mProj.setPosition(mHitBox.centerBottom());
             playShoot = true;
             return mProj;
