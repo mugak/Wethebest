@@ -16,6 +16,12 @@ public class SimpleCannon extends GameObject {
 
     private PlayerConfig pc;
 
+    public static final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
+    public static final float FIRING_RATE = .1f; //how frequently the player can shoot
+    public static final float AMMO_REGEN_RATE = 1f; //how frequently ammo regenerates
+    public static final int MAX_AMMO = 5; //total projectiles the player can shoot
+    public static final int MAX_LIVES = 3;
+
     public int lives;
     public int ammo;
 
@@ -28,14 +34,13 @@ public class SimpleCannon extends GameObject {
 
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity, PlayerConfig pc) {
         super(app, size, spriteID, position, velocity);
-        this.pc = pc;
 
-        lives = pc.MAX_LIVES;
-        ammo = pc.MAX_AMMO;
+        lives = MAX_LIVES;
+        ammo = MAX_AMMO;
 
-        waitToShoot = new Counter(pc.FIRING_RATE);
-        invincible = new Counter(pc.INVINCIBLE_SECONDS);
-        waitForAmmo = new Counter(pc.AMMO_REGEN_RATE);
+        waitToShoot = new Counter(FIRING_RATE);
+        invincible = new Counter(INVINCIBLE_SECONDS);
+        waitForAmmo = new Counter(AMMO_REGEN_RATE);
     }
 
     public void update(long fps) {
