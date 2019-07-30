@@ -139,7 +139,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 //                } else {
 //                    mPlayer.setMovement(mPlayer.MOVINGLEFT);
 //                }
-                shootNow = true;
+                    shootNow = mPlayer.canShoot();
 
                 break;
 
