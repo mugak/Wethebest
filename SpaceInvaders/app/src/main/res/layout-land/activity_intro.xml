@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/phonepic2"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="28dp"/>
 
     <Button
         android:id="@+id/Startbtn"
@@ -57,7 +57,7 @@
         android:layout_alignTop="@+id/Next_btn"
         android:text="Quick Start"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-58dp"
+        android:layout_marginTop="-53dp"
         android:background="#F44336"
         android:textColor="#CDE8FA"
         />
