@@ -18,6 +18,7 @@ public class SimpleCannon extends GameObject {
     public int lives = MAX_LIVES;
 
     private boolean playShoot = false;
+    private boolean playHit = true; //Sound effect
 
     private boolean invincible = false;
     private long frameCount = 0;
@@ -52,10 +53,15 @@ public class SimpleCannon extends GameObject {
             app.soundEngine.playerShoot();
             playShoot = false;
         }
+        if(playHit){
+            app.soundEngine.playerHit();
+            playHit = false;
+        }
     }
 
     public void collide(GameObject gameObject) {
         if(gameObject instanceof AlienProj) {
+            playHit = true;
             if(!invincible) {
                 lives -= 1;
                 reset();

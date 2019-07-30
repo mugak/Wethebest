@@ -25,6 +25,7 @@ public class SoundEngine {
     private int alienShootID = -1;
     private int barrierHitID = -1;
     private int alienHitID = -1;
+    private int playerHitID = -1;
 
     public float masterVolume = .5f; // Volumes range from 0 through 1
     int nowPlaying =-1;
@@ -61,6 +62,7 @@ public class SoundEngine {
             alienShootID = sp.load(assetManager.openFd("alien_shoot.ogg"), 0);
             barrierHitID = sp.load(assetManager.openFd("Collision8-Bit.ogg"),0);
             alienHitID = sp.load(assetManager.openFd("SmallExplosion8-Bit.ogg"), 0);
+            playerHitID = sp.load(assetManager.openFd("Metal_Hit.ogg"),0);
 
 
         }catch(IOException e){
@@ -87,5 +89,9 @@ public class SoundEngine {
 
     public void alienHit(){
         sp.play(alienHitID, masterVolume, masterVolume, 0,0,1);
+    }
+
+    public void playerHit(){
+        sp.play(playerHitID, masterVolume, masterVolume, 0,0,1);
     }
 }
