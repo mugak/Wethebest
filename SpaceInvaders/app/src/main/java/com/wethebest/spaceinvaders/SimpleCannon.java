@@ -14,24 +14,28 @@ public class SimpleCannon extends GameObject {
     private final int SPRITE_ID = R.drawable.player;
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
 
-    private final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
-    private final float FIRING_RATE = .1f; //how frequently the player can shoot
-    private final float AMMO_REGEN_RATE = 1f; //how frequently ammo regenerates
+    private PlayerConfig pc;
 
-    public final int MAX_AMMO = 5; //total projectiles the player can shoot
-    public final int MAX_LIVES = 3;
-    public int lives = MAX_LIVES;
-    public int ammo = MAX_AMMO;
+    public int lives;
+    public int ammo;
 
     private boolean playShoot = false;
     private boolean playHit = true; //Sound effect
 
-    public Counter waitToShoot = new Counter(FIRING_RATE);
-    private Counter invincible = new Counter(INVINCIBLE_SECONDS);
-    private Counter waitForAmmo = new Counter(AMMO_REGEN_RATE);
+    public Counter waitToShoot;
+    private Counter invincible;
+    private Counter waitForAmmo;
 
-    SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+    SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity, PlayerConfig pc) {
         super(app, size, spriteID, position, velocity);
+        this.pc = pc;
+
+        lives = pc.MAX_LIVES;
+        ammo = pc.MAX_AMMO;
+
+        waitToShoot = new Counter(pc.FIRING_RATE);
+        invincible = new Counter(pc.INVINCIBLE_SECONDS);
+        waitForAmmo = new Counter(pc.AMMO_REGEN_RATE);
     }
 
     public void update(long fps) {
@@ -67,8 +71,8 @@ public class SimpleCannon extends GameObject {
         else if(waitForAmmo.isCountingDown) {
             if(waitForAmmo.finished()) {
                 ammo += 1;
-                if(ammo >= MAX_AMMO) {
-                    ammo = MAX_AMMO;
+                if(ammo >= pc.MAX_AMMO) {
+                    ammo = pc.MAX_AMMO;
                 }
             }
         }
