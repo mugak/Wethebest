@@ -102,7 +102,7 @@ public class Alien extends GameObject {
 
     private void checkAlienWin() {
         if(mHitBox.bottomOutOfBounds()) {
-            app.mPlayer.lives = 0; //game over when aliens reach bottom of screen
+            app.getPlayer().lives = 0; //game over when aliens reach bottom of screen
         }
     }
 }

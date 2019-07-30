@@ -112,5 +112,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             mGameState.run(this);
         }
     }
+
+    public SimpleCannon getPlayer() {
+        return mGameObjectManager.mPlayer;
+    }
 }
 
