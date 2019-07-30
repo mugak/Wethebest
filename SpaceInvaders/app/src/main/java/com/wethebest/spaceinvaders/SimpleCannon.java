@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.graphics.Canvas;
 import android.graphics.PointF;
 
 /*@SimpleCannon
@@ -14,8 +15,10 @@ public class SimpleCannon extends GameObject {
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
 
     private final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
-    private final int FIRING_RATE = 1; //fire every second
-    public final int MAX_AMMO = 99; //total projectiles the player can shoot
+    private final float FIRING_RATE = .1f; //how frequently the player can shoot
+    private final float AMMO_REGEN_RATE = 1f; //how frequently ammo regenerates
+
+    public final int MAX_AMMO = 5; //total projectiles the player can shoot
     public final int MAX_LIVES = 3;
     public int lives = MAX_LIVES;
     public int ammo = MAX_AMMO;
@@ -23,8 +26,9 @@ public class SimpleCannon extends GameObject {
     private boolean playShoot = false;
     private boolean playHit = true; //Sound effect
 
-    private Counter waitToShoot = new Counter(FIRING_RATE);
+    public Counter waitToShoot = new Counter(FIRING_RATE);
     private Counter invincible = new Counter(INVINCIBLE_SECONDS);
+    private Counter waitForAmmo = new Counter(AMMO_REGEN_RATE);
 
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
@@ -40,10 +44,11 @@ public class SimpleCannon extends GameObject {
         }
 
         if(invincible.on && !invincible.isCountingDown) {
+            mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);
             invincible.setFPS(fps);
         }
         else if(invincible.on && invincible.isCountingDown) {
-            if (invincible.finished()) {
+            if(invincible.finished()) {
                 mHitBox.setBitmap(SPRITE_ID);
             }
         }
@@ -53,6 +58,19 @@ public class SimpleCannon extends GameObject {
         }
         else if(waitToShoot.on && waitToShoot.isCountingDown) {
             waitToShoot.finished();
+        }
+
+        waitForAmmo.on = true;
+        if(!waitForAmmo.isCountingDown) {
+            waitForAmmo.setFPS(fps);
+        }
+        else if(waitForAmmo.isCountingDown) {
+            if(waitForAmmo.finished()) {
+                ammo += 1;
+                if(ammo >= MAX_AMMO) {
+                    ammo = MAX_AMMO;
+                }
+            }
         }
 
     }
@@ -74,10 +92,14 @@ public class SimpleCannon extends GameObject {
                 lives -= 1;
                 reset();
                 invincible.on = true;
-                mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);
             }
         }
     }
+
+    public void reset() {
+        waitToShoot.reset();
+    }
+
 
     public GameObject shoot() {
         ammo--;
@@ -94,6 +116,10 @@ public class SimpleCannon extends GameObject {
 
         waitToShoot.on = true; //player must wait after this shot
         return true; //shoot a projectile
+    }
+
+    private void regenerateAmmo() {
+
     }
 
 }
