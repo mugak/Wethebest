@@ -1,10 +1,12 @@
 package com.wethebest.spaceinvaders;
 
-import android.graphics.Canvas;
-import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.RectF;
 
+/*@SimpleCannon
+* This game object shoots projectiles and is controlled by the player.
+* Movement is horizontally left or right and is determined by the device's accelerometer sensor.
+* When the player shoots, a PlayerProj object at the position of the cannon.
+*/
 public class SimpleCannon extends GameObject {
     //DEFAULTS
     private final int SPRITE_ID = R.drawable.player;
