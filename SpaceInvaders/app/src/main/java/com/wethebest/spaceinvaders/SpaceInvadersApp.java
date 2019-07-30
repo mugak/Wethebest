@@ -52,6 +52,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         soundEngine = new SoundEngine(context);
         mGameUI = new GameUI(this);
 
+        rand = new Random();
+
         //start game
         mGameObjectManager = new GameObjectManager(this);
         mGameState = new PauseState(this);
