@@ -24,4 +24,10 @@ public class Counter {
         return !on;
     }
 
+    public void reset() {
+        frameCount = 0;
+        on = false;
+        isCountingDown = false;
+    }
+
 }

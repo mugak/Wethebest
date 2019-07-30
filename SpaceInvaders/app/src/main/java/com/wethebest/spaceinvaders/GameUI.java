@@ -29,8 +29,7 @@ public class GameUI {
         mRect = new RectF();
         Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");
         mPaint.setTypeface(mTypeface);
-        mPaint.setTextSize(app.mScreenSize.x/20);
-        mPaint.setARGB(255, 255,255, 255);
+        mPaint.setTextSize(app.mScreenSize.y/12);
     }
 
 
@@ -46,19 +45,25 @@ public class GameUI {
         drawLives(canvas);
         drawScore(canvas);
         drawPauseButton(canvas);
+        if(app.mPlayer.waitToShoot.on) {
+            drawWaitToShoot(canvas);
+        }
     }
 
     public void drawAmmo(Canvas canvas) {
+        mPaint.setARGB(255, 255,255, 255);
         mPaint.setTextAlign(Paint.Align.LEFT);
         canvas.drawText("Ammo: " + Integer.toString(mAmmo), app.mScreenSize.y/12, app.mScreenSize.y/12, mPaint);
     }
 
     public void drawLives(Canvas canvas) {
+        mPaint.setARGB(255, 255,255, 255);
         mPaint.setTextAlign(Paint.Align.RIGHT);
         canvas.drawText("Lives: " + Integer.toString(mLives), app.mScreenSize.x - app.mScreenSize.y/10 - app.mScreenSize.y/24, app.mScreenSize.y/12, mPaint);
     }
 
     public void drawScore(Canvas canvas) {
+        mPaint.setARGB(255, 255,255, 255);
         mPaint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText("Score: " + Integer.toString(mScore), app.mScreenSize.x/2, app.mScreenSize.y/12, mPaint);
     }
@@ -73,4 +78,8 @@ public class GameUI {
         canvas.drawBitmap(mBitmap, mRect.left, mRect.top, null);
     }
 
+    public void drawWaitToShoot(Canvas canvas) {
+        mPaint.setARGB(255, 255,0, 0);
+        canvas.drawRect(0, app.mScreenSize.y/12 - app.mScreenSize.x/20, app.mScreenSize.y/13, app.mScreenSize.y/12, mPaint);
+    }
 }
