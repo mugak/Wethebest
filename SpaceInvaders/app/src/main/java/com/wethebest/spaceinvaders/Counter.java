@@ -7,7 +7,7 @@ public class Counter {
     private float seconds;
 
     Counter(float seconds) {
-        this.seconds = seconds;
+        setSeconds(seconds);
     }
 
     public void setFPS(long fps) {
@@ -30,4 +30,7 @@ public class Counter {
         isCountingDown = false;
     }
 
+    public void setSeconds(float seconds) {
+        this.seconds = seconds;
+    }
 }
