@@ -1,7 +1,6 @@
 package com.wethebest.spaceinvaders;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
@@ -9,9 +8,14 @@ import android.media.SoundPool;
 import android.os.Build;
 import android.util.Log;
 
-
 import java.io.IOException;
 
+
+/*@SoundEngine
+* Sets up all of the sounds in the game to be played in each game object.
+* Loads the sound files into memory and assigns them with an ID.
+* Sounds are played through the member methods.
+*/
 public class SoundEngine {
 
     Context context;
