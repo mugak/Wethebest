@@ -14,8 +14,6 @@ public class SimpleCannon extends GameObject {
     private final int SPRITE_ID = R.drawable.player;
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
 
-    private PlayerConfig pc;
-
     public static final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
     public static final float FIRING_RATE = .1f; //how frequently the player can shoot
     public static final float AMMO_REGEN_RATE = 1f; //how frequently ammo regenerates
@@ -32,7 +30,7 @@ public class SimpleCannon extends GameObject {
     private Counter invincible;
     private Counter waitForAmmo;
 
-    SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity, PlayerConfig pc) {
+    SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
 
         lives = MAX_LIVES;
@@ -76,8 +74,8 @@ public class SimpleCannon extends GameObject {
         else if(waitForAmmo.isCountingDown) {
             if(waitForAmmo.finished()) {
                 ammo += 1;
-                if(ammo >= pc.MAX_AMMO) {
-                    ammo = pc.MAX_AMMO;
+                if(ammo >= MAX_AMMO) {
+                    ammo = MAX_AMMO;
                 }
             }
         }
