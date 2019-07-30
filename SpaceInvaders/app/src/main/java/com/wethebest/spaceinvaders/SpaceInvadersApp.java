@@ -26,8 +26,6 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
     public Context context;
 
-    private long mFPS;
-
     private Thread mGameThread = null;
 
     GameState mGameState;

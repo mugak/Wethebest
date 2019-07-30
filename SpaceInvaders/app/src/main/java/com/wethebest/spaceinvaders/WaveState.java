@@ -12,15 +12,22 @@ public class WaveState implements GameState {
 
     public WaveState(SpaceInvadersApp app) {
         mApp = app;
+        mApp.score = 0;
+        app.mGameObjectManager = new GameObjectManager(app);
     }
 
     @Override
     public void changeState(SpaceInvadersApp app, State nextState) {
         switch(nextState) {
+            case WAVE:
+                app.setState(new WaveState(app));
+                break;
             case PAUSE:
                 app.setState(new PauseState(app));
+                break;
             case GAMEOVER:
                 app.setState(new GameOverState());
+                break;
         }
     }
 
@@ -48,7 +55,9 @@ public class WaveState implements GameState {
             mFPS = MILLIS_IN_SECOND / timeThisFrame;
         }
 
-        if (isGameOver(app)) { changeState(app, State.GAMEOVER); }
+        if (isGameOver(app)) {
+            changeState(app, State.WAVE);
+        }
     }
 
     private void draw() {
