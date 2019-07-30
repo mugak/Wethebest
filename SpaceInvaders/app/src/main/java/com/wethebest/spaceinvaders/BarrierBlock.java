@@ -18,7 +18,7 @@ public class BarrierBlock extends GameObject {
 
     public void playAudio() {
         if(playHit) {
-            app.soundEngine.alienShoot(); //TODO get barrierHit() sound file
+            app.soundEngine.barrierHit(); //TODO get barrierHit() sound file
             playHit = false;
         }
     }
