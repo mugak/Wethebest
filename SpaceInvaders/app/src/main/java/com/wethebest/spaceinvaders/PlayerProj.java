@@ -9,9 +9,8 @@ import android.graphics.PointF;
 * down for the alien projectiles.
 */
 public class PlayerProj extends GameObject {
-    public PlayerProj(SpaceInvadersApp app) {
-        super(app, new PointF(app.mScreenSize.x / 80, app.mScreenSize.x / 40), R.drawable.projectile_a, -app.mScreenSize.y);
-        //super(app, size, sprite, velocity)
+    public PlayerProj(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+        super(app, size, spriteID, position, velocity);
     }
     public void playAudio() { }
 

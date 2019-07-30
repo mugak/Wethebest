@@ -28,7 +28,7 @@ public class Barriers {
     }
 
     public List getBarrierBlocks() {
-        List<BarrierBlock> barrierBlocks = new LinkedList<BarrierBlock>();
+        List<GameObject> barrierBlocks = new LinkedList<GameObject>();
 
         for(Barrier barrier : barriers) {
             barrierBlocks.addAll(barrier.barrierBlocks);

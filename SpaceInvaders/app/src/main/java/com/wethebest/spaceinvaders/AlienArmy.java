@@ -39,9 +39,10 @@ public class AlienArmy {
                 PointF position = new PointF(STARTING_POSITION.x + i * (size.x + COL_SPACING),
                         STARTING_POSITION.y + j * (size.y + ROW_SPACING));
 
-                Alien alien = new Alien(app);
+                //Alien alien = new Alien(app);
+                GameObject alien = GameObjectFactory.getGameObject("Alien");
                 alien.setPosition(position);
-                aliens.add(alien);
+                aliens.add((Alien) alien);
             }
         }
     }

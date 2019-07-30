@@ -22,12 +22,8 @@ public class SimpleCannon extends GameObject {
     private boolean invincible = false;
     private long frameCount = 0;
 
-    SimpleCannon(SpaceInvadersApp app) {
-        super(app,
-                new PointF(app.mScreenSize.x / 10, app.mScreenSize.x / 10),
-                R.drawable.player,
-                new PointF(app.mScreenSize.x / 2, app.mScreenSize.y - app.mScreenSize.x/10));
-        //super(app, size, sprite, position)
+    SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+        super(app, size, spriteID, position, velocity);
     }
 
     public void update(long fps) {
@@ -69,8 +65,8 @@ public class SimpleCannon extends GameObject {
         }
     }
 
-    public PlayerProj shoot() {
-        PlayerProj mProj = new PlayerProj(app);
+    public GameObject shoot() {
+        GameObject mProj = GameObjectFactory.getGameObject("PlayerProj");
         mProj.setPosition(mHitBox.centerTop());
         playShoot = true;
         return mProj;

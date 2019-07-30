@@ -16,19 +16,6 @@ public abstract class GameObject {
 
     public boolean isActive = true;
 
-    //TODO create GameObjectBuilder, use GameObjectFactory
-    GameObject(SpaceInvadersApp app, PointF size, int spriteID) {
-        this(app, size, spriteID, new PointF(0, 0), 0);
-    }
-
-    GameObject(SpaceInvadersApp app, PointF size, int spriteID, PointF position) {
-        this(app, size, spriteID, position, 0);
-    }
-
-    GameObject(SpaceInvadersApp app, PointF size, int spriteID, float velocity) {
-        this(app, size, spriteID, new PointF(0, 0), velocity);
-    }
-
     GameObject(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         this.app = app;
         this.SIZE = size;
