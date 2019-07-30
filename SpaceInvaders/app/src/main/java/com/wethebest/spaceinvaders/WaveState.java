@@ -42,6 +42,7 @@ public class WaveState implements GameState {
 
         long timeThisFrame = System.currentTimeMillis() - frameStartTime;
 
+        //TODO: ensure that timeThisFrame isn't ridiculously high
         if (timeThisFrame > 0) {
             int MILLIS_IN_SECOND = 1000;
             mFPS = MILLIS_IN_SECOND / timeThisFrame;
