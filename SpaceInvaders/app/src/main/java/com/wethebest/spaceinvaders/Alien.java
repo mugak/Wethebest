@@ -4,12 +4,12 @@ import android.graphics.Point;
 import android.graphics.PointF;
 
 public class Alien extends GameObject {
-    private final Point SHOOT_INTERVAL = new Point(5, 20); //shoots every 5-20 seconds
+    private final PointF SHOOT_INTERVAL = new PointF(5, 15); //shoots every 5-15 seconds
 
     //Shoot projectiles randomly
     private GameObject mProj;
-    private Point shootInterval = SHOOT_INTERVAL;
-    private long frameCount = 0;
+    private PointF shootInterval = SHOOT_INTERVAL;
+    private float frameCount = 0;
     public boolean shootNow = false;
     private boolean playHit = false;
 
@@ -78,7 +78,7 @@ public class Alien extends GameObject {
     //calculates when to shoot shooting by counting the number of frames
     private void timeToShoot(long fps) {
         if(frameCount <= 0) {
-            int seconds = getRandomInt(shootInterval);
+            float seconds = getRandomFloat(shootInterval);
             frameCount = fps * seconds;
         } //if alien is not waiting to shoot, assign frameCount
         else {
@@ -89,8 +89,15 @@ public class Alien extends GameObject {
         } //alien is waiting to shoot
     }
 
-    private int getRandomInt(Point interval) {
-        return app.rand.nextInt(interval.y - interval.x) + interval.x;
+    private float getRandomFloat(PointF interval) {
+        return app.rand.nextFloat() * (interval.y - interval.x) + interval.x;
+
+    }
+    //Set the Shoot
+    public void setShootInterval(float factor){
+        float min = (SHOOT_INTERVAL.x * factor);
+        float max = (SHOOT_INTERVAL.y * factor);
+        shootInterval = new PointF(min, max);
     }
 
     private void checkAlienWin() {

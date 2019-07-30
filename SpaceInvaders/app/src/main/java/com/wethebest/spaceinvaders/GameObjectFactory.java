@@ -15,10 +15,10 @@ public class GameObjectFactory {
 
     public static GameObject getGameObject(String objectName) {
         if(objectName.equalsIgnoreCase("ALIEN")) {
-            size = new PointF(app.mScreenSize.x / 10, app.mScreenSize.y / 10);
+            size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
             spriteID = R.drawable.invader_a01;
             position = new PointF(0, 0);
-            velocity = 200f;
+            velocity = 100f;
             return new Alien(app, size, spriteID, position, velocity);
         }
         else if(objectName.equalsIgnoreCase("PLAYER")) {
@@ -43,10 +43,10 @@ public class GameObjectFactory {
             return new PlayerProj(app, size, spriteID, position, velocity);
         }
         else if(objectName.equalsIgnoreCase("ALIENPROJ")) {
-            size = new PointF(app.mScreenSize.x / 160, app.mScreenSize.x / 40);
+            size = new PointF(app.mScreenSize.x / 240, app.mScreenSize.x / 40);
             spriteID = R.drawable.alien_laser;
             position = new PointF(0, 0);
-            velocity = app.mScreenSize.y / 3;
+            velocity = app.mScreenSize.y / 4;
             return new AlienProj(app, size, spriteID, position, velocity);
         }
 
