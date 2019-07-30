@@ -20,7 +20,6 @@ public class BarrierBlock extends GameObject {
             app.soundEngine.barrierHit(); //TODO get barrierHit() sound file
             playHit = false;
         }
-
     }
 
     public void collide(GameObject gameObject) {

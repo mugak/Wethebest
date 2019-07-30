@@ -9,10 +9,11 @@ import java.util.List;
 
 public class AlienArmy {
     //DEFAULTS
-    private final int NUM_ALIENS = 13;
-    private final Point DIMENSIONS = new Point(NUM_ALIENS/4 + NUM_ALIENS % 4,
-                                                NUM_ALIENS/4 + NUM_ALIENS % 4);
+    private final int NUM_ALIENS = 14;
 
+    //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
+    private final Point DIMENSIONS = new Point(NUM_ALIENS/4 + NUM_ALIENS % 4,
+                                                NUM_ALIENS/4 );
     //SET BASED ON SCREEN SIZE
     private final float ROW_SPACING;
     private final float COL_SPACING;
@@ -26,7 +27,7 @@ public class AlienArmy {
         this.app = app;
 
         ROW_SPACING = 0;
-        COL_SPACING = app.mScreenSize.y / 10;
+        COL_SPACING = app.mScreenSize.y / 8;
         STARTING_POSITION = new PointF(app.mScreenSize.y / 10, app.mScreenSize.y / 10);
 
         createAliens();
