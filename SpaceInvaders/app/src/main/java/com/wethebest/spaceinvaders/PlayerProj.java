@@ -1,22 +1,33 @@
 package com.wethebest.spaceinvaders;
 
-import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
-import android.widget.Space;
+import android.graphics.PointF;
 
-class PlayerProj extends  Projectile{
-    PlayerProj(SpaceInvadersApp app){
-        super(app);
-        this.mBitmap = BitmapFactory.decodeResource(app.context.getResources(), R.drawable.powerup_blue01);
-        yVel = -mScreenSize.x/3; //Projectile shoots up
-        //soundEngine.playerShoot();
+/*@PlayerProj Class
+* Represents the projectiles shot from the player.
+* Only collides with the barrier block and alien game objects.
+* Moves vertically up the screen when created as opposed to
+* down for the alien projectiles.
+*/
+public class PlayerProj extends GameObject {
+    public PlayerProj(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+        super(app, size, spriteID, position, velocity);
+    }
+    public void playAudio() { }
+
+    public void update(long fps){
+        mHitBox.moveVertically(mHitBox.velocity/fps);
+        checkBounds();
     }
 
-    @Override
-    public void collide (GameObject gameObject) {
-        if(!(gameObject instanceof SimpleCannon)) {
-            isActive = false; //PlayerProj can't shoot the player
+    public void collide(GameObject gameObject) {
+        if((gameObject instanceof BarrierBlock || gameObject instanceof Alien)) {
+            isActive = false;
+        }
+    }
+
+    public void checkBounds() {
+        if(mHitBox.topOutOfBounds()|| mHitBox.bottomOutOfBounds()) {
+            isActive = false;
         }
     }
 }

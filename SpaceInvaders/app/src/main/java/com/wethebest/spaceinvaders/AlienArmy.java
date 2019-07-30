@@ -1,146 +1,142 @@
 package com.wethebest.spaceinvaders;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.os.Bundle;
-import android.util.Log;
-
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class AlienArmy {
-    private int numRows;
-    private int aliensPerRow;
-    private int maxNumAliens;
+    //DEFAULTS
+    private final int NUM_ALIENS = 14;
 
-    private Point mScreenSize;
-    private PointF rowPosition; //Position of top left corner of first alien in first row
-    private int spaceBetweenRows;
-    private List <AlienRow> alienRows;
-
-    public List<Alien> allAliens = new LinkedList<Alien>(); //
+    //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
+    private final Point DIMENSIONS = new Point(NUM_ALIENS/4 + NUM_ALIENS % 4,
+                                                NUM_ALIENS/4 );
+    //SET BASED ON SCREEN SIZE
+    private final float ROW_SPACING;
+    private final float COL_SPACING;
+    private final PointF STARTING_POSITION; //top left corner of first alien
 
     private SpaceInvadersApp app;
-    public boolean changeDirection;
+    public List<Alien> aliens = new LinkedList<Alien>();
+    private boolean reverseNow = false;
 
     AlienArmy(SpaceInvadersApp app) {
         this.app = app;
-        mScreenSize = app.mScreenSize;
-        numRows = 4; //TODO hardcoded
-        aliensPerRow = AlienRow.numAliens;
-        maxNumAliens = numRows * aliensPerRow;
 
-        spaceBetweenRows = 0; //TODO set better spacing
-        setPos();
-        alienRows = new LinkedList<AlienRow>();
-        setRows();
+        ROW_SPACING = 0;
+        COL_SPACING = app.mScreenSize.y / 8;
+        STARTING_POSITION = new PointF(app.mScreenSize.y / 10, app.mScreenSize.y / 10);
 
-        changeDirection = false;
+        createAliens();
     }
 
+    //Instantiates and sets positions of every alien
+    private void createAliens() {
+        //First get the size of an alien
+        GameObject tempAlien = GameObjectFactory.getGameObject("Alien");
+        PointF size = new PointF(tempAlien.getHitBox().width(), tempAlien.getHitBox().height());
+        int numAliensToAdd = NUM_ALIENS;
 
-    private void setPos() {
-        rowPosition = new PointF(mScreenSize.x / 10, mScreenSize.y / 10); //TODO set better position
-    }
+        for(int i = 0; i < DIMENSIONS.x; i++) {
+            for(int j = 0; j < DIMENSIONS.y; j++) {
+                if(numAliensToAdd <=0){break;}
 
-    private void setRows() {
-        for(int i = 0; i < numRows; i++) {
-            AlienRow mAlienRow = new AlienRow(app);
-            Alien.setAlienSize(new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10));
-            mAlienRow.alienPos = new PointF(rowPosition.x, rowPosition.y + i * (Alien.alienSize.y + spaceBetweenRows));
-            mAlienRow.setAliens();
-            alienRows.add(mAlienRow);
+                PointF position = new PointF(STARTING_POSITION.x + i * (size.x + COL_SPACING),
+                        STARTING_POSITION.y + j * (size.y + ROW_SPACING));
 
-        }
-    }
-
-    public List getAliens() {
-        List<Alien> allAliens = new LinkedList<Alien>();
-        for(AlienRow mAlienRow : alienRows) {
-            allAliens.addAll(mAlienRow.getAliens());
-        }
-        return allAliens;
-    }
-
-    public void setAliens() {
-        for(AlienRow mAlienRow : alienRows) {
-            allAliens.addAll(mAlienRow.aliens);
-        }
-    }
-
-    public void changeDirection() {
-        for (Alien a : allAliens) {
-            a.reverseXVelocity();
-        }
-    }
-
-    public void update(long fps) {
-        for(Alien mAlien : allAliens) {
-            mAlien.update(fps);
-            if(mAlien.outOfBounds()) {
-                changeDirection = true;
+                GameObject alien = GameObjectFactory.getGameObject("Alien");
+                alien.setPosition(position);
+                aliens.add((Alien) alien);
+                numAliensToAdd--;
             }
         }
-        if(changeDirection == true) {
-            changeDirection();
-            changeDirection = false;
+    }
+
+    //Updates aliens, reverses direction and increases speed if needed
+    public void update(long fps) {
+        for(Alien alien : aliens) {
+            alien.update(fps);
+            alien.setShootInterval((float)aliens.size()/NUM_ALIENS);
+            if(alien.outOfBounds()) {
+                reverseNow = true;
+            }
         }
 
+
+
+        reverse();
         increaseSpeed();
     }
 
-    //calculates speed based on exponential growth: y(t) = a × e^(kt)
-    //a = base_speed
-    //k = rate of growth - tweak based on game feel
-    //t = number of aliens killed (time)
-    //y(t) = new speed at the number of aliens killed
-    public void increaseSpeed() {
-        int aliensKilled = maxNumAliens - allAliens.size();
-        float multiplier = exponentialGrowth(.09f, aliensKilled);
-        AlienHitBox.speedUp(multiplier); //sets SPEED aka y(t) in AlienHitBox
+    //Reverses direction when an alien hits the side of screen
+    private void reverse() {
+        if(reverseNow) {
+            for(Alien alien : aliens) {
+                alien.reverseXVelocity();
+            }
+        }
+        reverseNow = false;
     }
 
-    //returns e^(kt)
-    public float exponentialGrowth(float rateOfGrowth, int time) {
-        return (float) Math.exp(rateOfGrowth * time);
-    }
+    //Calculates speed based on exponential growth: y(t) = a × e^(kt)
+    //a = Alien BASE_SPEED
+    //k = rate of growth
+    //t = time (number of aliens killed)
+    //y(t) = new speed at the given time
+    private void increaseSpeed() {
+        int aliensKilled = (DIMENSIONS.x * DIMENSIONS.y) - aliens.size(); //number of max aliens - number of current aliens
+        float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
 
-
-
-    public void draw(Canvas canvas) {
-        for (Alien a : allAliens) {
-            a.display(canvas);
+        for(Alien alien : aliens) {
+            alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in HitBoxs
         }
     }
 
+    //Returns e^(kt)
+    private float exponentialGrowth(float rateOfGrowth, int time) {
+        return (float) Math.exp(rateOfGrowth * time);
+    }
 
+    //Returns list of alien projectiles
     public List getAlienProjs() {
         List<GameObject> alienProjs = new LinkedList<>();
 
-        for (Alien a : allAliens) {
-                if (a.shootNow) {
-                    alienProjs.add(a.shoot());
-                    a.shootNow = false;
+        for(Alien alien: aliens) {
+                if(alien.shootNow) {
+                    alienProjs.add(alien.shoot());
+                    alien.shootNow = false;
                 }
             }
         return alienProjs;
     }
 
+    public void draw(Canvas canvas) {
+        for(Alien alien: aliens) {
+            alien.display(canvas);
+        }
+    }
+
+    //Removes killed aliens
     public void removeInactiveObjects() {
-        Iterator<Alien> alienObjectIterator = allAliens.iterator();
+        Iterator<Alien> alienObjectIterator = aliens.iterator();
 
         while (alienObjectIterator.hasNext()) {
             Alien alienObject = alienObjectIterator.next();
 
             if (!alienObject.isActive()) {
-                app.score += 100;
+                increaseScore();
                 alienObjectIterator.remove();
             }
         }
     }
+
+    //TODO put in spaceinvadersapp
+    private void increaseScore() {
+        app.score += 100;
+    }
+
+
 }

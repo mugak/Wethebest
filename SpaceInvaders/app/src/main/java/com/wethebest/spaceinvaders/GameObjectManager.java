@@ -14,7 +14,7 @@ public class GameObjectManager {
     private LinkedList<GameObject> gameObjects;
     public SimpleCannon mPlayer;
     private AlienArmy mAlienArmy;
-    private LinkedList<Barrier> mBarriers;
+    private Barriers mBarriers;
 
     SpaceInvadersApp app;
 
@@ -23,32 +23,17 @@ public class GameObjectManager {
 
         gameObjects = new LinkedList<>();
 
-        mPlayer = new SimpleCannon(app);
-        mBarriers = new LinkedList<Barrier>();
+        mPlayer = (SimpleCannon) GameObjectFactory.getGameObject("Player");
+        mBarriers = new Barriers(app);
         mAlienArmy = new AlienArmy(app);
-        mAlienArmy.setAliens();
 
-        gameObjects.addAll(mAlienArmy.getAliens());
         gameObjects.add(mPlayer);
+        gameObjects.addAll(mAlienArmy.aliens);
+        gameObjects.addAll(mBarriers.getBarrierBlocks());
 
         for (GameObject gameObject : gameObjects) {
-            gameObject.reset(app.mScreenSize);
+            gameObject.reset();
         }
-
-        createBarriers(3);
-    }
-
-    private void createBarriers(int numBarriers) {
-        for (int i = 1; i < numBarriers + 1; i++) {
-            PointF barrierCenterPosition = Util.computeBarrierPosition(i, numBarriers, app.mScreenSize);
-
-            addBarrierToGameObjects(new Barrier(app.mScreenSize, barrierCenterPosition));
-        }
-    }
-
-    private void addBarrierToGameObjects(Barrier barrier) {
-        mBarriers.add(barrier);
-        gameObjects.addAll(barrier.getBarrierBlocks());
     }
 
     private void removeInactiveObjects() {
@@ -62,16 +47,7 @@ public class GameObjectManager {
             }
         }
 
-        Iterator<Alien> alienObjectIterator = mAlienArmy.allAliens.iterator();
-
-        while (alienObjectIterator.hasNext()) {
-            Alien alienObject = alienObjectIterator.next();
-
-            if (!alienObject.isActive()) {
-                alienObjectIterator.remove();
-            }
-        }
-
+        mAlienArmy.removeInactiveObjects();
     }
 
     public void add(GameObject gameObject) {
@@ -81,7 +57,7 @@ public class GameObjectManager {
     }
 
     // This function updates all gameobjects each frame
-    public void updateState(long fps) {
+    public void updateGameObjectStates(long fps) {
         updateGameObjects(fps);
         detectCollisions();
         removeInactiveObjects();
@@ -93,7 +69,7 @@ public class GameObjectManager {
         }
 
         mAlienArmy.update(fps);
-        //addAlienProjs();
+        gameObjects.addAll(mAlienArmy.getAlienProjs());
     }
 
     public void displayGameObjects(Canvas canvas) {
@@ -124,15 +100,15 @@ public class GameObjectManager {
         //Checks to see if the first object is a projectile because in SpaceInvaders only
         // projectiles collide with non projectiles. There are no other types of collisions
         for (GameObject object1 : gameObjects) {
-            if (object1 instanceof Projectile) {
+            if (object1 instanceof AlienProj || object1 instanceof PlayerProj) {
 
                 for (GameObject object2 : gameObjects) {
-                    if (!(object2 instanceof Projectile)) {
+                    if (!(object2 instanceof AlienProj || object2 instanceof PlayerProj)) {
                         collide(object1, object2);
                     }
                 }
 
-                for (GameObject alienObject : mAlienArmy.allAliens) {
+                for (GameObject alienObject : mAlienArmy.aliens) {
                     collide(object1, alienObject);
                 }
             }

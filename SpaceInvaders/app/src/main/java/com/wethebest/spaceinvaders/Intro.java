@@ -36,6 +36,7 @@ public class Intro extends AppCompatActivity {
         final ImageView MainImage = findViewById(R.id.imageView3);
         final ImageView Seagullpoop = findViewById(R.id.imageView4);
         final ImageView usermessage = findViewById(R.id.imageView6);
+        Button Startbtn = findViewById(R.id.Startbtn);
 
 
         Nextbtn.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +54,20 @@ public class Intro extends AppCompatActivity {
 
             }
         });
+
+        //Start button goes directly to Game (Space invaders class)
+        Startbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(Intro.this,SpaceInvaders.class);
+                startActivityForResult(intent,0);
+                overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
+
+
+            }
+        });
+
 
         //goes to next activity once name is entered
         EnterName.setOnKeyListener(new OnKeyListener()
@@ -84,6 +99,7 @@ public class Intro extends AppCompatActivity {
 
     }
 
+
     //main menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,6 +107,25 @@ public class Intro extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    //items in the menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.action_settings) {
+            startActivity(new Intent(Intro.this, Settings.class));
+        }
+
+        if(item.getItemId() == R.id.action_startover) {
+            startActivity(new Intent(Intro.this, SpaceInvaders.class));
+
+        }
+        if(item.getItemId() == R.id.action_newgame) {
+            startActivity(new Intent(Intro.this, Intro.class));
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     //back button forces to go to intro activity and stops app from crashing

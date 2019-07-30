@@ -14,6 +14,7 @@ import android.view.SurfaceView;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Random;
 
 /*
     SpaceInvadersApp works as a manager of the different game states: wave and gameover
@@ -25,6 +26,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
     public Context context;
 
+    private long mFPS;
+
     private Thread mGameThread = null;
 
     GameState mGameState;
@@ -34,10 +37,9 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public int score;
 
     private volatile boolean mPlaying;
-
     public boolean shootNow;
-
-    SoundEngine soundEngine;
+    public Random rand;
+    public SoundEngine soundEngine;
 
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
@@ -74,8 +76,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                         mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGLEFT);
                     }
                 }*/
+                shootNow = mGameObjectManager.mPlayer.canShoot();
 
-                shootNow = true;
                 break;
 
             case MotionEvent.ACTION_UP:

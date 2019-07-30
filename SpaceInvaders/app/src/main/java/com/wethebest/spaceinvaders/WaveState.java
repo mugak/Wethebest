@@ -35,7 +35,7 @@ public class WaveState implements GameState {
             app.shootNow = false;
         }
 
-        app.mGameObjectManager.updateState(mFPS);
+        app.mGameObjectManager.updateGameObjectStates(mFPS);
         app.mGameUI.update(app.score);
 
         draw();

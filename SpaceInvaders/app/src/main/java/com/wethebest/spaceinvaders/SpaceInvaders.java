@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.graphics.Point;
 import android.view.Display;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
@@ -20,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
+
 
 
 
@@ -39,6 +42,8 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
         int widthInPixels = 800;
         int heightInPixels = 600;
 
+
+
         myBlankBitmap = Bitmap.createBitmap(widthInPixels,
                 heightInPixels,
                 Bitmap.Config.ARGB_8888);
@@ -46,14 +51,19 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
         // with the Bitmap to draw on
         myCanvas = new Canvas(myBlankBitmap);
 
+
+        enableImmersiveMode();
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
-        display.getSize(size);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            display.getRealSize(size);
+        }
+        else {
+            display.getSize(size);
+        }
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
         mSpaceInvadersApp = new SpaceInvadersApp(this, size.x, size.y);
-        enableImmersiveMode();
         setContentView(mSpaceInvadersApp);
     }
 
@@ -102,6 +112,7 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     }
 
 
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -122,6 +133,8 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
         }
+
+
     } //enables full screen - took from https://stackoverflow.com/questions/29186081/android-immersive-mode-reset-when-changing-activity
 
 //    //main menu

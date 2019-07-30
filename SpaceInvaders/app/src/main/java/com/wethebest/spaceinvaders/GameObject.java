@@ -1,39 +1,47 @@
 package com.wethebest.spaceinvaders;
 
-import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Point;
+import android.graphics.PointF;
 import android.graphics.RectF;
 
-//All GameObjects should be displayable and collidable objects
-public interface GameObject {
-    //Implements how the object changes state each frame
-    //Could be used to update position of GameObjects each frame
-    void update(long fps);
+public abstract class GameObject {
+    private final int SPRITE_ID;
+    private final PointF SIZE;
+    private final PointF POSITION;
+    protected final float VELOCITY;
+    protected final float SPEED;
 
-    //Implements the way the object will be displayed to the screen
-    //Requires the class to have it's own Paint object to draw itself to the canvas
-    void display(Canvas canvas);
+    protected SpaceInvadersApp app;
+    protected HitBox mHitBox;
 
-    //Object plays the appropriate sound at the current frame, e.g. during collision or
-    //shooting a projectile
-    void playAudio();
+    public boolean isActive = true;
 
-    //Resets state of object to beginning of GameState
-    //Examples would include moving GameObjects to their starting positions in the game or
-    // deactivating an object that shouldn't be instantiated yet
-    void reset(Point location);
+    GameObject(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+        this.app = app;
+        this.SIZE = size;
+        this.SPRITE_ID = spriteID;
+        this.POSITION = position;
+        this.VELOCITY = velocity;
+        this.SPEED = Math.abs(velocity);
+        mHitBox = new HitBox.Builder(app, SIZE).withSprite(SPRITE_ID).withPosition(POSITION).withVelocity(VELOCITY).build();
+    }
 
-    //Implements the behavior of how an object should change state when it is collided with
-    //Implementations of GameObject should check to see if the passed gameObject parameter is
-    //of the proper type to collide with
-    void collide(GameObject gameobject);
+    public abstract void update(long fps);
 
-    //Necessary for the SpaceInvadersApp class to calculate if a collision has occured between two
-    // objects
-    RectF getHitBox();
+    public abstract void playAudio();
 
-    //Checks to see if object should be in game
-    //If false then the SpaceInvadersApp will remove it's reference to the object and it will dissapear
-    boolean isActive();
+    public abstract void collide(GameObject gameobject);
+
+
+    public void display(Canvas canvas) { mHitBox.display(canvas); };
+
+    public RectF getHitBox() { return mHitBox.getHitBox(); }
+
+    public void reset() { }
+
+    public void setPosition(PointF position) { mHitBox.setPosition(position); }
+
+    public boolean isActive(){
+        return isActive;
+    }
 }

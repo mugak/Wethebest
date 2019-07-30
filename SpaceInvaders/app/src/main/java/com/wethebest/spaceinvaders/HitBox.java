@@ -1,162 +1,103 @@
 package com.wethebest.spaceinvaders;
 
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-
 //TODO create HitBoxBuilder
 //TODO separate bitmap drawing into another class
-//TODO create GameObjectHitBox classes, integrate HitBox into all of them
 //TODO make HitBoxList to replace Barrier and AlienArmy
 
-//The HitBox class controls the position and movement a GameObject's HitBox.
+//The HitBox class controls the position and movement of a rectangle
 public class HitBox {
-    //Needed for Context and ScreenSize
     private SpaceInvadersApp app;
 
-    //Used to draw on Canvas
-    private RectF mRect;
-    public Bitmap mBitmap;
-    private Paint mPaint;
+    private RectF mRect = new RectF();
+    private Bitmap mBitmap;
 
-    //
-    public float velocity; //
-    public static PointF size; //
+    public float velocity;
+    public float speed;
 
-    //Aliens have a constant movement speed
-    private final float SPEED = 500;
-
-
-    //Tells the game whether the object should still be in game
-    public boolean isActive;
-
-    HitBox(SpaceInvadersApp app) {
-        this.app = app;
-
-        mRect = new RectF();
-        mPaint = new Paint();
-
-        isActive = true;
-        velocity = SPEED; //TODO hardcoded
+    private HitBox(Builder builder) {
+        this.app = builder.app;
+        this.mRect = builder.mRect;
+        this.mBitmap = builder.mBitmap;
+        this.velocity = builder.velocity;
+        this.speed = builder.speed;
     }
 
-    public void moveHorizontally(float offset) {
-        mRect.left = mRect.left + offset;
-        updateRightSide();
+    public HitBox(SpaceInvadersApp app) { this.app = app; }
+
+    public void setSize(PointF size) { mRect.set(0, 0, size.x, size.y); }
+    public void setPosition(PointF position) { mRect.offsetTo(position.x, position.y); }
+    public RectF getHitBox(){ return mRect; }
+
+    //Drawing
+    public void setBitmap(int spriteID) {
+        mBitmap = BitmapFactory.decodeResource(app.context.getResources(), spriteID);
+        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mRect.width(), (int) mRect.height(), true);
+    }
+    public void display(Canvas canvas) {
+        canvas.drawBitmap(mBitmap, mRect.left, mRect.top, null);
     }
 
-    private void moveLeft() {
-        mRect.left = mRect.left - size.x;
-        updateRightSide();
-    }
+    //Movement
+    public void moveHorizontally(float offset) { mRect.offset(offset, 0); }
+    public void moveVertically(float offset) { mRect.offset(0, offset); }
+    public void moveDown() { mRect.offset(0, mRect.height()); }
 
-    private void moveRight() {
-        mRect.left = mRect.left + size.x;
-        updateRightSide();
-    }
-
-    private void updateRightSide() {
-        mRect.right = mRect.left + size.x;
-    }
-
-    private void moveVertically(float offset) {
-        mRect.top = mRect.top + offset;
-        updateBottomSide();
-    }
-    private void moveUp() {
-        mRect.top = mRect.top - size.y;
-        updateBottomSide();
-    }
-
-    public void moveDown() {
-        mRect.top = mRect.top + size.y;
-        updateBottomSide();
-    }
-
-    private void updateBottomSide() {
-        mRect.bottom = mRect.top + size.y;
-    }
-    //Manually sets position of hitbox
-    void setPosition(PointF position) {
-        mRect.left = position.x;
-        mRect.top = position.y;
-
-        updateRightSide();
-        updateBottomSide();
-    }
-
-    public void setSize(RectF rect) {
-        this.size = new PointF();
-        size.x = rect.right - rect.left;
-        size.y =  rect.top - rect.bottom;
-    }
-
-    public void setSize(PointF size) {
-        this.size = new PointF(size.x, size.y);
-
-    }
-
-    //Returns true when the hitbox touches the edge of the screen
-    boolean horizontalOutOfBounds() {
-        return mRect.left <= 0 || mRect.right >= app.mScreenSize.x;
-    }
-
-    boolean bottomOutOfBounds() {
-        return mRect.bottom >= app.mScreenSize.y;
-    }
-
-    boolean topOutOfBounds() {
-        return mRect.top <= 0;
-    }
-
-    //Position of hitbox stays within screen boundaries
-    void horizontalStayInBounds() {
-        if (mRect.left < 0) {
-            setPosition(new PointF(0, mRect.top));
+    //Check bounds
+    public boolean horizontalOutOfBounds() { return mRect.left <= 0 || mRect.right >= app.mScreenSize.x; }
+    public boolean bottomOutOfBounds() { return mRect.bottom >= app.mScreenSize.y; }
+    public boolean topOutOfBounds() { return mRect.top <= 0; }
+    public void horizontalStayInBounds() {
+        if (mRect.left <= 0) {
+            mRect.offsetTo(0, mRect.top);
         } //reset to left edge
-        else if (mRect.right > app.mScreenSize.x) {
-            setPosition(new PointF(app.mScreenSize.x - size.x, mRect.top));
+        else if (mRect.right >= app.mScreenSize.x) {
+            mRect.offsetTo(app.mScreenSize.x - mRect.width(), mRect.top);
         } //reset pos to right edge
     }
 
-    void verticalStayInBounds() {
-        if (mRect.top < 0) {
-            setPosition(new PointF(mRect.left, 0));
-        } //reset to top edge
-        else if (mRect.bottom > app.mScreenSize.y) {
-            setPosition(new PointF(mRect.left, app.mScreenSize.y - size.y));
-        } //reset to bottom edge
-    }
+    //Get center of hitbox
+    public PointF centerBottom() { return new PointF(mRect.centerX(), mRect.bottom); }
+    public PointF centerTop() { return new PointF(mRect.centerX(), mRect.top); }
 
-        //Resets position of hitbox to default
-    void resetPosition(PointF position) {
-
-    }
-
-    //Returns true when hitbox is still active
-    public boolean isActive() {
-        return isActive;
-    }
-
-    //Returns the hitbox
-    RectF getHitBox() {
-        return mRect;
-    }
+    public static class Builder {
+        private SpaceInvadersApp app;
+        private RectF mRect;
+        private Bitmap mBitmap;
+        private float velocity;
+        private float speed;
 
 
-    public void setBitmap(int spriteID) {
-        mBitmap = BitmapFactory.decodeResource(app.context.getResources(), spriteID);
-        mBitmap = Bitmap.createScaledBitmap(mBitmap, (int)size.x, (int)size.y, true );
-    }
+        public Builder(SpaceInvadersApp app, PointF size) {
+            this.app = app;
+            mRect = new RectF(0, 0, size.x, size.y);
 
-    public void display(Canvas canvas) {
-        mPaint.setColor(Color.argb(255, 255, 255, 255));
-        canvas.drawBitmap(mBitmap, this.getHitBox().left, this.getHitBox().top, mPaint);
+        }
+
+        public Builder withSprite(int spriteID) {
+            mBitmap = BitmapFactory.decodeResource(app.context.getResources(), spriteID);
+            mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mRect.width(), (int) mRect.height(), true);
+            return this;
+        }
+
+        public Builder withPosition(PointF position) {
+            mRect.offsetTo(position.x, position.y);
+            return this;
+        }
+
+        public Builder withVelocity(float velocity) {
+            this.velocity = velocity;
+            this.speed = Math.abs(this.velocity);
+            return this;
+        }
+
+        public HitBox build() {
+            return new HitBox(this);
+        }
     }
 }

@@ -1,130 +1,108 @@
 package com.wethebest.spaceinvaders;
 
-import android.content.Context;
-import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.RectF;
 
-import java.util.Random;
+public class Alien extends GameObject {
+    private final PointF SHOOT_INTERVAL = new PointF(5, 25); //shoots every x-y seconds
 
-class Alien implements GameObject {
-    //Needed for Context and ScreenSize
-    private SpaceInvadersApp app;
+    //Shoot projectiles randomly
+    private GameObject mProj;
+    private PointF shootInterval = SHOOT_INTERVAL;
+    private float frameCount = 0;
+    public boolean shootNow = false;
+    private boolean playHit = false;
 
-    public AlienHitBox mHitBox;
+    private boolean movingRight = true; //Current movement direction
+    private boolean playShoot = false; //Sound effect
 
-    //All aliens have the same size and velocity
-    public static PointF alienSize; //TODO set in AlienRow
-
-    //Shoots projectiles randomly
-    private AlienProj mProj;
-    private static Random rand = new Random();
-    private static Point shootInterval = new Point(5, 20); // shoots every 5-20 seconds
-    private long framesUntilShoot;
-    public boolean shootNow;
-    private boolean waitingToShoot;
-
-    private SoundEngine soundEngine;
-    private Context context;
-
-    Alien(SpaceInvadersApp app) {
-        this.app = app;
-        context = app.context;
-        soundEngine = new SoundEngine(context);
-
-        mHitBox = new AlienHitBox(app);
-        alienSize = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);
-
-        shootNow = false;
-        waitingToShoot = false;
-        framesUntilShoot = 0;
-
+    Alien(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+        super(app, size, spriteID, position, velocity);
     }
 
     public void update(long fps) {
-        mHitBox.update(fps);
+        if(movingRight) {
+            mHitBox.velocity = mHitBox.speed;
+        }
+        else {
+            mHitBox.velocity = -mHitBox.speed;
+        }
+
+        mHitBox.moveHorizontally(mHitBox.velocity / fps);
+
         timeToShoot(fps);
         checkAlienWin();
-
-    }
-
-    public void display(Canvas canvas) {
-        mHitBox.display(canvas);
     }
 
     public void playAudio() {
-        if (shootNow) {
-            soundEngine.alienShoot();
+        if(playShoot) {
+            app.soundEngine.alienShoot();
+            playShoot = false;
         }
-//        if(hit){
-//            soundEngine.alientHit();
-//        }
+        if(playHit){
+            app.soundEngine.alienHit();
+            playHit = false;
+        }
     }
 
-    public RectF getHitBox() {
-        return mHitBox.getHitBox();
+    public void collide(GameObject gameObject) {
+        if (gameObject instanceof PlayerProj) {
+            playHit = true;
+            isActive = false;
+        }
     }
 
     public boolean outOfBounds() {
         return mHitBox.horizontalOutOfBounds();
     }
 
+
+
     public void reverseXVelocity() {
-        mHitBox.reverseXVelocity();
+        movingRight = !movingRight;
+        mHitBox.moveDown();
+        mHitBox.horizontalStayInBounds();
     }
 
-
-    public void setPos(PointF position) {
-        mHitBox.setPosition(position);
+    public void speedUp(float multiplier) {
+        mHitBox.speed = SPEED * multiplier;
     }
 
-    public void reset(Point location) {
-    }
-
-
-
-    public void collide(GameObject gameObject) {
-        mHitBox.collide(gameObject);
-    }
-
-    public static void setAlienSize(PointF size) {
-        alienSize = size;
-        AlienHitBox.alienSize = alienSize;
-        //TODO change to setHitBoxSize and hitBoxSize?
-    }
-
-    public boolean isActive() {
-        return mHitBox.isActive();
-    }
-
-    public AlienProj shoot() {
-            mProj = new AlienProj(app);
-            RectF tempRect = mHitBox.getHitBox();
-            mProj.setPos((tempRect.right + tempRect.left) / 2, tempRect.bottom);
+    public GameObject shoot() {
+            mProj = GameObjectFactory.getGameObject("AlienProj");
+            mProj.setPosition(mHitBox.centerBottom());
+            playShoot = true;
             return mProj;
     }
 
     //calculates when to shoot shooting by counting the number of frames
     private void timeToShoot(long fps) {
-        if(!waitingToShoot) {
-            int seconds = rand.nextInt(shootInterval.y - shootInterval.x) + shootInterval.x ; //random int in shooting interval
-            framesUntilShoot = fps * seconds;
-            waitingToShoot = true;
-        }
-        else if(waitingToShoot) {
-            framesUntilShoot--;
-            if (framesUntilShoot <= 0) {
+        if(frameCount <= 0) {
+            float seconds = getRandomFloat(shootInterval);
+            frameCount = fps * seconds;
+        } //if alien is not waiting to shoot, assign frameCount
+        else {
+            frameCount--;
+            if (frameCount <= 0) {
                 shootNow = true;
-                waitingToShoot = false;
             }
-        }
+        } //alien is waiting to shoot
+    }
 
+    private float getRandomFloat(PointF interval) {
+        return app.rand.nextFloat() * (interval.y - interval.x) + interval.x;
+
+    }
+    //Set the Shoot
+    public void setShootInterval(float factor){
+        float min = (SHOOT_INTERVAL.x * factor);
+        float max = (SHOOT_INTERVAL.y * factor);
+        shootInterval = new PointF(min, max);
     }
 
     private void checkAlienWin() {
         if(mHitBox.bottomOutOfBounds()) {
-            SimpleCannon.lives = 0; //game over when aliens reach bottom of screen
+            app.mPlayer.lives = 0; //game over when aliens reach bottom of screen
         }
     }
 }

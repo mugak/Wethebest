@@ -1,29 +1,16 @@
 package com.wethebest.spaceinvaders;
 
-import android.app.Activity;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import android.view.View;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.animation.Animation;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.TranslateAnimation;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import static android.view.MotionEvent.*;
 
 
 public class UI extends AppCompatActivity {
@@ -40,13 +27,16 @@ public class UI extends AppCompatActivity {
         final ImageView Brick1 = findViewById(R.id.Brick1);
         final ImageView Brick2 = findViewById(R.id.Brick2);
         final ImageView Brick3 = findViewById(R.id.Brick3);
-        ImageView Brick4 = findViewById(R.id.Brick4);
+        final ImageView Brick4 = findViewById(R.id.Brick4);
 
         ImageView Laserbeam = findViewById(R.id.laserbeam);
         ImageView InvaderLaserBeam = findViewById(R.id.Invader_laser_beam);
 
+
         final ImageView Invader1 = findViewById(R.id.Invader1);
-        final ImageView Invader1a = findViewById(R.id.Invader1a);
+        Invader1.setBackgroundResource(R.drawable.alien1_animation);
+        final AnimationDrawable Invader1Animation = (AnimationDrawable) Invader1.getBackground();
+        //final ImageView Invader1a = findViewById(R.id.Invader1a);
         final ImageView Invader1b = findViewById(R.id.Invader1b);
         final ImageView Invader2 = findViewById(R.id.Invader2);
         final ImageView Invader2a = findViewById(R.id.Invader2a);
@@ -75,7 +65,8 @@ public class UI extends AppCompatActivity {
                 Brick2.setVisibility(ImageView.VISIBLE);
                 Brick3.setVisibility(ImageView.VISIBLE);
                 Invader1.setVisibility(ImageView.VISIBLE);
-                Invader1a.setVisibility(ImageView.VISIBLE);
+                Invader1Animation.setVisible(true, true);
+                //Invader1a.setVisibility(ImageView.VISIBLE);
                 Invader1b.setVisibility(ImageView.VISIBLE);
                 Invader2.setVisibility(ImageView.VISIBLE);
                 Invader2a.setVisibility(ImageView.VISIBLE);
@@ -98,9 +89,9 @@ public class UI extends AppCompatActivity {
                         0.0f, 0.0f);//  new TranslateAnimation(xFrom,xTo, yFrom,yTo)
 
                 animation.setDuration(5000);  // animation duration
-               animation.setRepeatCount(1);  // animation repeat count
+                animation.setRepeatCount(1);   // animation repeat count
                 animation.setRepeatMode(0);   // repeat animation (left to right, right to left )
-               animation.setFillAfter(true);
+                animation.setFillAfter(true);
 
                 Spaceship.startAnimation(animation);  // start animation
 
