@@ -4,7 +4,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 
 public class Alien extends GameObject {
-    private final PointF SHOOT_INTERVAL = new PointF(5, 15); //shoots every 5-15 seconds
+    private final PointF SHOOT_INTERVAL = new PointF(5, 25); //shoots every x-y seconds
 
     //Shoot projectiles randomly
     private GameObject mProj;

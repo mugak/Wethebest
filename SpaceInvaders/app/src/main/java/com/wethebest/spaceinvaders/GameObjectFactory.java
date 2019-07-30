@@ -18,7 +18,7 @@ public class GameObjectFactory {
             size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
             spriteID = R.drawable.invader_a01;
             position = new PointF(0, 0);
-            velocity = 100f;
+            velocity = 50f;
             return new Alien(app, size, spriteID, position, velocity);
         }
         else if(objectName.equalsIgnoreCase("PLAYER")) {

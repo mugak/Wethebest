@@ -13,11 +13,12 @@ public class SimpleCannon extends GameObject {
     //DEFAULTS
     private final int SPRITE_ID = R.drawable.player;
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
-    private final int WAIT_SPRITE_ID = R.drawable.player_wait;
 
     private final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
-    private final float FIRING_RATE = 0.5f; //how frequently the player can shoot
-    public final int MAX_AMMO = 99; //total projectiles the player can shoot
+    private final float FIRING_RATE = .1f; //how frequently the player can shoot
+    private final float AMMO_REGEN_RATE = 1f; //how frequently ammo regenerates
+
+    public final int MAX_AMMO = 5; //total projectiles the player can shoot
     public final int MAX_LIVES = 3;
     public int lives = MAX_LIVES;
     public int ammo = MAX_AMMO;
@@ -27,6 +28,7 @@ public class SimpleCannon extends GameObject {
 
     public Counter waitToShoot = new Counter(FIRING_RATE);
     private Counter invincible = new Counter(INVINCIBLE_SECONDS);
+    private Counter waitForAmmo = new Counter(AMMO_REGEN_RATE);
 
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
@@ -56,6 +58,19 @@ public class SimpleCannon extends GameObject {
         }
         else if(waitToShoot.on && waitToShoot.isCountingDown) {
             waitToShoot.finished();
+        }
+
+        waitForAmmo.on = true;
+        if(!waitForAmmo.isCountingDown) {
+            waitForAmmo.setFPS(fps);
+        }
+        else if(waitForAmmo.isCountingDown) {
+            if(waitForAmmo.finished()) {
+                ammo += 1;
+                if(ammo >= MAX_AMMO) {
+                    ammo = MAX_AMMO;
+                }
+            }
         }
 
     }
@@ -101,6 +116,10 @@ public class SimpleCannon extends GameObject {
 
         waitToShoot.on = true; //player must wait after this shot
         return true; //shoot a projectile
+    }
+
+    private void regenerateAmmo() {
+
     }
 
 }
