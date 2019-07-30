@@ -13,6 +13,7 @@ public class GameUI {
     private final int PAUSE_BUTTON_SPRITE_ID = R.drawable.pause_button;
     public int mScore;
     public int mLives;
+    public int mAmmo;
     private Paint mPaint;
     private Bitmap mBitmap;
     private RectF mRect;
@@ -23,6 +24,7 @@ public class GameUI {
 
         mScore = 0;
         mLives = app.mPlayer.MAX_LIVES;
+        mAmmo = app.mPlayer.MAX_AMMO;
         mPaint = new Paint();
         mRect = new RectF();
         Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");
@@ -35,22 +37,30 @@ public class GameUI {
     public void update(int score) {
         mScore = score;
         mLives = app.mPlayer.lives;
+        mAmmo = app.mPlayer.ammo;
+
     }
 
     public void draw(Canvas canvas) {
-        drawScore(canvas);
+        drawAmmo(canvas);
         drawLives(canvas);
+        drawScore(canvas);
         drawPauseButton(canvas);
     }
 
-    public void drawScore(Canvas canvas) {
+    public void drawAmmo(Canvas canvas) {
         mPaint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawText("Score: " + Integer.toString(mScore), app.mScreenSize.y/12, app.mScreenSize.y/12, mPaint);
+        canvas.drawText("Ammo: " + Integer.toString(mAmmo), app.mScreenSize.y/12, app.mScreenSize.y/12, mPaint);
     }
 
     public void drawLives(Canvas canvas) {
         mPaint.setTextAlign(Paint.Align.RIGHT);
         canvas.drawText("Lives: " + Integer.toString(mLives), app.mScreenSize.x - app.mScreenSize.y/10 - app.mScreenSize.y/24, app.mScreenSize.y/12, mPaint);
+    }
+
+    public void drawScore(Canvas canvas) {
+        mPaint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("Score: " + Integer.toString(mScore), app.mScreenSize.x/2, app.mScreenSize.y/12, mPaint);
     }
 
     public void drawPauseButton(Canvas canvas) {
