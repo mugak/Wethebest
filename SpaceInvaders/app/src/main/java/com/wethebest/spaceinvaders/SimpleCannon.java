@@ -13,14 +13,15 @@ public class SimpleCannon extends GameObject {
     private final int SPRITE_ID = R.drawable.player;
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
 
-    private final int INVICIBLE_SECONDS = 2; //how long cannon is invincible
+    private final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
+    private final int FIRING_RATE = 1; //fire every second
     public final int MAX_LIVES = 3;
     public int lives = MAX_LIVES;
 
     private boolean playShoot = false;
 
-    private boolean invincible = false;
-    private long frameCount = 0;
+    private Counter waitToShoot = new Counter(FIRING_RATE);
+    private Counter invincible = new Counter(INVINCIBLE_SECONDS);
 
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
@@ -35,16 +36,22 @@ public class SimpleCannon extends GameObject {
             mHitBox.horizontalStayInBounds();
         }
 
-        if(invincible && frameCount <= 0) {
-            frameCount = fps * INVICIBLE_SECONDS;
+        if(invincible.on && !invincible.isCountingDown) {
+            invincible.setFPS(fps);
         }
-        else {
-            frameCount--;
-            if(frameCount <= 0) {
-                invincible = false;
+        else if(invincible.on && invincible.isCountingDown) {
+            if (invincible.finished()) {
                 mHitBox.setBitmap(SPRITE_ID);
             }
         }
+
+        if(waitToShoot.on && !waitToShoot.isCountingDown) {
+            waitToShoot.setFPS(fps);
+        }
+        else if(waitToShoot.on && waitToShoot.isCountingDown) {
+            waitToShoot.finished();
+        }
+
     }
 
     public void playAudio(){
@@ -56,19 +63,29 @@ public class SimpleCannon extends GameObject {
 
     public void collide(GameObject gameObject) {
         if(gameObject instanceof AlienProj) {
-            if(!invincible) {
+            if(!invincible.on) {
                 lives -= 1;
                 reset();
-                invincible = true;
+                invincible.on = true;
                 mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);
             }
         }
     }
 
     public GameObject shoot() {
-        GameObject mProj = GameObjectFactory.getGameObject("PlayerProj");
-        mProj.setPosition(mHitBox.centerTop());
-        playShoot = true;
-        return mProj;
+            GameObject mProj = GameObjectFactory.getGameObject("PlayerProj");
+            mProj.setPosition(mHitBox.centerTop());
+            playShoot = true;
+            return mProj;
     }
+
+    public boolean canShoot() {
+        if(waitToShoot.on) {
+            return false; //if player cant shoot yet, return false
+        }
+
+        waitToShoot.on = true; //player must wait after this shot
+        return true; //shoot a projectile
+    }
+
 }
