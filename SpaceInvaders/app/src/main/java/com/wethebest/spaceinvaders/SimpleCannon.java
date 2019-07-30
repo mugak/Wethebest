@@ -15,8 +15,10 @@ public class SimpleCannon extends GameObject {
 
     private final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
     private final int FIRING_RATE = 1; //fire every second
+    private final int MAX_AMMO = 99; //total projectiles the player can shoot
     public final int MAX_LIVES = 3;
     public int lives = MAX_LIVES;
+    private int ammo = MAX_AMMO;
 
     private boolean playShoot = false;
     private boolean playHit = true; //Sound effect
@@ -78,14 +80,15 @@ public class SimpleCannon extends GameObject {
     }
 
     public GameObject shoot() {
-            GameObject mProj = GameObjectFactory.getGameObject("PlayerProj");
-            mProj.setPosition(mHitBox.centerTop());
-            playShoot = true;
-            return mProj;
+        ammo--;
+        GameObject mProj = GameObjectFactory.getGameObject("PlayerProj");
+        mProj.setPosition(mHitBox.centerTop());
+        playShoot = true;
+        return mProj;
     }
 
     public boolean canShoot() {
-        if(waitToShoot.on) {
+        if(waitToShoot.on || ammo <= 0) {
             return false; //if player cant shoot yet, return false
         }
 
