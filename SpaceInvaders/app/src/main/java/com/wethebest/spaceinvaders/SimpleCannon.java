@@ -1,10 +1,13 @@
 package com.wethebest.spaceinvaders;
 
-import android.graphics.Canvas;
-import android.graphics.Point;
 import android.graphics.PointF;
-import android.graphics.RectF;
 
+/*@SimpleCannon
+* This game object shoots projectiles and is controlled by the player.
+* Movement is horizontally left or right and is determined by the device's accelerometer sensor.
+* When the player shoots, a PlayerProj object at the position of the cannon.
+* The cannon starts with MAX_LIVES number of lives and has a short interval of invincibility when hit.
+*/
 public class SimpleCannon extends GameObject {
     //DEFAULTS
     private final int SPRITE_ID = R.drawable.player;
@@ -24,8 +27,11 @@ public class SimpleCannon extends GameObject {
     }
 
     public void update(long fps) {
-        if(((SpaceInvaders)app.context).yAcceleration >= .08f || ((SpaceInvaders)app.context).yAcceleration <= -.08f) { //tilt thresholds for cannon to stay still
-            mHitBox.moveHorizontally(((SpaceInvaders)app.context).yAcceleration * 10); //change this multiplying constant to change movement speed
+        if(((SpaceInvaders)app.context).yAcceleration >= .08f //tilt thresholds for cannon to stay still
+                || ((SpaceInvaders)app.context).yAcceleration <= -.08f)
+        {
+            //change this multiplying constant to change movement speed
+            mHitBox.moveHorizontally(((SpaceInvaders)app.context).yAcceleration * 10);
             mHitBox.horizontalStayInBounds();
         }
 
