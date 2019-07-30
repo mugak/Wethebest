@@ -24,10 +24,10 @@ public class SoundEngine {
     private int playerShootID = -1;
     private int alienShootID = -1;
     private int barrierHitID = -1;
-    public float masterVolume = .5f;
+    private int alienHitID = -1;
 
+    public float masterVolume = .5f; // Volumes range from 0 through 1
     int nowPlaying =-1;
-    float volume = 1;// Volumes range from 0 through 1
 
 
 
@@ -59,7 +59,8 @@ public class SoundEngine {
             //Load all soundEngine files in memory
             playerShootID = sp.load(assetManager.openFd("proj_shoot.ogg"), 0);
             alienShootID = sp.load(assetManager.openFd("alien_shoot.ogg"), 0);
-            barrierHitID = sp.load(assetManager.openFd("test_beep.ogg"),0);
+            barrierHitID = sp.load(assetManager.openFd("Collision8-Bit.ogg"),0);
+            alienHitID = sp.load(assetManager.openFd("SmallExplosion8-Bit.ogg"), 0);
 
 
         }catch(IOException e){
@@ -82,5 +83,9 @@ public class SoundEngine {
 
     public void barrierHit(){
         sp.play(barrierHitID, masterVolume, masterVolume, 0, 0, 1);
+    }
+
+    public void alienHit(){
+        sp.play(alienHitID, masterVolume, masterVolume, 0,0,1);
     }
 }
