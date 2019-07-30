@@ -19,6 +19,7 @@ public class SimpleCannon extends GameObject {
     public int lives = MAX_LIVES;
 
     private boolean playShoot = false;
+    private boolean playHit = true; //Sound effect
 
     private Counter waitToShoot = new Counter(FIRING_RATE);
     private Counter invincible = new Counter(INVINCIBLE_SECONDS);
@@ -58,6 +59,10 @@ public class SimpleCannon extends GameObject {
         if(playShoot) {
             app.soundEngine.playerShoot();
             playShoot = false;
+        }
+        if(playHit){
+            app.soundEngine.playerHit();
+            playHit = false;
         }
     }
 

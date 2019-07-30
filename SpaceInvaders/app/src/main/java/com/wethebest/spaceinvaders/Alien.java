@@ -11,6 +11,7 @@ public class Alien extends GameObject {
     private Point shootInterval = SHOOT_INTERVAL;
     private long frameCount = 0;
     public boolean shootNow = false;
+    private boolean playHit = false;
 
     private boolean movingRight = true; //Current movement direction
     private boolean playShoot = false; //Sound effect
@@ -38,10 +39,15 @@ public class Alien extends GameObject {
             app.soundEngine.alienShoot();
             playShoot = false;
         }
+        if(playHit){
+            app.soundEngine.alienHit();
+            playHit = false;
+        }
     }
 
     public void collide(GameObject gameObject) {
         if (gameObject instanceof PlayerProj) {
+            playHit = true;
             isActive = false;
         }
     }
