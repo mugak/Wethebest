@@ -110,14 +110,8 @@ public class SoundEngine {
         sp.play(playerHitID, masterVolume, masterVolume, 0,0,1);
     }
 
-    public void startEngineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, 0, 1);}
-
-    public void stopEngineHum(){sp.stop(engineHumID);}
-
-    public void setEngineHumPitch(float factor){//factor ranges from 0 to 1
-       // Log.d("asdfb",Float.toString(factor));
-      //  sp.play(engineHumID, factor, factor, -1, 0, factor);
-        //TODO scale this correctly. volume only goes up to 1, rate goes beyond 1
+    public void engineHum(float factor){
+        sp.play(engineHumID, masterVolume, masterVolume, 0, 0, factor);
     }
 
     public void resume() {
