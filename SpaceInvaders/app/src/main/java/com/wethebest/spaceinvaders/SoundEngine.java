@@ -109,5 +109,10 @@ public class SoundEngine {
 
     public void stopEngineHum(){sp.stop(engineHumID);}
 
+    public void setEngineHumPitch(float factor){//factor ranges from 0 to 1
+        sp.setVolume(engineHumID, factor, factor);
+        sp.setRate(engineHumID, factor*10);
+    }
+
 
 }

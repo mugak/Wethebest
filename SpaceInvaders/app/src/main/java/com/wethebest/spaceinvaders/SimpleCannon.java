@@ -3,6 +3,8 @@ package com.wethebest.spaceinvaders;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 
+import static java.lang.Math.abs;
+
 /*@SimpleCannon
 * This game object shoots projectiles and is controlled by the player.
 * Movement is horizontally left or right and is determined by the device's accelerometer sensor.
@@ -25,7 +27,6 @@ public class SimpleCannon extends GameObject {
 
     private boolean playShoot = false;
     private boolean playHit = false; //Sound effect
-    private boolean playPlaneNoise = false;
 
     public Counter waitToShoot;
     private Counter invincible;
@@ -49,7 +50,7 @@ public class SimpleCannon extends GameObject {
             //change this multiplying constant to change movement speed
             mHitBox.moveHorizontally(((SpaceInvaders)app.context).yAcceleration * 10);
             mHitBox.horizontalStayInBounds();
-            playPlaneNoise = true;
+
         }
 
         if(invincible.on && !invincible.isCountingDown) {
@@ -93,10 +94,7 @@ public class SimpleCannon extends GameObject {
             app.soundEngine.playerHit();
             playHit = false;
         }
-        if(playPlaneNoise){
-            app.soundEngine.startEngineHum();
-            playPlaneNoise = false;
-        }
+        app.soundEngine.setEngineHumPitch(abs(((SpaceInvaders)app.context).yAcceleration )/9.81f);
     }
 
     public void collide(GameObject gameObject) {
