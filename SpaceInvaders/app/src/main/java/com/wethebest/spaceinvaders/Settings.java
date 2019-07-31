@@ -73,7 +73,7 @@ public class Settings extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    //items in menu
+    //items in
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
