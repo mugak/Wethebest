@@ -33,8 +33,6 @@ public class WaveState implements GameState {
 
     @Override
     public void run(SpaceInvadersApp app) {
-        long frameStartTime = System.currentTimeMillis();
-
         if(app.shootNow) {
             //This seems needs to change
             //Maybe playercannon refactor to fix this
@@ -42,18 +40,10 @@ public class WaveState implements GameState {
             app.shootNow = false;
         }
 
-        app.mGameObjectManager.updateGameObjectStates(mFPS);
+        app.mGameObjectManager.updateGameObjectStates(app.fps);
         app.mGameUI.update(app.score);
 
         draw();
-
-        long timeThisFrame = System.currentTimeMillis() - frameStartTime;
-
-        //TODO: ensure that timeThisFrame isn't ridiculously high
-        if (timeThisFrame > 0) {
-            int MILLIS_IN_SECOND = 1000;
-            mFPS = MILLIS_IN_SECOND / timeThisFrame;
-        }
 
         if (isGameOver(app)) {
             changeState(app, State.WAVE);

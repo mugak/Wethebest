@@ -33,6 +33,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     GameUI mGameUI;
     public int score;
+    public long fps;
 
     private volatile boolean mPlaying;
     public boolean shootNow;
@@ -49,12 +50,14 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         soundEngine = new SoundEngine(context);
         mGameUI = new GameUI(this);
+        fps = 1;
 
         rand = new Random();
 
         //start game
         mGameObjectManager = new GameObjectManager(this);
-        mGameState = new PauseState(this);
+        mGameState = new WaveState(this);
+        mGameState.changeState(this, State.WAVE);
     }
 
     public void setState(GameState newGameState) {
@@ -107,7 +110,18 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     @Override
     public void run() {
         while(mPlaying) {
+            long frameStartTime = System.currentTimeMillis();
+
             mGameState.run(this);
+
+            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
+
+            //TODO: ensure that timeThisFrame isn't ridiculously high
+            if (timeThisFrame > 0) {
+                int MILLIS_IN_SECOND = 1000;
+                fps = MILLIS_IN_SECOND / timeThisFrame;
+                //Log.d("FRAMES", Long.toString(fps));
+            }
         }
     }
 

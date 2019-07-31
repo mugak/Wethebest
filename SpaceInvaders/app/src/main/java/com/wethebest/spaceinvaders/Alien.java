@@ -30,9 +30,9 @@ public class Alien extends GameObject {
 
         if(fps != 0) {
             mHitBox.moveHorizontally(mHitBox.velocity / fps);
+            timeToShoot(fps);
         }
 
-        timeToShoot(fps);
         checkAlienWin();
     }
 
