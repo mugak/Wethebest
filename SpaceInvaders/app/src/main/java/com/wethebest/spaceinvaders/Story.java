@@ -28,7 +28,7 @@ public class Story extends AppCompatActivity {
         final ImageView MainImage = findViewById(R.id.imageView3);
         final ImageView Seagullpoop = findViewById(R.id.imageView4);
         final ImageView usermessage = findViewById(R.id.imageView6);
-        Button Startbtn = findViewById(R.id.Startbtn);
+
 
 
         Nextbtn.setOnClickListener(new View.OnClickListener() {
@@ -42,19 +42,6 @@ public class Story extends AppCompatActivity {
                 PlayerName.setVisibility(ImageView.VISIBLE);
                 Seagullpoop.setVisibility(ImageView.VISIBLE);
                 usermessage.setVisibility(ImageView.VISIBLE);
-
-
-            }
-        });
-
-        //Start button goes directly to Game (Space invaders class)
-        Startbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent=new Intent(Story.this,SpaceInvaders.class);
-                startActivityForResult(intent,0);
-                overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
 
 
             }
@@ -125,7 +112,7 @@ public class Story extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 
-            startActivity(new Intent(Story.this, Intro.class));
+            startActivity(new Intent(Story.this, Story.class));
 
         }
         return super.onKeyDown(keyCode, event);
