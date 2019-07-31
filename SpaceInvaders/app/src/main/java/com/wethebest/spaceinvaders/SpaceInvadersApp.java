@@ -1,19 +1,13 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.RectF;
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Random;
 
 /*
@@ -105,6 +99,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     @Override
     public void run() {
         while(mPlaying) {
+
             long frameStartTime = System.currentTimeMillis();
 
             mGameState.run(this);

@@ -34,6 +34,8 @@ public class SimpleCannon extends GameObject {
     private Counter invincible;
     private Counter waitForAmmo;
 
+    boolean testBool = false;
+
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
 
