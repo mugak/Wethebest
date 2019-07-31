@@ -56,7 +56,7 @@
         android:layout_alignBottom="@+id/imageView3"
         android:layout_centerHorizontal="true"
         android:background="#F44336"
-        android:text="Story"
+        android:text="NEXT"
         android:textColor="#CDE8FA" />
 
     <TextView
@@ -97,17 +97,7 @@
         android:inputType="textPersonName"
         android:visibility="invisible"/>
 
-    <Button
-        android:id="@+id/Startbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/Next_btn"
-        android:text="Quick Start"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="-58dp"
-        android:background="#F44336"
-        android:textColor="#CDE8FA"
-        />
+
 
     <Button
         android:id="@+id/Enterbtn"
