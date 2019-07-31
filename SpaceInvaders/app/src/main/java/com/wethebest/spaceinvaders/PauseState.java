@@ -19,6 +19,7 @@ public class PauseState implements GameState {
 
     @Override
     public void run(SpaceInvadersApp app) {
+        app.mGameUI.update(app.score);
         draw();
     }
 
@@ -26,7 +27,9 @@ public class PauseState implements GameState {
         if (mApp.mOurHolder.getSurface().isValid()) {
             mApp.mCanvas = mApp.mOurHolder.lockCanvas();
 
-            mApp.mCanvas.drawColor(Color.argb(255, 0, 0, 0));
+            mApp.mGameObjectManager.displayGameObjects(mApp.mCanvas);
+            mApp.mGameUI.draw(mApp.mCanvas);
+            mApp.mCanvas.drawColor(Color.argb(150, 0, 0, 0));
 
             mApp.mOurHolder.unlockCanvasAndPost(mApp.mCanvas);
         }
