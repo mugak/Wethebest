@@ -21,11 +21,13 @@ public class SoundEngine {
     Context context;
 
     private SoundPool sp;
+    private SoundPool spStream;
     private int playerShootID = -1;
     private int alienShootID = -1;
     private int barrierHitID = -1;
     private int alienHitID = -1;
     private int playerHitID = -1;
+    private int engineHumID = -1;
 
     public float masterVolume = .5f; // Volumes range from 0 through 1
     int nowPlaying =-1;
@@ -42,11 +44,18 @@ public class SoundEngine {
                             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                             .build();
 
+            //Audioattributes for a stream
+//            AudioAttributes streamAudio = new AudioAttributes.Builder()
+//                    .setUsage(AudioAttributes.)
             // Initialize the SoundPool
             sp = new SoundPool.Builder()
                     .setMaxStreams(5)
                     .setAudioAttributes(audioAttributes)
                     .build();
+
+//            sp = new SoundPool.Builder()
+//                    .setMaxStreams(5)
+//                    .setAudioAttributes()
         }
         else {
             // The old way
@@ -63,6 +72,7 @@ public class SoundEngine {
             barrierHitID = sp.load(assetManager.openFd("Collision8-Bit.ogg"),0);
             alienHitID = sp.load(assetManager.openFd("SmallExplosion8-Bit.ogg"), 0);
             playerHitID = sp.load(assetManager.openFd("Metal_Hit.ogg"),0);
+            engineHumID = sp.load(assetManager.openFd("Helicopter, chopper idling.wav"),0);
 
 
         }catch(IOException e){
@@ -94,4 +104,15 @@ public class SoundEngine {
     public void playerHit(){
         sp.play(playerHitID, masterVolume, masterVolume, 0,0,1);
     }
+
+    public void startEngineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, -1, 1);}
+
+    public void stopEngineHum(){sp.stop(engineHumID);}
+
+    public void setEngineHumPitch(float factor){//factor ranges from 0 to 1
+        sp.setVolume(engineHumID, factor, factor);
+        sp.setRate(engineHumID, factor*10);
+    }
+
+
 }

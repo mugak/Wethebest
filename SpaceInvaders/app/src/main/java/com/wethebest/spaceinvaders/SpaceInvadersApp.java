@@ -62,9 +62,54 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mGameState.changeState(this, State.WAVE);
     }
 
+//<<<<<<< HEAD
+//    @Override
+//    public void run() {
+//        soundEngine.startEngineHum();
+//        while (mPlaying) {
+//            long frameStartTime = System.currentTimeMillis();
+//
+//            if (!mPaused) {
+//
+//                if(shootNow) {
+//                    gameObjects.add(mPlayer.shoot());
+//                    shootNow = false;
+//                }
+//
+//                for (GameObject object : gameObjects) {
+//                    object.update(mFPS);
+//                }
+//
+//                mAlienArmy.update(mFPS);
+//                gameObjects.addAll(mAlienArmy.getAlienProjs());
+//                detectCollisions();
+//
+//                for(GameObject object : gameObjects) {
+//                    object.playAudio();
+//                }
+//            }
+//
+//            removeInactiveObjects();
+//            mAlienArmy.removeInactiveObjects();
+//
+//            mGameUI.update(score);
+//            draw();
+//
+//            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
+//
+//            if (timeThisFrame > 0) {
+//                final int MILLIS_IN_SECOND = 1000;
+//                mFPS = MILLIS_IN_SECOND / timeThisFrame;
+//            }
+//
+//            if (isGameOver()) {
+//                startGame();
+//            }
+//=======
     public void setState(GameState newGameState) {
         if(newGameState != null) {
             mGameState = newGameState;
+//>>>>>>> 77d058678ca200538e90f74fe0a0d79180529279
         }
     }
 
@@ -72,6 +117,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public boolean onTouchEvent(MotionEvent motionEvent) {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
+//<<<<<<< HEAD
+//                mPaused = false;
+//                shootNow = mPlayer.canShoot();
+//=======
                      /*else if(mGameState instanceof WaveState) {
                     if (motionEvent.getX() > mScreenSize.x / 2) {
                         mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGRIGHT);
@@ -80,7 +129,8 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                     }
                 }*/
                 shootNow = mGameObjectManager.mPlayer.canShoot();
-
+                soundEngine.startEngineHum();
+//>>>>>>> 77d058678ca200538e90f74fe0a0d79180529279
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -92,14 +142,16 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     public void resume() {
         mPlaying = true;
+        soundEngine.startEngineHum();
         mGameThread = new Thread(this);
         mGameThread.start();
-
         mGameState.changeState(this, State.WAVE);
+
     }
 
     public void pause() {
         mPlaying = false;
+        soundEngine.stopEngineHum();
         try {
             mGameThread.join();
         } catch (InterruptedException e) {
@@ -111,6 +163,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     @Override
     public void run() {
+        soundEngine.startEngineHum();
         while(mPlaying) {
             long frameStartTime = System.currentTimeMillis();
 

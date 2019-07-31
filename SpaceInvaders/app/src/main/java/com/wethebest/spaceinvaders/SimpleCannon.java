@@ -25,7 +25,7 @@ public class SimpleCannon extends GameObject {
     public int ammo;
 
     private boolean playShoot = false;
-    private boolean playHit = true; //Sound effect
+    private boolean playHit = false; //Sound effect
 
     public Counter waitToShoot;
     private Counter invincible;
@@ -49,6 +49,7 @@ public class SimpleCannon extends GameObject {
             //change this multiplying constant to change movement speed
             mHitBox.moveHorizontally(((SpaceInvaders)app.context).yAcceleration * 10);
             mHitBox.horizontalStayInBounds();
+
         }
 
         if(invincible.on && !invincible.isCountingDown) {
@@ -92,6 +93,7 @@ public class SimpleCannon extends GameObject {
             app.soundEngine.playerHit();
             playHit = false;
         }
+        app.soundEngine.setEngineHumPitch(abs(((SpaceInvaders)app.context).yAcceleration )/9.81f);
     }
 
     public void collide(GameObject gameObject) {
