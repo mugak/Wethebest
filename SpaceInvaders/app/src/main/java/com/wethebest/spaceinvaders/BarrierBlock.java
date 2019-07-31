@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.PointF;
+import android.util.Log;
 /*
 BarrierBlock handles the logic for each block in the barrier.
 It loses durability when shot by an AlienProj or PlayerProj
@@ -20,7 +21,7 @@ public class BarrierBlock extends GameObject {
 
     public void playAudio() {
         if(playHit) {
-            app.soundEngine.barrierHit(); //TODO get barrierHit() sound file
+            app.soundEngine.barrierHit();
             playHit = false;
         }
     }

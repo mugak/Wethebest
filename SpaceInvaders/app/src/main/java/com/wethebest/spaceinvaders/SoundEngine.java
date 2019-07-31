@@ -21,13 +21,13 @@ public class SoundEngine {
     Context context;
 
     private SoundPool sp;
-    private SoundPool spStream;
     private int playerShootID = -1;
     private int alienShootID = -1;
     private int barrierHitID = -1;
     private int alienHitID = -1;
     private int playerHitID = -1;
     private int engineHumID = -1;
+    public boolean loaded = false;
 
     public float masterVolume = .5f; // Volumes range from 0 through 1
     int nowPlaying =-1;
@@ -49,7 +49,7 @@ public class SoundEngine {
 //                    .setUsage(AudioAttributes.)
             // Initialize the SoundPool
             sp = new SoundPool.Builder()
-                    .setMaxStreams(5)
+                    .setMaxStreams(10)
                     .setAudioAttributes(audioAttributes)
                     .build();
 
@@ -59,9 +59,15 @@ public class SoundEngine {
         }
         else {
             // The old way
-            sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+            sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         }
         try{
+            sp.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                @Override
+                public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                    loaded = true;
+                }
+            });
 
             // Create objects of the 2 required classes
             AssetManager assetManager = context.getAssets();
@@ -79,7 +85,6 @@ public class SoundEngine {
             // Print an error message to the console
             Log.d("error", "failed to load soundEngine files");
         }
-
     }
 
     public void playerShoot(){
@@ -112,6 +117,14 @@ public class SoundEngine {
     public void setEngineHumPitch(float factor){//factor ranges from 0 to 1
         sp.setVolume(engineHumID, factor, factor);
         sp.setRate(engineHumID, factor*10);
+    }
+
+    public void resume() {
+        sp.autoResume();
+    }
+
+    public void pause() {
+        sp.autoPause();
     }
 
 

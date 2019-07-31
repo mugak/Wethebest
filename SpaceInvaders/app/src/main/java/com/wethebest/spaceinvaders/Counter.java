@@ -38,7 +38,7 @@ public class Counter {
 
     public boolean run(long fps) {
         if(on && !running) {
-            if(fps < 100) { //keeps fps within reasonable range - sometimes fps is 1000
+            if(fps > 20 && fps < 100) { //keeps fps within reasonable range - sometimes fps is 1 or 1000
                 frameCount = fps * seconds;
                 running = true;
             }

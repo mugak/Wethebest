@@ -65,6 +65,7 @@ public class GameObjectManager {
     public void updateGameObjectStates(long fps) {
         updateGameObjects(fps);
         detectCollisions();
+        playAudio();
         removeInactiveObjects();
     }
 
@@ -81,10 +82,15 @@ public class GameObjectManager {
     public void displayGameObjects(Canvas canvas) {
         for (GameObject gameObject : gameObjects) {
             gameObject.display(canvas);
-            gameObject.playAudio();
         }
 
         mAlienArmy.draw(canvas);
+    }
+
+    public void playAudio() {
+        for(GameObject gameObject : gameObjects) {
+            gameObject.playAudio();
+        }
     }
 
     private void detectCollisions() {
