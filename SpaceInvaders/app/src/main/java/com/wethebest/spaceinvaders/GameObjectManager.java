@@ -18,6 +18,7 @@ public class GameObjectManager {
     public SimpleCannon mPlayer;
     private AlienArmy mAlienArmy;
     private Barriers mBarriers;
+    private UFOSpawner mUFOSpawner;
 
     SpaceInvadersApp app;
 
@@ -29,6 +30,7 @@ public class GameObjectManager {
         mPlayer = (SimpleCannon) GameObjectFactory.getGameObject("Player");
         mBarriers = new Barriers(app);
         mAlienArmy = new AlienArmy(app);
+        mUFOSpawner = new UFOSpawner(app);
 
         gameObjects.add(mPlayer);
         gameObjects.addAll(mAlienArmy.aliens);
@@ -71,6 +73,7 @@ public class GameObjectManager {
             gameObject.update(fps);
         }
 
+        mUFOSpawner.update(fps);
         mAlienArmy.update(fps);
         gameObjects.addAll(mAlienArmy.getAlienProjs());
     }

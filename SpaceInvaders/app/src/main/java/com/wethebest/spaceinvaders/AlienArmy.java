@@ -94,7 +94,7 @@ public class AlienArmy {
     //t = time (number of aliens killed)
     //y(t) = new speed at the given time
     private void increaseSpeed() {
-        int aliensKilled = (DIMENSIONS.x * DIMENSIONS.y) - aliens.size(); //number of max aliens - number of current aliens
+        int aliensKilled =  NUM_ALIENS - aliens.size(); //number of max aliens - number of current aliens
         float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
 
         for(Alien alien : aliens) {

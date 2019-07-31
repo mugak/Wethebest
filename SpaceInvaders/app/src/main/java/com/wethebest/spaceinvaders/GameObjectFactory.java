@@ -54,6 +54,13 @@ public class GameObjectFactory {
             velocity = app.mScreenSize.y / 4;
             return new AlienProj(app, size, spriteID, position, velocity);
         }
+        else if(objectName.equalsIgnoreCase("UFO")) {
+            size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
+            spriteID = R.drawable.invader_ufo_flying01;
+            position = new PointF(50, 50);
+            velocity = 50f;
+            return new UFO(app, size, spriteID, position, velocity);
+        }
 
         return null;
 
