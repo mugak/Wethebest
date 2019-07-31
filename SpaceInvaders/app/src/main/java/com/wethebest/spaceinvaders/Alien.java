@@ -1,8 +1,13 @@
 package com.wethebest.spaceinvaders;
 
-import android.graphics.Point;
 import android.graphics.PointF;
 
+/*
+Alien handles the enemies movement and game logic.
+The enemy moves side to side, gradually moving towards the player.
+It also shoots projectiles randomly.
+Instantiated in AlienArmy
+ */
 public class Alien extends GameObject {
     private final PointF SHOOT_INTERVAL = new PointF(5, 25); //shoots every x-y seconds
 

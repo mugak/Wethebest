@@ -3,8 +3,13 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.PointF;
 
+/*
+GameObjectFactory handles the constructors for each GameObject
+Holds default values for each GameObject
+ */
+
 public class GameObjectFactory {
-    public static SpaceInvadersApp app;
+    public static SpaceInvadersApp app; //set in SpaceInvadersApp
     private static PointF size;
     private static int spriteID;
     private static PointF position;

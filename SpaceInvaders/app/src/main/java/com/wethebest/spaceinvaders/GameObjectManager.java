@@ -1,14 +1,17 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
-import android.graphics.PointF;
 import android.graphics.RectF;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
 /*
-    Potentially collisions should be handled by another class
+GameObjectManager holds all of the GameObjects - the player, projectiles, AlienArmy, and Barriers
+It updates, draws, removes, and detects collisions
+Instantiated in SpaceInvadersApp
+
+Potentially collisions should be handled by another class
  */
 public class GameObjectManager {
     private LinkedList<GameObject> gameObjects;

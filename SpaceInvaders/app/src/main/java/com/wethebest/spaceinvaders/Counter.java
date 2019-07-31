@@ -1,5 +1,11 @@
 package com.wethebest.spaceinvaders;
 
+/*
+Counter counts a specified number of seconds by decrementing frames
+Instance variable in Alien and Cannon
+Used for enemies shooting randomly, player ammo regeneration, firing rate, and invincibility.
+ */
+
 public class Counter {
     public boolean on = false;
     public boolean isCountingDown = false;

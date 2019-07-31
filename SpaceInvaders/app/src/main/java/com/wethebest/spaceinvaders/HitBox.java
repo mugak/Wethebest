@@ -6,11 +6,14 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-//TODO create HitBoxBuilder
-//TODO separate bitmap drawing into another class
-//TODO make HitBoxList to replace Barrier and AlienArmy
+/*
+HitBox is an instance variable of GameObject
+It handles the movement and drawing of the GameObject
+Created using a Builder
 
-//The HitBox class controls the position and movement of a rectangle
+Separate Bitmap drawing to another class?
+ */
+
 public class HitBox {
     private SpaceInvadersApp app;
 

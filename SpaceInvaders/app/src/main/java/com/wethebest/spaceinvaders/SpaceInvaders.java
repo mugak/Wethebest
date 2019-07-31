@@ -23,6 +23,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 
+/*
+SpaceInvaders is the Activity for the actual game
+It handles user events, the window manager, the accelerometer, and sets the view (SpaceInvadersApp)
+Started in Intro
+ */
 
 
 

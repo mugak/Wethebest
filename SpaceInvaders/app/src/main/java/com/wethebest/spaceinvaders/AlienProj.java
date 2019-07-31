@@ -6,6 +6,7 @@ import android.graphics.PointF;
 * Represents the projectiles shot from each alien.
 * Moves vertically down in a straight line with constant velocity.
 * Collides only with the player cannon and barrier blocks.
+* Instantiated by Alien
  */
 public class AlienProj extends GameObject{
     AlienProj(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {

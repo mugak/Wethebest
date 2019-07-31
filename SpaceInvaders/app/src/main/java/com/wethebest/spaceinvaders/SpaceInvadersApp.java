@@ -17,13 +17,15 @@ import java.util.LinkedList;
 import java.util.Random;
 
 /*
-    SpaceInvadersApp works as a manager of the different game states: wave and gameover
+    SpaceInvadersApp starts the game and handles the game states
+    It also handles touch events
+    Set in SpaceInvaders
  */
 class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     public SurfaceHolder mOurHolder;
     public Canvas mCanvas;
-    public Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
+    public Point mScreenSize;
     public Context context;
 
     private Thread mGameThread = null;

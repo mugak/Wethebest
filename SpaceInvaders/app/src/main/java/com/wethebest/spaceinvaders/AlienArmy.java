@@ -7,6 +7,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/*
+AlienArmy places the enemies, updates the enemies, and handles their logic as a group
+When one enemy touches the screen, the whole army reverses direction and moves forward.
+As the player kills off enemies, the enemies speed up and shoot projectiles more frequently.
+Instantiated in GameObjectManager
+ */
+
 public class AlienArmy {
     //DEFAULTS
     private final int NUM_ALIENS = 14;

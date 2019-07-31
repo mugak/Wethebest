@@ -3,11 +3,12 @@ package com.wethebest.spaceinvaders;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 
-/*@SimpleCannon
-* This game object shoots projectiles and is controlled by the player.
-* Movement is horizontally left or right and is determined by the device's accelerometer sensor.
-* When the player shoots, a PlayerProj object at the position of the cannon.
-* The cannon starts with MAX_LIVES number of lives and has a short interval of invincibility when hit.
+/*
+SimpleCannon represents the cannon controlled by the player
+Movement is horizontal, determined by the device's accelerometer sensor.
+The player shoots projectiles when the screen is touched
+It has features such as lives, firing rate, invincibility
+Instantiated in GameObjectManager
 */
 public class SimpleCannon extends GameObject {
     //DEFAULTS

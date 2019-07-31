@@ -7,6 +7,7 @@ import android.graphics.PointF;
 * Only collides with the barrier block and alien game objects.
 * Moves vertically up the screen when created as opposed to
 * down for the alien projectiles.
+* Instantiated in SimpleCannon
 */
 public class PlayerProj extends GameObject {
     public PlayerProj(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
