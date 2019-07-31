@@ -32,6 +32,8 @@ public class SimpleCannon extends GameObject {
     private Counter invincible;
     private Counter waitForAmmo;
 
+    boolean testBool = false;
+
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
 
@@ -41,6 +43,7 @@ public class SimpleCannon extends GameObject {
         waitToShoot = new Counter(FIRING_RATE);
         invincible = new Counter(INVINCIBLE_SECONDS);
         waitForAmmo = new Counter(AMMO_REGEN_RATE);
+
     }
 
     public void update(long fps) {
@@ -94,6 +97,7 @@ public class SimpleCannon extends GameObject {
             app.soundEngine.playerHit();
             playHit = false;
         }
+        app.soundEngine.startEngineHum();
         app.soundEngine.setEngineHumPitch(abs(((SpaceInvaders)app.context).yAcceleration )/9.81f);
     }
 

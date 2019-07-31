@@ -105,7 +105,7 @@ public class SoundEngine {
         sp.play(playerHitID, masterVolume, masterVolume, 0,0,1);
     }
 
-    public void startEngineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, -1, 1);}
+    public boolean startEngineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, -1, 1); return true;}
 
     public void stopEngineHum(){sp.stop(engineHumID);}
 
