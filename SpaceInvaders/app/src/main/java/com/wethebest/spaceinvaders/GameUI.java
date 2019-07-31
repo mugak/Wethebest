@@ -23,8 +23,8 @@ public class GameUI {
         this.app = app;
 
         mScore = 0;
-        mLives = app.mPlayer.MAX_LIVES;
-        mAmmo = app.mPlayer.MAX_AMMO;
+        mLives = SimpleCannon.MAX_LIVES;
+        mAmmo = SimpleCannon.MAX_AMMO;
         mPaint = new Paint();
         mRect = new RectF();
         Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");
@@ -35,8 +35,8 @@ public class GameUI {
 
     public void update(int score) {
         mScore = score;
-        mLives = app.mPlayer.lives;
-        mAmmo = app.mPlayer.ammo;
+        mLives = app.getPlayer().lives;
+        mAmmo = app.getPlayer().ammo;
 
     }
 
@@ -45,7 +45,7 @@ public class GameUI {
         drawLives(canvas);
         drawScore(canvas);
         drawPauseButton(canvas);
-        if(app.mPlayer.waitToShoot.on) {
+        if(app.getPlayer().waitToShoot.on) {
             drawWaitToShoot(canvas);
         }
     }

@@ -28,7 +28,6 @@ public class Intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-
         final TextView PlayerName = findViewById(R.id.PlayerName);
         final EditText EnterName = findViewById(R.id.EnterName);
         final Button Enterbtn = findViewById(R.id.Enterbtn);
@@ -139,7 +138,4 @@ public class Intro extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
-
 }

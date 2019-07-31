@@ -16,34 +16,29 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
+/*
+    SpaceInvadersApp works as a manager of the different game states: wave and gameover
+ */
 class SpaceInvadersApp extends SurfaceView implements Runnable {
 
-    private SurfaceHolder mOurHolder;
-    private Canvas mCanvas;
+    public SurfaceHolder mOurHolder;
+    public Canvas mCanvas;
     public Point mScreenSize; //TODO: maybe this should be public since it's accessed by all GameObjects
     public Context context;
 
-    private long mFPS;
-
-    LinkedList<GameObject> gameObjects;
-    SimpleCannon mPlayer;
-    AlienArmy mAlienArmy;
-    //LinkedList<Barrier> mBarriers = new LinkedList<Barrier>();
-    Barriers mBarriers;
-
     private Thread mGameThread = null;
-    private volatile boolean mPlaying;
-    private boolean mPaused = true;
+
+    GameState mGameState;
+    GameObjectManager mGameObjectManager;
 
     GameUI mGameUI;
     public int score;
+    public long fps;
 
-    private boolean shootNow;
+    private volatile boolean mPlaying;
+    public boolean shootNow;
     public Random rand;
     public SoundEngine soundEngine;
-
-
-
 
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
@@ -53,119 +48,102 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         GameObjectFactory.app = this;
 
-        //SoundEngine
         soundEngine = new SoundEngine(context);
-
-        startGame();
-    }
-
-    private void startGame() {
-        rand = new Random();
-        gameObjects = new LinkedList<>();
-
-        mPlayer = (SimpleCannon) GameObjectFactory.getGameObject("Player");
-        mAlienArmy = new AlienArmy(this);
-        mBarriers = new Barriers(this);
-
-        gameObjects.add(mPlayer);
-        gameObjects.addAll(mAlienArmy.aliens);
-        gameObjects.addAll(mBarriers.getBarrierBlocks());
-
-
-        score = 0;
         mGameUI = new GameUI(this);
+        fps = 1;
 
-        for (GameObject gameObject : gameObjects) {
-            gameObject.reset();
-        }
+        rand = new Random();
+
+        //start game
+        mGameObjectManager = new GameObjectManager(this);
+        mGameState = new WaveState(this);
+        mGameState.changeState(this, State.WAVE);
     }
 
-    private boolean isGameOver() {
-            return mPlayer.lives == 0;
-    }
-
-    @Override
-    public void run() {
-        soundEngine.startEngineHum();
-        while (mPlaying) {
-            long frameStartTime = System.currentTimeMillis();
-
-            if (!mPaused) {
-
-                if(shootNow) {
-                    gameObjects.add(mPlayer.shoot());
-                    shootNow = false;
-                }
-
-                for (GameObject object : gameObjects) {
-                    object.update(mFPS);
-                }
-
-                mAlienArmy.update(mFPS);
-                gameObjects.addAll(mAlienArmy.getAlienProjs());
-                detectCollisions();
-
-                for(GameObject object : gameObjects) {
-                    object.playAudio();
-                }
-            }
-
-            removeInactiveObjects();
-            mAlienArmy.removeInactiveObjects();
-
-            mGameUI.update(score);
-            draw();
-
-            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
-
-            if (timeThisFrame > 0) {
-                final int MILLIS_IN_SECOND = 1000;
-                mFPS = MILLIS_IN_SECOND / timeThisFrame;
-            }
-
-            if (isGameOver()) {
-                startGame();
-            }
+//<<<<<<< HEAD
+//    @Override
+//    public void run() {
+//        soundEngine.startEngineHum();
+//        while (mPlaying) {
+//            long frameStartTime = System.currentTimeMillis();
+//
+//            if (!mPaused) {
+//
+//                if(shootNow) {
+//                    gameObjects.add(mPlayer.shoot());
+//                    shootNow = false;
+//                }
+//
+//                for (GameObject object : gameObjects) {
+//                    object.update(mFPS);
+//                }
+//
+//                mAlienArmy.update(mFPS);
+//                gameObjects.addAll(mAlienArmy.getAlienProjs());
+//                detectCollisions();
+//
+//                for(GameObject object : gameObjects) {
+//                    object.playAudio();
+//                }
+//            }
+//
+//            removeInactiveObjects();
+//            mAlienArmy.removeInactiveObjects();
+//
+//            mGameUI.update(score);
+//            draw();
+//
+//            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
+//
+//            if (timeThisFrame > 0) {
+//                final int MILLIS_IN_SECOND = 1000;
+//                mFPS = MILLIS_IN_SECOND / timeThisFrame;
+//            }
+//
+//            if (isGameOver()) {
+//                startGame();
+//            }
+//=======
+    public void setState(GameState newGameState) {
+        if(newGameState != null) {
+            mGameState = newGameState;
+//>>>>>>> 77d058678ca200538e90f74fe0a0d79180529279
         }
-
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
-                mPaused = false;
-                shootNow = mPlayer.canShoot();
+//<<<<<<< HEAD
+//                mPaused = false;
+//                shootNow = mPlayer.canShoot();
+//=======
+                     /*else if(mGameState instanceof WaveState) {
+                    if (motionEvent.getX() > mScreenSize.x / 2) {
+                        mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGRIGHT);
+                    } else {
+                        mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.MOVINGLEFT);
+                    }
+                }*/
+                shootNow = mGameObjectManager.mPlayer.canShoot();
+
+//>>>>>>> 77d058678ca200538e90f74fe0a0d79180529279
                 break;
 
             case MotionEvent.ACTION_UP:
-                //mPlayer.setMovement(mPlayer.STOPPED);
+                //mGameObjectManager.mPlayer.setMovement(mGameObjectManager.mPlayer.STOPPED);
                 break;
         }
         return true;
-    }
-
-    private void draw() {
-        if (mOurHolder.getSurface().isValid()) {
-            mCanvas = mOurHolder.lockCanvas();
-
-            mCanvas.drawColor(Color.argb(255, 0, 0, 0));
-
-
-            for (GameObject gameObject : gameObjects) {
-                gameObject.display(mCanvas);
-            }
-
-            mAlienArmy.draw(mCanvas);
-            mGameUI.draw(mCanvas);
-            mOurHolder.unlockCanvasAndPost(mCanvas);
-        }
     }
 
     public void resume() {
         mPlaying = true;
         mGameThread = new Thread(this);
         mGameThread.start();
+
+        mGameState.changeState(this, State.WAVE);
     }
 
     public void pause() {
@@ -175,48 +153,31 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
             mGameThread.join();
         } catch (InterruptedException e) {
             Log.e("Error:", "joining thread");
-
         }
+
+        mGameState.changeState(this, State.PAUSE);
     }
 
-    private void detectCollisions() {
-        //Checks to see if the first object is a projectile because in SpaceInvaders only
-        // projectiles collide with non projectiles. There are no other types of collisions
-        Iterator<GameObject> firstObjectItr = gameObjects.iterator();
-        while (firstObjectItr.hasNext()) {
-            GameObject object1 = firstObjectItr.next();
-            if (object1 instanceof AlienProj || object1 instanceof PlayerProj) {
+    @Override
+    public void run() {
+        while(mPlaying) {
+            long frameStartTime = System.currentTimeMillis();
 
-                for (GameObject object2 : gameObjects) {
-                    if (!(object2 instanceof AlienProj || object2 instanceof  PlayerProj)) {
-                        collide(object1, object2);
-                    }
-                }
+            mGameState.run(this);
 
-                for (GameObject alienObject : mAlienArmy.aliens) {
-                    collide(object1, alienObject);
-                }
+            long timeThisFrame = System.currentTimeMillis() - frameStartTime;
+
+            //TODO: ensure that timeThisFrame isn't ridiculously high
+            if (timeThisFrame > 0) {
+                int MILLIS_IN_SECOND = 1000;
+                fps = MILLIS_IN_SECOND / timeThisFrame;
+                //Log.d("FRAMES", Long.toString(fps));
             }
         }
     }
 
-    private void collide(GameObject object1, GameObject object2) {
-        if (RectF.intersects(object1.getHitBox(), object2.getHitBox())) {
-            object1.collide(object2);
-            object2.collide(object1);
-        }
-    }
-
-    private void removeInactiveObjects() {
-        Iterator<GameObject> gameObjectIterator = gameObjects.iterator();
-
-        while (gameObjectIterator.hasNext()) {
-            GameObject gameObject = gameObjectIterator.next();
-
-            if (!gameObject.isActive()) {
-                gameObjectIterator.remove();
-            }
-        }
+    public SimpleCannon getPlayer() {
+        return mGameObjectManager.mPlayer;
     }
 }
 

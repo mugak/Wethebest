@@ -105,11 +105,12 @@ public class AlienArmy {
         List<GameObject> alienProjs = new LinkedList<>();
 
         for(Alien alien: aliens) {
-                if(alien.shootNow) {
-                    alienProjs.add(alien.shoot());
-                    alien.shootNow = false;
-                }
+            if(alien.shootNow) {
+                alienProjs.add(alien.shoot());
+                alien.shootNow = false;
             }
+        }
+
         return alienProjs;
     }
 
@@ -137,6 +138,5 @@ public class AlienArmy {
     private void increaseScore() {
         app.score += 100;
     }
-
 
 }

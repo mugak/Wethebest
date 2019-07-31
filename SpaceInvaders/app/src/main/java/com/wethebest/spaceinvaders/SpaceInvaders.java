@@ -31,7 +31,6 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     private SpaceInvadersApp mSpaceInvadersApp;
     Bitmap myBlankBitmap;
     Canvas myCanvas;
-
     public float yAcceleration;
     private SensorManager sensorManager;
 
