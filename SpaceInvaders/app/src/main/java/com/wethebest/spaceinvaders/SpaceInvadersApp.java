@@ -86,6 +86,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     @Override
     public void run() {
+        soundEngine.startEngineHum();
         while (mPlaying) {
             long frameStartTime = System.currentTimeMillis();
 
@@ -134,13 +135,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         switch (motionEvent.getAction() & motionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
                 mPaused = false;
-//                if (motionEvent.getX() > mScreenSize.x / 2) {
-//                    mPlayer.setMovement(mPlayer.MOVINGRIGHT);
-//                } else {
-//                    mPlayer.setMovement(mPlayer.MOVINGLEFT);
-//                }
-                    shootNow = mPlayer.canShoot();
-
+                shootNow = mPlayer.canShoot();
                 break;
 
             case MotionEvent.ACTION_UP:
@@ -175,6 +170,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     public void pause() {
         mPlaying = false;
+        soundEngine.stopEngineHum();
         try {
             mGameThread.join();
         } catch (InterruptedException e) {

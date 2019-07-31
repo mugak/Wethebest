@@ -21,6 +21,7 @@ public class SoundEngine {
     Context context;
 
     private SoundPool sp;
+    private SoundPool spStream;
     private int playerShootID = -1;
     private int alienShootID = -1;
     private int barrierHitID = -1;
@@ -43,11 +44,18 @@ public class SoundEngine {
                             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                             .build();
 
+            //Audioattributes for a stream
+//            AudioAttributes streamAudio = new AudioAttributes.Builder()
+//                    .setUsage(AudioAttributes.)
             // Initialize the SoundPool
             sp = new SoundPool.Builder()
                     .setMaxStreams(5)
                     .setAudioAttributes(audioAttributes)
                     .build();
+
+//            sp = new SoundPool.Builder()
+//                    .setMaxStreams(5)
+//                    .setAudioAttributes()
         }
         else {
             // The old way
@@ -97,5 +105,9 @@ public class SoundEngine {
         sp.play(playerHitID, masterVolume, masterVolume, 0,0,1);
     }
 
-    public void engineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, 0, 1);}
+    public void startEngineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, -1, 1);}
+
+    public void stopEngineHum(){sp.stop(engineHumID);}
+
+
 }
