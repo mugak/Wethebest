@@ -1,23 +1,30 @@
 package com.wethebest.spaceinvaders;
 
-import android.graphics.Point;
 import android.graphics.PointF;
 
+/*
+Alien handles the enemies movement and game logic.
+The enemy moves side to side, gradually moving towards the player.
+It also shoots projectiles randomly.
+Instantiated in AlienArmy
+ */
 public class Alien extends GameObject {
-    private final PointF SHOOT_INTERVAL = new PointF(5, 25); //shoots every x-y seconds
+    private final PointF SHOOT_INTERVAL = new PointF(10, 25); //shoots every x-y seconds
 
     //Shoot projectiles randomly
-    private GameObject mProj;
     private PointF shootInterval = SHOOT_INTERVAL;
-    private float frameCount = 0;
     public boolean shootNow = false;
+    private Counter waitToShoot;
+
+    //Sound effects
+    private boolean playShoot = false;
     private boolean playHit = false;
 
     private boolean movingRight = true; //Current movement direction
-    private boolean playShoot = false; //Sound effect
 
     Alien(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
+        waitToShoot = new AutomaticCounter(getRandomFloat(shootInterval));
     }
 
     public void update(long fps) {
@@ -30,7 +37,7 @@ public class Alien extends GameObject {
 
         if(fps != 0) {
             mHitBox.moveHorizontally(mHitBox.velocity / fps);
-            timeToShoot(fps);
+            handleCounters(fps);
         }
 
         checkAlienWin();
@@ -58,8 +65,6 @@ public class Alien extends GameObject {
         return mHitBox.horizontalOutOfBounds();
     }
 
-
-
     public void reverseXVelocity() {
         movingRight = !movingRight;
         mHitBox.moveDown();
@@ -71,24 +76,17 @@ public class Alien extends GameObject {
     }
 
     public GameObject shoot() {
-            mProj = GameObjectFactory.getGameObject("AlienProj");
+            GameObject mProj = GameObjectFactory.getGameObject("AlienProj");
             mProj.setPosition(mHitBox.centerBottom());
             playShoot = true;
             return mProj;
     }
 
-    //calculates when to shoot shooting by counting the number of frames
-    private void timeToShoot(long fps) {
-        if(frameCount <= 0) {
-            float seconds = getRandomFloat(shootInterval);
-            frameCount = fps * seconds;
-        } //if alien is not waiting to shoot, assign frameCount
-        else {
-            frameCount--;
-            if (frameCount <= 0) {
-                shootNow = true;
-            }
-        } //alien is waiting to shoot
+    private void handleCounters(long fps) {
+        if(waitToShoot.run(fps)) {
+            shootNow = true;
+            waitToShoot.setSeconds(getRandomFloat(shootInterval));
+        }
     }
 
     private float getRandomFloat(PointF interval) {

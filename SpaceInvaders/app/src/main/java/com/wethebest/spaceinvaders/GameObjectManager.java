@@ -1,20 +1,24 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
-import android.graphics.PointF;
 import android.graphics.RectF;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
 /*
-    Potentially collisions should be handled by another class
+GameObjectManager holds all of the GameObjects - the player, projectiles, AlienArmy, and Barriers
+It updates, draws, removes, and detects collisions
+Instantiated in SpaceInvadersApp
+
+Potentially collisions should be handled by another class
  */
 public class GameObjectManager {
     private LinkedList<GameObject> gameObjects;
     public SimpleCannon mPlayer;
     private AlienArmy mAlienArmy;
     private Barriers mBarriers;
+    private UFOSpawner mUFOSpawner;
 
     SpaceInvadersApp app;
 
@@ -26,6 +30,7 @@ public class GameObjectManager {
         mPlayer = (SimpleCannon) GameObjectFactory.getGameObject("Player");
         mBarriers = new Barriers(app);
         mAlienArmy = new AlienArmy(app);
+        mUFOSpawner = new UFOSpawner(app);
 
         gameObjects.add(mPlayer);
         gameObjects.addAll(mAlienArmy.aliens);
@@ -60,6 +65,7 @@ public class GameObjectManager {
     public void updateGameObjectStates(long fps) {
         updateGameObjects(fps);
         detectCollisions();
+        playAudio();
         removeInactiveObjects();
     }
 
@@ -68,6 +74,7 @@ public class GameObjectManager {
             gameObject.update(fps);
         }
 
+        mUFOSpawner.update(fps);
         mAlienArmy.update(fps);
         gameObjects.addAll(mAlienArmy.getAlienProjs());
     }
@@ -75,10 +82,15 @@ public class GameObjectManager {
     public void displayGameObjects(Canvas canvas) {
         for (GameObject gameObject : gameObjects) {
             gameObject.display(canvas);
-            gameObject.playAudio();
         }
 
         mAlienArmy.draw(canvas);
+    }
+
+    public void playAudio() {
+        for(GameObject gameObject : gameObjects) {
+            gameObject.playAudio();
+        }
     }
 
     private void detectCollisions() {

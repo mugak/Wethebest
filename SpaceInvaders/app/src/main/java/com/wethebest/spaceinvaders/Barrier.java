@@ -7,7 +7,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
-
+/*
+Barrier handles the placement of BarrierBlocks so that they look like one single barrier
+Instantiated in Barriers
+ */
 public class Barrier {
     //DEFAULTS
     private final Point DIMENSIONS = new Point(3, 3); //size is in units of barrier blocks

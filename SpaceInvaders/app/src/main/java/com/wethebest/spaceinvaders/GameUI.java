@@ -1,6 +1,5 @@
 package com.wethebest.spaceinvaders;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,6 +7,12 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+
+/*
+GameUI draws the UI while the game is playing
+It updates the score, player lives, and ammo, and the red square that lets the player know they can't shoot
+Instantiated in SpaceInvadersApp
+ */
 
 public class GameUI {
     private final int PAUSE_BUTTON_SPRITE_ID = R.drawable.pause_button;

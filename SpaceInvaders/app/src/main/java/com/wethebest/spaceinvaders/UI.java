@@ -12,7 +12,9 @@ import android.view.animation.TranslateAnimation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
+/*
+currently not being used
+ */
 public class UI extends AppCompatActivity {
 
     @Override

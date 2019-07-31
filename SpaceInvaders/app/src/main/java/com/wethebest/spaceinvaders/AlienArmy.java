@@ -7,6 +7,13 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/*
+AlienArmy places the enemies, updates the enemies, and handles their logic as a group
+When one enemy touches the screen, the whole army reverses direction and moves forward.
+As the player kills off enemies, the enemies speed up and shoot projectiles more frequently.
+Instantiated in GameObjectManager
+ */
+
 public class AlienArmy {
     //DEFAULTS
     private final int NUM_ALIENS = 12;
@@ -87,7 +94,7 @@ public class AlienArmy {
     //t = time (number of aliens killed)
     //y(t) = new speed at the given time
     private void increaseSpeed() {
-        int aliensKilled = (DIMENSIONS.x * DIMENSIONS.y) - aliens.size(); //number of max aliens - number of current aliens
+        int aliensKilled =  NUM_ALIENS - aliens.size(); //number of max aliens - number of current aliens
         float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
 
         for(Alien alien : aliens) {

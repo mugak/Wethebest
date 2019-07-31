@@ -4,6 +4,10 @@ import android.graphics.PointF;
 
 import java.util.LinkedList;
 import java.util.List;
+/*
+Barriers handles the placement of each Barrier, set dynamically based on the number of barriers desired
+Instantiated in GameObjectManager
+ */
 
 public class Barriers {
     //DEFAULTS

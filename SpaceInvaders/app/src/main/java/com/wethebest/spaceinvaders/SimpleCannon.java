@@ -2,14 +2,14 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.util.Log;
 
-import static java.lang.Math.abs;
-
-/*@SimpleCannon
-* This game object shoots projectiles and is controlled by the player.
-* Movement is horizontally left or right and is determined by the device's accelerometer sensor.
-* When the player shoots, a PlayerProj object at the position of the cannon.
-* The cannon starts with MAX_LIVES number of lives and has a short interval of invincibility when hit.
+/*
+SimpleCannon represents the cannon controlled by the player
+Movement is horizontal, determined by the device's accelerometer sensor.
+The player shoots projectiles when the screen is touched
+It has features such as lives, firing rate, invincibility
+Instantiated in GameObjectManager
 */
 public class SimpleCannon extends GameObject {
     //DEFAULTS
@@ -25,8 +25,10 @@ public class SimpleCannon extends GameObject {
     public int lives;
     public int ammo;
 
+    //Sound effects
     private boolean playShoot = false;
-    private boolean playHit = false; //Sound effect
+    private boolean playHit = false;
+    private boolean playEngineHum = false;
 
     public Counter waitToShoot;
     private Counter invincible;
@@ -42,8 +44,7 @@ public class SimpleCannon extends GameObject {
 
         waitToShoot = new Counter(FIRING_RATE);
         invincible = new Counter(INVINCIBLE_SECONDS);
-        waitForAmmo = new Counter(AMMO_REGEN_RATE);
-
+        waitForAmmo = new AutomaticCounter(AMMO_REGEN_RATE);
     }
 
     public void update(long fps) {
@@ -55,37 +56,7 @@ public class SimpleCannon extends GameObject {
             mHitBox.horizontalStayInBounds();
 
         }
-
-        if(invincible.on && !invincible.isCountingDown) {
-            mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);
-            invincible.setFPS(fps);
-        }
-        else if(invincible.on && invincible.isCountingDown) {
-            if(invincible.finished()) {
-                mHitBox.setBitmap(SPRITE_ID);
-            }
-        }
-
-        if(waitToShoot.on && !waitToShoot.isCountingDown) {
-            waitToShoot.setFPS(fps);
-        }
-        else if(waitToShoot.on && waitToShoot.isCountingDown) {
-            waitToShoot.finished();
-        }
-
-        waitForAmmo.on = true;
-        if(!waitForAmmo.isCountingDown) {
-            waitForAmmo.setFPS(fps);
-        }
-        else if(waitForAmmo.isCountingDown) {
-            if(waitForAmmo.finished()) {
-                ammo += 1;
-                if(ammo >= MAX_AMMO) {
-                    ammo = MAX_AMMO;
-                }
-            }
-        }
-
+        handleCounters(fps);
     }
 
     public void playAudio(){
@@ -97,8 +68,14 @@ public class SimpleCannon extends GameObject {
             app.soundEngine.playerHit();
             playHit = false;
         }
-        app.soundEngine.startEngineHum();
-        app.soundEngine.setEngineHumPitch(abs(((SpaceInvaders)app.context).yAcceleration )/9.81f);
+
+        if(!playEngineHum) {
+            playEngineHum = true;
+            app.soundEngine.startEngineHum();
+        }
+        app.soundEngine.setEngineHumPitch(Math.abs(((SpaceInvaders)app.context).yAcceleration )/9.81f);
+        //Log.d("asd",Float.toString(((SpaceInvaders)app.context).yAcceleration ));//TODO see SoundEngine
+
     }
 
     public void collide(GameObject gameObject) {
@@ -107,12 +84,13 @@ public class SimpleCannon extends GameObject {
                 lives -= 1;
                 reset();
                 invincible.on = true;
+                mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);
             }
         }
     }
 
     public void reset() {
-        waitToShoot.reset();
+        //waitToShoot.reset();
     }
 
 
@@ -133,7 +111,20 @@ public class SimpleCannon extends GameObject {
         return true; //shoot a projectile
     }
 
-    private void regenerateAmmo() {
+    private void handleCounters(long fps) {
+        //Counter.run() returns true when done counting
+        if(invincible.run(fps)) {
+            mHitBox.setBitmap(SPRITE_ID);
+        }
 
+        if(waitToShoot.run(fps)) {
+        }
+
+        if(waitForAmmo.run(fps)) {
+            ammo += 1;
+            if(ammo >= MAX_AMMO) {
+                ammo = MAX_AMMO;
+            }
+        }
     }
 }

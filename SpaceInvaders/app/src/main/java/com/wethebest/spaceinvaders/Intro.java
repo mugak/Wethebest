@@ -28,35 +28,26 @@ public class Intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-        final TextView PlayerName = findViewById(R.id.PlayerName);
-        final EditText EnterName = findViewById(R.id.EnterName);
-        final Button Enterbtn = findViewById(R.id.Enterbtn);
-        final Button Nextbtn = findViewById(R.id.Next_btn);
-        final TextView title = findViewById(R.id.textView2);
-        final ImageView MainImage = findViewById(R.id.imageView3);
-        final ImageView Seagullpoop = findViewById(R.id.imageView4);
-        final ImageView usermessage = findViewById(R.id.imageView6);
-        Button Startbtn = findViewById(R.id.Startbtn);
+
+        Button Storybtn = findViewById(R.id.Story_btn);
+        Button Playbtn = findViewById(R.id.Play_btn);
 
 
-        Nextbtn.setOnClickListener(new View.OnClickListener() {
+        //Story button goes directly to Story class
+        Storybtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                MainImage.setVisibility(ImageView.INVISIBLE);
-                title.setVisibility(ImageView.INVISIBLE);
-                Nextbtn.setVisibility(ImageView.INVISIBLE);
-                EnterName.setVisibility(ImageView.VISIBLE);
-                PlayerName.setVisibility(ImageView.VISIBLE);
-                Seagullpoop.setVisibility(ImageView.VISIBLE);
-                usermessage.setVisibility(ImageView.VISIBLE);
+                Intent intent=new Intent(Intro.this,Story.class);
+                startActivityForResult(intent,0);
+                overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
 
 
             }
         });
 
-        //Start button goes directly to Game (Space invaders class)
-        Startbtn.setOnClickListener(new View.OnClickListener() {
+        //goes directly to the game
+        Playbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -65,32 +56,6 @@ public class Intro extends AppCompatActivity {
                 overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
 
 
-            }
-        });
-
-
-        //goes to next activity once name is entered
-        EnterName.setOnKeyListener(new OnKeyListener()
-        {
-            public boolean onKey(View v, int keyCode, KeyEvent event)
-            {
-                if (event.getAction() == KeyEvent.ACTION_DOWN)
-                {
-                    switch (keyCode)
-                    {
-                        case KeyEvent.KEYCODE_DPAD_CENTER:
-                        case KeyEvent.KEYCODE_ENTER:
-
-                            Intent intent=new Intent(Intro.this,SpaceInvaders.class);
-                            startActivityForResult(intent,0);
-                            overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
-
-                            return true;
-                        default:
-                            break;
-                    }
-                }
-                return false;
             }
         });
 

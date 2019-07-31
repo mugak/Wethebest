@@ -3,8 +3,13 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.PointF;
 
+/*
+GameObjectFactory handles the constructors for each GameObject
+Holds default values for each GameObject
+ */
+
 public class GameObjectFactory {
-    public static SpaceInvadersApp app;
+    public static SpaceInvadersApp app; //set in SpaceInvadersApp
     private static PointF size;
     private static int spriteID;
     private static PointF position;
@@ -48,6 +53,13 @@ public class GameObjectFactory {
             position = new PointF(0, 0);
             velocity = app.mScreenSize.y / 4;
             return new AlienProj(app, size, spriteID, position, velocity);
+        }
+        else if(objectName.equalsIgnoreCase("UFO")) {
+            size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
+            spriteID = R.drawable.invader_ufo_flying01;
+            position = new PointF(50, 50);
+            velocity = 200f;
+            return new UFO(app, size, spriteID, position, velocity);
         }
 
         return null;
