@@ -71,6 +71,7 @@ public class SimpleCannon extends GameObject {
             app.soundEngine.startEngineHum();
         }
         app.soundEngine.setEngineHumPitch(Math.abs(((SpaceInvaders)app.context).yAcceleration )/9.81f);
+        //Log.d("asd",Float.toString(((SpaceInvaders)app.context).yAcceleration ));//TODO see SoundEngine
     }
 
     public void collide(GameObject gameObject) {

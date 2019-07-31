@@ -65,7 +65,7 @@ public class SoundEngine {
             sp.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
                 @Override
                 public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                    loaded = true;
+                    loaded = true; //sets loaded to true when all sounds are loaded
                 }
             });
 
@@ -110,13 +110,14 @@ public class SoundEngine {
         sp.play(playerHitID, masterVolume, masterVolume, 0,0,1);
     }
 
-    public void startEngineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, -1, 1);}
+    public void startEngineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, 0, 1);}
 
     public void stopEngineHum(){sp.stop(engineHumID);}
 
     public void setEngineHumPitch(float factor){//factor ranges from 0 to 1
-        sp.setVolume(engineHumID, factor, factor);
-        sp.setRate(engineHumID, factor*10);
+       // Log.d("asdfb",Float.toString(factor));
+      //  sp.play(engineHumID, factor, factor, -1, 0, factor);
+        //TODO scale this correctly. volume only goes up to 1, rate goes beyond 1
     }
 
     public void resume() {
