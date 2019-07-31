@@ -1,21 +1,23 @@
 package com.wethebest.spaceinvaders;
 
-import android.util.Log;
+
+import android.graphics.PointF;
 
 public class UFOSpawner {
-    private final float UFO_SPAWN_INTERVAL = 5f; //TODO make this random
+    private final PointF SHOOT_INTERVAL = new PointF(20, 30); // every x-y seconds
     private Counter spawnUFO;
 
     private SpaceInvadersApp app;
 
     UFOSpawner(SpaceInvadersApp app) {
         this.app = app;
-        spawnUFO = new AutomaticCounter(UFO_SPAWN_INTERVAL);
+        spawnUFO = new AutomaticCounter(getRandomFloat(SHOOT_INTERVAL));
     }
 
     public void update(long fps) {
         if(spawnUFO.run(fps)) {
             createUFO();
+            spawnUFO.setSeconds(getRandomFloat(SHOOT_INTERVAL));
         }
     }
 
@@ -23,4 +25,8 @@ public class UFOSpawner {
         app.mGameObjectManager.add(GameObjectFactory.getGameObject("UFO"));
     }
 
+    private float getRandomFloat(PointF interval) {
+        return app.rand.nextFloat() * (interval.y - interval.x) + interval.x;
+
+    }
 }

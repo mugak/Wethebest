@@ -9,7 +9,7 @@ It also shoots projectiles randomly.
 Instantiated in AlienArmy
  */
 public class Alien extends GameObject {
-    private final PointF SHOOT_INTERVAL = new PointF(5, 25); //shoots every x-y seconds
+    private final PointF SHOOT_INTERVAL = new PointF(10, 25); //shoots every x-y seconds
 
     //Shoot projectiles randomly
     private PointF shootInterval = SHOOT_INTERVAL;
@@ -86,7 +86,6 @@ public class Alien extends GameObject {
         if(waitToShoot.run(fps)) {
             shootNow = true;
             waitToShoot.setSeconds(getRandomFloat(shootInterval));
-            waitToShoot.reset();
         }
     }
 

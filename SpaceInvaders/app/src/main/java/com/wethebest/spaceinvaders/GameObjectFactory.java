@@ -58,7 +58,7 @@ public class GameObjectFactory {
             size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
             spriteID = R.drawable.invader_ufo_flying01;
             position = new PointF(50, 50);
-            velocity = 50f;
+            velocity = 200f;
             return new UFO(app, size, spriteID, position, velocity);
         }
 

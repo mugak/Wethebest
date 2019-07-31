@@ -104,11 +104,9 @@ public class SimpleCannon extends GameObject {
         //Counter.run() returns true when done counting
         if(invincible.run(fps)) {
             mHitBox.setBitmap(SPRITE_ID);
-            invincible.reset();
         }
 
         if(waitToShoot.run(fps)) {
-            waitToShoot.reset();
         }
 
         if(waitForAmmo.run(fps)) {
@@ -116,7 +114,6 @@ public class SimpleCannon extends GameObject {
             if(ammo >= MAX_AMMO) {
                 ammo = MAX_AMMO;
             }
-            waitForAmmo.reset();
         }
     }
 }
