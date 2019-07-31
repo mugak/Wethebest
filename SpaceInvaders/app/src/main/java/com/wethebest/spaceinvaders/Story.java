@@ -18,11 +18,10 @@ public class Story extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
+        setContentView(R.layout.activity_story);
 
         final TextView PlayerName = findViewById(R.id.PlayerName);
         final EditText EnterName = findViewById(R.id.EnterName);
-        final Button Enterbtn = findViewById(R.id.Enterbtn);
         final Button Nextbtn = findViewById(R.id.Next_btn);
         final TextView title = findViewById(R.id.textView2);
         final ImageView MainImage = findViewById(R.id.imageView3);
