@@ -28,7 +28,6 @@ public class Intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
-
         final TextView PlayerName = findViewById(R.id.PlayerName);
         final EditText EnterName = findViewById(R.id.EnterName);
         final Button Enterbtn = findViewById(R.id.Enterbtn);
@@ -37,6 +36,7 @@ public class Intro extends AppCompatActivity {
         final ImageView MainImage = findViewById(R.id.imageView3);
         final ImageView Seagullpoop = findViewById(R.id.imageView4);
         final ImageView usermessage = findViewById(R.id.imageView6);
+        Button Startbtn = findViewById(R.id.Startbtn);
 
 
         Nextbtn.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +54,20 @@ public class Intro extends AppCompatActivity {
 
             }
         });
+
+        //Start button goes directly to Game (Space invaders class)
+        Startbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(Intro.this,SpaceInvaders.class);
+                startActivityForResult(intent,0);
+                overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
+
+
+            }
+        });
+
 
         //goes to next activity once name is entered
         EnterName.setOnKeyListener(new OnKeyListener()
@@ -84,6 +98,7 @@ public class Intro extends AppCompatActivity {
 
 
     }
+
 
     //main menu
     @Override
@@ -123,7 +138,4 @@ public class Intro extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-
-
 }

@@ -7,10 +7,20 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+/*
+AlienArmy places the enemies, updates the enemies, and handles their logic as a group
+When one enemy touches the screen, the whole army reverses direction and moves forward.
+As the player kills off enemies, the enemies speed up and shoot projectiles more frequently.
+Instantiated in GameObjectManager
+ */
+
 public class AlienArmy {
     //DEFAULTS
-    private final Point DIMENSIONS = new Point(4, 4);
+    private final int NUM_ALIENS = 12;
 
+    //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
+    private final Point DIMENSIONS = new Point(NUM_ALIENS/4 + NUM_ALIENS % 4,
+                                                NUM_ALIENS/4 );
     //SET BASED ON SCREEN SIZE
     private final float ROW_SPACING;
     private final float COL_SPACING;
@@ -24,7 +34,7 @@ public class AlienArmy {
         this.app = app;
 
         ROW_SPACING = 0;
-        COL_SPACING = app.mScreenSize.y / 10;
+        COL_SPACING = app.mScreenSize.y / 8;
         STARTING_POSITION = new PointF(app.mScreenSize.y / 10, app.mScreenSize.y / 10);
 
         createAliens();
@@ -32,16 +42,22 @@ public class AlienArmy {
 
     //Instantiates and sets positions of every alien
     private void createAliens() {
-        PointF size = new PointF(app.mScreenSize.x/10, app.mScreenSize.y/10);//TODO Size shared with Alien. maybe get from GameConfig
+        //First get the size of an alien
+        GameObject tempAlien = GameObjectFactory.getGameObject("Alien");
+        PointF size = new PointF(tempAlien.getHitBox().width(), tempAlien.getHitBox().height());
+        int numAliensToAdd = NUM_ALIENS;
 
         for(int i = 0; i < DIMENSIONS.x; i++) {
             for(int j = 0; j < DIMENSIONS.y; j++) {
+                if(numAliensToAdd <=0){break;}
+
                 PointF position = new PointF(STARTING_POSITION.x + i * (size.x + COL_SPACING),
                         STARTING_POSITION.y + j * (size.y + ROW_SPACING));
 
-                Alien alien = new Alien(app);
+                GameObject alien = GameObjectFactory.getGameObject("Alien");
                 alien.setPosition(position);
-                aliens.add(alien);
+                aliens.add((Alien) alien);
+                numAliensToAdd--;
             }
         }
     }
@@ -50,11 +66,13 @@ public class AlienArmy {
     public void update(long fps) {
         for(Alien alien : aliens) {
             alien.update(fps);
-
+            alien.setShootInterval((float)aliens.size()/NUM_ALIENS);
             if(alien.outOfBounds()) {
                 reverseNow = true;
             }
         }
+
+
 
         reverse();
         increaseSpeed();
@@ -76,7 +94,7 @@ public class AlienArmy {
     //t = time (number of aliens killed)
     //y(t) = new speed at the given time
     private void increaseSpeed() {
-        int aliensKilled = (DIMENSIONS.x * DIMENSIONS.y) - aliens.size(); //number of max aliens - number of current aliens
+        int aliensKilled =  NUM_ALIENS - aliens.size(); //number of max aliens - number of current aliens
         float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
 
         for(Alien alien : aliens) {
@@ -94,11 +112,12 @@ public class AlienArmy {
         List<GameObject> alienProjs = new LinkedList<>();
 
         for(Alien alien: aliens) {
-                if(alien.shootNow) {
-                    alienProjs.add(alien.shoot());
-                    alien.shootNow = false;
-                }
+            if(alien.shootNow) {
+                alienProjs.add(alien.shoot());
+                alien.shootNow = false;
             }
+        }
+
         return alienProjs;
     }
 
@@ -126,6 +145,5 @@ public class AlienArmy {
     private void increaseScore() {
         app.score += 100;
     }
-
 
 }

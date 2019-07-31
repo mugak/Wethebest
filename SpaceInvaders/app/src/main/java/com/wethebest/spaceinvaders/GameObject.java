@@ -4,6 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
+/*
+GameObject is extended by SimpleCannon, Alien, BarrierBlock, AlienProj, and PlayerProj
+Provides common variables such as sprite, size, and position
+Uses HitBox for movement
+Created by GameObjectFactory
+ */
+
+
 public abstract class GameObject {
     private final int SPRITE_ID;
     private final PointF SIZE;
@@ -15,19 +23,6 @@ public abstract class GameObject {
     protected HitBox mHitBox;
 
     public boolean isActive = true;
-
-    //TODO create GameObjectBuilder, use GameObjectFactory
-    GameObject(SpaceInvadersApp app, PointF size, int spriteID) {
-        this(app, size, spriteID, new PointF(0, 0), 0);
-    }
-
-    GameObject(SpaceInvadersApp app, PointF size, int spriteID, PointF position) {
-        this(app, size, spriteID, position, 0);
-    }
-
-    GameObject(SpaceInvadersApp app, PointF size, int spriteID, float velocity) {
-        this(app, size, spriteID, new PointF(0, 0), velocity);
-    }
 
     GameObject(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         this.app = app;

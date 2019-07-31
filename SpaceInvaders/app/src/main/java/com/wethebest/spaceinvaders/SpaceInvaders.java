@@ -23,6 +23,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 
+/*
+SpaceInvaders is the Activity for the actual game
+It handles user events, the window manager, the accelerometer, and sets the view (SpaceInvadersApp)
+Started in Intro
+ */
+
 
 
 public class SpaceInvaders extends Activity implements SensorEventListener { //AppCompatActivity implements SensorEventListener {
@@ -30,7 +36,6 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     private SpaceInvadersApp mSpaceInvadersApp;
     Bitmap myBlankBitmap;
     Canvas myCanvas;
-
     public float yAcceleration;
     private SensorManager sensorManager;
 
@@ -41,6 +46,8 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
 
         int widthInPixels = 800;
         int heightInPixels = 600;
+
+
 
         myBlankBitmap = Bitmap.createBitmap(widthInPixels,
                 heightInPixels,
@@ -110,6 +117,7 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     }
 
 
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
@@ -130,6 +138,8 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
         }
+
+
     } //enables full screen - took from https://stackoverflow.com/questions/29186081/android-immersive-mode-reset-when-changing-activity
 
 //    //main menu

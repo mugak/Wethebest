@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wethebest.spaceinvaders">
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -8,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Settings"></activity>
-        <activity android:name=".GameOver"></activity>
+        <activity android:name=".Story"></activity>
+        <activity android:name=".Settings" />
+        <activity android:name=".GameOver" />
         <activity android:name=".UI" />
-        <activity android:name=".SpaceInvaders"></activity>
+        <activity android:name=".SpaceInvaders" />
         <activity android:name=".Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,4 +22,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

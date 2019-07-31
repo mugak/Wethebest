@@ -7,14 +7,17 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
-
+/*
+Barrier handles the placement of BarrierBlocks so that they look like one single barrier
+Instantiated in Barriers
+ */
 public class Barrier {
     //DEFAULTS
     private final Point DIMENSIONS = new Point(3, 3); //size is in units of barrier blocks
     private final PointF BLOCK_SIZE;
 
     private SpaceInvadersApp app;
-    public List<BarrierBlock> barrierBlocks = new LinkedList<BarrierBlock>();
+    public List<GameObject> barrierBlocks = new LinkedList<GameObject>();
     private PointF position; //top left corner
 
 
@@ -29,7 +32,7 @@ public class Barrier {
             for (int j = 0; j < DIMENSIONS.y; j++) {
                 PointF blockPos = new PointF(position.x + i * BLOCK_SIZE.x,
                         position.y + j * BLOCK_SIZE.y);
-                BarrierBlock mBarrierBlock = new BarrierBlock(app);
+                GameObject mBarrierBlock = GameObjectFactory.getGameObject("BarrierBlock");
                 mBarrierBlock.setPosition(blockPos);
 
                 barrierBlocks.add(mBarrierBlock);

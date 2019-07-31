@@ -1,24 +1,26 @@
 package com.wethebest.spaceinvaders;
 
-import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.graphics.RectF;
+/*
+BarrierBlock handles the logic for each block in the barrier.
+It loses durability when shot by an AlienProj or PlayerProj
+Instantiated in Barrier
+ */
 
 public class BarrierBlock extends GameObject {
     private final int MAX_DURABILITY = 1;
     private int durability = MAX_DURABILITY;
     private boolean playHit = false; //Sound effect
 
-    BarrierBlock(SpaceInvadersApp app){
-        super(app, new PointF(app.mScreenSize.x / 20, app.mScreenSize.y / 40), R.drawable.def_brick_01);
-        //super(app, size, sprite)
+    BarrierBlock(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+        super(app, size, spriteID, position, velocity);
     }
 
     public void update(long fps) { }
 
     public void playAudio() {
         if(playHit) {
-            app.soundEngine.alienShoot(); //TODO get barrierHit() sound file
+            app.soundEngine.barrierHit(); //TODO get barrierHit() sound file
             playHit = false;
         }
     }
