@@ -2,6 +2,11 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.Color;
 
+/*
+PauseState pauses the game
+WaveState changes to PauseState when the pause button is touched
+ */
+
 public class PauseState implements GameState {
     SpaceInvadersApp mApp;
 

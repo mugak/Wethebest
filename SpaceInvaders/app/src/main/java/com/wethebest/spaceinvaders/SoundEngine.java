@@ -12,9 +12,9 @@ import java.io.IOException;
 
 
 /*@SoundEngine
-* Sets up all of the sounds in the game to be played in each game object.
-* Loads the sound files into memory and assigns them with an ID.
-* Sounds are played through the member methods.
+* Plays all sound effects in the game
+* Loads the sound files into memory and assigns an ID
+* Has methods for each sound effect, called by the respective GameObject
 */
 public class SoundEngine {
 

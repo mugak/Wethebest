@@ -2,7 +2,8 @@ package com.wethebest.spaceinvaders;
 
 /*
 AutomaticCounter turns itself back on automatically
-Used in player ammo regeneration
+Instance variable in Cannon and Alien
+Used in player ammo regeneration and shooting
  */
 public class AutomaticCounter extends Counter {
     AutomaticCounter(float seconds) { super(seconds); }

@@ -28,7 +28,6 @@ public class SimpleCannon extends GameObject {
     //Sound effects
     private boolean playShoot = false;
     private boolean playHit = false;
-    private boolean playEngineHum = false;
 
     public Counter waitToShoot;
     private Counter invincible;
