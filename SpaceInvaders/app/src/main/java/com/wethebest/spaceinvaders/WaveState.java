@@ -13,7 +13,7 @@ public class WaveState implements GameState {
     public WaveState(SpaceInvadersApp app) {
         mApp = app;
         mApp.score = 0;
-        app.mGameObjectManager = new GameObjectManager(app);
+        //app.mGameObjectManager = new GameObjectManager(app);
     }
 
     @Override
