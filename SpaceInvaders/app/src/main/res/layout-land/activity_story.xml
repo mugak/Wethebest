@@ -6,7 +6,10 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#D0EEFD"
-    tools:context=".Intro">
+    tools:context=".Story">
+
+
+
 
 
     <TextView
@@ -43,59 +46,9 @@
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_centerHorizontal="true"
-
-        app:srcCompat="@drawable/phonepic2" />
-
-
-    <Button
-        android:id="@+id/Next_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView3"
-        android:layout_centerHorizontal="true"
-        android:background="#F44336"
-        android:text="Story"
-        android:textColor="#CDE8FA" />
-
-    <TextView
-        android:id="@+id/PlayerName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView3"
-        android:layout_marginBottom="100dp"
-        android:layout_centerInParent="true"
-        android:text="@string/player_name"
-        android:visibility="invisible"
-
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#F44336"
-
-        android:textSize="36sp" />
-
-    <EditText
-        android:id="@+id/ParentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:visibility="invisible"
-
-        />
-
-    <EditText
-        android:id="@+id/EnterName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/PlayerName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:visibility="invisible"/>
+        app:srcCompat="@drawable/phonepic2"
+        android:layout_marginTop="28dp"/>
 
     <Button
         android:id="@+id/Startbtn"
@@ -104,21 +57,60 @@
         android:layout_alignTop="@+id/Next_btn"
         android:text="Quick Start"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="-58dp"
+        android:layout_marginTop="-53dp"
         android:background="#F44336"
         android:textColor="#CDE8FA"
         />
 
     <Button
-        android:id="@+id/Enterbtn"
+        android:id="@+id/Next_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/EnterName"
+        android:layout_alignBottom="@+id/imageView3"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-60dp"
         android:background="#F44336"
-        android:text="Enter"
-        android:visibility="invisible"/>
+        android:text="STORY"
+        android:textColor="#CDE8FA" />
+
+
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView3"
+        android:layout_marginBottom="10dp"
+        android:layout_centerInParent="true"
+        android:stretchColumns="0,1,2"
+        >
+
+        <TableRow
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/PlayerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_name"
+                android:visibility="invisible"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#F44336"
+                android:textSize="36sp" />
+
+
+            <EditText
+                android:id="@+id/EnterName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:visibility="invisible"
+                tools:ignore="NotSibling" />
+
+
+        </TableRow>
+    </TableLayout>
+
+
 
 
 </RelativeLayout>
