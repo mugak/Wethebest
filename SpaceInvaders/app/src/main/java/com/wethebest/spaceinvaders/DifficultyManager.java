@@ -3,7 +3,8 @@ package com.wethebest.spaceinvaders;
 public class DifficultyManager {
     private GameObjectManager mGameObjectManager;
 
-    final float ALIENSPEEDMULTIPLIER = (float) 1.2;
+    private final float ALIENSPEEDMULTIPLIER = (float) 1.2;
+    private final float ALIENFIRERATEINCREASE = (float) 2;
 
     public DifficultyManager(GameObjectManager gom) {
         mGameObjectManager = gom;
@@ -13,5 +14,7 @@ public class DifficultyManager {
         mGameObjectManager.mAlienArmy.increaseInitialSpeed(ALIENSPEEDMULTIPLIER);
     }
 
-
+    public void increaseAlienFireRate() {
+        mGameObjectManager.mAlienArmy.increaseAlienFireRate(ALIENFIRERATEINCREASE);
+    }
 }

@@ -153,7 +153,9 @@ public class AlienArmy {
         app.score += 100;
     }
 
-    public void increaseAlienFireRate() {
-
+    public void increaseAlienFireRate(float decreaseAmount) {
+        for (Alien alien : aliens) {
+            alien.decreaseBaseShootInterval(decreaseAmount);
+        }
     }
 }

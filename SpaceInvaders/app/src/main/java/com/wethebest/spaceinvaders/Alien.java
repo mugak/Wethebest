@@ -106,13 +106,17 @@ public class Alien extends GameObject {
         }
     }
 
-    public void decreaseBaseShootInterval() {
-        if(baseShootInterval.x > 1) {
-            baseShootInterval.x -= 2;
+    public void decreaseBaseShootInterval(float decreaseAmount) {
+        if(baseShootInterval.x > decreaseAmount) {
+            baseShootInterval.x -= decreaseAmount;
+        } else {
+            baseShootInterval.x = 1;
         }
 
         if(baseShootInterval.y > 1) {
-            baseShootInterval.y -= 2;
+            baseShootInterval.y -= decreaseAmount;
+        } else {
+            baseShootInterval.y = 1;
         }
     }
 }
