@@ -5,6 +5,7 @@ public class DifficultyManager {
 
     private final float ALIENSPEEDMULTIPLIER = (float) 1.2;
     private final float ALIENFIRERATEINCREASE = (float) 2;
+    private final int NUMALIENINCREASE = 2;
 
     public DifficultyManager(GameObjectManager gom) {
         mGameObjectManager = gom;
@@ -16,5 +17,9 @@ public class DifficultyManager {
 
     public void increaseAlienFireRate() {
         mGameObjectManager.mAlienArmy.increaseAlienFireRate(ALIENFIRERATEINCREASE);
+    }
+
+    public void increaseAlienArmySize() {
+        mGameObjectManager.mAlienArmy.increaseNumAliens(NUMALIENINCREASE);
     }
 }
