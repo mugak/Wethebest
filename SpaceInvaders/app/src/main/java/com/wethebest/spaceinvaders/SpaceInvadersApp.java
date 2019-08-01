@@ -39,6 +39,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     public boolean shootNow;
     public Random rand;
     public SoundEngine soundEngine;
+    public DifficultyManager difficultyManager;
 
     public SpaceInvadersApp(Context context, int x, int y) {
         super(context);
