@@ -104,6 +104,7 @@ public class GameUI {
 //        if (System.currentTimeMillis() % 1000 == 1000) {
 //            fps = fps +1;
 //        }
+
     int textX = app.mScreenSize.x*3/4;
     int textY = app.mScreenSize.y/4;
 
