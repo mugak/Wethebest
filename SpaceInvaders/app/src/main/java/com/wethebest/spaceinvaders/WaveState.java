@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 
 /*
     WaveState represents the core game play where the player shoots down an advancing wave of
@@ -11,11 +12,13 @@ import android.graphics.Color;
 public class WaveState implements GameState {
     private long mFPS;
     private SpaceInvadersApp mApp;
+    private Paint mPaint;
 
     public WaveState(SpaceInvadersApp app) {
         mApp = app;
         mApp.score = 0;
         //app.mGameObjectManager = new GameObjectManager(app);
+        mApp.mPaint = mPaint;
     }
 
     @Override
@@ -62,10 +65,15 @@ public class WaveState implements GameState {
             mApp.mGameUI.draw(mApp.mCanvas);
 
             mApp.mOurHolder.unlockCanvasAndPost(mApp.mCanvas);
+
+//            mApp.mCanvas.drawText("FPS=" + mFPS, 10f, 150f, mPaint);
+
         }
     }
 
     private boolean isGameOver(SpaceInvadersApp app) {
         return app.mGameObjectManager.mPlayer.lives == 0;
     }
+
+
 }

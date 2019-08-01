@@ -95,7 +95,7 @@ public class AlienArmy {
     //y(t) = new speed at the given time
     private void increaseSpeed() {
         int aliensKilled =  NUM_ALIENS - aliens.size(); //number of max aliens - number of current aliens
-        float multiplier = exponentialGrowth(.09f, aliensKilled); //tweak rateOfGrowth based on game feel
+        float multiplier = exponentialGrowth(.15f, aliensKilled); //tweak rateOfGrowth based on game feel
 
         for(Alien alien : aliens) {
             alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in HitBoxs

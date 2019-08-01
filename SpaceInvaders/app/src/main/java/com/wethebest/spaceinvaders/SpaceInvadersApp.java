@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -57,6 +58,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mGameObjectManager = new GameObjectManager(this);
         mGameState = new WaveState(this);
         mGameState.changeState(this, State.WAVE);
+
+        mCanvas = new Canvas();
+        mPaint = new Paint();//For printing debugging
+
     }
 
     public void setState(GameState newGameState) {
@@ -116,23 +121,13 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 //Log.d("FRAMES", Long.toString(fps));
             }
 
-            if(debugging){
-                printDebugText();
-                }
-            }
         }
-
-    public void printDebugText(){
-            // Hold a value that is half that of the member variable mFontSize
-            int textSize = mScreenSize.y/6;
-//            // A guess at a good position vertically to start printing the debugging text
-            mPaint.setTextSize(textSize);
-//            mCanvas.drawText("FPS=" + fps, 15,mScreenSize.y/2 + textSize, mPaint);
-
     }
+
 
     public SimpleCannon getPlayer() {
         return mGameObjectManager.mPlayer;
     }
+
 }
 
