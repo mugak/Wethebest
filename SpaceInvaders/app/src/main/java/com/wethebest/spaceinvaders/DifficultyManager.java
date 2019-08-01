@@ -28,10 +28,10 @@ public class DifficultyManager {
     }
 
     public void increasePlayerMaxAmmo() {
-
+        mGameObjectManager.mPlayer.maxAmmo += 1;
     }
 
     public void increasePlayerAmmoRegenRate() {
-        
+
     }
 }
