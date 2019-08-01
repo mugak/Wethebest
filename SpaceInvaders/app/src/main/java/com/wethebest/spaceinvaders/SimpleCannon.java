@@ -28,7 +28,6 @@ public class SimpleCannon extends GameObject {
     //Sound effects
     private boolean playShoot = false;
     private boolean playHit = false;
-    private boolean playEngineHum = false;
 
     public Counter waitToShoot;
     private Counter invincible;
@@ -69,13 +68,7 @@ public class SimpleCannon extends GameObject {
             playHit = false;
         }
 
-        if(!playEngineHum) {
-            playEngineHum = true;
-            app.soundEngine.startEngineHum();
-        }
-        app.soundEngine.setEngineHumPitch(Math.abs(((SpaceInvaders)app.context).yAcceleration )/9.81f);
-        //Log.d("asd",Float.toString(((SpaceInvaders)app.context).yAcceleration ));//TODO see SoundEngine
-
+        app.soundEngine.engineHum(Math.abs(((SpaceInvaders)app.context).yAcceleration)  + 3); //modulate engine rate based on screen tilt
     }
 
     public void collide(GameObject gameObject) {

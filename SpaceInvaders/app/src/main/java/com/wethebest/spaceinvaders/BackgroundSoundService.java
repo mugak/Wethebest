@@ -7,6 +7,9 @@ import android.media.MediaPlayer;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+/*
+BackgroundSoundService plays the music using MediaPlayer
+ */
 
 public class BackgroundSoundService extends AppCompatActivity {
 

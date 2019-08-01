@@ -12,9 +12,9 @@ import java.io.IOException;
 
 
 /*@SoundEngine
-* Sets up all of the sounds in the game to be played in each game object.
-* Loads the sound files into memory and assigns them with an ID.
-* Sounds are played through the member methods.
+* Plays all sound effects in the game
+* Loads the sound files into memory and assigns an ID
+* Has methods for each sound effect, called by the respective GameObject
 */
 public class SoundEngine {
 
@@ -110,15 +110,8 @@ public class SoundEngine {
         sp.play(playerHitID, masterVolume, masterVolume, 0,0,1);
     }
 
-    public void startEngineHum(){ sp.play(engineHumID, masterVolume, masterVolume, 0, 0, 1);}
-
-
-    public void stopEngineHum(){sp.stop(engineHumID);}
-
-    public void setEngineHumPitch(float factor){//factor ranges from 0 to 1
-       // Log.d("asdfb",Float.toString(factor));
-      //  sp.play(engineHumID, factor, factor, -1, 0, factor);
-        //TODO scale this correctly. volume only goes up to 1, rate goes beyond 1
+    public void engineHum(float factor){
+        sp.play(engineHumID, masterVolume, masterVolume, 0, 0, factor);
     }
 
     public void resume() {

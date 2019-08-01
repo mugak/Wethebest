@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
+/*
+GameOver draws the game over screen
+ */
 
 public class GameOver extends AppCompatActivity {
 

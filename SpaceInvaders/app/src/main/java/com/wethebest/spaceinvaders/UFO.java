@@ -2,6 +2,12 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.PointF;
 
+/*
+UFO moves across the top of the screen
+Gives extra points if hit
+Instantiated by UFOSpawner
+ */
+
 public class UFO extends GameObject {
     UFO(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);

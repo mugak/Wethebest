@@ -2,6 +2,7 @@ package com.wethebest.spaceinvaders;
 
 /*
 Counter counts a specified number of seconds by decrementing frames
+Must be turned on after the desired event occurs
 Instance variable in Alien and Cannon
 Used for player firing rate and invincibility.
  */

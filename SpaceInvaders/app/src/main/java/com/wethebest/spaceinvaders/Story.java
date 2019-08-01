@@ -13,6 +13,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/*
+Story gives the background story of the game
+Started when Story button is pressed in Intro
+ */
+
 public class Story extends AppCompatActivity {
 
     @Override

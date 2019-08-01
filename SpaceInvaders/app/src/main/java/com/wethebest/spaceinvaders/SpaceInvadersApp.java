@@ -12,7 +12,8 @@ import android.view.SurfaceView;
 import java.util.Random;
 
 /*
-    SpaceInvadersApp starts the game and handles the game states
+    SpaceInvadersApp is the view for the SpaceInvaders activity
+    It starts the game, handles the threading, and controls the game states
     It also handles touch events
     Set in SpaceInvaders
  */

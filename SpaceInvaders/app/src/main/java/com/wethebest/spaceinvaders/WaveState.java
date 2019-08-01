@@ -3,8 +3,10 @@ package com.wethebest.spaceinvaders;
 import android.graphics.Color;
 
 /*
-    This state represents the core game play where the player shoots down an advancing wave of
+    WaveState represents the core game play where the player shoots down an advancing wave of
     aliens
+    Default state in SpaceInvadersApp
+    PauseState changes to WaveState when game is unpaused
  */
 public class WaveState implements GameState {
     private long mFPS;
