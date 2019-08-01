@@ -16,7 +16,7 @@ Potentially collisions should be handled by another class
 public class GameObjectManager {
     private LinkedList<GameObject> gameObjects;
     public SimpleCannon mPlayer;
-    private AlienArmy mAlienArmy;
+    public AlienArmy mAlienArmy;
     private Barriers mBarriers;
     private UFOSpawner mUFOSpawner;
 

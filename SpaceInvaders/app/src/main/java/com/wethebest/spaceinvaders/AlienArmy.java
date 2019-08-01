@@ -30,6 +30,9 @@ public class AlienArmy {
     public List<Alien> aliens = new LinkedList<Alien>();
     private boolean reverseNow = false;
 
+    // Initial speed of the wave
+    private float waveSpeed;
+
     AlienArmy(SpaceInvadersApp app) {
         this.app = app;
 
@@ -72,8 +75,6 @@ public class AlienArmy {
             }
         }
 
-
-
         reverse();
         increaseSpeed();
     }
@@ -88,6 +89,12 @@ public class AlienArmy {
         reverseNow = false;
     }
 
+    public void increaseInitialSpeed(float multiplier) {
+        for(Alien alien : aliens) {
+            alien.speedUp(multiplier);
+        }
+    }
+
     //Calculates speed based on exponential growth: y(t) = a × e^(kt)
     //a = Alien BASE_SPEED
     //k = rate of growth
@@ -98,7 +105,7 @@ public class AlienArmy {
         float multiplier = exponentialGrowth(.15f, aliensKilled); //tweak rateOfGrowth based on game feel
 
         for(Alien alien : aliens) {
-            alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in HitBoxs
+            alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in HitBoxes
         }
     }
 
@@ -146,4 +153,7 @@ public class AlienArmy {
         app.score += 100;
     }
 
+    public void increaseAlienFireRate() {
+
+    }
 }

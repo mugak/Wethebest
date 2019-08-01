@@ -9,10 +9,10 @@ It also shoots projectiles randomly.
 Instantiated in AlienArmy
  */
 public class Alien extends GameObject {
-    private final PointF SHOOT_INTERVAL = new PointF(10, 25); //shoots every x-y seconds
+    private PointF baseShootInterval = new PointF(10, 25); //shoots every x-y seconds
 
     //Shoot projectiles randomly
-    private PointF shootInterval = SHOOT_INTERVAL;
+    private PointF shootInterval = baseShootInterval;
     public boolean shootNow = false;
     private Counter waitToShoot;
 
@@ -95,14 +95,24 @@ public class Alien extends GameObject {
     }
     //Set the Shoot
     public void setShootInterval(float factor){
-        float min = (SHOOT_INTERVAL.x * factor);
-        float max = (SHOOT_INTERVAL.y * factor);
+        float min = (baseShootInterval.x * factor);
+        float max = (baseShootInterval.y * factor);
         shootInterval = new PointF(min, max);
     }
 
     private void checkAlienWin() {
         if(mHitBox.bottomOutOfBounds()) {
             app.getPlayer().lives = 0; //game over when aliens reach bottom of screen
+        }
+    }
+
+    public void decreaseBaseShootInterval() {
+        if(baseShootInterval.x > 1) {
+            baseShootInterval.x -= 2;
+        }
+
+        if(baseShootInterval.y > 1) {
+            baseShootInterval.y -= 2;
         }
     }
 }
