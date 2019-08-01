@@ -22,4 +22,16 @@ public class DifficultyManager {
     public void increaseAlienArmySize() {
         mGameObjectManager.mAlienArmy.increaseNumAliens(NUMALIENINCREASE);
     }
+
+    public void increasePlayerFireRate() {
+
+    }
+
+    public void increasePlayerMaxAmmo() {
+
+    }
+
+    public void increasePlayerAmmoRegenRate() {
+        
+    }
 }
