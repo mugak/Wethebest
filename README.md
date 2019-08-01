@@ -25,7 +25,7 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
    * AlienProj and PlayerProj are instantiated by their respective classes
 ---
 # **Classes**  
-#### Activities
+## Activities
 * **Intro** - main activity, main menu
     * **Settings** 
     * **Story** - explains background story
@@ -33,23 +33,23 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
     * **BackgroundSoundService** - plays music
     * **GameOver**
 
-#### Views
+## Views
 * **SpaceInvadersApp** - game view, handles threading and states
 
-#### States
+## States
 * **State** - enum: WAVE, PAUSE, GAMEOVER
 * **GameState** - interface
     * **WaveState** - spawns enemies
     * **PauseState**
     * **GameOverState**
 
-#### Game Object
+## Game Object
 * **GameObject** - abstract class
     * **HitBox** - instance variable: controls movement and drawing
 * **GameObjectFactory** - creates GameObjects with default values
 * **GameObjectManager** - updates all GameObjects
 
-##### *Game Objects*
+### Game Objects
 * **SimpleCannon** - the player
 * **Alien**
 * **AlienProj** - alien projectile
@@ -57,18 +57,18 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 * **BarrierBlock** - single block in a Barrier
 * **UFO**
 
-##### *Game Object Containers*
+### *Game Object Containers*
 * **AlienArmy** - controls Aliens
 * **Barrier** - sets BarrierBlocks
 * **Barriers** - sets multiple Barrier objects
 * **UFOSpawner**
 
-#### Misc
+## Misc
 * **SoundEngine** - plays sound effects
 * **GameUI** - draws score, lives, ammo
 * **Counter** - counts seconds by decrementing frames
     * **AutomaticCounter** - counts without being triggered
-
+---
 ## Sprint 1
 [Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Sprint_Storyboard.png)  
 [CRC Cards](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/CRC_Cards.png)   
