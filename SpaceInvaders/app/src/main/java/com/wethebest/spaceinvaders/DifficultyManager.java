@@ -17,8 +17,6 @@ public class DifficultyManager {
     }
 
     public void increaseGameDifficulty() {
-        Random alienRand = new Random();
-
         for(int i = 0; i < NUMALIENBUFFS; ++i) {
             increaseRandomAlienStat();
         }
@@ -60,7 +58,7 @@ public class DifficultyManager {
             case 1:
                 increasePlayerMaxAmmo();
             case 2:
-                increasePlayerMaxAmmo();
+                increasePlayerAmmoRegenRate();
         }
     }
 

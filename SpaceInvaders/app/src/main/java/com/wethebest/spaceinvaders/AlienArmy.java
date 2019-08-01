@@ -162,4 +162,8 @@ public class AlienArmy {
     public void increaseNumAliens(int numNewAliens) {
         numAliens += numNewAliens;
     }
+
+    public void spawnNewWave() {
+        createAliens();
+    }
 }
