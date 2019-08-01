@@ -1,19 +1,24 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 
 /*
-    This state represents the core game play where the player shoots down an advancing wave of
+    WaveState represents the core game play where the player shoots down an advancing wave of
     aliens
+    Default state in SpaceInvadersApp
+    PauseState changes to WaveState when game is unpaused
  */
 public class WaveState implements GameState {
     private long mFPS;
     private SpaceInvadersApp mApp;
+    private Paint mPaint;
 
     public WaveState(SpaceInvadersApp app) {
         mApp = app;
         mApp.score = 0;
-        app.mGameObjectManager = new GameObjectManager(app);
+        //app.mGameObjectManager = new GameObjectManager(app);
+        mApp.mPaint = mPaint;
     }
 
     @Override
@@ -60,10 +65,15 @@ public class WaveState implements GameState {
             mApp.mGameUI.draw(mApp.mCanvas);
 
             mApp.mOurHolder.unlockCanvasAndPost(mApp.mCanvas);
+
+//            mApp.mCanvas.drawText("FPS=" + mFPS, 10f, 150f, mPaint);
+
         }
     }
 
     private boolean isGameOver(SpaceInvadersApp app) {
         return app.mGameObjectManager.mPlayer.lives == 0;
     }
+
+
 }

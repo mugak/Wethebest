@@ -20,6 +20,11 @@ import android.view.KeyEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/*
+Intro is the main activity
+Buttons go to SpaceInvaders or Story
+Options menu goes to Settings, SpaceInvaders, or Intro
+ */
 
 public class Intro extends AppCompatActivity {
 

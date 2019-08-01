@@ -3,6 +3,11 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.PointF;
 
+/*
+UFOSpawner instantiates UFO randomly, adding it to GameObjects in GameObjectManager
+Updated in GameObjectManager
+ */
+
 public class UFOSpawner {
     private final PointF SHOOT_INTERVAL = new PointF(20, 30); // every x-y seconds
     private Counter spawnUFO;

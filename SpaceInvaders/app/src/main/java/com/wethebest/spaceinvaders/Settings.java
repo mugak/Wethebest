@@ -21,9 +21,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.media.AudioManager;
 
-
-
-
+/*
+Settings has buttons that control the volume
+Options menu goes to Settings, SpaceInvaders, or Intro
+ */
 public class Settings extends AppCompatActivity {
 
     @Override

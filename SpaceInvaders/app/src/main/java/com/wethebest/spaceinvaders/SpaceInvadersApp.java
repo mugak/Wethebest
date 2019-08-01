@@ -1,32 +1,30 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.PointF;
-import android.graphics.RectF;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Random;
 
 /*
-    SpaceInvadersApp starts the game and handles the game states
+    SpaceInvadersApp is the view for the SpaceInvaders activity
+    It starts the game, handles the threading, and controls the game states
     It also handles touch events
     Set in SpaceInvaders
  */
 class SpaceInvadersApp extends SurfaceView implements Runnable {
-
+    public final boolean debugging = true;
     public SurfaceHolder mOurHolder;
     public Canvas mCanvas;
     public Point mScreenSize;
     public Context context;
+    public Paint mPaint;
 
     private Thread mGameThread = null;
 
@@ -60,6 +58,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         mGameObjectManager = new GameObjectManager(this);
         mGameState = new WaveState(this);
         mGameState.changeState(this, State.WAVE);
+
+        mCanvas = new Canvas();
+        mPaint = new Paint();//For printing debugging
+
     }
 
     public void setState(GameState newGameState) {
@@ -105,6 +107,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     @Override
     public void run() {
         while(mPlaying) {
+
             long frameStartTime = System.currentTimeMillis();
 
             mGameState.run(this);
@@ -117,11 +120,14 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 fps = MILLIS_IN_SECOND / timeThisFrame;
                 //Log.d("FRAMES", Long.toString(fps));
             }
+
         }
     }
+
 
     public SimpleCannon getPlayer() {
         return mGameObjectManager.mPlayer;
     }
+
 }
 
