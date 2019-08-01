@@ -10,7 +10,7 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 * Muga Kim
 * Sach Samala
 
-[Design Document](https://github.com/ecs160ss12019/Wethebest/blob/master/DesignDocument.md)  
+![Design Document](https://github.com/ecs160ss12019/Wethebest/blob/master/DesignDocument.md)  
 
 ## Sprint 1
 [Sprint Storyboard](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint1/Sprint_Storyboard.png)  
