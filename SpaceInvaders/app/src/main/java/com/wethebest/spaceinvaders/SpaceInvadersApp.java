@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Point;
 import android.content.Context;
 import android.util.Log;
@@ -16,11 +17,12 @@ import java.util.Random;
     Set in SpaceInvaders
  */
 class SpaceInvadersApp extends SurfaceView implements Runnable {
-
+    public final boolean debugging = true;
     public SurfaceHolder mOurHolder;
     public Canvas mCanvas;
     public Point mScreenSize;
     public Context context;
+    public Paint mPaint;
 
     private Thread mGameThread = null;
 
@@ -112,7 +114,20 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 fps = MILLIS_IN_SECOND / timeThisFrame;
                 //Log.d("FRAMES", Long.toString(fps));
             }
+
+            if(debugging){
+                printDebugText();
+                }
+            }
         }
+
+    public void printDebugText(){
+            // Hold a value that is half that of the member variable mFontSize
+            int textSize = mScreenSize.y/6;
+//            // A guess at a good position vertically to start printing the debugging text
+            mPaint.setTextSize(textSize);
+//            mCanvas.drawText("FPS=" + fps, 15,mScreenSize.y/2 + textSize, mPaint);
+
     }
 
     public SimpleCannon getPlayer() {
