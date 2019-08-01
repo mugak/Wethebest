@@ -119,6 +119,8 @@ public class GameObjectManager {
         }
     }
 
-
+    public boolean allAliensDefeated() {
+        return mAlienArmy.aliens.isEmpty();
+    }
 
 }

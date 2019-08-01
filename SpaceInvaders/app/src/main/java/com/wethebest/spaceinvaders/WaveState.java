@@ -52,6 +52,10 @@ public class WaveState implements GameState {
 
         if (isGameOver(app)) {
             changeState(app, State.WAVE);
+        } else if (isWaveDefeated(app)) {
+            app.upgrade_aliens();
+            app.upgrade_player();
+            changeState(app, State.WAVE);
         }
     }
 
@@ -75,5 +79,7 @@ public class WaveState implements GameState {
         return app.mGameObjectManager.mPlayer.lives == 0;
     }
 
-
+    private boolean isWaveDefeated(SpaceInvadersApp app) {
+        return app.mGameObjectManager.allAliensDefeated();
+    }
 }
