@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
+import com.wethebest.spaceinvaders.BackgroundSoundService;
 
 
 
@@ -33,6 +35,7 @@ public class Intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        new BackgroundSoundService();
 
         Button Storybtn = findViewById(R.id.Story_btn);
         Button Playbtn = findViewById(R.id.Play_btn);
@@ -108,4 +111,7 @@ public class Intro extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
+
 }
