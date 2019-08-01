@@ -29,8 +29,8 @@ public class GameUI {
         this.app = app;
 
         mScore = 0;
-        mLives = SimpleCannon.MAX_LIVES;
-        mAmmo = SimpleCannon.MAX_AMMO;
+        mLives = app.getPlayer().MAX_LIVES;
+        mAmmo = app.getPlayer().maxAmmo;
         mPaint = new Paint();
         mRect = new RectF();
         Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");

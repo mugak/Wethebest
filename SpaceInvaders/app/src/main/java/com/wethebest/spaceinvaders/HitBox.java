@@ -21,6 +21,7 @@ public class HitBox {
     private Bitmap mBitmap;
 
     public float velocity;
+    //speed is absolute value of velocity
     public float speed;
 
     private HitBox(Builder builder) {

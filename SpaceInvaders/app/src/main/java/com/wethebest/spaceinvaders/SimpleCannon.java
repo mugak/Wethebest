@@ -1,8 +1,6 @@
 package com.wethebest.spaceinvaders;
 
-import android.graphics.Canvas;
 import android.graphics.PointF;
-import android.util.Log;
 
 /*
 SimpleCannon represents the cannon controlled by the player
@@ -17,10 +15,11 @@ public class SimpleCannon extends GameObject {
     private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
 
     public static final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
-    public static final float FIRING_RATE = .1f; //how frequently the player can shoot
-    public static final float AMMO_REGEN_RATE = 1f; //how frequently ammo regenerates
-    public static final int MAX_AMMO = 5; //total projectiles the player can shoot
     public static final int MAX_LIVES = 3;
+
+    public float firingRate = .1f; //how frequently the player can shoot
+    public float ammoRegenRate = 1f; //how frequently ammo regenerates
+    public int maxAmmo = 5; //total projectiles the player can shoot
 
     public int lives;
     public int ammo;
@@ -39,11 +38,11 @@ public class SimpleCannon extends GameObject {
         super(app, size, spriteID, position, velocity);
 
         lives = MAX_LIVES;
-        ammo = MAX_AMMO;
+        ammo = maxAmmo;
 
-        waitToShoot = new Counter(FIRING_RATE);
+        waitToShoot = new Counter(firingRate);
         invincible = new Counter(INVINCIBLE_SECONDS);
-        waitForAmmo = new AutomaticCounter(AMMO_REGEN_RATE);
+        waitForAmmo = new AutomaticCounter(ammoRegenRate);
     }
 
     public void update(long fps) {
@@ -115,8 +114,8 @@ public class SimpleCannon extends GameObject {
 
         if(waitForAmmo.run(fps)) {
             ammo += 1;
-            if(ammo >= MAX_AMMO) {
-                ammo = MAX_AMMO;
+            if(ammo >= maxAmmo) {
+                ammo = maxAmmo;
             }
         }
     }

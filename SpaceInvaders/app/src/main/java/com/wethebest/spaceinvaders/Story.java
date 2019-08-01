@@ -116,7 +116,9 @@ public class Story extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 
-            startActivity(new Intent(Story.this, Story.class));
+            Intent intent=new Intent(Story.this,Intro.class);
+            startActivityForResult(intent,0);
+            overridePendingTransition( R.anim.trans_right_in, R.anim.trans_right_out );
 
         }
         return super.onKeyDown(keyCode, event);

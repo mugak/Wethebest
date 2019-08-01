@@ -16,11 +16,11 @@ Instantiated in GameObjectManager
 
 public class AlienArmy {
     //DEFAULTS
-    private final int NUM_ALIENS = 12;
+    public int numAliens = 12;
 
     //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
-    private final Point DIMENSIONS = new Point(NUM_ALIENS/4 + NUM_ALIENS % 4,
-                                                NUM_ALIENS/4 );
+    private final Point DIMENSIONS = new Point(numAliens/4 + numAliens % 4,
+                                                numAliens/4 );
     //SET BASED ON SCREEN SIZE
     private final float ROW_SPACING;
     private final float COL_SPACING;
@@ -29,6 +29,9 @@ public class AlienArmy {
     private SpaceInvadersApp app;
     public List<Alien> aliens = new LinkedList<Alien>();
     private boolean reverseNow = false;
+
+    // Initial speed of the wave
+    private float waveSpeed;
 
     AlienArmy(SpaceInvadersApp app) {
         this.app = app;
@@ -45,7 +48,7 @@ public class AlienArmy {
         //First get the size of an alien
         GameObject tempAlien = GameObjectFactory.getGameObject("Alien");
         PointF size = new PointF(tempAlien.getHitBox().width(), tempAlien.getHitBox().height());
-        int numAliensToAdd = NUM_ALIENS;
+        int numAliensToAdd = numAliens;
 
         for(int i = 0; i < DIMENSIONS.x; i++) {
             for(int j = 0; j < DIMENSIONS.y; j++) {
@@ -66,13 +69,11 @@ public class AlienArmy {
     public void update(long fps) {
         for(Alien alien : aliens) {
             alien.update(fps);
-            alien.setShootInterval((float)aliens.size()/NUM_ALIENS);
+            alien.setShootInterval((float)aliens.size()/numAliens);
             if(alien.outOfBounds()) {
                 reverseNow = true;
             }
         }
-
-
 
         reverse();
         increaseSpeed();
@@ -88,17 +89,23 @@ public class AlienArmy {
         reverseNow = false;
     }
 
+    public void increaseInitialSpeed(float multiplier) {
+        for(Alien alien : aliens) {
+            alien.speedUp(multiplier);
+        }
+    }
+
     //Calculates speed based on exponential growth: y(t) = a × e^(kt)
     //a = Alien BASE_SPEED
     //k = rate of growth
     //t = time (number of aliens killed)
     //y(t) = new speed at the given time
     private void increaseSpeed() {
-        int aliensKilled =  NUM_ALIENS - aliens.size(); //number of max aliens - number of current aliens
+        int aliensKilled =  numAliens - aliens.size(); //number of max aliens - number of current aliens
         float multiplier = exponentialGrowth(.15f, aliensKilled); //tweak rateOfGrowth based on game feel
 
         for(Alien alien : aliens) {
-            alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in HitBoxs
+            alien.speedUp(multiplier); //sets SPEED aka y(t) by BASE_SPEED * multiplier in HitBoxes
         }
     }
 
@@ -146,4 +153,17 @@ public class AlienArmy {
         app.score += 100;
     }
 
+    public void increaseAlienFireRate(float decreaseAmount) {
+        for (Alien alien : aliens) {
+            alien.decreaseBaseShootInterval(decreaseAmount);
+        }
+    }
+
+    public void increaseNumAliens(int numNewAliens) {
+        numAliens += numNewAliens;
+    }
+
+    public void spawnNewWave() {
+        createAliens();
+    }
 }

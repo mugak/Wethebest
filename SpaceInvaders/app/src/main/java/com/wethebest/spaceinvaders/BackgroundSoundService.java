@@ -4,9 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.media.MediaPlayer;
-
-
 import androidx.appcompat.app.AppCompatActivity;
+
 /*
 BackgroundSoundService plays the music using MediaPlayer
  */
@@ -17,13 +16,13 @@ public class BackgroundSoundService extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_intro);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-       // mMediaPlayer = MediaPlayer.create(this,R.raw.raw_theme);  //add music file .m4a or mp3
+        mMediaPlayer = MediaPlayer.create(this,R.raw.example);  //add music file .m4a or mp3
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
     }

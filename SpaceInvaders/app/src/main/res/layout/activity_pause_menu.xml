@@ -6,41 +6,29 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#D0EEFD"
-    tools:context=".Intro">
+    tools:context=".PauseMenu">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignWithParentIfMissing="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="false"
-        android:layout_centerHorizontal="true"
-        android:text="WarnMe: Seagulls"
-        android:textColor="#F44336"
-        android:textSize="45sp" />
 
 
     <Button
-        android:id="@+id/Play_btn"
+        android:id="@+id/resume_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:background="#F44336"
-        android:text="Play Now"
+        android:text="RESUME"
         android:textColor="#CDE8FA" />
 
     <Button
-        android:id="@+id/Story_btn"
+        android:id="@+id/End_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Play_btn"
+        android:layout_alignBottom="@+id/resume_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-70dp"
+        android:layout_marginBottom="-200dp"
         android:background="#F44336"
-        android:text="Story Mode"
+        android:text="End Game"
         android:textColor="#CDE8FA" />
 
 

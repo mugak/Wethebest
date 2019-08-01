@@ -10,15 +10,11 @@ import android.graphics.Paint;
     PauseState changes to WaveState when game is unpaused
  */
 public class WaveState implements GameState {
-    private long mFPS;
     private SpaceInvadersApp mApp;
-    private Paint mPaint;
 
     public WaveState(SpaceInvadersApp app) {
         mApp = app;
         mApp.score = 0;
-        //app.mGameObjectManager = new GameObjectManager(app);
-        mApp.mPaint = mPaint;
     }
 
     @Override
@@ -52,6 +48,10 @@ public class WaveState implements GameState {
 
         if (isGameOver(app)) {
             changeState(app, State.WAVE);
+        } else if (isWaveDefeated(app)) {
+            app.mGameObjectManager.mAlienArmy.spawnNewWave();
+            app.difficultyManager.increaseGameDifficulty();
+            changeState(app, State.WAVE);
         }
     }
 
@@ -75,5 +75,7 @@ public class WaveState implements GameState {
         return app.mGameObjectManager.mPlayer.lives == 0;
     }
 
-
+    private boolean isWaveDefeated(SpaceInvadersApp app) {
+        return app.mGameObjectManager.allAliensDefeated();
+    }
 }
