@@ -11,9 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".PauseMenu"></activity>
         <activity android:name=".Story" />
-        <activity android:name=".Settings" />
-        <activity android:name=".GameOver" />
-        <activity android:name=".UI" />
+        <activity android:name=".GameOver" android:screenOrientation="landscape"  />
         <activity android:name=".SpaceInvaders"/>
         <activity android:name=".Intro">
             <intent-filter>

@@ -43,7 +43,6 @@
         android:textColor="#CDE8FA" />
 
 
-
     <EditText
         android:id="@+id/ParentLayout"
         android:layout_width="match_parent"

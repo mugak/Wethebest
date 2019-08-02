@@ -17,10 +17,10 @@
         android:layout_alignBottom="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-50dp"
-        android:background="#E91E63"
+        android:background="#F44336"
         android:text="00000"
-        android:textColor="#FFFFFFFF"
-        android:textSize="36sp"
+        android:textColor="#CDE8FA"
+        android:textSize="30sp"
         android:visibility="visible" />
 
     <TextView
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-340dp"
+        android:layout_marginBottom="-220dp"
         android:background="#F44336"
         android:text="Start Over"
         android:textColor="#CDE8FA" />
