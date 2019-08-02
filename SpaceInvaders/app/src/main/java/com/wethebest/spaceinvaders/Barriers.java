@@ -22,7 +22,7 @@ public class Barriers {
     }
 
     //Creates NUM_BARRIERS ammount of barriers center within the game screen
-    private void createBarriers() {
+    public void createBarriers() {
         for (int i = 1; i < NUM_BARRIERS + 1; i++) {
             Barrier barrier = new Barrier(app);
             PointF barrierCenterPosition = new PointF(app.mScreenSize.x/4 * i ,app.mScreenSize.y * 4 / 5);

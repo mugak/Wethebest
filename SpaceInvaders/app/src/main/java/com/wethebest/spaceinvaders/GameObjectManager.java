@@ -135,4 +135,18 @@ public class GameObjectManager {
         return mAlienArmy.aliens.isEmpty();
     }
 
+    private void removeBarriers(){
+        for(GameObject gameObject : gameObjects){
+            if(gameObject instanceof BarrierBlock){
+                gameObject.isActive = false;
+            }
+        }
+    }
+
+    public void resetBarriers(){
+        removeBarriers();
+        mBarriers.createBarriers();
+        gameObjects.addAll(mBarriers.getBarrierBlocks());
+    }
+
 }

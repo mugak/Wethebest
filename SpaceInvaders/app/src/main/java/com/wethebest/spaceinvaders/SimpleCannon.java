@@ -87,7 +87,6 @@ public class SimpleCannon extends GameObject {
 
                 if (lives == 0) {
                     app.isGameOver = true;
-
                     app.context.startActivity(new Intent(app.context, GameOver.class));
 
 
@@ -149,5 +148,9 @@ public class SimpleCannon extends GameObject {
         ammoRegenRate /= multiplier;
         if(ammoRegenRate < HIGHEST_REGEN_RATE) { ammoRegenRate = HIGHEST_REGEN_RATE; }
         waitForAmmo.setSeconds(ammoRegenRate);
+    }
+
+    public void resetAmmo(){
+        ammo = maxAmmo;
     }
 }
