@@ -7,10 +7,10 @@ public class DifficultyManager {
 
     private final float ALIENSPEEDMULTIPLIER = 1.2f;
     private final float ALIENFIRERATEINCREASE = 2f;
-    private final int NUMALIENINCREASE = 3;
+    private final int NUMALIENINCREASE = 1;
 
-    private final float PLAYERFIRERATEINCREASE = 1.5f;
-    private final float PLAYERAMMOREGENRATEINCREASE = 1.5f;
+    private final float PLAYERFIRERATEINCREASE = 1.3f;
+    private final float PLAYERAMMOREGENRATEINCREASE = 1.2f;
 
     private final int NUMALIENBUFFS = 2;
     private final int NUMPLAYERBUFFS = 3;
@@ -35,36 +35,41 @@ public class DifficultyManager {
         Random rand = new Random();
 
         int stat = rand.nextInt(3);
+        increaseWaveSpeed();
+        increaseAlienFireRate();
+        increaseAlienArmySize();
 
-        switch(stat) {
-            case 0:
-                increaseWaveSpeed();
-                break;
-            case 1:
-                increaseAlienFireRate();
-                break;
-            case 2:
-                increaseAlienArmySize();
-                break;
-        }
+//        switch(stat) {
+//            case 0:
+//                increaseWaveSpeed();
+//                break;
+//            case 1:
+//                increaseAlienFireRate();
+//                break;
+//            case 2:
+//                increaseAlienArmySize();
+//                break;
+//        }
     }
 
     //Gives the player a random stat upgrade
     public void increaseRandomPlayerBuff() {
         Random rand = new Random();
         int stat = rand.nextInt(3);
-
-        switch (stat) {
-            case 0:
-                increasePlayerFireRate();
-                break;
-            case 1:
-                increasePlayerMaxAmmo();
-                break;
-            case 2:
-                increasePlayerAmmoRegenRate();
-                break;
-        }
+        increasePlayerFireRate();
+        increasePlayerMaxAmmo();
+        increasePlayerAmmoRegenRate();
+//        switch (stat) {
+//            case 0:
+//                increasePlayerFireRate();
+//                break;
+//            case 1:
+//                increasePlayerMaxAmmo();
+//                break;
+//            case 2:
+//                increasePlayerAmmoRegenRate();
+//                break;
+//        }
     }
 
     //Increases the initial wave speed of an alien in subsequent waves

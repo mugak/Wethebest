@@ -16,7 +16,8 @@ Instantiated in GameObjectManager
 
 public class AlienArmy {
     //DEFAULTS
-    public int numAliens = 6;
+    private final int MAX_NUM_ALIENS = 24;
+    public int numAliens = 3;
 
     //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
     private Point DIMENSIONS = new Point(numAliens/3 + numAliens % 3, 3 );
@@ -24,6 +25,7 @@ public class AlienArmy {
     private final float ROW_SPACING;
     private final float COL_SPACING;
     private final PointF STARTING_POSITION; //top left corner of first alien
+
 
     private SpaceInvadersApp app;
     public List<Alien> aliens = new LinkedList<Alien>();
@@ -173,7 +175,9 @@ public class AlienArmy {
         Saves the new number of aliens and recreates the wave with more aliens
      */
     public void increaseNumAliens(int numNewAliens) {
+
         numAliens += numNewAliens;
+        if(numAliens > MAX_NUM_ALIENS){numAliens = MAX_NUM_ALIENS;}
         aliens.clear();
         resetDimensions();
         createAliens();
