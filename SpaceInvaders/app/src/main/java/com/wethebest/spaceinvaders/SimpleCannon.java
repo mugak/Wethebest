@@ -66,8 +66,8 @@ public class SimpleCannon extends GameObject {
             app.soundEngine.playerHit();
             playHit = false;
         }
+        app.soundEngine.engineHum(Math.abs(((SpaceInvaders) app.context).yAcceleration) + 1); //modulate engine rate based on screen tilt
 
-        app.soundEngine.engineHum(Math.abs(((SpaceInvaders)app.context).yAcceleration)  + 3); //modulate engine rate based on screen tilt
     }
 
     public void collide(GameObject gameObject) {
