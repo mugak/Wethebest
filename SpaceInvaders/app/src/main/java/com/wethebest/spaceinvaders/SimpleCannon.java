@@ -27,7 +27,7 @@ public class SimpleCannon extends GameObject {
     private float firingRate =  1.5f; //how frequently the player can shoot
     private float ammoRegenRate = 3f; //how frequently ammo regenerates
 
-    public int maxAmmo = 2; //total projectiles the player can shoot
+    public int maxAmmo = 1; //total projectiles the player can shoot
 
     public int lives;
     public int ammo;

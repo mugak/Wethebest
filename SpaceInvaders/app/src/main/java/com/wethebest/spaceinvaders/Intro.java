@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ Buttons go to SpaceInvaders or Story
 Options menu goes to Settings, SpaceInvaders, or Intro
  */
 
-public class Intro extends AppCompatActivity {
+public class Intro extends Activity {// {AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,30 +65,30 @@ public class Intro extends AppCompatActivity {
     }
 
 
-    //main menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    //items in the menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        if(item.getItemId() == R.id.action_startover) {
-            startActivity(new Intent(Intro.this, SpaceInvaders.class));
-
-        }
-        if(item.getItemId() == R.id.action_newgame) {
-            startActivity(new Intent(Intro.this, Intro.class));
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    //main menu
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    //items in the menu
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//
+//        if(item.getItemId() == R.id.action_startover) {
+//            startActivity(new Intent(Intro.this, SpaceInvaders.class));
+//
+//        }
+//        if(item.getItemId() == R.id.action_newgame) {
+//            startActivity(new Intent(Intro.this, Intro.class));
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     //back button forces to go to intro activity and stops app from crashing
     @Override

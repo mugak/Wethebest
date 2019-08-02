@@ -2,6 +2,10 @@ package com.wethebest.spaceinvaders;
 
 import java.util.Random;
 
+/*gives player and aliens stat increases after each wave
+* currently not random
+*/
+
 public class DifficultyManager {
     private GameObjectManager mGameObjectManager;
 
