@@ -51,8 +51,8 @@
         android:id="@+id/gameover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
         android:contentDescription="TODO"
+        android:visibility="invisible"
         app:srcCompat="@drawable/game_over" />
 
     <Button

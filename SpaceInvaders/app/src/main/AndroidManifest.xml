@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PauseMenu"></activity>
-        <activity android:name=".Story" />
+        <activity android:name=".PauseMenu" android:screenOrientation="landscape" ></activity>
+        <activity android:name=".Story" android:screenOrientation="landscape" />
         <activity android:name=".GameOver" android:screenOrientation="landscape"  />
-        <activity android:name=".SpaceInvaders"/>
-        <activity android:name=".Intro">
+        <activity android:name=".SpaceInvaders" android:screenOrientation="landscape" />
+        <activity android:name=".Intro" android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
