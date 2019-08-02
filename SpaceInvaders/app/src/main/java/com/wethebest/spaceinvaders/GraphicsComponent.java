@@ -9,10 +9,9 @@ import android.graphics.PointF;
 
 public interface GraphicsComponent {
 
-    void initialize(Context c, GameObject object,
+    void initialize(Context c, GameObjectSpec spec,
                     PointF size);
 
     // Updated to take a reference to a Camera
-    void draw(Canvas canvas, Paint paint,
-              Transform t);
+    void draw(Canvas canvas, Transform t);
 }

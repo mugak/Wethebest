@@ -3,6 +3,8 @@ package com.wethebest.spaceinvaders;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Paint;
+import android.content.Context;
 
 /*
 GameObject is extended by SimpleCannon, Alien, BarrierBlock, AlienProj, PlayerProj, and UFO
@@ -13,6 +15,15 @@ Created by GameObjectFactory
 
 
 public abstract class GameObject {
+
+    // part of Entity-Component pattern, holds data
+    // & handles GameObject operations
+    private Transform mTransform;
+    private GraphicsComponent mGraphicsComponent;
+    private UpdateComponent mUpdateComponent;
+
+    private GameObjectType mType;
+
     private final int SPRITE_ID;
     private final PointF SIZE;
     private final PointF POSITION;
@@ -34,16 +45,56 @@ public abstract class GameObject {
         mHitBox = new HitBox.Builder(app, SIZE).withSprite(SPRITE_ID).withPosition(POSITION).withVelocity(VELOCITY).build();
     }
 
-    public abstract void update(long fps);
+    //public abstract void update(long fps);
 
     public abstract void playAudio();
 
     public abstract void collide(GameObject gameobject);
 
+    void setGraphics(GraphicsComponent g, Context c,
+                     GameObjectSpec spec,
+                     PointF size) {
 
-    public void display(Canvas canvas) { mHitBox.display(canvas); };
+        mGraphicsComponent = g;
+        g.initialize(c, spec, size);
+    }
 
-    public RectF getHitBox() { return mHitBox.getHitBox(); }
+    void setMovement(UpdateComponent m) {
+        mUpdateComponent = m;
+    }
+
+    void setTransform(Transform t) {
+        mTransform = t;
+    }
+
+    void display(Canvas canvas) {
+        mGraphicsComponent.draw(canvas, mTransform);
+    }
+
+    void update(long fps) {
+        mUpdateComponent.update(fps, mTransform);
+    }
+
+    String getType() {
+        return mType.toString();
+    }
+
+    void setInactive() {
+        isActive = false;
+    }
+
+    Transform getTransform() {
+        return mTransform;
+    }
+
+    void setType(GameObjectType type) {
+        mType = type;
+    }
+
+
+    //public void display(Canvas canvas) { mHitBox.display(canvas); };
+
+    //public RectF getHitBox() { return mHitBox.getHitBox(); }
 
     public void reset() { }
 
@@ -55,77 +106,3 @@ public abstract class GameObject {
         return isActive;
     }
 }
-
-/*
-“class GameObject {
-
-    private Transform mTransform;
-
-
-    private boolean mActive = true;
-    private String mTag;
-
-    private GraphicsComponent mGraphicsComponent;
-    private UpdateComponent mUpdateComponent;
-
-
-    void setGraphics(GraphicsComponent g,
-                          Context c,
-                          GameObjectSpec spec,
-                          PointF objectSize,
-                          int pixelsPerMetre) {
-
-       mGraphicsComponent = g;
-       g.initialize(c, spec, objectSize, pixelsPerMetre);
-    }
-
-    void setMovement(UpdateComponent m) {
-       mUpdateComponent = m;
-    }
-
-
-    void setPlayerInputTransform(PlayerInputComponent s) {
-       s.setTransform(mTransform);
-    }
-
-
-    void setTransform(Transform t) {
-        mTransform = t;
-    }
-
-    void draw(Canvas canvas, Paint paint, Camera cam) {
-   mGraphicsComponent.draw(canvas,
-               paint,
-               mTransform, cam);
-    }
-
-    void update(long fps, Transform playerTransform) {
-       mUpdateComponent.update(fps,
-                   mTransform,
-                   playerTransform);
-    }
-
-    boolean checkActive() {
-       return mActive;
-    }
-
-    String getTag() {
-       return mTag;
-    }
-
-    void setInactive() {
-       mActive = false;
-    }
-
-    Transform getTransform() {
-       return mTransform;
-    }
-
-    void setTag(String tag) {
-       mTag = tag;
-    }
- }
-
-
-
-    */

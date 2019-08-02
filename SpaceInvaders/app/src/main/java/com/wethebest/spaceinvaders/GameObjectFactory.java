@@ -63,7 +63,5 @@ public class GameObjectFactory {
             return new UFO(app, size, spriteID, position, velocity);
         }
         return null;
-
-
     }
 }
