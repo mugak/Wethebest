@@ -31,7 +31,7 @@ public abstract class GameObject {
     protected final float SPEED;
 
     protected SpaceInvadersApp app;
-    protected HitBox mHitBox;
+//    protected HitBox mHitBox;
 
     public boolean isActive = true;
 
@@ -42,7 +42,7 @@ public abstract class GameObject {
         this.POSITION = position;
         this.VELOCITY = velocity;
         this.SPEED = Math.abs(velocity);
-        mHitBox = new HitBox.Builder(app, SIZE).withSprite(SPRITE_ID).withPosition(POSITION).withVelocity(VELOCITY).build();
+       // mHitBox = new HitBox.Builder(app, SIZE).withSprite(SPRITE_ID).withPosition(POSITION).withVelocity(VELOCITY).build();
     }
 
     //public abstract void update(long fps);
@@ -98,9 +98,9 @@ public abstract class GameObject {
 
     public void reset() { }
 
-    public void setPosition(PointF position) { mHitBox.setPosition(position); }
+   // public void setPosition(PointF position) { mHitBox.setPosition(position); }
 
-    public void setVelocity(float velocity) { mHitBox.setVelocity(velocity); }
+  //  public void setVelocity(float velocity) { mHitBox.setVelocity(velocity); }
 
     public boolean isActive(){
         return isActive;
