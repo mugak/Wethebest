@@ -4,5 +4,5 @@ package com.wethebest.spaceinvaders;
 
 
 public interface UpdateComponent {
-    void update(long fps, Transform t, Transform playerTransform);
+    void update(long fps, Transform t);
 }
