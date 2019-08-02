@@ -49,6 +49,8 @@ public class GameObjectFactory {
 
         object.setTransform(new Transform(velocity, size.x,
                 size.y, location));
+
+        return object;
     }
 
     /*

@@ -21,21 +21,23 @@ public /*abstract*/ class GameObject {
     private Transform mTransform;
     private GraphicsComponent mGraphicsComponent;
     private UpdateComponent mUpdateComponent;
+    private MovementComponent mMovementComponent;
+    private SpawnComponent mSpawnComponent;
 
     private GameObjectType mType;
 
-    private final int SPRITE_ID;
+    /*private final int SPRITE_ID;
     private final PointF SIZE;
     private final PointF POSITION;
     protected final float VELOCITY;
-    protected final float SPEED;
+    protected final float SPEED;*/
 
     protected SpaceInvadersApp app;
 //    protected HitBox mHitBox;
 
     public boolean isActive = true;
 
-    GameObject(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+    /*GameObject(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         this.app = app;
         this.SIZE = size;
         this.SPRITE_ID = spriteID;
@@ -43,7 +45,9 @@ public /*abstract*/ class GameObject {
         this.VELOCITY = velocity;
         this.SPEED = Math.abs(velocity);
        // mHitBox = new HitBox.Builder(app, SIZE).withSprite(SPRITE_ID).withPosition(POSITION).withVelocity(VELOCITY).build();
-    }
+    }*/
+
+    public GameObject() {}
 
     //public abstract void update(long fps);
 
@@ -63,6 +67,10 @@ public /*abstract*/ class GameObject {
 
     void setMovement(UpdateComponent m) {
         mUpdateComponent = m;
+    }
+
+    void setSpawner(SpawnComponent s) {
+        mSpawnComponent = s;
     }
 
     void setTransform(Transform t) {
@@ -98,7 +106,7 @@ public /*abstract*/ class GameObject {
 
     //public RectF getHitBox() { return mHitBox.getHitBox(); }
 
-    public void reset() { }
+    //public void reset() { }
 
    // public void setPosition(PointF position) { mHitBox.setPosition(position); }
 
@@ -107,4 +115,16 @@ public /*abstract*/ class GameObject {
     public boolean isActive(){
         return isActive;
     }
+
+    public boolean spawn() {
+        // Only spawnComponent if not already active
+        if (!isActive) {
+            mSpawnComponent.spawn(mTransform);
+            isActive = true;
+            return true;
+        }
+        return false;
+    }
+
+
 }

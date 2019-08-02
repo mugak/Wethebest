@@ -22,10 +22,15 @@ public class Alien extends GameObject {
 
     private boolean movingRight = true; //Current movement direction
 
-    Alien(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+    /*Alien(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
         waitToShoot = new AutomaticCounter(getRandomFloat(shootInterval));
+    }*/
+
+    public Alien() {
+        super();
     }
+
 
     public void update(long fps) {
         if(movingRight) {
@@ -116,5 +121,21 @@ public class Alien extends GameObject {
         } else {
             baseShootInterval.y = 1;
         }
+    }
+}
+
+public class AlienSpec extends GameObjectSpec {
+    private static final GameObjectType mType = GameObjectType.ALIEN;
+    private static final String mBitmapName = "seagull";
+    private static final int mFramesOfAnimation = 2;
+    private static final float mInitSpeed = app.mScreenSize.y / 4;
+    private static final PointF mSize =
+            new PointF(app.mScreenSize.x / 60, app.mScreenSize.x / 60);
+    private static final String[] mComponents =
+            new String [] {"AnimatedGraphicsComponent", "PlayerUpdateComponent"};
+
+    public AlienSpec() {
+        super(mType, mBitmapName, mInitSpeed,
+                mSize, mComponents, mFramesOfAnimation);
     }
 }
