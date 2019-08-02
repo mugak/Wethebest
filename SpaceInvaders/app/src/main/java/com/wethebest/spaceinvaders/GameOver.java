@@ -30,6 +30,19 @@ public class GameOver extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent=new Intent(GameOver.this,SpaceInvaders.class);
+                startActivityForResult(intent,0);
+                overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
+
+            }
+        });
+
+        Button IntroPage = findViewById(R.id.MainMenu_btn);
+
+        StartOver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
                 Intent intent=new Intent(GameOver.this,Intro.class);
                 startActivityForResult(intent,0);
                 overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
@@ -48,19 +61,19 @@ public class GameOver extends AppCompatActivity {
     }
 
     //items in the menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        if(item.getItemId() == R.id.action_startover) {
-            startActivity(new Intent(GameOver.this, SpaceInvaders.class));
-
-        }
-        if(item.getItemId() == R.id.action_newgame) {
-            startActivity(new Intent(GameOver.this, Intro.class));
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+    //@Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//
+//        if(item.getItemId() == R.id.action_startover) {
+//            startActivity(new Intent(GameOver.this, SpaceInvaders.class));
+//
+//        }
+//        if(item.getItemId() == R.id.action_newgame) {
+//            startActivity(new Intent(GameOver.this, Intro.class));
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }
