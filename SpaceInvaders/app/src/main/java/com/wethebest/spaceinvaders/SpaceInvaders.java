@@ -96,6 +96,7 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     protected void onPause() {
         super.onPause();
         mSpaceInvadersApp.pause();
+        startActivity(new Intent(SpaceInvaders.this, PauseMenu.class));
 
         mMediaPlayer.stop(); mMediaPlayer.release();
         super.onPause();
