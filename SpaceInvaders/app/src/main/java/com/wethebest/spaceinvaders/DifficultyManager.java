@@ -29,7 +29,7 @@ public class DifficultyManager {
     public void increaseRandomAlienStat() {
         Random rand = new Random();
 
-        int stat = rand.nextInt(4);
+        int stat = rand.nextInt(3);
 
         switch(stat) {
             case 0:
@@ -40,9 +40,6 @@ public class DifficultyManager {
                 break;
             case 2:
                 increaseAlienArmySize();
-                break;
-            case 3:
-                //do nothing
                 break;
         }
     }

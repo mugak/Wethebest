@@ -36,6 +36,8 @@ public class AlienArmy {
     AlienArmy(SpaceInvadersApp app) {
         this.app = app;
 
+        waveSpeed = GameObjectFactory.getGameObject("alien").SPEED;
+
         ROW_SPACING = 0;
         COL_SPACING = app.mScreenSize.y / 8;
         STARTING_POSITION = new PointF(app.mScreenSize.y / 10, app.mScreenSize.y / 10);
@@ -59,6 +61,7 @@ public class AlienArmy {
 
                 GameObject alien = GameObjectFactory.getGameObject("Alien");
                 alien.setPosition(position);
+                alien.setVelocity(waveSpeed);
                 aliens.add((Alien) alien);
                 numAliensToAdd--;
             }
@@ -90,8 +93,10 @@ public class AlienArmy {
     }
 
     public void increaseInitialSpeed(float multiplier) {
+        waveSpeed *= multiplier;
+
         for(Alien alien : aliens) {
-            alien.speedUp(multiplier);
+            alien.setVelocity(waveSpeed);
         }
     }
 
@@ -134,7 +139,7 @@ public class AlienArmy {
         }
     }
 
-    //Removes killed aliens
+    //Removes killed aliens and alerts app if all aliens defeated
     public void removeInactiveObjects() {
         Iterator<Alien> alienObjectIterator = aliens.iterator();
 
