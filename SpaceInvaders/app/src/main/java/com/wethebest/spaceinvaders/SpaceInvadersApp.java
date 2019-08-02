@@ -61,6 +61,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
         difficultyManager = new DifficultyManager(mGameObjectManager);
 
+        //This value gets updated very quickly, but starting with a zero value causes problems
         fps = 1;
 
         mGameState = new WaveState(this);
@@ -70,6 +71,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
 
     }
 
+    //This class acts the context for the game states
     public void setState(GameState newGameState) {
         if(newGameState != null) {
             mGameState = newGameState;
@@ -130,6 +132,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         }
     }
 
+    //Is called by wave state when the aliens win the game
     public void newGame() {
         score = 0;
 

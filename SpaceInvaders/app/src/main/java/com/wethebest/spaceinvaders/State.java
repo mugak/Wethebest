@@ -6,6 +6,5 @@ Handled in SpaceInvadersApp
  */
 public enum State {
     WAVE,
-    PAUSE,
-    GAMEOVER
+    PAUSE
 }
