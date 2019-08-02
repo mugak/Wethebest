@@ -2,6 +2,8 @@ package com.wethebest.spaceinvaders;
 
 
 import android.graphics.PointF;
+import android.content.Context;
+import android.widget.Space;
 
 /*
 GameObjectFactory handles the constructors for each GameObject
@@ -15,10 +17,41 @@ public class GameObjectFactory {
     private static PointF position;
     private static float velocity;
 
+    private Context mContext;
+    private PointF mScreenSize;
+
 
     GameObjectFactory(){}
 
-    //public static GameObject getGameObject(String objectName) {
+    GameObjectFactory(Context c, PointF screenSize, SpaceInvadersApp app) {
+        this.mContext = c;
+        this.mScreenSize = screenSize;
+        this.app = app;
+    }
+
+    GameObject getGameObject(GameObjectSpec spec) {
+        GameObject object = new GameObject();
+
+        int numComponents = spec.getComponents().length;
+
+        final float HIDDEN = -2000f;
+
+        object.setType(spec.getType());
+
+        // Configure the speed relative to the screen size
+        float speed = mScreenSize.x / spec.getSpeed();
+
+        // Configure the object size relative to screen size
+        size = spec.getSize();
+
+        // Set the location to somewhere off-screen
+        PointF location = new PointF(HIDDEN, HIDDEN);
+
+        object.setTransform(new Transform(velocity, size.x,
+                size.y, location));
+    }
+
+    /*
     public static GameObject getGameObject(GameObjectType objectName) {
         switch(objectName) {
             case ALIEN:
@@ -60,6 +93,5 @@ public class GameObjectFactory {
             default:
                 return null;
         }
-
-    }
+    }*/
 }

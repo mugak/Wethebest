@@ -30,8 +30,8 @@ public abstract class GameObjectSpec {
         return mFramesAnimation;
     }
 
-    public String getType(){
-        return mType.toString();
+    public GameObjectType getType(){
+        return mType;
     }
 
     public String getBitmapName(){

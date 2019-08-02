@@ -14,7 +14,7 @@ Created by GameObjectFactory
  */
 
 
-public abstract class GameObject {
+public /*abstract*/ class GameObject {
 
     // part of Entity-Component pattern, holds data
     // & handles GameObject operations
@@ -47,9 +47,11 @@ public abstract class GameObject {
 
     //public abstract void update(long fps);
 
-    public abstract void playAudio();
+    //public abstract void playAudio();
+    public void playAudio() {}
 
-    public abstract void collide(GameObject gameobject);
+    //public abstract void collide(GameObject gameobject);
+    public void collide(GameObject gameobject){}
 
     void setGraphics(GraphicsComponent g, Context c,
                      GameObjectSpec spec,
@@ -67,8 +69,8 @@ public abstract class GameObject {
         mTransform = t;
     }
 
-    void display(Canvas canvas) {
-        mGraphicsComponent.draw(canvas, mTransform);
+    void display(Canvas canvas, Paint paint) {
+        mGraphicsComponent.draw(canvas, mTransform, paint);
     }
 
     void update(long fps) {
