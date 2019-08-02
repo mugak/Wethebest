@@ -21,7 +21,6 @@ public /*abstract*/ class GameObject {
     private Transform mTransform;
     private GraphicsComponent mGraphicsComponent;
     private UpdateComponent mUpdateComponent;
-    private MovementComponent mMovementComponent;
     private SpawnComponent mSpawnComponent;
 
     private GameObjectType mType;
