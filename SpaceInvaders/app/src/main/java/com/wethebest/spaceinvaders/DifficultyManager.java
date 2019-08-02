@@ -52,8 +52,8 @@ public class DifficultyManager {
     //Gives the player a random stat upgrade
     public void increaseRandomPlayerBuff() {
         Random rand = new Random();
-
-        int stat = rand.nextInt(3);
+int stat = 0;
+       // int stat = rand.nextInt(3);
 
         switch (stat) {
             case 0:
