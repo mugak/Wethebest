@@ -3,6 +3,7 @@ package com.wethebest.spaceinvaders;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -33,8 +34,6 @@ public class Story extends AppCompatActivity {
         final ImageView Seagullpoop = findViewById(R.id.imageView4);
         final ImageView usermessage = findViewById(R.id.imageView6);
 
-
-
         Nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,10 +46,8 @@ public class Story extends AppCompatActivity {
                 Seagullpoop.setVisibility(ImageView.VISIBLE);
                 usermessage.setVisibility(ImageView.VISIBLE);
 
-
             }
         });
-
 
         //goes to next activity once name is entered
         EnterName.setOnKeyListener(new View.OnKeyListener()
@@ -77,11 +74,7 @@ public class Story extends AppCompatActivity {
             }
         });
 
-
-
-
     }
-
 
     //main menu
     @Override
@@ -120,4 +113,19 @@ public class Story extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+    
+    private MediaPlayer mMediaPlayer;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMediaPlayer = MediaPlayer.create(this,R.raw.example);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
+    }
+    @Override
+    protected void onPause() {
+        mMediaPlayer.stop(); mMediaPlayer.release();
+        super.onPause();
+    }
+
 }
