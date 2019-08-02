@@ -33,6 +33,29 @@ public class PauseMenu extends AppCompatActivity {
             }
         });
 
+        StartOverbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(PauseMenu.this,SpaceInvaders.class);
+                startActivityForResult(intent,0);
+                overridePendingTransition( R.anim.trans_right_in, R.anim.trans_right_out );
+
+            }
+        });
+
+        EndGamebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(PauseMenu.this,Intro.class);
+                startActivityForResult(intent,0);
+                overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
+
+            }
+        });
+
+
 
 
 
