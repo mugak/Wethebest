@@ -118,12 +118,12 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
 
-           // Intent intent=new Intent(SpaceInvaders.this,Intro.class);
-           // startActivityForResult(intent,0);
-           // overridePendingTransition( R.anim.trans_right_in, R.anim.trans_right_out );
+            Intent intent=new Intent(SpaceInvaders.this,Intro.class);
+            startActivityForResult(intent,0);
+            overridePendingTransition( R.anim.trans_right_in, R.anim.trans_right_out );
 
-            mSpaceInvadersApp.pause();
-            startActivity(new Intent(SpaceInvaders.this, PauseMenu.class));
+            //mSpaceInvadersApp.pause();
+           // startActivity(new Intent(SpaceInvaders.this, PauseMenu.class));
         }
         return super.onKeyDown(keyCode, event);
     }
