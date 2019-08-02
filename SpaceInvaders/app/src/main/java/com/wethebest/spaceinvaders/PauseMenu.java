@@ -22,6 +22,7 @@ public class PauseMenu extends AppCompatActivity {
         Button StartOverbtn = findViewById(R.id.StartOver_btn);
         Button EndGamebtn = findViewById(R.id.End_btn);
 
+        //Resume button goes to back to game without restarting activity
         Resumebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +34,7 @@ public class PauseMenu extends AppCompatActivity {
             }
         });
 
+        //Goes to Game, but restarts
         StartOverbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +46,7 @@ public class PauseMenu extends AppCompatActivity {
             }
         });
 
+        //Goes to Intro class, to the very start
         EndGamebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

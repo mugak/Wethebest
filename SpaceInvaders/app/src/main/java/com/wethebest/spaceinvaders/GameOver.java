@@ -24,6 +24,7 @@ public class GameOver extends AppCompatActivity {
 
         Button StartOver = findViewById(R.id.StartOver_btn);
 
+        //goes to intro class after button start over is clicked
         StartOver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +37,7 @@ public class GameOver extends AppCompatActivity {
         });
     }
 
+    //menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

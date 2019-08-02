@@ -47,7 +47,6 @@ public class Story extends AppCompatActivity {
                 Seagullpoop.setVisibility(ImageView.VISIBLE);
                 usermessage.setVisibility(ImageView.VISIBLE);
 
-
             }
         });
 
