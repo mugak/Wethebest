@@ -16,7 +16,7 @@ Instantiated in GameObjectManager
 
 public class AlienArmy {
     //DEFAULTS
-    public int numAliens = 12;
+    public int numAliens = 6;
 
     //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
     private Point DIMENSIONS = new Point(numAliens/3 + numAliens % 3, 3 );
@@ -181,6 +181,7 @@ public class AlienArmy {
 
     public void spawnNewWave() {
         createAliens();
+        app.mGameUI.counter.on = true;
     }
 
     /*

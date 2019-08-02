@@ -19,6 +19,7 @@ Instantiated in SpaceInvadersApp
  */
 
 public class GameUI {
+    private final boolean DEBUGGING = false;
     private final int PAUSE_BUTTON_SPRITE_ID = R.drawable.pause_button;
     public int mScore;
     public int mLives;
@@ -30,6 +31,7 @@ public class GameUI {
     private RectF pRect;
     private SpaceInvadersApp app;
     private long fps = 0;
+    Counter counter = new Counter(3);
 
     GameUI(SpaceInvadersApp app) {
         this.app = app;
@@ -40,9 +42,8 @@ public class GameUI {
         mPaint = new Paint();
         mRect = new RectF();
         pRect = new RectF();
-        Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");
-        mPaint.setTypeface(mTypeface);
-        mPaint.setTextSize(app.mScreenSize.y / 12);
+        resetText();
+        counter.on = true;
     }
 
 
@@ -62,7 +63,12 @@ public class GameUI {
             drawWaitToShoot(canvas);
         }
 
-        printDebugText();
+        if(counter.on){
+            drawLevel();
+            counter.run(app.fps);
+        }
+
+        if(DEBUGGING){printDebugText();}
     }
 
     public void drawAmmo(Canvas canvas) {
@@ -114,13 +120,6 @@ public class GameUI {
         mPaint.setARGB(255, 0, 0, 255);
 
 
-        //long timeThisFrame = System.currentTimeMillis() - frameStartTime;
-        //Print fps every second
-//
-//        if (System.currentTimeMillis() % 1000 == 1000) {
-//            fps = fps +1;
-//        }
-
     int textX = app.mScreenSize.x*3/4;
     int textY = app.mScreenSize.y/4;
 
@@ -134,5 +133,25 @@ public class GameUI {
         textY += textSize;
         app.mCanvas.drawText("mPlayer x pos=" + (short)(app.mGameObjectManager.mPlayer.mHitBox.centerTop().x), textX, textY, mPaint);
 
+    }
+
+    private void drawLevel(){
+        int textSize = app.mScreenSize.y / 6;
+        Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Comic-Sans.ttf");
+        mPaint.setTypeface(mTypeface);
+        mPaint.setTextSize(textSize);
+        mPaint.setARGB(255, 255, 255, 255);
+
+        if(app.level > 1) {
+            app.mCanvas.drawText("YEET!!", app.mScreenSize.x / 2, app.mScreenSize.y/2 + mPaint.getTextSize(), mPaint);
+        }
+        app.mCanvas.drawText("Level " + app.level, app.mScreenSize.x / 2, app.mScreenSize.y/2, mPaint);
+        resetText();
+    }
+
+    private void resetText(){
+        Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");
+        mPaint.setTypeface(mTypeface);
+        mPaint.setTextSize(app.mScreenSize.y / 12);
     }
 }
