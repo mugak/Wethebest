@@ -20,6 +20,7 @@ public class GameOver extends AppCompatActivity {
         setContentView(R.layout.activity_game_over);
 
         TextView Score = findViewById(R.id.Score);
+        Score.setText("");
         Button StartOver = findViewById(R.id.StartOver_btn);
 
         StartOver.setOnClickListener(new View.OnClickListener() {
