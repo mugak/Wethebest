@@ -113,7 +113,7 @@ public class Story extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-    
+
     private MediaPlayer mMediaPlayer;
     @Override
     protected void onResume() {
