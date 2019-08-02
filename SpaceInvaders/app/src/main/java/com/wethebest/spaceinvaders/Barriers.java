@@ -24,7 +24,7 @@ public class Barriers {
     private void createBarriers() {
         for (int i = 1; i < NUM_BARRIERS + 1; i++) {
             Barrier barrier = new Barrier(app);
-            PointF barrierCenterPosition = new PointF(app.mScreenSize.x * i / (NUM_BARRIERS + 1),app.mScreenSize.y * 3 / 4);
+            PointF barrierCenterPosition = new PointF(app.mScreenSize.x/4 * i ,app.mScreenSize.y * 4 / 5);
             barrier.setPosition(barrierCenterPosition);
             barrier.createBarrierBlocks();
             barriers.add(barrier);

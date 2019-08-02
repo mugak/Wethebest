@@ -27,28 +27,28 @@ public class GameObjectFactory {
             return new Alien(app, size, spriteID, position, velocity);
         }
         else if(objectName.equalsIgnoreCase("PLAYER")) {
-            size = new PointF(app.mScreenSize.x / 10, app.mScreenSize.x / 10);
+            size = new PointF(app.mScreenSize.x / 7, app.mScreenSize.x / 10);
             spriteID = R.drawable.biploar_red;
-            position = new PointF(app.mScreenSize.x / 2, app.mScreenSize.y - app.mScreenSize.x/10);
+            position = new PointF(app.mScreenSize.x / 2, app.mScreenSize.y - size.y*3/4);
             velocity = 0f;
             return new SimpleCannon(app, size, spriteID, position, velocity);
         }
         else if(objectName.equalsIgnoreCase("BARRIERBLOCK")) {
-            size = new PointF(app.mScreenSize.x / 20, app.mScreenSize.y / 40);
-            spriteID = R.drawable.def_brick_01;
+            size = new PointF(app.mScreenSize.x / 30, app.mScreenSize.x / 60);
+            spriteID = R.drawable.white_cloud;
             position = new PointF(0, 0);
             velocity = 0;
             return new BarrierBlock(app, size, spriteID, position, velocity);
         }
         else if(objectName.equalsIgnoreCase("PLAYERPROJ")) {
             size = new PointF(app.mScreenSize.x / 80, app.mScreenSize.x / 40);
-            spriteID = R.drawable.projectile_a;
+            spriteID = R.drawable.missile;
             position = new PointF(0, 0);
             velocity = -app.mScreenSize.y;
             return new PlayerProj(app, size, spriteID, position, velocity);
         }
         else if(objectName.equalsIgnoreCase("ALIENPROJ")) {
-            size = new PointF(app.mScreenSize.x / 240, app.mScreenSize.x / 40);
+            size = new PointF(app.mScreenSize.x / 60, app.mScreenSize.x / 60);
             spriteID = R.drawable.smiley_poop;
             position = new PointF(0, 0);
             velocity = app.mScreenSize.y / 4;
@@ -61,7 +61,6 @@ public class GameObjectFactory {
             velocity = 200f;
             return new UFO(app, size, spriteID, position, velocity);
         }
-
         return null;
 
 

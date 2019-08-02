@@ -11,9 +11,12 @@ import java.util.ArrayList;
 Barrier handles the placement of BarrierBlocks so that they look like one single barrier
 Instantiated in Barriers
  */
+
 public class Barrier {
     //DEFAULTS
-    private final Point DIMENSIONS = new Point(3, 3); //size is in units of barrier blocks
+    private final Point DIMENSIONS = new Point(4, 4); //size is in units of barrier blocks
+
+
     private final PointF BLOCK_SIZE;
 
     private SpaceInvadersApp app;
@@ -23,8 +26,8 @@ public class Barrier {
 
     Barrier(SpaceInvadersApp app) {
         this.app = app;
-
-        BLOCK_SIZE = new PointF(app.mScreenSize.x / 20, app.mScreenSize.y / 40); //TODO repeated in barrierblock, maybe get from gameconfig
+        GameObject tempBarrierBlock = GameObjectFactory.getGameObject(("BarrierBlock"));
+        BLOCK_SIZE = new PointF(tempBarrierBlock.getHitBox().width(), tempBarrierBlock.getHitBox().height());
     }
 
     public void createBarrierBlocks() {
@@ -41,7 +44,7 @@ public class Barrier {
     }
 
     public void setPosition(PointF centerPosition) {
-        position = new PointF(centerPosition.x - (DIMENSIONS.x * BLOCK_SIZE.x / 2), centerPosition.y - (DIMENSIONS.y * BLOCK_SIZE.y / 2));
+        position = new PointF(centerPosition.x - (DIMENSIONS.x * BLOCK_SIZE.x ), centerPosition.y - (DIMENSIONS.y * BLOCK_SIZE.y ));
     }
 
 }

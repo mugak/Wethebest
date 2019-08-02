@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.view.MotionEvent;
 
 /*
 GameUI draws the UI while the game is playing
@@ -84,6 +85,10 @@ public class GameUI {
         mBitmap = BitmapFactory.decodeResource(app.context.getResources(), PAUSE_BUTTON_SPRITE_ID);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mRect.width(), (int) mRect.height(), true);
         canvas.drawBitmap(mBitmap, mRect.left, mRect.top, null);
+//        MotionEvent motionEvent = MotionEvent.;
+//        if(app.onTouchEvent(MotionEvent.ACTION_UP){
+//
+//        }
     }
 
     public void drawWaitToShoot(Canvas canvas) {

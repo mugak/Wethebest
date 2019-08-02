@@ -82,6 +82,10 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
                 break;
 
             case MotionEvent.ACTION_UP:
+                int x = (int)motionEvent.getX();
+                int y = (int)motionEvent.getY();
+                if(x > mScreenSize.x*9/10 && y < mScreenSize.y/10)
+                    {mPlaying = false;}
                 break;
         }
         return true;
