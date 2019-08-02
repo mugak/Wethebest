@@ -45,7 +45,7 @@ public class WaveState implements GameState {
 
         draw();
 
-        if (isGameOver(app)) {
+        if (app.isGameOver) {
             app.newGame();
         } else if (isWaveDefeated(app)) {
             app.mGameObjectManager.mAlienArmy.spawnNewWave();
@@ -68,10 +68,6 @@ public class WaveState implements GameState {
 //            mApp.mCanvas.drawText("FPS=" + mFPS, 10f, 150f, mPaint);
 
         }
-    }
-
-    private boolean isGameOver(SpaceInvadersApp app) {
-        return app.mGameObjectManager.mPlayer.lives == 0;
     }
 
     private boolean isWaveDefeated(SpaceInvadersApp app) {
