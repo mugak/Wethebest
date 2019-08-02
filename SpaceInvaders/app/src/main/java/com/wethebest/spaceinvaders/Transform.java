@@ -75,6 +75,8 @@ public class Transform {
         return mSpeed;
     }
 
+    void setSpeed(float speed) {mSpeed = speed;}
+
     PointF getLocation() {
         return mLocation;
     }

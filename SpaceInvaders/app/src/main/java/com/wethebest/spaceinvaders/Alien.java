@@ -10,7 +10,7 @@ It also shoots projectiles randomly.
 Instantiated in AlienArmy
  */
 public class Alien extends GameObject {
-    private PointF baseShootInterval = new PointF(3, 15); //shoots every x-y seconds
+    /*private PointF baseShootInterval = new PointF(3, 15); //shoots every x-y seconds
 
     //Shoot projectiles randomly
     private PointF shootInterval = baseShootInterval;
@@ -23,30 +23,13 @@ public class Alien extends GameObject {
 
     private boolean movingRight = true; //Current movement direction
 
-    /*Alien(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
+    Alien(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
         waitToShoot = new AutomaticCounter(getRandomFloat(shootInterval));
-    }*/
+
 
     public Alien() {
         super();
-    }
-
-
-    public void update(long fps) {
-        if(movingRight) {
-            mHitBox.velocity = mHitBox.speed;
-        }
-        else {
-            mHitBox.velocity = -mHitBox.speed;
-        }
-
-        if(fps != 0) {
-            mHitBox.moveHorizontally(mHitBox.velocity / fps);
-            handleCounters(fps);
-        }
-
-        checkAlienWin();
     }
 
     public void playAudio() {
@@ -123,11 +106,112 @@ public class Alien extends GameObject {
             baseShootInterval.y = 1;
         }
     }
-
+*/
     public class AlienUpdateComponent implements UpdateComponent {
+        private PointF baseShootInterval = new PointF(3, 15); //shoots every x-y seconds
+
+        //Shoot projectiles randomly
+        private PointF shootInterval = baseShootInterval;
+        public boolean shootNow = false;
+        private Counter waitToShoot;
+
+        //Sound effects
+        private boolean playShoot = false;
+        private boolean playHit = false;
+
         @Override
         public void update(long fps, Transform t) {
+            PointF location = t.getLocation();
+            float speed = t.getSpeed();
 
+            if(t.headingRight()) {
+                location.x += speed / fps;
+            }
+            else if (t.headingLeft()){
+                location.x -= speed / fps;
+            }
+
+            if(fps != 0) {
+                handleCounters(fps);
+            }
+
+            checkAlienWin();
+        }
+
+        public void playAudio() {
+            if(playShoot) {
+                app.soundEngine.alienShoot();
+                playShoot = false;
+            }
+            if(playHit){
+                app.soundEngine.alienHit();
+                playHit = false;
+            }
+        }
+
+        public void collide(GameObject gameObject) {
+            if (gameObject instanceof PlayerProj) {
+                playHit = true;
+                isActive = false;
+            }
+        }
+
+        public boolean outOfBounds() {
+            return getTransform().mHitBox.bottom >= app.screenSize.y;
+        }
+
+        public void reverseXVelocity() {
+
+            getTransform().headDown();
+            if (getTransform().headingRight()) getTransform().headLeft();
+            else getTransform().headRight();
+        }
+
+        public void speedUp(float multiplier) {
+            getTransform().setSpeed(getTransform().getSpeed() * multiplier);
+        }
+
+        /*public GameObject shoot() {
+            GameObject mProj = GameObjectFactory.getGameObject("AlienProj");
+            mProj.setPosition(mHitBox.centerBottom());
+            playShoot = true;
+            return mProj;
+        }*/
+
+        private void handleCounters(long fps) {
+            if(waitToShoot.run(fps)) {
+                shootNow = true;
+                waitToShoot.setSeconds(getRandomFloat(shootInterval));
+            }
+        }
+
+        private float getRandomFloat(PointF interval) {
+            return app.rand.nextFloat() * (interval.y - interval.x) + interval.x;
+
+        }
+        //Set the Shoot
+        public void setShootInterval(float factor){
+            float min = (baseShootInterval.x * factor);
+            float max = (baseShootInterval.y * factor);
+            shootInterval = new PointF(min, max);
+        }
+
+        private void checkAlienWin() {
+            app.isGameOver = outOfBounds();
+        }
+
+        public void decreaseBaseShootInterval(float decreaseAmount) {
+            if (baseShootInterval.x > decreaseAmount) {
+                baseShootInterval.x -= decreaseAmount;
+            } else {
+                baseShootInterval.x = 1;
+            }
+
+            if (baseShootInterval.y > 1) {
+                baseShootInterval.y -= decreaseAmount;
+            } else {
+                baseShootInterval.y = 1;
+            }
         }
     }
 
