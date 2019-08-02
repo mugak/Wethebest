@@ -7,7 +7,7 @@ public class DifficultyManager {
 
     private final float ALIENSPEEDMULTIPLIER = (float) 1.2;
     private final float ALIENFIRERATEINCREASE = (float) 2;
-    private final int NUMALIENINCREASE = 2;
+    private final int NUMALIENINCREASE = 3;
 
     private final int NUMALIENBUFFS = 2;
     private final int NUMPLAYERBUFFS = 1;
@@ -29,7 +29,7 @@ public class DifficultyManager {
     public void increaseRandomAlienStat() {
         Random rand = new Random();
 
-        int stat = rand.nextInt(4);
+        int stat = rand.nextInt(3);
 
         switch(stat) {
             case 0:
@@ -40,9 +40,6 @@ public class DifficultyManager {
                 break;
             case 2:
                 increaseAlienArmySize();
-                break;
-            case 3:
-                //do nothing
                 break;
         }
     }

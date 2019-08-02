@@ -34,9 +34,12 @@ public class SimpleCannon extends GameObject {
 
     boolean testBool = false;
 
+    SpaceInvadersApp mApp;
+
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
 
+        mApp = app;
         lives = MAX_LIVES;
         ammo = maxAmmo;
 
@@ -66,14 +69,19 @@ public class SimpleCannon extends GameObject {
             app.soundEngine.playerHit();
             playHit = false;
         }
+        app.soundEngine.engineHum(Math.abs(((SpaceInvaders) app.context).yAcceleration) + 1); //modulate engine rate based on screen tilt
 
-        app.soundEngine.engineHum(Math.abs(((SpaceInvaders)app.context).yAcceleration)  + 3); //modulate engine rate based on screen tilt
     }
 
     public void collide(GameObject gameObject) {
         if(gameObject instanceof AlienProj) {
             if(!invincible.on) {
                 lives -= 1;
+
+                if(lives == 0) {
+                    app.isGameOver = true;
+                }
+
                 reset();
                 invincible.on = true;
                 mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);

@@ -36,6 +36,10 @@ public class HitBox {
 
     public void setSize(PointF size) { mRect.set(0, 0, size.x, size.y); }
     public void setPosition(PointF position) { mRect.offsetTo(position.x, position.y); }
+    public void setVelocity(float velocity) {
+        this.velocity = velocity;
+        this.speed = Math.abs(velocity);
+    }
     public RectF getHitBox(){ return mRect; }
 
     //Drawing

@@ -10,7 +10,7 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 * Muga Kim
 * Sach Samala
 
-# **Design Document**
+## Design Document
 * The game starts with Intro, displaying a main menu with buttons, one of which transitions to the SpaceInvaders activity.
 * SpaceInvaders sets up the canvas, the display, and the accelerometer. It sets the view to SpaceInvadersApp.
 * SpaceInvadersApp is a SurfaceView. It runs the game, handling game states such as WaveState. It instantiates GameObjectManager.
@@ -23,8 +23,8 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
    * Aliens are observers to AlienArmy.
    * Barriers construct Barrier objects, which set the BarrierBlocks.
    * AlienProj and PlayerProj are instantiated by their respective classes
----
-# **Classes**  
+
+## **Classes**   
 ## Activities
 * **Intro** - main activity, main menu
     * **Settings** 
@@ -57,7 +57,7 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 * **BarrierBlock** - single block in a Barrier
 * **UFO**
 
-### *Game Object Containers*
+### Game Object Containers
 * **AlienArmy** - controls Aliens
 * **Barrier** - sets BarrierBlocks
 * **Barriers** - sets multiple Barrier objects

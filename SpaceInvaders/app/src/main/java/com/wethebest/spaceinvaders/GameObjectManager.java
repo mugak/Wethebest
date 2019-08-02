@@ -10,8 +10,6 @@ import java.util.LinkedList;
 GameObjectManager holds all of the GameObjects - the player, projectiles, AlienArmy, and Barriers
 It updates, draws, removes, and detects collisions
 Instantiated in SpaceInvadersApp
-
-Potentially collisions should be handled by another class
  */
 public class GameObjectManager {
     private LinkedList<GameObject> gameObjects;
@@ -36,11 +34,16 @@ public class GameObjectManager {
         gameObjects.addAll(mAlienArmy.aliens);
         gameObjects.addAll(mBarriers.getBarrierBlocks());
 
+        //Put all gameObjects in their original states
         for (GameObject gameObject : gameObjects) {
             gameObject.reset();
         }
     }
 
+    /*
+        Checks to see if the gameObject is inactive and if so removes it from the list of gameobject
+        Also calls for the alienArmy to remove references to it's innactive aliens
+     */
     private void removeInactiveObjects() {
         Iterator<GameObject> gameObjectIterator = gameObjects.iterator();
 
@@ -55,13 +58,14 @@ public class GameObjectManager {
         mAlienArmy.removeInactiveObjects();
     }
 
+    //Allows a game object to be added to the gameobjects list
     public void add(GameObject gameObject) {
         if(gameObjects != null) {
             gameObjects.add(gameObject);
         }
     }
 
-    // This function updates all gameobjects each frame
+    // Handles what should happen in a change in state, like a collision for instance
     public void updateGameObjectStates(long fps) {
         updateGameObjects(fps);
         detectCollisions();
@@ -69,6 +73,7 @@ public class GameObjectManager {
         removeInactiveObjects();
     }
 
+    // The function is called each frame and tells the gameobjects to update their state
     public void updateGameObjects(long fps) {
         for(GameObject gameObject : gameObjects) {
             gameObject.update(fps);
@@ -87,12 +92,17 @@ public class GameObjectManager {
         mAlienArmy.draw(canvas);
     }
 
+    //Plays all game object's audio
     public void playAudio() {
         for(GameObject gameObject : gameObjects) {
             gameObject.playAudio();
         }
     }
 
+    /*
+        Called each frame and checks to see if any of the projectiles have collided with any of the
+        non-projectiles
+     */
     private void detectCollisions() {
         //Checks to see if the first object is a projectile because in SpaceInvaders only
         // projectiles collide with non projectiles. There are no other types of collisions
@@ -112,6 +122,7 @@ public class GameObjectManager {
         }
     }
 
+    //If there is a collision between the two game objects, call each object's collision behaviors
     private void collide(GameObject object1, GameObject object2) {
         if (RectF.intersects(object1.getHitBox(), object2.getHitBox())) {
             object1.collide(object2);
@@ -119,6 +130,7 @@ public class GameObjectManager {
         }
     }
 
+    //Is used to determine if a wave should end
     public boolean allAliensDefeated() {
         return mAlienArmy.aliens.isEmpty();
     }

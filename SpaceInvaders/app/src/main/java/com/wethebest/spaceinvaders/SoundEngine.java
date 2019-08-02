@@ -6,6 +6,7 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
+import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class SoundEngine {
     Context context;
 
     private SoundPool sp;
+
     private int playerShootID = -1;
     private int alienShootID = -1;
     private int barrierHitID = -1;
@@ -40,7 +42,7 @@ public class SoundEngine {
         // Instantiate a SoundPool dependent on Android version
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                            .setUsage(AudioAttributes.USAGE_MEDIA)
+                            .setUsage(AudioAttributes.USAGE_GAME)
                             .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                             .build();
 
@@ -49,9 +51,10 @@ public class SoundEngine {
 //                    .setUsage(AudioAttributes.)
             // Initialize the SoundPool
             sp = new SoundPool.Builder()
-                    .setMaxStreams(10)
+                    .setMaxStreams(25)
                     .setAudioAttributes(audioAttributes)
                     .build();
+
 
 //            sp = new SoundPool.Builder()
 //                    .setMaxStreams(5)
@@ -59,7 +62,7 @@ public class SoundEngine {
         }
         else {
             // The old way
-            sp = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+            sp = new SoundPool(25, AudioManager.STREAM_MUSIC, 0);
         }
         try{
             sp.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
@@ -73,12 +76,12 @@ public class SoundEngine {
             AssetManager assetManager = context.getAssets();
 
             //Load all soundEngine files in memory
-            playerShootID = sp.load(assetManager.openFd("proj_shoot.ogg"), 0);
-            alienShootID = sp.load(assetManager.openFd("alien_shoot.ogg"), 0);
-            barrierHitID = sp.load(assetManager.openFd("Collision8-Bit.ogg"),0);
-            alienHitID = sp.load(assetManager.openFd("SmallExplosion8-Bit.ogg"), 0);
-            playerHitID = sp.load(assetManager.openFd("Metal_Hit.ogg"),0);
-            engineHumID = sp.load(assetManager.openFd("Helicopter, chopper idling.wav"),0);
+            playerShootID = sp.load(assetManager.openFd("playershoot.ogg"), 0);
+            alienShootID = sp.load(assetManager.openFd("enemyshoot.ogg"), 0);
+            barrierHitID = sp.load(assetManager.openFd("barrierhit.ogg"),0);
+            alienHitID = sp.load(assetManager.openFd("enemyhit.ogg"), 0);
+            playerHitID = sp.load(assetManager.openFd("playerhit.ogg"),0);
+            engineHumID = sp.load(assetManager.openFd("enginehum.ogg"),0);
 
 
         }catch(IOException e){
@@ -88,29 +91,30 @@ public class SoundEngine {
     }
 
     public void playerShoot(){
-
-        sp.play(playerShootID, masterVolume, masterVolume, 0, 0, 1);
-        //sp.stop(nowplaying);
+        sp.play(playerShootID, masterVolume, masterVolume, 1, 0, 1);
     }
 
     public void alienShoot(){
-
-        sp.play(alienShootID , masterVolume, masterVolume , 0 , 0 , 1);
+        sp.play(alienShootID , masterVolume, masterVolume , 1 , 0 , 1);
     }
 
     public void barrierHit(){
-        sp.play(barrierHitID, masterVolume, masterVolume, 0, 0, 1);
+        sp.play(barrierHitID, masterVolume, masterVolume, 1, 0, 1);
     }
 
     public void alienHit(){
-        sp.play(alienHitID, masterVolume, masterVolume, 0,0,1);
+        sp.play(alienHitID, masterVolume, masterVolume, 1,0,1);
     }
 
     public void playerHit(){
-        sp.play(playerHitID, masterVolume, masterVolume, 0,0,1);
+        sp.play(playerHitID, masterVolume, masterVolume, 1,0,1);
     }
 
     public void engineHum(float factor){
+        int rateBound = 5;
+        if(factor >= rateBound) {
+            factor = rateBound; //so the pitch doesnt go too high or too low
+        }
         sp.play(engineHumID, masterVolume, masterVolume, 0, 0, factor);
     }
 
