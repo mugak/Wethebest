@@ -29,7 +29,7 @@ public class GameObjectFactory {
         this.app = app;
     }
 
-    GameObject getGameObject(GameObjectSpec spec) {
+    public GameObject getGameObject(GameObjectSpec spec) {
         GameObject object = new GameObject();
 
         int numComponents = spec.getComponents().length;

@@ -130,7 +130,7 @@ public class AlienSpec extends GameObjectSpec {
     private static final PointF mSize =
             new PointF(app.mScreenSize.x / 60, app.mScreenSize.x / 60);
     private static final String[] mComponents =
-            new String [] {"AnimatedGraphicsComponent", "PlayerUpdateComponent"};
+            new String [] {"AnimatedGraphicsComponent", "UpdateComponent"};
 
     public AlienSpec() {
         super(mType, mBitmapName, mInitSpeed,

@@ -37,7 +37,7 @@ public class AlienArmy {
     AlienArmy(SpaceInvadersApp app) {
         this.app = app;
 
-        waveSpeed = GameObjectFactory.getGameObject("alien").SPEED;
+        waveSpeed = GameObjectFactory.getGameObject(new AlienSpec()).getSpeed();
 
         ROW_SPACING = 0;
         COL_SPACING = app.mScreenSize.y / 8;
