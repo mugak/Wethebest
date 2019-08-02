@@ -2,12 +2,14 @@ package com.wethebest.spaceinvaders;
 
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Rect;
+
 
 // starter code source: “Learning Java by Building Android Games - Second Edition.”
 
 public class Animator {
 
-    private RectF mRect;
+    private Rect mRect;
     private PointF size;
     private int mFrameCount;
     private int mCurrentFrame;
@@ -20,14 +22,14 @@ public class Animator {
         this.mFrameCount = frameCount;
         this.size = size;
 
-        mRect = new RectF(0, 0, size.x, size.y);
+        mRect = new Rect(0, 0, (int)size.x, (int)size.y);
 
         // length of frame in milliseconds
         mFramePeriod = 1000 / fps;
         mFrameTicker = 0L;
     }
 
-    RectF getCurrentFrame(long time) {
+    Rect getCurrentFrame(long time) {
         if (time > mFrameTicker + mFramePeriod) {
             mFrameTicker = time;
             mCurrentFrame++;
@@ -38,9 +40,9 @@ public class Animator {
 
         // Update the left and right values of the source of
         // the next frame on the spritesheet
-        this.mRect.left = mCurrentFrame * size.x;
+        this.mRect.left = mCurrentFrame * (int)size.x;
         this.mRect.right = this.mRect.left
-                + size.x;
+                + (int)size.x;
 
         return mRect;
     }

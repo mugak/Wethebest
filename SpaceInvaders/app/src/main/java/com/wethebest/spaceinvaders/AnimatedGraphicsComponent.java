@@ -9,12 +9,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Rect;
 
 public class AnimatedGraphicsComponent implements GraphicsComponent {
 
     private String mBitmapName;
     private Animator mAnimator;
-    private RectF mSectionToDraw;
+    private Rect mSectionToDraw;
 
     @Override
     public void initialize(Context context, GameObjectSpec spec, PointF size) {
