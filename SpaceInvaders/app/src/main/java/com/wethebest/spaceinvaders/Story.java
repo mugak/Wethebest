@@ -96,9 +96,6 @@ public class Story extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.action_settings) {
-            startActivity(new Intent(Story.this, Settings.class));
-        }
 
         if(item.getItemId() == R.id.action_startover) {
             startActivity(new Intent(Story.this, SpaceInvaders.class));
