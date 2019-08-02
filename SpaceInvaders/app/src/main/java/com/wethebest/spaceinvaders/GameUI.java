@@ -145,8 +145,9 @@ public class GameUI {
         if(app.level > 1) {
             app.mCanvas.drawText("YEET!!", app.mScreenSize.x / 2, app.mScreenSize.y/2 + mPaint.getTextSize(), mPaint);
         }
-        app.mCanvas.drawText("Level " + app.level, app.mScreenSize.x / 2, app.mScreenSize.y/2, mPaint);
         resetText();
+        app.mCanvas.drawText("Level " + app.level, app.mScreenSize.x / 2, app.mScreenSize.y/2, mPaint);
+
     }
 
     private void resetText(){
