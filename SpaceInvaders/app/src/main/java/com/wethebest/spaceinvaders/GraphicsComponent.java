@@ -13,5 +13,5 @@ public interface GraphicsComponent {
                     PointF size);
 
     // Updated to take a reference to a Camera
-    void draw(Canvas canvas, Transform t);
+    void draw(Canvas canvas, Transform t, Paint paint);
 }

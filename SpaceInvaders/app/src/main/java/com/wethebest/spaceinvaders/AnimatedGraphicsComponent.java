@@ -36,7 +36,7 @@ public class AnimatedGraphicsComponent implements GraphicsComponent {
 
     @Override
     // Updated to take a reference to a Camera
-    public void draw(Canvas canvas, Paint paint, Transform t) {
+    public void draw(Canvas canvas, Transform t, Paint paint) {
 
         // Get the section of bitmap to draw
         // when an object is in motion
@@ -52,7 +52,7 @@ public class AnimatedGraphicsComponent implements GraphicsComponent {
         }
 
         // Where should the bitmap section be drawn?
-        RectF screenCoordinates = (t.getLocation().x, t.getLocation().y, 
+        RectF screenCoordinates = new RectF(t.getLocation().x, t.getLocation().y,
                 t.getSize().x, t.getSize().y);
 
         if (t.getFacingRight()) {
