@@ -56,7 +56,7 @@ public class PauseMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(PauseMenu.this,Intro.class);
+                Intent intent=new Intent(PauseMenu.this,GameOver.class);
                 startActivityForResult(intent,0);
                 overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
 

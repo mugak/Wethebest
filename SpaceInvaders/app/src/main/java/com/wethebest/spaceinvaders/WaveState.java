@@ -58,9 +58,7 @@ public class WaveState implements GameState {
             //app.newGame();
         } else if (isWaveDefeated(app)) {
             app.level++;
-            app.mGameObjectManager.mAlienArmy.spawnNewWave();
-            app.mGameObjectManager.resetBarriers();
-            app.mGameObjectManager.mPlayer.resetAmmo();
+            app.mGameObjectManager.newWave();
             app.difficultyManager.increaseGameDifficulty();
             changeState(app, State.WAVE);
         }
