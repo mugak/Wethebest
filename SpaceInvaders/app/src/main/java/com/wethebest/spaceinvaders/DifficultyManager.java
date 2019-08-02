@@ -10,10 +10,10 @@ public class DifficultyManager {
     private final int NUMALIENINCREASE = 3;
 
     private final float PLAYERFIRERATEINCREASE = 1.5f;
-
+    private final float PLAYERAMMOREGENRATEINCREASE = 1.5f;
 
     private final int NUMALIENBUFFS = 2;
-    private final int NUMPLAYERBUFFS = 1;
+    private final int NUMPLAYERBUFFS = 3;
 
     public DifficultyManager(GameObjectManager gom) {
         mGameObjectManager = gom;
@@ -92,6 +92,6 @@ public class DifficultyManager {
 
     //Increases the rate that the player regenerates used ammo
     private void increasePlayerAmmoRegenRate() {
-
+        mGameObjectManager.mPlayer.increaseAmmoRegenRate(PLAYERAMMOREGENRATEINCREASE);
     }
 }
