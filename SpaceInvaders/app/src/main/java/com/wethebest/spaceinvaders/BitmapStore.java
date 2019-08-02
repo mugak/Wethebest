@@ -1,12 +1,15 @@
 package com.wethebest.spaceinvaders;
 
-// source: “Learning Java by Building Android Games - Second Edition.”
+// starter code source: “Learning Java by Building Android Games - Second Edition.”
+// singleton - can only exist once & needs to be called by all gameObjects
+// it's fine that this is a singleton because it only really has one purpose
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +33,7 @@ public class BitmapStore {
 
         // Put a default bitmap in each of the maps
         // to return in case a bitmap doesn't exist
-        addBitmap(c, "death_visible", new PointF(1, 1), 128, true);
+        //addBitmap(c, "death_visible", new PointF(1, 1), 128, true);
     }
 
     static Bitmap getBitmap(String bitmapName) {
@@ -51,11 +54,13 @@ public class BitmapStore {
         }
     }
 
-    static void addBitmap(Context c, String bitmapName, PointF objectSize,
-                          int pixelsPerMetre, boolean needReversed) {
+    static void addBitmap(Context c, String bitmapName, PointF size,
+                          boolean needReversed) {
 
         Bitmap bitmap;
         Bitmap bitmapReversed;
+
+        RectF rect = new RectF(0, 0, size.x, size.y);
 
         // Make a resource id out of the string of the file name
         int resID = c.getResources().getIdentifier(bitmapName,
@@ -67,8 +72,8 @@ public class BitmapStore {
 
         // Resize the bitmap
         bitmap = Bitmap.createScaledBitmap(bitmap,
-                (int) objectSize.x * pixelsPerMetre,
-                (int) objectSize.y * pixelsPerMetre,
+                (int) rect.width(),
+                (int) rect.height(),
                 false);
 
         mBitmapsMap.put(bitmapName, bitmap);

@@ -3,7 +3,7 @@ package com.wethebest.spaceinvaders;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
-// source: “Learning Java by Building Android Games - Second Edition.”
+// starter code source: “Learning Java by Building Android Games - Second Edition.”
 
 public class Animator {
 
