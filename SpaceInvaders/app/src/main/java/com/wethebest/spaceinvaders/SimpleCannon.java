@@ -80,6 +80,7 @@ public class SimpleCannon extends GameObject {
 
                 if(lives == 0) {
                     app.isGameOver = true;
+                    
                 }
 
                 reset();

@@ -35,7 +35,7 @@ public class GameObjectFactory {
         }
         else if(objectName.equalsIgnoreCase("BARRIERBLOCK")) {
             size = new PointF(app.mScreenSize.x / 30, app.mScreenSize.x / 60);
-            spriteID = R.drawable.pink_cloud_face;
+            spriteID = R.drawable.white_cloud;
             position = new PointF(0, 0);
             velocity = 0;
             return new BarrierBlock(app, size, spriteID, position, velocity);

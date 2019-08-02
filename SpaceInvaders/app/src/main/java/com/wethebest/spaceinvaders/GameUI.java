@@ -96,8 +96,6 @@ public class GameUI {
 
     public void pauseButton(PointF point){
         if(mRect.contains(point.x, point.y)){
-            //app.mGameState.changeState(app, State.PAUSE);
-
             app.pause();
             app.context.startActivity(new Intent( (app.context), PauseMenu.class));
         }
