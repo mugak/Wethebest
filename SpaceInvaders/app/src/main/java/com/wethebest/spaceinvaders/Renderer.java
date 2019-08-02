@@ -23,23 +23,20 @@ public class Renderer {
     }
 
     void draw(ArrayList<GameObject> objects,
-               GameState gs,
                GameUI hud) {
 
         if (mSurfaceHolder.getSurface().isValid()) {
             mCanvas = mSurfaceHolder.lockCanvas();
             mCanvas.drawColor(Color.argb(255, 0, 0, 0));
 
-            if(gs.getDrawing()) {
 
-                for (GameObject object : objects) {
-                    if (object.isActive()) {
-                        object.display(mCanvas);
-                    }
+            for (GameObject object : objects) {
+                if (object.isActive()) {
+                    object.display(mCanvas);
                 }
             }
 
-            hud.draw(mCanvas, gs);
+            hud.draw(mCanvas);
 
             mSurfaceHolder.unlockCanvasAndPost(mCanvas);
         }
