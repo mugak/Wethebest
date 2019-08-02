@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/resume_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-480dp"
+        android:layout_marginBottom="-410dp"
         android:background="#F44336"
         android:text="Start Over"
         android:textColor="#CDE8FA" />

@@ -19,6 +19,8 @@ public class PauseMenu extends AppCompatActivity {
 
 
         Button Resumebtn = findViewById(R.id.resume_btn);
+        Button StartOverbtn = findViewById(R.id.StartOver_btn);
+        Button EndGamebtn = findViewById(R.id.End_btn);
 
         Resumebtn.setOnClickListener(new View.OnClickListener() {
             @Override
