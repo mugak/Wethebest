@@ -108,7 +108,6 @@ public class Intro extends AppCompatActivity {
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
     }
-
     @Override
     protected void onPause() {
         mMediaPlayer.stop(); mMediaPlayer.release();
