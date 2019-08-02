@@ -28,6 +28,14 @@ public class WaveState implements GameState {
         }
     }
 
+    /*
+        This function is called by spaceinvaders which implements runnable
+        Essentially this is the functionality that is called every frame of the game loop
+        Creates player shots
+        Updates all gameobject states
+        Draws UI and screen
+        And determines if the game has ended
+     */
     @Override
     public void run(SpaceInvadersApp app) {
         if(app.shootNow) {
@@ -51,6 +59,7 @@ public class WaveState implements GameState {
         }
     }
 
+    //Display the game
     private void draw() {
         if (mApp.mOurHolder.getSurface().isValid()) {
             mApp.mCanvas = mApp.mOurHolder.lockCanvas();
@@ -67,6 +76,7 @@ public class WaveState implements GameState {
         }
     }
 
+   //Checks to see if the current wave has been defeated
     private boolean isWaveDefeated(SpaceInvadersApp app) {
         return app.mGameObjectManager.allAliensDefeated();
     }
