@@ -1,6 +1,7 @@
 package com.wethebest.spaceinvaders;
 
 import android.graphics.PointF;
+import android.graphics.RectF;
 
 /*
 Alien handles the enemies movement and game logic.
@@ -120,6 +121,22 @@ public class Alien extends GameObject {
             baseShootInterval.y -= decreaseAmount;
         } else {
             baseShootInterval.y = 1;
+        }
+    }
+
+    public class AlienUpdateComponent implements UpdateComponent {
+        @Override
+        public void update(long fps, Transform t) {
+
+        }
+    }
+
+    public class AlienTransform extends Transform {
+        public AlienTransform(float speed, float objectWidth,
+                              float objectHeight,
+                              PointF startingLocation) {
+
+            super(speed, objectWidth, objectHeight, startingLocation);
         }
     }
 }

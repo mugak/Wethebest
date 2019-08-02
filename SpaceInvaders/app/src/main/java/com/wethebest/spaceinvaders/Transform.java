@@ -5,7 +5,7 @@ import android.graphics.PointF;
 
 // starter code source: “Learning Java by Building Android Games - Second Edition.”
 public class Transform {
-    RectF mCollider;
+    RectF mHitBox;
     private PointF mLocation;
     private float mSpeed;
     private float mObjectHeight;
@@ -22,7 +22,7 @@ public class Transform {
               float objectHeight,
               PointF startingLocation) {
 
-        mCollider = new RectF();
+        RectF mHitBox = new RectF();
         mSpeed = speed;
         mObjectHeight = objectHeight;
         mObjectWidth = objectWidth;
@@ -31,21 +31,26 @@ public class Transform {
         // This tells movable blocks their starting position
         mStartingPosition = new PointF(
                 mLocation.x, mLocation.y);
+
+        mHitBox = new RectF(startingLocation.x - (objectWidth / 2),
+                startingLocation.y - (objectHeight / 2),
+                startingLocation.x + (objectWidth / 2),
+                startingLocation.y + (objectHeight / 2));
     }
 
-    public void updateCollider() {
-        mCollider.top = mLocation.y;
-        mCollider.left = mLocation.x;
-        mCollider.bottom =
-                (mCollider.top + mObjectHeight);
+    public void updateHitBox() {
+        mHitBox.top = mLocation.y - (mObjectHeight / 2);
+        mHitBox.left = mLocation.x - (mObjectWidth / 2);
+        mHitBox.bottom =
+                (mHitBox.top + mObjectHeight);
 
-        mCollider.right =
-                (mCollider.left + mObjectWidth);
+        mHitBox.right =
+                (mHitBox.left + mObjectWidth);
     }
 
 
-    public RectF getCollider() {
-        return mCollider;
+    public RectF getHitBox() {
+        return mHitBox;
     }
 
     void headUp() {
