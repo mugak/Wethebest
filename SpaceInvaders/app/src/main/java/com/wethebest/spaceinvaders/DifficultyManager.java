@@ -16,6 +16,7 @@ public class DifficultyManager {
         mGameObjectManager = gom;
     }
 
+    //Endows the aliens and players with random stat upgrades
     public void increaseGameDifficulty() {
         for(int i = 0; i < NUMALIENBUFFS; ++i) {
             increaseRandomAlienStat();
@@ -26,6 +27,7 @@ public class DifficultyManager {
         }
     }
 
+    //Gives the alien a random stat upgrade
     public void increaseRandomAlienStat() {
         Random rand = new Random();
 
@@ -44,6 +46,7 @@ public class DifficultyManager {
         }
     }
 
+    //Gives the player a random stat upgrade
     public void increaseRandomPlayerBuff() {
         Random rand = new Random();
 
@@ -59,26 +62,32 @@ public class DifficultyManager {
         }
     }
 
+    //Increases the initial wave speed of an alien in subsequent waves
     private void increaseWaveSpeed() {
         mGameObjectManager.mAlienArmy.increaseInitialSpeed(ALIENSPEEDMULTIPLIER);
     }
 
+    //Causes the aliens to shoot more frequently in subsequent waves
     private void increaseAlienFireRate() {
         mGameObjectManager.mAlienArmy.increaseAlienFireRate(ALIENFIRERATEINCREASE);
     }
 
+    //Increases the number of aliens in subsequent waves
     private void increaseAlienArmySize() {
         mGameObjectManager.mAlienArmy.increaseNumAliens(NUMALIENINCREASE);
     }
 
+    //Increases the number of shots a player fires per second
     private void increasePlayerFireRate() {
 
     }
 
+    //Increases the maximum ammount of ammo that a player can have at one time
     private void increasePlayerMaxAmmo() {
         mGameObjectManager.mPlayer.maxAmmo += 1;
     }
 
+    //Increases the rate that the player regenerates used ammo
     private void increasePlayerAmmoRegenRate() {
 
     }

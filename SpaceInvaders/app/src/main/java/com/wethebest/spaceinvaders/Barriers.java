@@ -21,6 +21,7 @@ public class Barriers {
         createBarriers();
     }
 
+    //Creates NUM_BARRIERS ammount of barriers center within the game screen
     private void createBarriers() {
         for (int i = 1; i < NUM_BARRIERS + 1; i++) {
             Barrier barrier = new Barrier(app);
@@ -31,6 +32,7 @@ public class Barriers {
         }
     }
 
+    //Returns all the barrier blocks in all of the barriers
     public List getBarrierBlocks() {
         List<GameObject> barrierBlocks = new LinkedList<GameObject>();
 
