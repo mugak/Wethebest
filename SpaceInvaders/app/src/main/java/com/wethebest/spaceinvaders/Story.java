@@ -33,8 +33,6 @@ public class Story extends AppCompatActivity {
         final ImageView Seagullpoop = findViewById(R.id.imageView4);
         final ImageView usermessage = findViewById(R.id.imageView6);
 
-
-
         Nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +48,6 @@ public class Story extends AppCompatActivity {
             }
         });
 
-
         //goes to next activity once name is entered
         EnterName.setOnKeyListener(new View.OnKeyListener()
         {
@@ -58,7 +55,6 @@ public class Story extends AppCompatActivity {
             {
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                 {
-
                     switch (keyCode)
                     {
                         case KeyEvent.KEYCODE_DPAD_CENTER:
@@ -67,7 +63,6 @@ public class Story extends AppCompatActivity {
                             Intent intent=new Intent(Story.this,SpaceInvaders.class);
                             startActivityForResult(intent,0);
                             overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
-
 
                             return true;
                         default:
@@ -78,11 +73,7 @@ public class Story extends AppCompatActivity {
             }
         });
 
-
-
-
     }
-
 
     //main menu
     @Override

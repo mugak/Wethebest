@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 /*
-GameOver draws the game over screen
+GameOver draws the game over screen after player dies and lives = 0.
  */
 
 public class GameOver extends AppCompatActivity {

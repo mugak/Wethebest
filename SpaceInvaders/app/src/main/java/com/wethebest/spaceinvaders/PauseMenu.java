@@ -8,6 +8,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+/*
+Pause Menu gives the game a menu when game play is paused.
+Pause Menu allows player to resume, start over, and end game.
+ */
+
 public class PauseMenu extends AppCompatActivity {
 
     @Override
