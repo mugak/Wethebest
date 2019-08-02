@@ -128,6 +128,22 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
         }
     }
 
+    public void newGame() {
+        score = 0;
+
+        rand = new Random();
+
+        //mGameObjectManager relies on rand
+        mGameObjectManager = new GameObjectManager(this);
+        //mGameUI relies on mGameObjectManager
+        mGameUI = new GameUI(this);
+
+        difficultyManager = new DifficultyManager(mGameObjectManager);
+
+        fps = 1;
+
+        mGameState = new WaveState(this);
+    }
 
     public SimpleCannon getPlayer() {
         return mGameObjectManager.mPlayer;

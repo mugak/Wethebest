@@ -19,8 +19,8 @@ public class AlienArmy {
     public int numAliens = 12;
 
     //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
-    private final Point DIMENSIONS = new Point(numAliens/4 + numAliens % 4,
-                                                numAliens/4 );
+    private final Point DIMENSIONS = new Point(numAliens/3 + numAliens % 3,
+                                                3 );
     //SET BASED ON SCREEN SIZE
     private final float ROW_SPACING;
     private final float COL_SPACING;
