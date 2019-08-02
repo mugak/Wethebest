@@ -26,9 +26,6 @@ public class WaveState implements GameState {
             case PAUSE:
                 app.setState(new PauseState(app));
                 break;
-            case GAMEOVER:
-                app.setState(new GameOverState());
-                break;
         }
     }
 

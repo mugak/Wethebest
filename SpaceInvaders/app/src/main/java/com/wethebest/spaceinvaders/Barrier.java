@@ -30,6 +30,7 @@ public class Barrier {
         BLOCK_SIZE = new PointF(tempBarrierBlock.getHitBox().width(), tempBarrierBlock.getHitBox().height());
     }
 
+    //Creates all the barrier blocks in a position relative to the top left corner of the barrier
     public void createBarrierBlocks() {
         for (int i = 0; i < DIMENSIONS.x; i++) {
             for (int j = 0; j < DIMENSIONS.y; j++) {
@@ -43,6 +44,7 @@ public class Barrier {
         }
     }
 
+    //Takes in a center position, but sets the object's position to be it's top left corner
     public void setPosition(PointF centerPosition) {
         position = new PointF(centerPosition.x - (DIMENSIONS.x * BLOCK_SIZE.x ), centerPosition.y - (DIMENSIONS.y * BLOCK_SIZE.y ));
     }
