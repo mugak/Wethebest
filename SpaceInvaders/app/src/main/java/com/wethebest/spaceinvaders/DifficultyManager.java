@@ -12,8 +12,8 @@ public class DifficultyManager {
     private final float PLAYERFIRERATEINCREASE = 1.3f;
     private final float PLAYERAMMOREGENRATEINCREASE = 1.2f;
 
-    private final int NUMALIENBUFFS = 2;
-    private final int NUMPLAYERBUFFS = 3;
+    private final int NUMALIENBUFFS = 1;
+    private final int NUMPLAYERBUFFS = 1;
 
     public DifficultyManager(GameObjectManager gom) {
         mGameObjectManager = gom;
