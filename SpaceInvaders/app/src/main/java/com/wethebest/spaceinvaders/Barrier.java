@@ -14,7 +14,7 @@ Instantiated in Barriers
 
 public class Barrier {
     //DEFAULTS
-    private final Point DIMENSIONS = new Point(4, 4); //size is in units of barrier blocks
+    private final Point DIMENSIONS = new Point(3, 3); //size is in units of barrier blocks
 
 
     private final PointF BLOCK_SIZE;
