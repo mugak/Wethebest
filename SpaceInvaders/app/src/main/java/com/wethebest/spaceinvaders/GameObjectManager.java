@@ -135,6 +135,13 @@ public class GameObjectManager {
         return mAlienArmy.aliens.isEmpty();
     }
 
+
+    public void newWave(){
+        removeProjectiles();
+        resetBarriers();
+        mPlayer.resetAmmo();
+        mAlienArmy.spawnNewWave();
+    }
     private void removeBarriers(){
         for(GameObject gameObject : gameObjects){
             if(gameObject instanceof BarrierBlock){
@@ -143,10 +150,18 @@ public class GameObjectManager {
         }
     }
 
-    public void resetBarriers(){
+    private void resetBarriers(){
         removeBarriers();
         mBarriers.createBarriers();
         gameObjects.addAll(mBarriers.getBarrierBlocks());
+    }
+
+    private void removeProjectiles(){
+        for(GameObject gameObject : gameObjects){
+            if(gameObject instanceof AlienProj || gameObject instanceof  PlayerProj){
+                gameObject.isActive = false;
+            }
+        }
     }
 
 }
