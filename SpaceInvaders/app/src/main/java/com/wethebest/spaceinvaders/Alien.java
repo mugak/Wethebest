@@ -10,103 +10,9 @@ It also shoots projectiles randomly.
 Instantiated in AlienArmy
  */
 public class Alien extends GameObject {
-    /*private PointF baseShootInterval = new PointF(3, 15); //shoots every x-y seconds
 
-    //Shoot projectiles randomly
-    private PointF shootInterval = baseShootInterval;
-    public boolean shootNow = false;
-    private Counter waitToShoot;
+    public Alien() {super();}
 
-    //Sound effects
-    private boolean playShoot = false;
-    private boolean playHit = false;
-
-    private boolean movingRight = true; //Current movement direction
-
-    Alien(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
-        super(app, size, spriteID, position, velocity);
-        waitToShoot = new AutomaticCounter(getRandomFloat(shootInterval));
-
-
-    public Alien() {
-        super();
-    }
-
-    public void playAudio() {
-        if(playShoot) {
-            app.soundEngine.alienShoot();
-            playShoot = false;
-        }
-        if(playHit){
-            app.soundEngine.alienHit();
-            playHit = false;
-        }
-    }
-
-    public void collide(GameObject gameObject) {
-        if (gameObject instanceof PlayerProj) {
-            playHit = true;
-            isActive = false;
-        }
-    }
-
-    public boolean outOfBounds() {
-        return mHitBox.horizontalOutOfBounds();
-    }
-
-    public void reverseXVelocity() {
-        movingRight = !movingRight;
-        mHitBox.moveDown();
-        mHitBox.horizontalStayInBounds();
-    }
-
-    public void speedUp(float multiplier) {
-        mHitBox.speed = SPEED * multiplier;
-    }
-
-    public GameObject shoot() {
-            GameObject mProj = GameObjectFactory.getGameObject("AlienProj");
-            mProj.setPosition(mHitBox.centerBottom());
-            playShoot = true;
-            return mProj;
-    }
-
-    private void handleCounters(long fps) {
-        if(waitToShoot.run(fps)) {
-            shootNow = true;
-            waitToShoot.setSeconds(getRandomFloat(shootInterval));
-        }
-    }
-
-    private float getRandomFloat(PointF interval) {
-        return app.rand.nextFloat() * (interval.y - interval.x) + interval.x;
-
-    }
-    //Set the Shoot
-    public void setShootInterval(float factor){
-        float min = (baseShootInterval.x * factor);
-        float max = (baseShootInterval.y * factor);
-        shootInterval = new PointF(min, max);
-    }
-
-    private void checkAlienWin() {
-        app.isGameOver = mHitBox.bottomOutOfBounds();
-    }
-
-    public void decreaseBaseShootInterval(float decreaseAmount) {
-        if(baseShootInterval.x > decreaseAmount) {
-            baseShootInterval.x -= decreaseAmount;
-        } else {
-            baseShootInterval.x = 1;
-        }
-
-        if(baseShootInterval.y > 1) {
-            baseShootInterval.y -= decreaseAmount;
-        } else {
-            baseShootInterval.y = 1;
-        }
-    }
-*/
     public class AlienUpdateComponent implements UpdateComponent {
         private PointF baseShootInterval = new PointF(3, 15); //shoots every x-y seconds
 
@@ -157,7 +63,7 @@ public class Alien extends GameObject {
         }
 
         public boolean outOfBounds() {
-            return getTransform().mHitBox.bottom >= app.screenSize.y;
+            return getTransform().mHitBox.bottom >= app.mScreenSize.y;
         }
 
         public void reverseXVelocity() {
@@ -212,15 +118,6 @@ public class Alien extends GameObject {
             } else {
                 baseShootInterval.y = 1;
             }
-        }
-    }
-
-    public class AlienTransform extends Transform {
-        public AlienTransform(float speed, float objectWidth,
-                              float objectHeight,
-                              PointF startingLocation) {
-
-            super(speed, objectWidth, objectHeight, startingLocation);
         }
     }
 }
