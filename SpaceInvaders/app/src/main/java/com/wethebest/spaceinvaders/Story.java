@@ -95,7 +95,7 @@ public class Story extends AppCompatActivity {
     //items in the menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        
+
 
         if(item.getItemId() == R.id.action_startover) {
             startActivity(new Intent(Story.this, SpaceInvaders.class));
