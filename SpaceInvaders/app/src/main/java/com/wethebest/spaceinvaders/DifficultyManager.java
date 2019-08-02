@@ -10,10 +10,10 @@ public class DifficultyManager {
     private final int NUMALIENINCREASE = 3;
 
     private final float PLAYERFIRERATEINCREASE = 1.5f;
-
+    private final float PLAYERAMMOREGENRATEINCREASE = 1.5f;
 
     private final int NUMALIENBUFFS = 2;
-    private final int NUMPLAYERBUFFS = 1;
+    private final int NUMPLAYERBUFFS = 3;
 
     public DifficultyManager(GameObjectManager gom) {
         mGameObjectManager = gom;
@@ -52,16 +52,18 @@ public class DifficultyManager {
     //Gives the player a random stat upgrade
     public void increaseRandomPlayerBuff() {
         Random rand = new Random();
-int stat = 0;
-       // int stat = rand.nextInt(3);
+        int stat = rand.nextInt(3);
 
         switch (stat) {
             case 0:
                 increasePlayerFireRate();
+                break;
             case 1:
                 increasePlayerMaxAmmo();
+                break;
             case 2:
                 increasePlayerAmmoRegenRate();
+                break;
         }
     }
 
@@ -92,6 +94,6 @@ int stat = 0;
 
     //Increases the rate that the player regenerates used ammo
     private void increasePlayerAmmoRegenRate() {
-
+        mGameObjectManager.mPlayer.increaseAmmoRegenRate(PLAYERAMMOREGENRATEINCREASE);
     }
 }
