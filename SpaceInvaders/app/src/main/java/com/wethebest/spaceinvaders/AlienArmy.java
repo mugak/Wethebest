@@ -44,7 +44,7 @@ public class AlienArmy {
         createAliens();
     }
 
-    //Instantiates and sets positions of every alien
+    //Instantiates and sets positions and velocites of every alien
     private void createAliens() {
         //First get the size of an alien
         GameObject tempAlien = GameObjectFactory.getGameObject("Alien");
@@ -91,6 +91,7 @@ public class AlienArmy {
         reverseNow = false;
     }
 
+    // This sets the initial speed of a wave to be faster if the difficulty manager changes it
     public void increaseInitialSpeed(float multiplier) {
         waveSpeed *= multiplier;
 
@@ -132,6 +133,7 @@ public class AlienArmy {
         return alienProjs;
     }
 
+    //displays all aliens
     public void draw(Canvas canvas) {
         for(Alien alien: aliens) {
             alien.display(canvas);
@@ -157,12 +159,19 @@ public class AlienArmy {
         app.score += 100;
     }
 
+    /*
+        Increase alien fire rate by decreasing the possible amounts of time that aliens have to
+        wait to shoot
+     */
     public void increaseAlienFireRate(float decreaseAmount) {
         for (Alien alien : aliens) {
             alien.decreaseBaseShootInterval(decreaseAmount);
         }
     }
 
+    /*
+        Saves the new number of aliens and recreates the wave with more aliens
+     */
     public void increaseNumAliens(int numNewAliens) {
         numAliens += numNewAliens;
         aliens.clear();
@@ -174,6 +183,9 @@ public class AlienArmy {
         createAliens();
     }
 
+    /*
+        Resets the dimensions to fit the new alien size
+     */
     public void resetDimensions() {
         DIMENSIONS = new Point(numAliens/3 + numAliens % 3, 3 );
     }
