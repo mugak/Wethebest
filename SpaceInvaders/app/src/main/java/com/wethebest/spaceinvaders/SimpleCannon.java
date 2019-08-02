@@ -146,4 +146,8 @@ public class SimpleCannon extends GameObject {
         if(ammoRegenRate < HIGHEST_REGEN_RATE) { ammoRegenRate = HIGHEST_REGEN_RATE; }
         waitForAmmo.setSeconds(ammoRegenRate);
     }
+
+    public void resetAmmo(){
+        ammo = maxAmmo;
+    }
 }
