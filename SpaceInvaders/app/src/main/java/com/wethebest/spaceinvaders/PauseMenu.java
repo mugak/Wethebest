@@ -2,7 +2,9 @@ package com.wethebest.spaceinvaders;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,12 +15,13 @@ Pause Menu gives the game a menu when game play is paused.
 Pause Menu allows player to resume, start over, and end game.
  */
 
-public class PauseMenu extends AppCompatActivity {
+public class PauseMenu extends Activity { //AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+       // getSupportActionBar().hide();
+       enableImmersiveMode();
 
         setContentView(R.layout.activity_pause_menu);
 
@@ -56,7 +59,7 @@ public class PauseMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent=new Intent(PauseMenu.this,Intro.class);
+                Intent intent=new Intent(PauseMenu.this,GameOver.class);
                 startActivityForResult(intent,0);
                 overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
 
@@ -68,6 +71,31 @@ public class PauseMenu extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        if(hasFocus) {
+            enableImmersiveMode();
+        }
+    }
+
+    protected void enableImmersiveMode() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+            );
+        }
+
+
+    } //enables full screen - took from https://stackoverflow.com/questions/29186081/android-immersive-mode-reset-when-changing-activity
+
 
 
 

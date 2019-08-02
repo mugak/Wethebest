@@ -140,20 +140,13 @@ public class GameUI {
     }
 
     private void drawLevel(){
-        int textSize = app.mScreenSize.y / 6;
-        Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Comic-Sans.ttf");
-        mPaint.setTypeface(mTypeface);
-        mPaint.setTextSize(textSize);
-        mPaint.setARGB(255, 255, 255, 255);
-
-        if(app.level > 1) {
-            app.mCanvas.drawText("YEET!!", app.mScreenSize.x / 2, app.mScreenSize.y/2 + mPaint.getTextSize(), mPaint);
-        }
-        app.mCanvas.drawText("Level " + app.level, app.mScreenSize.x / 2, app.mScreenSize.y/2, mPaint);
         resetText();
+        app.mCanvas.drawText("Wave " + app.level, app.mScreenSize.x / 2, app.mScreenSize.y/2, mPaint);
+
     }
 
     private void resetText(){
+        mPaint.setARGB(255, 255, 255, 255);
         Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");
         mPaint.setTypeface(mTypeface);
         mPaint.setTextSize(app.mScreenSize.y / 12);

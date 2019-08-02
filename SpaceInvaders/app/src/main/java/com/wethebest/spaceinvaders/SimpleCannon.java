@@ -22,10 +22,12 @@ public class SimpleCannon extends GameObject {
     public static final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
     public static final int MAX_LIVES = 3;
 
-    private float firingRate = 1f; //how frequently the player can shoot
-    private float ammoRegenRate = 2f; //how frequently ammo regenerates
+    private final float HIGHEST_FIRING_RATE = .1f;
+    private final float HIGHEST_REGEN_RATE = .5f;
+    private float firingRate =  1.5f; //how frequently the player can shoot
+    private float ammoRegenRate = 3f; //how frequently ammo regenerates
 
-    public int maxAmmo = 5; //total projectiles the player can shoot
+    public int maxAmmo = 1; //total projectiles the player can shoot
 
     public int lives;
     public int ammo;
@@ -85,10 +87,6 @@ public class SimpleCannon extends GameObject {
 
                 if (lives == 0) {
                     app.isGameOver = true;
-
-                    app.context.startActivity(new Intent(app.context, GameOver.class));
-
-
                 }
 
                 reset();
@@ -139,11 +137,17 @@ public class SimpleCannon extends GameObject {
 
     public void increaseFireRate(float multiplier) {
         firingRate /= multiplier;
-        waitToShoot.setSeconds(firingRate);
+        if(firingRate < HIGHEST_FIRING_RATE) { firingRate = HIGHEST_FIRING_RATE; }
+            waitToShoot.setSeconds(firingRate);
     }
 
     public void increaseAmmoRegenRate(float multiplier) {
         ammoRegenRate /= multiplier;
+        if(ammoRegenRate < HIGHEST_REGEN_RATE) { ammoRegenRate = HIGHEST_REGEN_RATE; }
         waitForAmmo.setSeconds(ammoRegenRate);
+    }
+
+    public void resetAmmo(){
+        ammo = maxAmmo;
     }
 }

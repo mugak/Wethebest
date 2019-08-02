@@ -17,11 +17,12 @@
         android:layout_alignBottom="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-50dp"
-        android:background="#F44336"
+        android:background="#D0EEFD"
         android:text="300"
-        android:textColor="#CDE8FA"
+        android:textColor="#F44336"
         android:textSize="30sp"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:fontFamily="@font/balonku" />
 
     <TextView
         android:id="@+id/textView3"
@@ -32,6 +33,7 @@
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
         android:text="Your Score:"
+        android:fontFamily="@font/balonku"
         android:textColor="#F44336"
         android:textSize="45sp" />
 
@@ -42,7 +44,9 @@
         android:layout_alignWithParentIfMissing="false"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
         android:text="GAME OVER"
+        android:fontFamily="@font/balonku"
         android:textColor="#F44336"
         android:textSize="45sp" />
 
@@ -51,8 +55,8 @@
         android:id="@+id/gameover"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
         android:contentDescription="TODO"
+        android:visibility="invisible"
         app:srcCompat="@drawable/game_over" />
 
     <Button
@@ -64,6 +68,17 @@
         android:layout_marginBottom="-220dp"
         android:background="#F44336"
         android:text="Start Over"
+        android:textColor="#CDE8FA" />
+
+    <Button
+        android:id="@+id/MainMenu_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-275dp"
+        android:background="#F44336"
+        android:text="Main Menu"
         android:textColor="#CDE8FA" />
 
 

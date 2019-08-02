@@ -44,6 +44,8 @@ public class Barrier {
         }
     }
 
+
+
     //Takes in a center position, but sets the object's position to be it's top left corner
     public void setPosition(PointF centerPosition) {
         position = new PointF(centerPosition.x - (DIMENSIONS.x * BLOCK_SIZE.x ), centerPosition.y - (DIMENSIONS.y * BLOCK_SIZE.y ));

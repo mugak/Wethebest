@@ -17,9 +17,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
-        android:text="WarnMe: Seagulls"
+        android:text="Sky Turds 💩"
         android:textColor="#F44336"
-        android:textSize="45sp" />
+        android:textSize="75sp"
+        android:fontFamily="@font/balonku" />
 
 
     <Button
@@ -32,31 +33,31 @@
         android:text="Play Now"
         android:textColor="#CDE8FA" />
 
-    <Button
-        android:id="@+id/Story_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Play_btn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-70dp"
-        android:background="#F44336"
-        android:text="Story Mode"
-        android:textColor="#CDE8FA" />
-
-
-
 
     <EditText
         android:id="@+id/ParentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:visibility="invisible"
+        android:visibility="invisible" />
 
-        />
-
+    <Button
+        android:id="@+id/Story_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Play_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-100dp"
+        android:background="#F44336"
+        android:text="Story Mode"
+        android:textColor="#CDE8FA" />
 
 
 </RelativeLayout>

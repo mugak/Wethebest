@@ -17,9 +17,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
-        android:text="WarnMe: Seagulls"
+        android:text="Sky Turds"
         android:textColor="#F44336"
-        android:textSize="45sp" />
+        android:textSize="45sp"
+        android:fontFamily="@font/balonku"/>
 
 
     <Button

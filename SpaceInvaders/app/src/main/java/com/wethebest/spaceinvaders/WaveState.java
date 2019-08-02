@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 
@@ -52,11 +53,12 @@ public class WaveState implements GameState {
         draw();
 
         if (app.isGameOver) {
-            app.level = 1;
-            app.newGame();
+            app.context.startActivity(new Intent(app.context, GameOver.class));
+            //app.level = 1;
+            //app.newGame();
         } else if (isWaveDefeated(app)) {
             app.level++;
-            app.mGameObjectManager.mAlienArmy.spawnNewWave();
+            app.mGameObjectManager.newWave();
             app.difficultyManager.increaseGameDifficulty();
             changeState(app, State.WAVE);
         }
