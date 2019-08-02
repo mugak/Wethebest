@@ -18,43 +18,44 @@ public class GameObjectFactory {
 
     GameObjectFactory(){}
 
-    public static GameObject getGameObject(String objectName) {
-        if(objectName.equalsIgnoreCase("ALIEN")) {
+    //public static GameObject getGameObject(String objectName) {
+    public static GameObject getGameObject(GameObjectType objectName) {
+        if(objectName == GameObjectType.ALIEN) {
             size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
             spriteID = R.drawable.seagull;
             position = new PointF(0, 0);
             velocity = 50f;
             return new Alien(app, size, spriteID, position, velocity);
         }
-        else if(objectName.equalsIgnoreCase("PLAYER")) {
+        else if(objectName == GameObjectType.PLAYER) {
             size = new PointF(app.mScreenSize.x / 7, app.mScreenSize.x / 10);
             spriteID = R.drawable.biploar_red;
             position = new PointF(app.mScreenSize.x / 2, app.mScreenSize.y - size.y*3/4);
             velocity = 0f;
             return new SimpleCannon(app, size, spriteID, position, velocity);
         }
-        else if(objectName.equalsIgnoreCase("BARRIERBLOCK")) {
+        else if(objectName == GameObjectType.BARRIER_BLOCK) {
             size = new PointF(app.mScreenSize.x / 30, app.mScreenSize.x / 60);
             spriteID = R.drawable.cloud;
             position = new PointF(0, 0);
             velocity = 0;
             return new BarrierBlock(app, size, spriteID, position, velocity);
         }
-        else if(objectName.equalsIgnoreCase("PLAYERPROJ")) {
+        else if(objectName == GameObjectType.PLAYER_PROJ) {
             size = new PointF(app.mScreenSize.x / 80, app.mScreenSize.x / 40);
             spriteID = R.drawable.missile;
             position = new PointF(0, 0);
             velocity = -app.mScreenSize.y;
             return new PlayerProj(app, size, spriteID, position, velocity);
         }
-        else if(objectName.equalsIgnoreCase("ALIENPROJ")) {
+        else if(objectName == GameObjectType.ALIEN_PROJ) {
             size = new PointF(app.mScreenSize.x / 60, app.mScreenSize.x / 60);
             spriteID = R.drawable.smiley_poop;
             position = new PointF(0, 0);
             velocity = app.mScreenSize.y / 4;
             return new AlienProj(app, size, spriteID, position, velocity);
         }
-        else if(objectName.equalsIgnoreCase("UFO")) {
+        else if(objectName == GameObjectType.UFO) {
             size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
             spriteID = R.drawable.spaceinvader;
             position = new PointF(50, 50);
