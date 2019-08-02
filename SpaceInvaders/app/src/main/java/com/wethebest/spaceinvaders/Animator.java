@@ -14,7 +14,7 @@ public class Animator {
     private long mFrameTicker;
     private int mFramePeriod;
 
-    Animator(PointF size, int frameCount, int fps) {
+    Animator(PointF size, int frameCount) {
 
         this.mCurrentFrame = 0;
         this.mFrameCount = frameCount;
