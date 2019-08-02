@@ -17,6 +17,7 @@ public class BarrierBlock extends GameObject {
         super(app, size, spriteID, position, velocity);
     }
 
+    //Barriers have no need to update each frame
     public void update(long fps) { }
 
     public void playAudio() {
@@ -26,6 +27,7 @@ public class BarrierBlock extends GameObject {
         }
     }
 
+    //When hit by a alien projectile deactive the block so the game object manager removes it
     public void collide(GameObject gameObject) {
         if (gameObject instanceof AlienProj || gameObject instanceof PlayerProj) {
             playHit = true;
