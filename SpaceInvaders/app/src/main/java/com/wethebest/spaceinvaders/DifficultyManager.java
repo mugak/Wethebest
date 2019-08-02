@@ -7,7 +7,7 @@ public class DifficultyManager {
 
     private final float ALIENSPEEDMULTIPLIER = (float) 1.2;
     private final float ALIENFIRERATEINCREASE = (float) 2;
-    private final int NUMALIENINCREASE = 2;
+    private final int NUMALIENINCREASE = 3;
 
     private final int NUMALIENBUFFS = 2;
     private final int NUMPLAYERBUFFS = 1;
