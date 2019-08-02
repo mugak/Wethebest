@@ -35,11 +35,11 @@ public class Intro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        //background music
         new BackgroundSoundService();
 
         Button Storybtn = findViewById(R.id.Story_btn);
         Button Playbtn = findViewById(R.id.Play_btn);
-
 
         //Story button goes directly to Story class
         Storybtn.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +49,6 @@ public class Intro extends AppCompatActivity {
                 Intent intent=new Intent(Intro.this,Story.class);
                 startActivityForResult(intent,0);
                 overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
-
 
             }
         });
@@ -63,11 +62,8 @@ public class Intro extends AppCompatActivity {
                 startActivityForResult(intent,0);
                 overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
 
-
             }
         });
-
-
 
 
     }
@@ -112,6 +108,19 @@ public class Intro extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    private MediaPlayer mMediaPlayer;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMediaPlayer = MediaPlayer.create(this,R.raw.example);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
+    }
 
+    @Override
+    protected void onPause() {
+        mMediaPlayer.stop(); mMediaPlayer.release();
+        super.onPause();
+    }
 
 }
