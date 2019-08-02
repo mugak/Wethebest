@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/resume_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-200dp"
+        android:layout_marginBottom="-100dp"
         android:background="#F44336"
         android:text="End Game"
         android:textColor="#CDE8FA" />
@@ -37,10 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/resume_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-480dp"
+        android:layout_marginBottom="-265dp"
         android:background="#F44336"
         android:text="Start Over"
         android:textColor="#CDE8FA" />
+
 
 
 
