@@ -29,6 +29,8 @@ public class SoundEngine {
     private int alienHitID = -1;
     private int playerHitID = -1;
     private int engineHumID = -1;
+    private int UFOID = -1;
+    private int UFOHitID = -1;
     public boolean loaded = false;
 
     public float masterVolume = .5f; // Volumes range from 0 through 1
@@ -81,6 +83,8 @@ public class SoundEngine {
             barrierHitID = sp.load(assetManager.openFd("barrierhit.ogg"),0);
             alienHitID = sp.load(assetManager.openFd("enemyhit.ogg"), 0);
             playerHitID = sp.load(assetManager.openFd("playerhit.ogg"),0);
+            UFOID = sp.load(assetManager.openFd("ufo.ogg"),0);
+            UFOHitID = sp.load(assetManager.openFd("ufohit.ogg"),0);
             engineHumID = sp.load(assetManager.openFd("enginehum.ogg"),0);
 
 
@@ -109,6 +113,13 @@ public class SoundEngine {
     public void playerHit(){
         sp.play(playerHitID, masterVolume, masterVolume, 1,0,1);
     }
+
+    public void UFO(){
+        sp.play(UFOID, masterVolume, masterVolume, 1,0,1);
+    }
+
+    public void UFOHit() { sp.play(UFOHitID, masterVolume, masterVolume, 1,0,1); }
+
 
     public void engineHum(float factor){
         int rateBound = 5;

@@ -35,7 +35,7 @@ public class GameObjectFactory {
         }
         else if(objectName.equalsIgnoreCase("BARRIERBLOCK")) {
             size = new PointF(app.mScreenSize.x / 30, app.mScreenSize.x / 60);
-            spriteID = R.drawable.white_cloud;
+            spriteID = R.drawable.cloud;
             position = new PointF(0, 0);
             velocity = 0;
             return new BarrierBlock(app, size, spriteID, position, velocity);
@@ -56,7 +56,7 @@ public class GameObjectFactory {
         }
         else if(objectName.equalsIgnoreCase("UFO")) {
             size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
-            spriteID = R.drawable.invader_ufo_flying01;
+            spriteID = R.drawable.spaceinvader;
             position = new PointF(50, 50);
             velocity = 200f;
             return new UFO(app, size, spriteID, position, velocity);
