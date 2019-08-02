@@ -12,6 +12,7 @@ import android.graphics.Paint;
 public class WaveState implements GameState {
     private SpaceInvadersApp mApp;
 
+
     public WaveState(SpaceInvadersApp app) {
         mApp = app;
         mApp.score = 0;
@@ -59,7 +60,7 @@ public class WaveState implements GameState {
         if (mApp.mOurHolder.getSurface().isValid()) {
             mApp.mCanvas = mApp.mOurHolder.lockCanvas();
 
-            mApp.mCanvas.drawColor(Color.argb(255, 0, 0, 0));
+            mApp.mCanvas.drawColor(Color.argb(255, 135, 206, 250));
 
             mApp.mGameObjectManager.displayGameObjects(mApp.mCanvas);
             mApp.mGameUI.draw(mApp.mCanvas);

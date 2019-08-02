@@ -21,14 +21,14 @@ public class GameObjectFactory {
     public static GameObject getGameObject(String objectName) {
         if(objectName.equalsIgnoreCase("ALIEN")) {
             size = new PointF(app.mScreenSize.x / 15, app.mScreenSize.y / 10);
-            spriteID = R.drawable.invader_a01;
+            spriteID = R.drawable.seagull;
             position = new PointF(0, 0);
             velocity = 50f;
             return new Alien(app, size, spriteID, position, velocity);
         }
         else if(objectName.equalsIgnoreCase("PLAYER")) {
             size = new PointF(app.mScreenSize.x / 10, app.mScreenSize.x / 10);
-            spriteID = R.drawable.player;
+            spriteID = R.drawable.biploar_red;
             position = new PointF(app.mScreenSize.x / 2, app.mScreenSize.y - app.mScreenSize.x/10);
             velocity = 0f;
             return new SimpleCannon(app, size, spriteID, position, velocity);
@@ -49,7 +49,7 @@ public class GameObjectFactory {
         }
         else if(objectName.equalsIgnoreCase("ALIENPROJ")) {
             size = new PointF(app.mScreenSize.x / 240, app.mScreenSize.x / 40);
-            spriteID = R.drawable.alien_laser;
+            spriteID = R.drawable.smiley_poop;
             position = new PointF(0, 0);
             velocity = app.mScreenSize.y / 4;
             return new AlienProj(app, size, spriteID, position, velocity);

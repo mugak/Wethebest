@@ -11,8 +11,8 @@ Instantiated in GameObjectManager
 */
 public class SimpleCannon extends GameObject {
     //DEFAULTS
-    private final int SPRITE_ID = R.drawable.player;
-    private final int INVINCIBLE_SPRITE_ID = R.drawable.player_invincible;
+    private final int SPRITE_ID = R.drawable.biploar_red;
+    private final int INVINCIBLE_SPRITE_ID = R.drawable.biploar_red_invincible;
 
     public static final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
     public static final int MAX_LIVES = 3;
