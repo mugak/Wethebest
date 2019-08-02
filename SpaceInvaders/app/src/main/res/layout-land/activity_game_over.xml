@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-50dp"
         android:background="#F44336"
-        android:text="00000"
+        android:text="300"
         android:textColor="#CDE8FA"
         android:textSize="30sp"
         android:visibility="visible" />

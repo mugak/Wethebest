@@ -31,6 +31,7 @@ public class GameUI {
     private SpaceInvadersApp app;
     private long fps = 0;
 
+
     GameUI(SpaceInvadersApp app) {
         this.app = app;
 
@@ -44,6 +45,8 @@ public class GameUI {
         mPaint.setTypeface(mTypeface);
         mPaint.setTextSize(app.mScreenSize.y / 12);
     }
+
+
 
 
     public void update(int score) {
@@ -98,6 +101,7 @@ public class GameUI {
         if(mRect.contains(point.x, point.y)){
             app.pause();
             app.context.startActivity(new Intent( (app.context), PauseMenu.class));
+
         }
 
     }

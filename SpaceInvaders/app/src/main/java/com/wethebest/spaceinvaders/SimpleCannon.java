@@ -2,6 +2,8 @@ package com.wethebest.spaceinvaders;
 
 import android.content.Intent;
 import android.graphics.PointF;
+import android.os.BaseBundle;
+import android.os.Bundle;
 
 /*
 SimpleCannon represents the cannon controlled by the player
@@ -11,6 +13,8 @@ It has features such as lives, firing rate, invincibility
 Instantiated in GameObjectManager
 */
 public class SimpleCannon extends GameObject {
+
+
     //DEFAULTS
     private final int SPRITE_ID = R.drawable.biploar_red;
     private final int INVINCIBLE_SPRITE_ID = R.drawable.biploar_red_invincible;
@@ -81,7 +85,10 @@ public class SimpleCannon extends GameObject {
 
                 if(lives == 0) {
                     app.isGameOver = true;
+
                     app.context.startActivity(new Intent(app.context, GameOver.class));
+
+
                 }
 
                 reset();

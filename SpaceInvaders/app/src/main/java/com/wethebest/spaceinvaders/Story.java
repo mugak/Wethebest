@@ -59,6 +59,7 @@ public class Story extends AppCompatActivity {
             {
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                 {
+
                     switch (keyCode)
                     {
                         case KeyEvent.KEYCODE_DPAD_CENTER:
@@ -67,6 +68,7 @@ public class Story extends AppCompatActivity {
                             Intent intent=new Intent(Story.this,SpaceInvaders.class);
                             startActivityForResult(intent,0);
                             overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
+
 
                             return true;
                         default:
