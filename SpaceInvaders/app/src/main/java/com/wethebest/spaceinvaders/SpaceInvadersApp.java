@@ -33,7 +33,7 @@ class SpaceInvadersApp extends SurfaceView implements Runnable {
     GameObjectManager mGameObjectManager;
 
     GameUI mGameUI;
-    public int score;
+    public static int score;
     public long fps;
 
     private volatile boolean mPlaying;

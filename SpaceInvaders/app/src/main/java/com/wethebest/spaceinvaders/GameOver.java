@@ -21,6 +21,7 @@ public class GameOver extends AppCompatActivity {
         setContentView(R.layout.activity_game_over);
 
         TextView Score = findViewById(R.id.Score);
+        Score.setText(String.valueOf(SpaceInvadersApp.score));
 
         Button StartOver = findViewById(R.id.StartOver_btn);
 

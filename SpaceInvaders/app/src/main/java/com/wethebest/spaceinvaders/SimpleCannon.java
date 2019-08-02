@@ -87,10 +87,6 @@ public class SimpleCannon extends GameObject {
 
                 if (lives == 0) {
                     app.isGameOver = true;
-
-                    app.context.startActivity(new Intent(app.context, GameOver.class));
-
-
                 }
 
                 reset();
