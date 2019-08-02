@@ -8,6 +8,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+/*
+Pause Menu gives the game a menu when game play is paused.
+Pause Menu allows player to resume, start over, and end game.
+ */
+
 public class PauseMenu extends AppCompatActivity {
 
     @Override
@@ -22,6 +27,7 @@ public class PauseMenu extends AppCompatActivity {
         Button StartOverbtn = findViewById(R.id.StartOver_btn);
         Button EndGamebtn = findViewById(R.id.End_btn);
 
+        //Resume button goes to back to game without restarting activity
         Resumebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +39,7 @@ public class PauseMenu extends AppCompatActivity {
             }
         });
 
+        //Goes to Game, but restarts
         StartOverbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +51,7 @@ public class PauseMenu extends AppCompatActivity {
             }
         });
 
+        //Goes to Intro class, to the very start
         EndGamebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

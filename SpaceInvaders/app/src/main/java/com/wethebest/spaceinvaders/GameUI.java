@@ -33,6 +33,7 @@ public class GameUI {
     private long fps = 0;
     Counter counter = new Counter(3);
 
+
     GameUI(SpaceInvadersApp app) {
         this.app = app;
 
@@ -45,6 +46,8 @@ public class GameUI {
         resetText();
         counter.on = true;
     }
+
+
 
 
     public void update(int score) {
@@ -104,6 +107,7 @@ public class GameUI {
         if(mRect.contains(point.x, point.y)){
             app.pause();
             app.context.startActivity(new Intent( (app.context), PauseMenu.class));
+
         }
 
     }

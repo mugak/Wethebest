@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 /*
-GameOver draws the game over screen
+GameOver draws the game over screen after player dies and lives = 0.
  */
 
 public class GameOver extends AppCompatActivity {
@@ -21,9 +21,10 @@ public class GameOver extends AppCompatActivity {
         setContentView(R.layout.activity_game_over);
 
         TextView Score = findViewById(R.id.Score);
-        Score.setText("");
+
         Button StartOver = findViewById(R.id.StartOver_btn);
 
+        //goes to intro class after button start over is clicked
         StartOver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +37,7 @@ public class GameOver extends AppCompatActivity {
         });
     }
 
+    //menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

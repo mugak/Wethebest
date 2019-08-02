@@ -15,11 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View.OnKeyListener;
 import android.view.KeyEvent;
-import com.wethebest.spaceinvaders.BackgroundSoundService;
-
-
-
-
 import androidx.appcompat.app.AppCompatActivity;
 
 /*
@@ -113,7 +108,6 @@ public class Intro extends AppCompatActivity {
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
     }
-
     @Override
     protected void onPause() {
         mMediaPlayer.stop(); mMediaPlayer.release();
