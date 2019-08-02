@@ -47,7 +47,7 @@ public class WaveState implements GameState {
         draw();
 
         if (isGameOver(app)) {
-            changeState(app, State.WAVE);
+            app.newGame();
         } else if (isWaveDefeated(app)) {
             app.mGameObjectManager.mAlienArmy.spawnNewWave();
             app.difficultyManager.increaseGameDifficulty();
