@@ -1,5 +1,6 @@
 package com.wethebest.spaceinvaders;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,6 +9,8 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
+
+import static androidx.core.content.ContextCompat.startActivity;
 
 /*
 GameUI draws the UI while the game is playing
@@ -23,6 +26,8 @@ public class GameUI {
     private Paint mPaint;
     private Bitmap mBitmap;
     private RectF mRect;
+    //For pause button
+    private RectF pRect;
     private SpaceInvadersApp app;
     private long fps = 0;
 
@@ -34,6 +39,7 @@ public class GameUI {
         mAmmo = app.getPlayer().maxAmmo;
         mPaint = new Paint();
         mRect = new RectF();
+        pRect = new RectF();
         Typeface mTypeface = Typeface.createFromAsset(this.app.context.getAssets(), "fonts/Bangers-Regular.ttf");
         mPaint.setTypeface(mTypeface);
         mPaint.setTextSize(app.mScreenSize.y / 12);
@@ -85,10 +91,17 @@ public class GameUI {
         mBitmap = BitmapFactory.decodeResource(app.context.getResources(), PAUSE_BUTTON_SPRITE_ID);
         mBitmap = Bitmap.createScaledBitmap(mBitmap, (int) mRect.width(), (int) mRect.height(), true);
         canvas.drawBitmap(mBitmap, mRect.left, mRect.top, null);
-//        MotionEvent motionEvent = MotionEvent.;
-//        if(app.onTouchEvent(MotionEvent.ACTION_UP){
-//
-//        }
+
+    }
+
+    public void pauseButton(PointF point){
+        if(mRect.contains(point.x, point.y)){
+            //app.mGameState.changeState(app, State.PAUSE);
+
+            app.pause();
+            app.context.startActivity(new Intent( (app.context), PauseMenu.class));
+        }
+
     }
 
     public void drawWaitToShoot(Canvas canvas) {
