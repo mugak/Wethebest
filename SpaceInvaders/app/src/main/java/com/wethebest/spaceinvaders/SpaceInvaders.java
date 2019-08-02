@@ -9,6 +9,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.graphics.Point;
@@ -38,6 +39,7 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     Canvas myCanvas;
     public float yAcceleration;
     private SensorManager sensorManager;
+    private MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +79,11 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
         super.onResume();
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_GAME);
         mSpaceInvadersApp.resume();
+
+        super.onResume();
+        mMediaPlayer = MediaPlayer.create(this,R.raw.example);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
     }
 
     @Override
@@ -89,6 +96,9 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
     protected void onPause() {
         super.onPause();
         mSpaceInvadersApp.pause();
+
+        mMediaPlayer.stop(); mMediaPlayer.release();
+        super.onPause();
     }
 
 
@@ -142,11 +152,8 @@ public class SpaceInvaders extends Activity implements SensorEventListener { //A
 
     } //enables full screen - took from https://stackoverflow.com/questions/29186081/android-immersive-mode-reset-when-changing-activity
 
-//    //main menu
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        getMenuInflater().inflate(R.menu.main_menu, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
+
+
+
+
 }

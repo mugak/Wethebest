@@ -40,7 +40,7 @@ public class Intro extends AppCompatActivity {
 
         Button Storybtn = findViewById(R.id.Story_btn);
         Button Playbtn = findViewById(R.id.Play_btn);
-        
+
         //Story button goes directly to Story class
         Storybtn.setOnClickListener(new View.OnClickListener() {
             @Override
