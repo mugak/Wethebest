@@ -9,7 +9,7 @@ Updated in GameObjectManager
  */
 
 public class UFOSpawner {
-    private final PointF SHOOT_INTERVAL = new PointF(20, 30); // every x-y seconds
+    private final PointF SHOOT_INTERVAL = new PointF(15, 25); // every x-y seconds
     private Counter spawnUFO;
 
     private SpaceInvadersApp app;

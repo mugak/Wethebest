@@ -18,7 +18,7 @@ public class SimpleCannon extends GameObject {
     public static final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
     public static final int MAX_LIVES = 3;
 
-    public float firingRate = .1f; //how frequently the player can shoot
+    public float firingRate = .2f; //how frequently the player can shoot
     public float ammoRegenRate = 1f; //how frequently ammo regenerates
     public int maxAmmo = 5; //total projectiles the player can shoot
 
@@ -128,5 +128,11 @@ public class SimpleCannon extends GameObject {
                 ammo = maxAmmo;
             }
         }
+    }
+
+    public void increaseFireRate(float multiplier) {
+        firingRate /= multiplier;
+        waitToShoot.setSeconds(firingRate);
+
     }
 }

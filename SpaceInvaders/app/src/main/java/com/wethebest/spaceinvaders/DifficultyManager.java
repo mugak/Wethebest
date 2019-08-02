@@ -5,9 +5,12 @@ import java.util.Random;
 public class DifficultyManager {
     private GameObjectManager mGameObjectManager;
 
-    private final float ALIENSPEEDMULTIPLIER = (float) 1.2;
-    private final float ALIENFIRERATEINCREASE = (float) 2;
+    private final float ALIENSPEEDMULTIPLIER = 1.2f;
+    private final float ALIENFIRERATEINCREASE = 2f;
     private final int NUMALIENINCREASE = 3;
+
+    private final float PLAYERFIRERATEINCREASE = 1.5f;
+
 
     private final int NUMALIENBUFFS = 2;
     private final int NUMPLAYERBUFFS = 1;
@@ -79,7 +82,7 @@ public class DifficultyManager {
 
     //Increases the number of shots a player fires per second
     private void increasePlayerFireRate() {
-
+        mGameObjectManager.mPlayer.increaseFireRate(PLAYERFIRERATEINCREASE);
     }
 
     //Increases the maximum ammount of ammo that a player can have at one time
