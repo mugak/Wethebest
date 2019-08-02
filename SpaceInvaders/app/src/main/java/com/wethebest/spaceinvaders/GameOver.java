@@ -2,6 +2,7 @@ package com.wethebest.spaceinvaders;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 GameOver draws the game over screen after player dies and lives = 0.
  */
 
-public class GameOver extends AppCompatActivity {
+public class GameOver extends Activity {// extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,29 +39,29 @@ public class GameOver extends AppCompatActivity {
         });
     }
 
-    //menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    //items in the menu
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        if(item.getItemId() == R.id.action_startover) {
-            startActivity(new Intent(GameOver.this, SpaceInvaders.class));
-
-        }
-        if(item.getItemId() == R.id.action_newgame) {
-            startActivity(new Intent(GameOver.this, Intro.class));
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    //menu
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
+//
+//        return super.onCreateOptionsMenu(menu);
+//    }
+//
+//    //items in the menu
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//
+//        if(item.getItemId() == R.id.action_startover) {
+//            startActivity(new Intent(GameOver.this, SpaceInvaders.class));
+//
+//        }
+//        if(item.getItemId() == R.id.action_newgame) {
+//            startActivity(new Intent(GameOver.this, Intro.class));
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }

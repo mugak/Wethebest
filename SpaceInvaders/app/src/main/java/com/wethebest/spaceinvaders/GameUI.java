@@ -150,7 +150,7 @@ public class GameUI {
             app.mCanvas.drawText("YEET!!", app.mScreenSize.x / 2, app.mScreenSize.y/2 + mPaint.getTextSize(), mPaint);
         }
         resetText();
-        app.mCanvas.drawText("Level " + app.level, app.mScreenSize.x / 2, app.mScreenSize.y/2, mPaint);
+        app.mCanvas.drawText("Wave " + app.level, app.mScreenSize.x / 2, app.mScreenSize.y/2, mPaint);
 
     }
 
