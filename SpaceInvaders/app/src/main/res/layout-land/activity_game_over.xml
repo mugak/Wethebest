@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="-550dp"
+        android:layout_marginBottom="-220dp"
         android:background="#F44336"
         android:text="Start Over"
         android:textColor="#CDE8FA" />
