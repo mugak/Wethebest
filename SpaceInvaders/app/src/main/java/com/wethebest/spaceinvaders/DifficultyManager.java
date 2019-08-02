@@ -5,12 +5,15 @@ import java.util.Random;
 public class DifficultyManager {
     private GameObjectManager mGameObjectManager;
 
-    private final float ALIENSPEEDMULTIPLIER = (float) 1.2;
-    private final float ALIENFIRERATEINCREASE = (float) 2;
+    private final float ALIENSPEEDMULTIPLIER = 1.2f;
+    private final float ALIENFIRERATEINCREASE = 2f;
     private final int NUMALIENINCREASE = 3;
 
+    private final float PLAYERFIRERATEINCREASE = 1.5f;
+    private final float PLAYERAMMOREGENRATEINCREASE = 1.5f;
+
     private final int NUMALIENBUFFS = 2;
-    private final int NUMPLAYERBUFFS = 1;
+    private final int NUMPLAYERBUFFS = 3;
 
     public DifficultyManager(GameObjectManager gom) {
         mGameObjectManager = gom;
@@ -49,16 +52,18 @@ public class DifficultyManager {
     //Gives the player a random stat upgrade
     public void increaseRandomPlayerBuff() {
         Random rand = new Random();
-
         int stat = rand.nextInt(3);
 
         switch (stat) {
             case 0:
                 increasePlayerFireRate();
+                break;
             case 1:
                 increasePlayerMaxAmmo();
+                break;
             case 2:
                 increasePlayerAmmoRegenRate();
+                break;
         }
     }
 
@@ -79,7 +84,7 @@ public class DifficultyManager {
 
     //Increases the number of shots a player fires per second
     private void increasePlayerFireRate() {
-
+        mGameObjectManager.mPlayer.increaseFireRate(PLAYERFIRERATEINCREASE);
     }
 
     //Increases the maximum ammount of ammo that a player can have at one time
@@ -89,6 +94,6 @@ public class DifficultyManager {
 
     //Increases the rate that the player regenerates used ammo
     private void increasePlayerAmmoRegenRate() {
-
+        mGameObjectManager.mPlayer.increaseAmmoRegenRate(PLAYERAMMOREGENRATEINCREASE);
     }
 }

@@ -22,8 +22,9 @@ public class SimpleCannon extends GameObject {
     public static final int INVINCIBLE_SECONDS = 2; //how long cannon is invincible
     public static final int MAX_LIVES = 3;
 
-    public float firingRate = .1f; //how frequently the player can shoot
-    public float ammoRegenRate = 1f; //how frequently ammo regenerates
+    private float firingRate = 1f; //how frequently the player can shoot
+    private float ammoRegenRate = 2f; //how frequently ammo regenerates
+
     public int maxAmmo = 5; //total projectiles the player can shoot
 
     public int lives;
@@ -54,23 +55,22 @@ public class SimpleCannon extends GameObject {
     }
 
     public void update(long fps) {
-        if(((SpaceInvaders)app.context).yAcceleration >= .08f //tilt thresholds for cannon to stay still
-                || ((SpaceInvaders)app.context).yAcceleration <= -.08f)
-        {
+        if (((SpaceInvaders) app.context).yAcceleration >= .08f //tilt thresholds for cannon to stay still
+                || ((SpaceInvaders) app.context).yAcceleration <= -.08f) {
             //change this multiplying constant to change movement speed
-            mHitBox.moveHorizontally(((SpaceInvaders)app.context).yAcceleration * 10);
+            mHitBox.moveHorizontally(((SpaceInvaders) app.context).yAcceleration * 10);
             mHitBox.horizontalStayInBounds();
 
         }
         handleCounters(fps);
     }
 
-    public void playAudio(){
-        if(playShoot) {
+    public void playAudio() {
+        if (playShoot) {
             app.soundEngine.playerShoot();
             playShoot = false;
         }
-        if(playHit){
+        if (playHit) {
             app.soundEngine.playerHit();
             playHit = false;
         }
@@ -79,11 +79,11 @@ public class SimpleCannon extends GameObject {
     }
 
     public void collide(GameObject gameObject) {
-        if(gameObject instanceof AlienProj) {
-            if(!invincible.on) {
+        if (gameObject instanceof AlienProj) {
+            if (!invincible.on) {
                 lives -= 1;
 
-                if(lives == 0) {
+                if (lives == 0) {
                     app.isGameOver = true;
 
                     app.context.startActivity(new Intent(app.context, GameOver.class));
@@ -112,7 +112,7 @@ public class SimpleCannon extends GameObject {
     }
 
     public boolean canShoot() {
-        if(waitToShoot.on || ammo <= 0) {
+        if (waitToShoot.on || ammo <= 0) {
             return false; //if player cant shoot yet, return false
         }
 
@@ -122,18 +122,28 @@ public class SimpleCannon extends GameObject {
 
     private void handleCounters(long fps) {
         //Counter.run() returns true when done counting
-        if(invincible.run(fps)) {
+        if (invincible.run(fps)) {
             mHitBox.setBitmap(SPRITE_ID);
         }
 
-        if(waitToShoot.run(fps)) {
+        if (waitToShoot.run(fps)) {
         }
 
-        if(waitForAmmo.run(fps)) {
+        if (waitForAmmo.run(fps)) {
             ammo += 1;
-            if(ammo >= maxAmmo) {
+            if (ammo >= maxAmmo) {
                 ammo = maxAmmo;
             }
         }
+    }
+
+    public void increaseFireRate(float multiplier) {
+        firingRate /= multiplier;
+        waitToShoot.setSeconds(firingRate);
+    }
+
+    public void increaseAmmoRegenRate(float multiplier) {
+        ammoRegenRate /= multiplier;
+        waitForAmmo.setSeconds(ammoRegenRate);
     }
 }
