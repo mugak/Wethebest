@@ -31,6 +31,19 @@ public class GameOver extends Activity {// extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent=new Intent(GameOver.this,SpaceInvaders.class);
+                startActivityForResult(intent,0);
+                overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
+
+            }
+        });
+
+        Button IntroPage = findViewById(R.id.MainMenu_btn);
+
+        StartOver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
                 Intent intent=new Intent(GameOver.this,Intro.class);
                 startActivityForResult(intent,0);
                 overridePendingTransition( R.anim.trans_left_in, R.anim.trans_left_out );
