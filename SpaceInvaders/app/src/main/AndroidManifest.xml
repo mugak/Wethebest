@@ -14,7 +14,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".GameOver" />
         <activity android:name=".UI" />
-        <activity android:name=".SpaceInvaders" />
+        <activity android:name=".SpaceInvaders"/>
         <activity android:name=".Intro">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

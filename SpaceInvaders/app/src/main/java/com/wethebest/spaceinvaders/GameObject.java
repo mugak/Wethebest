@@ -49,6 +49,8 @@ public abstract class GameObject {
 
     public void setPosition(PointF position) { mHitBox.setPosition(position); }
 
+    public void setVelocity(float velocity) { mHitBox.setVelocity(velocity); }
+
     public boolean isActive(){
         return isActive;
     }

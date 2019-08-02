@@ -34,9 +34,12 @@ public class SimpleCannon extends GameObject {
 
     boolean testBool = false;
 
+    SpaceInvadersApp mApp;
+
     SimpleCannon(SpaceInvadersApp app, PointF size, int spriteID, PointF position, float velocity) {
         super(app, size, spriteID, position, velocity);
 
+        mApp = app;
         lives = MAX_LIVES;
         ammo = maxAmmo;
 
@@ -74,6 +77,11 @@ public class SimpleCannon extends GameObject {
         if(gameObject instanceof AlienProj) {
             if(!invincible.on) {
                 lives -= 1;
+
+                if(lives == 0) {
+                    app.isGameOver = true;
+                }
+
                 reset();
                 invincible.on = true;
                 mHitBox.setBitmap(INVINCIBLE_SPRITE_ID);

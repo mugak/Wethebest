@@ -19,8 +19,7 @@ public class AlienArmy {
     public int numAliens = 12;
 
     //Fit NUM_ALIENS of aliens in 4 rows and 4 columns
-    private final Point DIMENSIONS = new Point(numAliens/4 + numAliens % 4,
-                                                numAliens/4 );
+    private Point DIMENSIONS = new Point(numAliens/3 + numAliens % 3, 3 );
     //SET BASED ON SCREEN SIZE
     private final float ROW_SPACING;
     private final float COL_SPACING;
@@ -36,6 +35,8 @@ public class AlienArmy {
     AlienArmy(SpaceInvadersApp app) {
         this.app = app;
 
+        waveSpeed = GameObjectFactory.getGameObject("alien").SPEED;
+
         ROW_SPACING = 0;
         COL_SPACING = app.mScreenSize.y / 8;
         STARTING_POSITION = new PointF(app.mScreenSize.y / 10, app.mScreenSize.y / 10);
@@ -43,7 +44,7 @@ public class AlienArmy {
         createAliens();
     }
 
-    //Instantiates and sets positions of every alien
+    //Instantiates and sets positions and velocites of every alien
     private void createAliens() {
         //First get the size of an alien
         GameObject tempAlien = GameObjectFactory.getGameObject("Alien");
@@ -59,6 +60,7 @@ public class AlienArmy {
 
                 GameObject alien = GameObjectFactory.getGameObject("Alien");
                 alien.setPosition(position);
+                alien.setVelocity(waveSpeed);
                 aliens.add((Alien) alien);
                 numAliensToAdd--;
             }
@@ -89,9 +91,12 @@ public class AlienArmy {
         reverseNow = false;
     }
 
+    // This sets the initial speed of a wave to be faster if the difficulty manager changes it
     public void increaseInitialSpeed(float multiplier) {
+        waveSpeed *= multiplier;
+
         for(Alien alien : aliens) {
-            alien.speedUp(multiplier);
+            alien.setVelocity(waveSpeed);
         }
     }
 
@@ -128,13 +133,14 @@ public class AlienArmy {
         return alienProjs;
     }
 
+    //displays all aliens
     public void draw(Canvas canvas) {
         for(Alien alien: aliens) {
             alien.display(canvas);
         }
     }
 
-    //Removes killed aliens
+    //Removes killed aliens and alerts app if all aliens defeated
     public void removeInactiveObjects() {
         Iterator<Alien> alienObjectIterator = aliens.iterator();
 
@@ -153,17 +159,34 @@ public class AlienArmy {
         app.score += 100;
     }
 
+    /*
+        Increase alien fire rate by decreasing the possible amounts of time that aliens have to
+        wait to shoot
+     */
     public void increaseAlienFireRate(float decreaseAmount) {
         for (Alien alien : aliens) {
             alien.decreaseBaseShootInterval(decreaseAmount);
         }
     }
 
+    /*
+        Saves the new number of aliens and recreates the wave with more aliens
+     */
     public void increaseNumAliens(int numNewAliens) {
         numAliens += numNewAliens;
+        aliens.clear();
+        resetDimensions();
+        createAliens();
     }
 
     public void spawnNewWave() {
         createAliens();
+    }
+
+    /*
+        Resets the dimensions to fit the new alien size
+     */
+    public void resetDimensions() {
+        DIMENSIONS = new Point(numAliens/3 + numAliens % 3, 3 );
     }
 }
