@@ -82,9 +82,6 @@ public class Intro extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == R.id.action_settings) {
-            startActivity(new Intent(Intro.this, Settings.class));
-        }
 
         if(item.getItemId() == R.id.action_startover) {
             startActivity(new Intent(Intro.this, SpaceInvaders.class));

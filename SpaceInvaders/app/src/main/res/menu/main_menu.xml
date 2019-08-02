@@ -9,9 +9,6 @@
         app2:showAsAction="always">
         <menu>
 
-            <item android:id="@+id/action_settings"
-                android:orderInCategory="1"
-                android:title="Settings"/>
 
             <item android:title="New Game"
                 android:id="@+id/action_startover"
