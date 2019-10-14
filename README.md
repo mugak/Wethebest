@@ -81,6 +81,12 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 [Acceptance Criteria](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Acceptance_Criteria.md)  
 [Screenshots](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Screenshots.md)  
 
+## Sprint 3
+![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint3/final1.png)  
+
+![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint3/final2.png)  
+
+
 ### Design Updates
 * Sprites are drawn for all game objects
 * Multiple aliens are spawned using observer pattern
