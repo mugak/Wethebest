@@ -82,9 +82,9 @@ For this project, we are implementing the classic arcade game, Space Invaders, a
 [Screenshots](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint2/Screenshots.md)  
 
 ## Sprint 3
-![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint3/final1.png)  
+![](https://github.com/mugak/Wethebest/blob/master/Sprint3/final1.png)  
 
-![](https://github.com/ecs160ss12019/Wethebest/blob/master/Sprint3/final2.png)  
+![](https://github.com/mugak/Wethebest/blob/master/Sprint3/final2.png)  
 
 
 ### Design Updates
